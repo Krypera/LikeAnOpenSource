@@ -245,7 +245,8 @@
             "title": "Projects",
             "subtitle": "Real repositories with clear learning value",
             "intro": [
-                "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone."
+                "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone.",
+                "The best project catalog does not stop at naming repositories. It explains why a repository is worth attention and what kind of team will actually benefit from it."
             ],
             "groups": [
                 {
@@ -261,6 +262,26 @@
                         },
                         {
                             "type": "record-feed",
+                            "sourcePath": "content/projects/index.json",
+                            "records": [
+                                "facebook-docusaurus",
+                                "vitejs-vite",
+                                "biomejs-biome",
+                                "cli-cli"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-reading-room",
+                    "title": "Repository Notes",
+                    "intro": [
+                        "These notes are meant to do the part a project card cannot do on its own: explain what the repository teaches, where it fits, and which tradeoffs deserve attention."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "layout": "details",
                             "sourcePath": "content/projects/index.json",
                             "records": [
                                 "facebook-docusaurus",

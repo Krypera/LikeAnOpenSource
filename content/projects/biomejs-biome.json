@@ -13,11 +13,19 @@
             "text": "Teams simplifying lint and format workflows"
         },
         {
-            "label": "Why it matters",
-            "text": "Reduces tool sprawl in everyday code quality work"
+            "label": "Evaluation lens",
+            "text": "Tool consolidation and codebase consistency"
+        },
+        {
+            "label": "Contribution angle",
+            "text": "Everyday developer ergonomics and rule clarity"
         }
     ],
-    "href": "https://github.com/biomejs/biome",
-    "linkLabel": "Open repository",
-    "external": true
+    "bodyPath": "content/projects/biomejs-biome.md",
+    "href": "#record-biomejs-biome",
+    "linkLabel": "Read evaluation",
+    "external": false,
+    "resourceHref": "https://github.com/biomejs/biome",
+    "resourceLinkLabel": "Open repository",
+    "resourceExternal": true
 }

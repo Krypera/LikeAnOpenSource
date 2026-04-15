@@ -41,7 +41,7 @@ The `content/site-content.v1.json` file added in this project is the current mai
 Recommended split:
 
 - keep section order, labels, cards, and lightweight summaries in JSON
-- store long-form guide and article bodies in Markdown
+- store long-form guide, article, and project bodies in Markdown
 - let record files point to optional `bodyPath` values when a card also owns a long-form body
 
 ## Manifest Contract
@@ -107,6 +107,7 @@ This gives us two major benefits:
 - new records can appear without editing HTML
 - long-form guide bodies can live in Markdown while cards and navigation stay structured
 - project and article cards can be sourced from dedicated record files instead of a single large manifest
+- repositories can open into richer inline notes without needing a separate page model first
 
 ## Fetch Strategy
 

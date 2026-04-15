@@ -8,6 +8,7 @@ The content layer is intentionally structured:
 
 - layout and navigation come from a manifest
 - long-form guide bodies can live in Markdown
+- long-form project notes can also live in Markdown-backed records
 - project cards can come from record files
 - article cards and article bodies can come from record files plus Markdown
 - content validation runs before deployment
@@ -108,7 +109,7 @@ Use collection indexes for reusable cards:
 - `content/projects/index.json`
 - `content/articles/index.json`
 
-Each index points to dedicated record files so new entries can be added without rewriting large UI blocks.
+Each index points to dedicated record files so new entries can be added without rewriting large UI blocks. Records can also own Markdown bodies when a catalog item needs a deeper explanation.
 
 ## Target Application Direction
 

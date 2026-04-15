@@ -102,6 +102,7 @@
                 <h2 class="sidebar-title">Projects</h2>
                 <ul class="sidebar-list">
                     <li><a href="#projects-overview">Selected Repositories</a></li>
+                    <li><a href="#projects-reading-room">Repository Notes</a></li>
                     <li><a href="#projects-categories">Category Logic</a></li>
                     <li><a href="#projects-submit">What We Look For</a></li>
                 </ul>
@@ -274,7 +275,8 @@
             <section id="content-projects" class="content-section" data-title="Projects" tabindex="-1" hidden>
                 <h1 class="doc-title">Projects</h1>
                 <p class="doc-subtitle">Real repositories with clear learning value</p>
-                <p class="doc-text">The Projects section should help people evaluate real repositories through onboarding quality, technical usefulness, and the kind of learning value each project offers.</p>
+                <p class="doc-text">Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone.</p>
+                <p class="doc-text">The best project catalog does not stop at naming repositories. It explains why a repository is worth attention and what kind of team will actually benefit from it.</p>
 
                 <div id="projects-overview" class="doc-section">
                     <h2 class="doc-subtitle">Selected Repositories</h2>
@@ -289,9 +291,10 @@
                             <ul class="card-meta">
                                 <li><span class="card-meta-label">Repository:</span> facebook/docusaurus</li>
                                 <li><span class="card-meta-label">Best for:</span> Versioned docs and documentation portals</li>
-                                <li><span class="card-meta-label">Why it matters:</span> Strong information architecture and a mature docs workflow</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Information architecture and docs maintainability</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Theme, plugin, and docs workflow customization</li>
                             </ul>
-                            <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                            <a href="#record-facebook-docusaurus" class="card-link">Read evaluation</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Frontend Tooling</span>
@@ -300,9 +303,10 @@
                             <ul class="card-meta">
                                 <li><span class="card-meta-label">Repository:</span> vitejs/vite</li>
                                 <li><span class="card-meta-label">Best for:</span> Fast modern frontend app setup</li>
-                                <li><span class="card-meta-label">Why it matters:</span> Sets the pace for fast local feedback loops</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Feedback-loop speed and build-tool ergonomics</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Plugin-driven tooling and dev-server experience</li>
                             </ul>
-                            <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                            <a href="#record-vitejs-vite" class="card-link">Read evaluation</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Code Quality</span>
@@ -311,9 +315,10 @@
                             <ul class="card-meta">
                                 <li><span class="card-meta-label">Repository:</span> biomejs/biome</li>
                                 <li><span class="card-meta-label">Best for:</span> Teams simplifying lint and format workflows</li>
-                                <li><span class="card-meta-label">Why it matters:</span> Reduces tool sprawl in everyday code quality work</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Tool consolidation and codebase consistency</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Everyday developer ergonomics and rule clarity</li>
                             </ul>
-                            <a href="https://github.com/biomejs/biome" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                            <a href="#record-biomejs-biome" class="card-link">Read evaluation</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Terminal Workflow</span>
@@ -322,9 +327,141 @@
                             <ul class="card-meta">
                                 <li><span class="card-meta-label">Repository:</span> cli/cli</li>
                                 <li><span class="card-meta-label">Best for:</span> Terminal-first GitHub issue and PR workflows</li>
-                                <li><span class="card-meta-label">Why it matters:</span> Pulls core repository operations closer to the command line</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Terminal productivity and repository operations</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Scriptable issue, PR, and release workflows</li>
                             </ul>
-                            <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                            <a href="#record-cli-cli" class="card-link">Read evaluation</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="projects-reading-room" class="doc-section">
+                    <h2 class="doc-subtitle">Repository Notes</h2>
+                    <p class="doc-text">These notes are meant to do the part a project card cannot do on its own: explain what the repository teaches, where it fits, and which tradeoffs deserve attention.</p>
+                    <div class="record-stack">
+                        <article id="record-facebook-docusaurus" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Docs Platform</span>
+                                <h3 class="record-detail-title">Docusaurus</h3>
+                            </div>
+                            <p class="record-detail-summary">An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Repository:</span> facebook/docusaurus</li>
+                                <li><span class="card-meta-label">Best for:</span> Versioned docs and documentation portals</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Information architecture and docs maintainability</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Theme, plugin, and docs workflow customization</li>
+                            </ul>
+                            <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Docusaurus matters in LAOS because it teaches more than page generation. It teaches how documentation becomes a product surface with navigation, versioning, and editorial structure.</p>
+                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
+                                <p class="doc-text">This repository is useful when you want to study:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>versioned documentation as a first-class requirement</li>
+                                    <li>navigation patterns for large technical content sets</li>
+                                    <li>the relationship between docs structure and contributor clarity</li>
+                                </ul>
+                                <p class="doc-text">That makes it a strong reference for products that expect their knowledge base to grow over time.</p>
+                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
+                                <p class="doc-text">Docusaurus fits best when a team needs documentation to behave like a maintained system rather than a loose pile of pages.</p>
+                                <p class="doc-text">It is especially useful when content needs to survive multiple releases, product changes, or contributor waves without losing its shape.</p>
+                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
+                                <p class="doc-text">The strength of a mature docs platform is also its weight. Teams get structure, but they also inherit decisions about theme conventions, plugin behavior, and content organization.</p>
+                                <p class="doc-text">That is not a flaw. It simply means Docusaurus is most valuable when the team actually needs that level of documentation discipline.</p>
+                            </div>
+                        </article>
+                        <article id="record-vitejs-vite" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Frontend Tooling</span>
+                                <h3 class="record-detail-title">Vite</h3>
+                            </div>
+                            <p class="record-detail-summary">A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Repository:</span> vitejs/vite</li>
+                                <li><span class="card-meta-label">Best for:</span> Fast modern frontend app setup</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Feedback-loop speed and build-tool ergonomics</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Plugin-driven tooling and dev-server experience</li>
+                            </ul>
+                            <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Vite belongs in the first project set because it changed the baseline expectation for local frontend feedback. It is not only a tool choice. It is a workflow expectation.</p>
+                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
+                                <p class="doc-text">Vite is worth studying when you care about:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>fast startup and instant local feedback</li>
+                                    <li>tool design that stays close to everyday developer experience</li>
+                                    <li>plugin-based extensibility without drowning the default setup</li>
+                                </ul>
+                                <p class="doc-text">That combination makes it useful far beyond its marketing shorthand.</p>
+                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
+                                <p class="doc-text">It fits best for teams building modern frontend applications that want fast iteration without immediately committing to a heavy custom toolchain.</p>
+                                <p class="doc-text">It is also useful as a learning reference because it shows how performance and simplicity can shape adoption just as much as feature depth.</p>
+                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
+                                <p class="doc-text">Speed alone does not answer every architectural question. Teams still have to think about framework fit, deployment constraints, and how much build customization they really need.</p>
+                                <p class="doc-text">That is why LAOS treats Vite as a strong workflow reference, not as a universal answer.</p>
+                            </div>
+                        </article>
+                        <article id="record-biomejs-biome" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Code Quality</span>
+                                <h3 class="record-detail-title">Biome</h3>
+                            </div>
+                            <p class="record-detail-summary">A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Repository:</span> biomejs/biome</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams simplifying lint and format workflows</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Tool consolidation and codebase consistency</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Everyday developer ergonomics and rule clarity</li>
+                            </ul>
+                            <a href="https://github.com/biomejs/biome" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Biome earns space here because it represents a clear idea: many teams want fewer overlapping quality tools and a more coherent everyday code-health workflow.</p>
+                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
+                                <p class="doc-text">Biome is valuable when you want to look at:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>how tool consolidation affects developer experience</li>
+                                    <li>the cost of fragmented lint and format pipelines</li>
+                                    <li>the relationship between speed, consistency, and adoption</li>
+                                </ul>
+                                <p class="doc-text">It turns code quality into a usability question, not only a rules question.</p>
+                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
+                                <p class="doc-text">It fits best for teams that are tired of maintaining a long stack of small quality tools and want a clearer operating model for formatting and linting.</p>
+                                <p class="doc-text">That makes it especially relevant for organizations that care about standardization and lower day-to-day friction.</p>
+                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
+                                <p class="doc-text">An integrated toolchain simplifies a lot, but it also asks teams to align around a more opinionated path. That means adoption is not only technical; it is also procedural.</p>
+                                <p class="doc-text">The right evaluation question is not "is consolidation good?" but "does this consolidation help our team move with less friction than before?"</p>
+                            </div>
+                        </article>
+                        <article id="record-cli-cli" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Terminal Workflow</span>
+                                <h3 class="record-detail-title">GitHub CLI</h3>
+                            </div>
+                            <p class="record-detail-summary">GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Repository:</span> cli/cli</li>
+                                <li><span class="card-meta-label">Best for:</span> Terminal-first GitHub issue and PR workflows</li>
+                                <li><span class="card-meta-label">Evaluation lens:</span> Terminal productivity and repository operations</li>
+                                <li><span class="card-meta-label">Contribution angle:</span> Scriptable issue, PR, and release workflows</li>
+                            </ul>
+                            <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">GitHub CLI belongs in this project set because it brings repository work closer to the place many developers already live: the terminal.</p>
+                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
+                                <p class="doc-text">This repository is useful when you want to study:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>terminal-first issue and pull request workflows</li>
+                                    <li>scripting-friendly repository operations</li>
+                                    <li>how tooling can reduce context switching across common GitHub tasks</li>
+                                </ul>
+                                <p class="doc-text">That makes it more than a convenience utility. It is a workflow design decision.</p>
+                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
+                                <p class="doc-text">It fits best for contributors and teams who spend meaningful time in shell-driven workflows and want repository actions to feel close to their development loop.</p>
+                                <p class="doc-text">That includes maintainers, reviewers, and contributors who prefer keyboard-heavy operating patterns.</p>
+                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
+                                <p class="doc-text">Terminal-native workflows feel powerful for the people who already think that way, but they can feel distant to contributors who rely on graphical interfaces.</p>
+                                <p class="doc-text">So the right question is not only whether the tool is capable. It is whether the team wants its contribution flow to lean more heavily toward command-line habits.</p>
+                            </div>
                         </article>
                     </div>
                 </div>

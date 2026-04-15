@@ -70,7 +70,11 @@ window.LAOSContentService = (() => {
                 .filter(Boolean),
             href: typeof item.href === "string" ? item.href.trim() : "",
             linkLabel: typeof item.linkLabel === "string" ? item.linkLabel.trim() : "",
-            external: Boolean(item.external)
+            external: Boolean(item.external),
+            resourceHref: typeof item.resourceHref === "string" ? item.resourceHref.trim() : "",
+            resourceLinkLabel:
+                typeof item.resourceLinkLabel === "string" ? item.resourceLinkLabel.trim() : "",
+            resourceExternal: Boolean(item.resourceExternal)
         };
     };
 

@@ -13,11 +13,19 @@
             "text": "Terminal-first GitHub issue and PR workflows"
         },
         {
-            "label": "Why it matters",
-            "text": "Pulls core repository operations closer to the command line"
+            "label": "Evaluation lens",
+            "text": "Terminal productivity and repository operations"
+        },
+        {
+            "label": "Contribution angle",
+            "text": "Scriptable issue, PR, and release workflows"
         }
     ],
-    "href": "https://github.com/cli/cli",
-    "linkLabel": "Open repository",
-    "external": true
+    "bodyPath": "content/projects/cli-cli.md",
+    "href": "#record-cli-cli",
+    "linkLabel": "Read evaluation",
+    "external": false,
+    "resourceHref": "https://github.com/cli/cli",
+    "resourceLinkLabel": "Open repository",
+    "resourceExternal": true
 }

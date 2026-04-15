@@ -74,6 +74,13 @@ const validateCard = (card, sourceLabel, { generatedTargets = [] } = {}) => {
             ensure(body.length > 0, `${sourceLabel}: body file "${bodyPath}" is empty.`);
         }
     }
+    if (typeof card?.resourceHref === "string" && card.resourceHref.trim()) {
+        ensure(
+            typeof card?.resourceLinkLabel === "string" && card.resourceLinkLabel.trim(),
+            `${sourceLabel}: resourceLinkLabel is required when resourceHref is provided.`
+        );
+        validateHref(card.resourceHref, `${sourceLabel} resource`);
+    }
 };
 
 const loadRecordCollection = (relativePath) => {

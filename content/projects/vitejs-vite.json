@@ -13,11 +13,19 @@
             "text": "Fast modern frontend app setup"
         },
         {
-            "label": "Why it matters",
-            "text": "Sets the pace for fast local feedback loops"
+            "label": "Evaluation lens",
+            "text": "Feedback-loop speed and build-tool ergonomics"
+        },
+        {
+            "label": "Contribution angle",
+            "text": "Plugin-driven tooling and dev-server experience"
         }
     ],
-    "href": "https://github.com/vitejs/vite",
-    "linkLabel": "Open repository",
-    "external": true
+    "bodyPath": "content/projects/vitejs-vite.md",
+    "href": "#record-vitejs-vite",
+    "linkLabel": "Read evaluation",
+    "external": false,
+    "resourceHref": "https://github.com/vitejs/vite",
+    "resourceLinkLabel": "Open repository",
+    "resourceExternal": true
 }

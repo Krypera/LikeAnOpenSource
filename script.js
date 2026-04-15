@@ -265,10 +265,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         }
 
-        const linkMarkup =
-            record.external && record.href && record.linkLabel
-                ? `<a class="card-link record-detail-link"${buildLinkAttributes(record)}>${escapeHtml(record.linkLabel)}</a>`
-                : "";
+        const detailLinkSource =
+            record.resourceHref && record.resourceLinkLabel
+                ? {
+                    href: record.resourceHref,
+                    external: record.resourceExternal,
+                    label: record.resourceLinkLabel
+                }
+                : record.external && record.href && record.linkLabel
+                    ? {
+                        href: record.href,
+                        external: record.external,
+                        label: record.linkLabel
+                    }
+                    : null;
+        const linkMarkup = detailLinkSource
+            ? `<a class="card-link record-detail-link"${buildLinkAttributes(detailLinkSource)}>${escapeHtml(detailLinkSource.label)}</a>`
+            : "";
 
         return `
             <article id="record-${escapeHtml(record.id)}" class="record-detail">

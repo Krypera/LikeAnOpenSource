@@ -30,6 +30,7 @@ Main files:
 Use Markdown for:
 
 - guide bodies
+- project notes
 - long-form article bodies
 
 Current guide files:
@@ -44,13 +45,21 @@ Current article files:
 - `content/articles/deep-dives-into-system-choices.md`
 - `content/articles/writing-from-inside-the-workflow.md`
 
+Current project note files:
+
+- `content/projects/facebook-docusaurus.md`
+- `content/projects/vitejs-vite.md`
+- `content/projects/biomejs-biome.md`
+- `content/projects/cli-cli.md`
+
 ## Adding a new project record
 
 1. Create a new file in `content/projects/`.
 2. Give it a stable `id`.
-3. Add `tag`, `title`, `description`, optional `details`, `href`, and `linkLabel`.
-4. Register the record in `content/projects/index.json`.
-5. Reference that record from the relevant `record-feed` block when needed.
+3. Add `tag`, `title`, `description`, optional `details`, and a `bodyPath` if the project needs a deeper note.
+4. Use `href` and `linkLabel` for the in-app jump target, then `resourceHref`, `resourceLinkLabel`, and `resourceExternal` for the real repository link when needed.
+5. Register the record in `content/projects/index.json`.
+6. Reference that record from the relevant `record-feed` block when needed.
 
 ## Adding a new article record
 

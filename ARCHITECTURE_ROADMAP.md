@@ -104,6 +104,7 @@ Now in progress:
 - richer project metadata
 - clearer repository evaluation fields
 - more realistic curation surface
+- deeper project notes using the same record-plus-Markdown contract
 
 ### Phase 4
 
