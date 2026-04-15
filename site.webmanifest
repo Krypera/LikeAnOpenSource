@@ -1,0 +1,17 @@
+{
+    "name": "LikeAnOpenSource",
+    "short_name": "LAOS",
+    "description": "Explore open-source projects with clearer entry points, stronger technical context, and better contribution paths.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0c1019",
+    "theme_color": "#5f24d6",
+    "icons": [
+        {
+            "src": "assets/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}

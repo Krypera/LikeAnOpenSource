@@ -129,6 +129,12 @@ Planned:
 - production deployment model
 - SEO and delivery polish
 
+Now partially underway:
+
+- fallback shell was reduced to an embedded-manifest app shell
+- baseline metadata, robots, and favicon support were added
+- domain-specific SEO items still wait for the final production URL
+
 ## Important Note
 
 Serving the current repo locally over HTTP is only a development convenience. It should not be mistaken for the final delivery architecture.

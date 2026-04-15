@@ -84,6 +84,20 @@ This validator checks:
 - record-feed references
 - referenced record file integrity
 
+## SEO Baseline
+
+The prototype now includes a lightweight SEO baseline:
+
+- description, Open Graph, and Twitter summary metadata
+- favicon and web manifest
+- `robots.txt`
+
+Items intentionally left for the final domain:
+
+- canonical URL
+- sitemap with production URLs
+- share image URLs that need absolute hosting paths
+
 ## Content Model
 
 ### Structured surfaces
