@@ -1,8 +1,10 @@
 # LikeAnOpenSource
 
-LikeAnOpenSource is a static documentation and discovery platform for people who want to explore open-source projects with clearer entry points, better technical context, and more useful contribution paths.
+LikeAnOpenSource is a documentation and discovery product for people who want to explore open-source projects with clearer entry points, better technical context, and more useful contribution paths.
 
-The site is intentionally content-driven:
+The current repository is a local frontend prototype plus a content model. It is being run over HTTP for development and product exploration while the broader application architecture is still taking shape.
+
+The content layer is intentionally structured:
 
 - layout and navigation come from a manifest
 - long-form guide bodies can live in Markdown
@@ -11,15 +13,15 @@ The site is intentionally content-driven:
 
 ## Current Product Direction
 
-The project is moving in five phases:
+The project is moving in these phases:
 
-1. Repo hygiene and publishing foundation
-2. Real repository records in `Projects`
-3. Article metadata plus Markdown bodies
-4. Smaller fallback HTML and less drift risk
-5. SEO and production polish
+1. Local prototype foundation and content model
+2. Dynamic product architecture alignment
+3. Real repository records in `Projects`
+4. Article metadata plus Markdown bodies
+5. Production polish and delivery readiness
 
-This repository now covers phase 1 and the beginning of phase 2.
+The repository currently covers phase 1 and the beginning of phase 2.
 
 ## Repository Structure
 
@@ -31,7 +33,6 @@ This repository now covers phase 1 and the beginning of phase 2.
 |   |-- articles/
 |   `-- guides/
 |-- scripts/
-|   |-- prepare-pages.mjs
 |   `-- validate-content.mjs
 |-- content-config.js
 |-- content-service.js
@@ -42,7 +43,7 @@ This repository now covers phase 1 and the beginning of phase 2.
 
 ## Local Development
 
-This project is a static site. Serve it over HTTP instead of opening `index.html` directly.
+This prototype should be served over HTTP instead of opening `index.html` directly.
 
 Recommended options:
 
@@ -108,21 +109,20 @@ Use collection indexes for reusable cards:
 
 Each index points to dedicated record files so new entries can be added without rewriting large UI blocks.
 
-## GitHub Pages Deployment
+## Target Application Direction
 
-This repository now includes a GitHub Pages workflow that:
+This project is not intended to stay a browser-only prototype.
 
-1. validates the content contract
-2. prepares a clean `dist/` artifact
-3. deploys the site with GitHub Actions
+The current HTML, CSS, and JavaScript setup is a fast local prototype so we can:
 
-To use it, set the Pages source in GitHub to `GitHub Actions`.
+- shape the product structure
+- prove the content model
+- test GitHub-fed content experiments
+- refine information architecture before locking in the full app stack
 
-The deployment artifact is prepared by:
+The target direction is a dynamic application with a real backend or server layer that can own content ingestion, normalization, caching, and delivery more cleanly than a browser-only prototype.
 
-```powershell
-node scripts/prepare-pages.mjs
-```
+See [ARCHITECTURE_ROADMAP.md](./ARCHITECTURE_ROADMAP.md) for the dynamic product direction.
 
 ## Contributing
 

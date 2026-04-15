@@ -758,10 +758,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             state: "warning",
             source: {
                 id: "static",
-                label: "Static HTML",
+                label: "Embedded fallback",
                 url: ""
             },
-            message: "The content service could not be loaded, so the page is using static HTML."
+            message: "The content service could not be loaded, so the page is using the embedded fallback view."
         };
 
     if (loadResult.kind === "manifest" && loadResult.manifest) {

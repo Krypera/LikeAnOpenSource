@@ -608,19 +608,19 @@ window.LAOSContentService = (() => {
         }
 
         return {
-            kind: "static",
-            source: {
-                id: "static",
-                label: "Static HTML",
-                url: ""
-            },
-            state: "warning",
-            message:
-                window.location.protocol === "file:"
-                    ? "The manifest could not be loaded, so the page is using static HTML. Open the project through an HTTP server to test the data layer."
-                    : "The manifest could not be loaded, so the page is using static HTML.",
-            warnings: errors
-        };
+                kind: "static",
+                source: {
+                    id: "static",
+                    label: "Embedded fallback",
+                    url: ""
+                },
+                state: "warning",
+                message:
+                    window.location.protocol === "file:"
+                    ? "The manifest could not be loaded, so the page is using the embedded fallback view. Open the project through an HTTP server to test the data layer."
+                    : "The manifest could not be loaded, so the page is using the embedded fallback view.",
+                warnings: errors
+            };
     };
 
     return {

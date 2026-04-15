@@ -4,6 +4,8 @@ Thanks for helping improve LikeAnOpenSource.
 
 The project is content-first right now. The most useful contributions are usually the ones that make the next visitor feel less lost, less hesitant, and more able to act.
 
+This repository is currently a local prototype. Running it over HTTP during development does not mean the final product will stay browser-only.
+
 ## What to edit where
 
 ### Edit JSON when you are changing structure
@@ -80,14 +82,6 @@ Then validate content:
 ```powershell
 node scripts/validate-content.mjs
 ```
-
-If you want to preview the deployment artifact:
-
-```powershell
-node scripts/prepare-pages.mjs
-```
-
-That generates `dist/`, which matches the files intended for GitHub Pages.
 
 ## Pull request checklist
 

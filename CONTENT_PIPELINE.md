@@ -1,14 +1,20 @@
 # Content Pipeline
 
-This project should no longer grow by duplicating static HTML blocks. The goal is to feed `Projects`, `Articles`, `Guides`, and discovery cards from content files stored in the GitHub repository.
+This project should no longer grow by duplicating hard-coded HTML blocks. The current prototype uses a manifest-driven frontend so `Projects`, `Articles`, `Guides`, and discovery surfaces can be fed from repository content while the broader application is still being shaped.
 
 ## Target Architecture
 
 1. The content source lives inside the repository.
 2. The UI does not hand-author every card. It reads a manifest.
 3. The manifest describes the screen using a `section -> group -> block` structure.
-4. The frontend tries a local manifest first, then GitHub Raw, then browser cache, and finally a static HTML fallback.
+4. The current prototype tries a local manifest first, then GitHub Raw, then browser cache, and finally an embedded fallback view.
 5. When the repository is ready, manifest validation should run in CI.
+
+Important context:
+
+- this repository is currently a local frontend prototype
+- the target product is expected to evolve into a dynamic application
+- the browser-only content flow here is a temporary development model, not a final architecture promise
 
 ## Repository Layout
 
@@ -103,14 +109,14 @@ The frontend uses this order:
 1. `./content/site-content.v1.json`
 2. `https://raw.githubusercontent.com/Krypera/LikeAnOpenSource/main/content/site-content.v1.json`
 3. browser cache
-4. static HTML fallback
+4. embedded fallback view
 
 That means:
 
 - a version hosted from the same repo can use a relative path
 - a separated presentation layer can still pull from GitHub Raw
 - network failures can reuse the last known content
-- the page does not fully break if the manifest cannot be loaded
+- the prototype does not fully break if the manifest cannot be loaded
 
 ## Important Assumption
 
@@ -125,6 +131,12 @@ Recommended order:
 3. Add frontmatter or metadata references for Markdown-backed guide and article bodies.
 4. Add JSON schema validation for the manifest and record files.
 5. Run schema checks and broken-link validation in GitHub Actions.
+
+## Dynamic Product Note
+
+This content pipeline is useful for local prototyping, but it should not be treated as the final runtime model for the product.
+
+As the project moves beyond prototype mode, a backend or server layer should take over content ingestion, normalization, caching, and API delivery.
 
 ## Local Development Note
 
