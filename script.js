@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const searchInput = document.getElementById("site-search");
     const searchStatus = document.getElementById("search-status");
     const searchEmpty = document.getElementById("search-empty");
+    const searchResults = document.getElementById("search-results");
+    const searchResultsList = document.getElementById("search-results-list");
+    const searchResultsSummary = document.getElementById("search-results-summary");
     const contentSourceBanner = document.getElementById("content-source-banner");
     const contentSectionsRoot = document.getElementById("content-sections");
     const repoLink = document.querySelector(".repo-link");
@@ -43,6 +46,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             .replace(/[\u0300-\u036f]/g, "")
             .replace(/\s+/g, " ")
             .trim();
+
+    const getPlainText = (value = "") =>
+        String(value).replace(/\s+/g, " ").trim();
 
     const renderInlineMarkdown = (value = "") => {
         const placeholders = [];
@@ -175,6 +181,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getContentSections = () =>
         Array.from(contentSectionsRoot.querySelectorAll(".content-section"));
+
+    const getDocumentGroups = () =>
+        Array.from(contentSectionsRoot.querySelectorAll(".doc-section"));
 
     const getSectionByMenu = (menuId) =>
         document.getElementById(`content-${menuId}`);
@@ -668,6 +677,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchMode = false;
         searchInput.value = "";
         searchEmpty.hidden = true;
+        searchResults.hidden = true;
+        searchResultsList.innerHTML = "";
+        searchResultsSummary.textContent = "";
+
+        getDocumentGroups().forEach((group) => {
+            group.hidden = false;
+        });
 
         getSidebarMenus().forEach((menu) => {
             menu.hidden = false;
@@ -675,6 +691,120 @@ document.addEventListener("DOMContentLoaded", async () => {
                 item.hidden = false;
             });
         });
+    };
+
+    const buildSearchSnippet = (text, query) => {
+        const cleanText = getPlainText(text);
+        if (!cleanText) {
+            return "";
+        }
+
+        const loweredText = cleanText.toLocaleLowerCase("en");
+        const loweredQuery = getPlainText(query).toLocaleLowerCase("en");
+        const matchIndex = loweredText.indexOf(loweredQuery);
+
+        if (matchIndex === -1) {
+            return cleanText.length > 170 ? `${cleanText.slice(0, 167).trim()}...` : cleanText;
+        }
+
+        const start = Math.max(0, matchIndex - 56);
+        const end = Math.min(cleanText.length, matchIndex + loweredQuery.length + 96);
+        const prefix = start > 0 ? "..." : "";
+        const suffix = end < cleanText.length ? "..." : "";
+        return `${prefix}${cleanText.slice(start, end).trim()}${suffix}`;
+    };
+
+    const collectSearchMatches = (query) => {
+        const normalizedQuery = normalizeText(query);
+        const matches = [];
+        const visibleGroups = new Set();
+        const visibleMenus = new Set();
+        const visibleSections = new Set();
+
+        getDocumentGroups().forEach((group) => {
+            const section = group.closest(".content-section");
+            if (!section) {
+                return;
+            }
+
+            const sectionTitle = section.dataset.title || "";
+            const groupTitle = group.querySelector(".doc-subtitle")?.textContent || "";
+            const bodyText = getPlainText(group.textContent);
+            const searchableText = normalizeText(`${sectionTitle} ${groupTitle} ${bodyText}`);
+
+            if (!searchableText.includes(normalizedQuery)) {
+                return;
+            }
+
+            let score = 1;
+            if (normalizeText(groupTitle).includes(normalizedQuery)) {
+                score += 6;
+            }
+            if (normalizeText(sectionTitle).includes(normalizedQuery)) {
+                score += 3;
+            }
+            if (normalizeText(bodyText.slice(0, 220)).includes(normalizedQuery)) {
+                score += 2;
+            }
+
+            const menuId = section.id.replace("content-", "");
+            visibleGroups.add(group.id);
+            visibleMenus.add(menuId);
+            visibleSections.add(section.id);
+
+            matches.push({
+                id: group.id,
+                menuId,
+                sectionId: section.id,
+                sectionTitle,
+                groupTitle,
+                snippet: buildSearchSnippet(bodyText, query),
+                score
+            });
+        });
+
+        matches.sort((left, right) => {
+            if (right.score !== left.score) {
+                return right.score - left.score;
+            }
+
+            if (left.sectionTitle !== right.sectionTitle) {
+                return left.sectionTitle.localeCompare(right.sectionTitle);
+            }
+
+            return left.groupTitle.localeCompare(right.groupTitle);
+        });
+
+        return {
+            matches,
+            visibleGroups,
+            visibleMenus,
+            visibleSections
+        };
+    };
+
+    const renderSearchResults = (matches, query) => {
+        if (!matches.length) {
+            searchResults.hidden = true;
+            searchResultsList.innerHTML = "";
+            searchResultsSummary.textContent = "";
+            return;
+        }
+
+        const limitedMatches = matches.slice(0, 8);
+        searchResults.hidden = false;
+        searchResultsSummary.textContent = `${matches.length} result(s) for "${query.trim()}"`;
+        searchResultsList.innerHTML = limitedMatches
+            .map(
+                (match) => `
+                    <a class="search-result-card" href="#${escapeHtml(match.id)}">
+                        <span class="search-result-kicker">${escapeHtml(match.sectionTitle)}</span>
+                        <h3 class="search-result-title">${escapeHtml(match.groupTitle)}</h3>
+                        <p class="search-result-text">${escapeHtml(match.snippet)}</p>
+                    </a>
+                `
+            )
+            .join("");
     };
 
     const showSection = (
@@ -790,45 +920,42 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchMode = true;
         clearSidebarActiveLinks();
         setActiveNav("");
-
-        let matchCount = 0;
+        const searchState = collectSearchMatches(query);
 
         getContentSections().forEach((section) => {
-            const isMatch = normalizeText(section.textContent).includes(normalizedQuery);
+            const isMatch = searchState.visibleSections.has(section.id);
             section.hidden = !isMatch;
             section.classList.toggle("active", isMatch);
-            if (isMatch) {
-                matchCount += 1;
-            }
+        });
+
+        getDocumentGroups().forEach((group) => {
+            group.hidden = !searchState.visibleGroups.has(group.id);
         });
 
         getSidebarMenus().forEach((menu) => {
             let visibleItems = 0;
-            const menuTitle = menu.querySelector(".sidebar-title")?.textContent || "";
+            const isVisibleMenu = searchState.visibleMenus.has(menu.dataset.menu);
 
             menu.querySelectorAll("li").forEach((item) => {
                 const link = item.querySelector("a");
                 const href = link?.getAttribute("href") || "";
-                const target = href.startsWith("#") ? document.querySelector(href) : null;
-                const haystack = normalizeText(
-                    `${menuTitle} ${link?.textContent || ""} ${target?.textContent || ""}`
-                );
-
-                const isVisible = haystack.includes(normalizedQuery);
+                const targetId = href.startsWith("#") ? href.slice(1) : "";
+                const isVisible = searchState.visibleGroups.has(targetId);
                 item.hidden = !isVisible;
                 if (isVisible) {
                     visibleItems += 1;
                 }
             });
 
-            menu.hidden = visibleItems === 0;
-            menu.classList.toggle("active", visibleItems > 0);
+            menu.hidden = !isVisibleMenu || visibleItems === 0;
+            menu.classList.toggle("active", isVisibleMenu && visibleItems > 0);
         });
 
-        searchEmpty.hidden = matchCount !== 0;
+        renderSearchResults(searchState.matches, query);
+        searchEmpty.hidden = searchState.matches.length !== 0;
         updateStatus(
-            matchCount
-                ? `${matchCount} section(s) found for "${query.trim()}".`
+            searchState.matches.length
+                ? `${searchState.matches.length} result(s) found for "${query.trim()}".`
                 : `No results found for "${query.trim()}".`
         );
 
@@ -889,6 +1016,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     sidebarMenusRoot.addEventListener("click", handleHashLinkClick);
     contentSectionsRoot.addEventListener("click", handleHashLinkClick);
+    searchResults.addEventListener("click", handleHashLinkClick);
 
     menuToggle.addEventListener("click", () => {
         if (body.classList.contains("sidebar-open")) {
