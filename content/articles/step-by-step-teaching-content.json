@@ -1,0 +1,9 @@
+{
+    "id": "step-by-step-teaching-content",
+    "tag": "Tutorial",
+    "title": "Step-by-step teaching content",
+    "description": "Explain setup, architecture, and implementation flows in a practical sequence that helps readers build confidence instead of just collecting information.",
+    "href": "#guides-getting-started",
+    "linkLabel": "Bridge into guides",
+    "external": false
+}

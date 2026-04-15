@@ -1,0 +1,9 @@
+{
+    "id": "terminal-first-workflows",
+    "tag": "CLI",
+    "title": "Terminal-first workflows",
+    "description": "Highlight tools and project patterns that make command-line onboarding, release routines, automation, and day-to-day maintenance easier to understand.",
+    "href": "#projects-categories",
+    "linkLabel": "Browse workflow ideas",
+    "external": false
+}

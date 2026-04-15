@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LikeAnOpenSource - Documentation and Discovery Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="header-content">
+            <div class="header-start">
+                <button type="button" class="menu-toggle" id="menu-toggle" aria-controls="sidebar" aria-expanded="false" aria-label="Open sidebar navigation">
+                    <svg class="menu-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="4" y1="7" x2="20" y2="7"></line>
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="17" x2="20" y2="17"></line>
+                    </svg>
+                </button>
+
+                <a href="#content-home" class="logo-area" id="logo-link" aria-label="Return to the LikeAnOpenSource homepage">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                    </svg>
+                    <span class="site-name">LikeAnOpenSource</span>
+                </a>
+            </div>
+
+            <div class="search-area">
+                <label class="search-bar" for="site-search">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span class="sr-only">Search the documentation</span>
+                    <input id="site-search" type="search" placeholder="Search the documentation..." autocomplete="off" aria-describedby="search-status">
+                </label>
+                <p class="search-status" id="search-status" role="status" aria-live="polite">Home section is displayed.</p>
+            </div>
+
+            <div class="user-area">
+                <a href="https://github.com/Krypera/LikeAnOpenSource" target="_blank" rel="noopener noreferrer" class="repo-link">
+                    <svg class="repo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span>Krypera/LikeAnOpenSource</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="header-nav" aria-label="Primary navigation">
+            <a href="#content-home" data-menu="home" aria-controls="content-home">Home</a>
+            <a href="#content-explore" data-menu="explore" aria-controls="content-explore">Explore</a>
+            <a href="#content-projects" data-menu="projects" aria-controls="content-projects">Projects</a>
+            <a href="#content-articles" data-menu="articles" aria-controls="content-articles">Articles</a>
+            <a href="#content-guides" data-menu="guides" aria-controls="content-guides">Guides</a>
+            <a href="#content-about" data-menu="about" aria-controls="content-about">About</a>
+        </nav>
+    </header>
+
+    <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Section navigation">
+        <div class="sidebar-mobile-header">
+            <p class="sidebar-overline">Navigation</p>
+            <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Close sidebar navigation">
+                <svg class="sidebar-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div id="sidebar-menus">
+            <div class="sidebar-menu active" id="menu-home" data-menu="home">
+                <h2 class="sidebar-title">Home</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#home-overview">Platform Overview</a></li>
+                    <li><a href="#home-paths">Content Paths</a></li>
+                    <li><a href="#home-principles">Core Principles</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu" id="menu-explore" data-menu="explore">
+                <h2 class="sidebar-title">Explore</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#explore-focus">What Explore Surfaces</a></li>
+                    <li><a href="#explore-criteria">What Earns A Feature</a></li>
+                    <li><a href="#explore-current-focus">Current Focus</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu" id="menu-projects" data-menu="projects">
+                <h2 class="sidebar-title">Projects</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#projects-overview">Catalog Flow</a></li>
+                    <li><a href="#projects-categories">Category Logic</a></li>
+                    <li><a href="#projects-submit">What We Look For</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu" id="menu-articles" data-menu="articles">
+                <h2 class="sidebar-title">Articles</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#articles-overview">Publishing Flow</a></li>
+                    <li><a href="#articles-formats">Content Formats</a></li>
+                    <li><a href="#articles-editorial">Editorial Standards</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu" id="menu-guides" data-menu="guides">
+                <h2 class="sidebar-title">Guides</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#guides-getting-started">Getting Started</a></li>
+                    <li><a href="#guides-reading-flow">How to Read the Guides</a></li>
+                    <li><a href="#guides-levels">Level Structure</a></li>
+                    <li><a href="#guides-contributing">How to Contribute</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-menu" id="menu-about" data-menu="about">
+                <h2 class="sidebar-title">About</h2>
+                <ul class="sidebar-list">
+                    <li><a href="#about-what-is-laos">What Is LAOS?</a></li>
+                    <li><a href="#about-philosophy">Our Philosophy</a></li>
+                    <li><a href="#about-quality">Editorial Standards</a></li>
+                    <li><a href="#about-contact">Repository</a></li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+
+    <main id="main-content" class="main-content">
+        <div class="search-empty" id="search-empty" hidden>
+            <p class="search-empty-title">No matching section was found for your search.</p>
+            <p class="search-empty-text">Try a broader keyword or switch to another main section.</p>
+        </div>
+
+        <div class="data-source-banner" id="content-source-banner" hidden></div>
+
+        <div id="content-sections">
+            <section id="content-home" class="content-section active" data-title="Home" tabindex="-1">
+                <h1 class="doc-title">Home</h1>
+                <p class="doc-subtitle">Welcome to LikeAnOpenSource</p>
+                <p class="doc-text">LikeAnOpenSource is a modern documentation and discovery platform designed to help people explore open source projects, learn developer tools, and discover the stories behind strong communities.</p>
+                <p class="doc-text">In the new architecture, this homepage no longer depends on hand-written HTML cards. It is designed to be fed by content that lives in the GitHub repository.</p>
+
+                <div class="callout">
+                    <p>Once the manifest is loaded from the repository, Explore, Projects, Articles, and Guides can all be updated from a single source of truth.</p>
+                </div>
+
+                <div id="home-overview" class="doc-section">
+                    <h2 class="doc-subtitle">Platform Overview</h2>
+                    <p class="doc-text">The platform is shaped around three major flows: discovery, deep content, and contribution guides. That structure helps both newcomers and experienced builders move through the same system with different goals.</p>
+
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">Explore</span>
+                            <h3 class="card-title">Featured Content</h3>
+                            <p class="card-desc">Show the latest and most relevant content from a single manifest-driven flow.</p>
+                            <a href="#content-explore" class="card-link">Go to Explore</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Guides</span>
+                            <h3 class="card-title">Layered Learning</h3>
+                            <p class="card-desc">List guide tracks by level and purpose without editing the page layout every time.</p>
+                            <a href="#content-guides" class="card-link">Open Guides</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Articles</span>
+                            <h3 class="card-title">Deep Context</h3>
+                            <p class="card-desc">Publish technical writing and editorial context through the same content contract.</p>
+                            <a href="#content-articles" class="card-link">Browse Articles</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="home-paths" class="doc-section">
+                    <h2 class="doc-subtitle">Content Paths</h2>
+                    <ul class="doc-list">
+                        <li><strong>For newcomers:</strong> Start with Guides, then move into Explore and Projects once the basics are familiar.</li>
+                        <li><strong>For active builders:</strong> Use Projects and Articles to compare tools, patterns, and real-world tradeoffs.</li>
+                        <li><strong>For contributors:</strong> Update repository content files and register them through the manifest instead of editing the layout directly.</li>
+                    </ul>
+                </div>
+
+                <div id="home-principles" class="doc-section">
+                    <h2 class="doc-subtitle">Core Principles</h2>
+                    <p class="doc-text">This platform is built to make content structure visible. Each section should explain what it is for, how it is fed, and where it connects in the rest of the system.</p>
+                    <p class="doc-text">A manifest-driven setup means a new project, guide, or article can appear without hand-editing HTML blocks.</p>
+
+                    <div class="callout warning">
+                        <p>As content grows, the repository should stay the source of truth. The page should render content, not own it.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-explore" class="content-section" data-title="Explore" tabindex="-1" hidden>
+                <h1 class="doc-title">Explore</h1>
+                <p class="doc-subtitle">How discovery is being shaped in LAOS</p>
+                <p class="doc-text">Explore is where LAOS will eventually surface curated projects, ecosystems, and deep-dive writing.</p>
+                <p class="doc-text">Until the repository contains enough real records, this section should explain the discovery lens honestly instead of pretending there is already a populated feed.</p>
+
+                <div id="explore-focus" class="doc-section">
+                    <h2 class="doc-subtitle">What Explore Surfaces</h2>
+                    <p class="doc-text">These are the four discovery lanes the platform is intentionally building first.</p>
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">Projects</span>
+                            <h3 class="card-title">Repositories with clear onboarding</h3>
+                            <p class="card-desc">Projects earn space here when setup, documentation, and contribution flow are understandable to someone new.</p>
+                            <a href="#projects-overview" class="card-link">Open project criteria</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Ecosystems</span>
+                            <h3 class="card-title">Stacks worth studying together</h3>
+                            <p class="card-desc">Explore should connect tools that make more sense as a system, such as docs platforms, frontend workflows, and developer tooling.</p>
+                            <a href="#projects-categories" class="card-link">See the category logic</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Articles</span>
+                            <h3 class="card-title">Deep dives with a point of view</h3>
+                            <p class="card-desc">Long-form writing here should explain tradeoffs, maintenance reality, and why a choice matters, not just list features.</p>
+                            <a href="#articles-overview" class="card-link">See the article direction</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Guides</span>
+                            <h3 class="card-title">Contribution paths that lower hesitation</h3>
+                            <p class="card-desc">Guides should turn curiosity into motion by showing where to start, what to improve, and how to contribute without guesswork.</p>
+                            <a href="#guides-getting-started" class="card-link">Open Getting Started</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="explore-criteria" class="doc-section">
+                    <h2 class="doc-subtitle">What Earns A Feature</h2>
+                    <ul class="doc-list">
+                        <li><strong>Clear onboarding:</strong> a visitor should understand what the project is, how to start, and how much effort it asks from them.</li>
+                        <li><strong>Visible maintenance:</strong> there should be some sign of active stewardship, usable issue hygiene, or healthy release practices.</li>
+                        <li><strong>Learning signal:</strong> the project, article, or guide should teach something transferable instead of only promoting itself.</li>
+                        <li><strong>Honest tradeoffs:</strong> if something is powerful but difficult, expensive, or niche, Explore should say so clearly.</li>
+                        <li><strong>Contribution friendliness:</strong> the best candidates make it easier for a newcomer to understand where help is needed.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>Explore should never simulate momentum. If something is featured, the team should be able to explain exactly why it deserves attention.</p>
+                    </div>
+                </div>
+
+                <div id="explore-current-focus" class="doc-section">
+                    <h2 class="doc-subtitle">Current Focus</h2>
+                    <p class="doc-text">Right now the content work is focused on three foundations: honest repository evaluation, stronger getting-started guides, and long-form writing that connects tools to real workflows.</p>
+                    <p class="doc-text">As real project records and articles land in the repository, Explore can stop describing the lens and start surfacing those records directly.</p>
+                    <ul class="doc-list">
+                        <li><strong>Documentation systems:</strong> we are prioritizing tools and patterns that solve navigation, search, structure, and authoring well.</li>
+                        <li><strong>Contributor-friendly repositories:</strong> we want to spotlight projects that make their contribution process visible and realistic for first-time contributors.</li>
+                        <li><strong>Workflow writing:</strong> the article layer is being shaped around real tradeoffs, maintenance lessons, and system-level thinking.</li>
+                    </ul>
+                    <div class="callout">
+                        <p>This area should stay focused on real project signals, clear selection criteria, and content that can stand behind its claims.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-projects" class="content-section" data-title="Projects" tabindex="-1" hidden>
+                <h1 class="doc-title">Projects</h1>
+                <p class="doc-subtitle">A project catalog fed from GitHub</p>
+                <p class="doc-text">The Projects section is meant to become a categorized view of repository records, grouped by technology, maintenance expectations, and usage context.</p>
+
+                <div id="projects-overview" class="doc-section">
+                    <h2 class="doc-subtitle">Catalog Flow</h2>
+                    <p class="doc-text">This area is not only for listing popular repositories. It should explain why they matter, who they are for, and what kind of maintenance burden or learning curve they carry.</p>
+
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">Repository</span>
+                            <h3 class="card-title">Project records</h3>
+                            <p class="card-desc">Every project can live as its own metadata record inside the repository and then be connected through the main manifest.</p>
+                            <a href="https://github.com/Krypera/LikeAnOpenSource/tree/main/content/projects" target="_blank" rel="noopener noreferrer" class="card-link">Open the projects folder</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">UI</span>
+                            <h3 class="card-title">Category blocks</h3>
+                            <p class="card-desc">Web, CLI, devtools, and libraries can all be defined as content blocks instead of hard-coded sections.</p>
+                            <a href="#projects-categories" class="card-link">See the category model</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="projects-categories" class="doc-section">
+                    <h2 class="doc-subtitle">Category Logic</h2>
+                    <ul class="doc-list">
+                        <li><strong>Web and Frontend:</strong> design systems, UI libraries, and framework-oriented repositories.</li>
+                        <li><strong>CLI and Terminal:</strong> tools that improve the command-line developer experience.</li>
+                        <li><strong>Devtools:</strong> build, lint, test, and observability tooling.</li>
+                    </ul>
+                </div>
+
+                <div id="projects-submit" class="doc-section">
+                    <h2 class="doc-subtitle">What We Look For</h2>
+                    <p class="doc-text">Adding a project should mean adding a repository record and, if needed, supporting assets. The layout should not need manual expansion every time a new item appears.</p>
+
+                    <div class="callout warning">
+                        <p>As this grows, CI validation should protect the site from broken manifest references or incomplete project records.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-articles" class="content-section" data-title="Articles" tabindex="-1" hidden>
+                <h1 class="doc-title">Articles</h1>
+                <p class="doc-subtitle">An editorial content flow</p>
+                <p class="doc-text">Articles should hold the deeper technical writing, decision-making context, and project narratives that sit next to the project catalog.</p>
+
+                <div id="articles-overview" class="doc-section">
+                    <h2 class="doc-subtitle">Publishing Flow</h2>
+                    <p class="doc-text">The article library should do more than explain how a tool works. It should also surface tradeoffs, team impact, and the reasoning behind technical choices.</p>
+                    <p class="doc-text">A shared content contract lets tutorials, case studies, and editorial notes reuse the same rendering system.</p>
+                </div>
+
+                <div id="articles-formats" class="doc-section">
+                    <h2 class="doc-subtitle">Content Formats</h2>
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">Tutorial</span>
+                            <h3 class="card-title">Step-by-step teaching content</h3>
+                            <p class="card-desc">Explain setup, architecture, and implementation flows in a practical sequence.</p>
+                            <a href="https://github.com/Krypera/LikeAnOpenSource/tree/main/content/articles" target="_blank" rel="noopener noreferrer" class="card-link">Open the articles folder</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Case Study</span>
+                            <h3 class="card-title">Real-world breakdowns</h3>
+                            <p class="card-desc">Show how a decision affects the team, the product, and long-term maintainability.</p>
+                            <a href="#articles-editorial" class="card-link">Read editorial notes</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="articles-editorial" class="doc-section">
+                    <h2 class="doc-subtitle">Editorial Standards</h2>
+                    <ul class="doc-list">
+                        <li><strong>Title discipline:</strong> every item should carry topic, category, and difficulty information.</li>
+                        <li><strong>Context first:</strong> articles should explain not only what to do, but also why a choice matters.</li>
+                        <li><strong>Cross-section visibility:</strong> highlighted writing can be reused in Explore.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="content-guides" class="content-section" data-title="Guides" tabindex="-1" hidden>
+                <h1 class="doc-title">Guides</h1>
+                <p class="doc-subtitle">Learning paths for real progress</p>
+                <p class="doc-text">Guides should help people move from passive reading to confident action.</p>
+
+                <div id="guides-getting-started" class="doc-section">
+                    <h2 class="doc-subtitle">Getting Started</h2>
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">Start</span>
+                            <h3 class="card-title">How to read the guides</h3>
+                            <p class="card-desc">Use the guide layer as a decision path. Start from your goal, stay inside one route, and branch into Projects or Articles only when you need depth.</p>
+                            <a href="#guides-reading-flow" class="card-link">Read the guide flow</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Contribute</span>
+                            <h3 class="card-title">How to contribute</h3>
+                            <p class="card-desc">Contribute where the reading experience feels weak: unclear copy, missing context, thin guide paths, or content that sounds more polished than it really is.</p>
+                            <a href="#guides-contributing" class="card-link">Open the contribution guide</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Evaluate</span>
+                            <h3 class="card-title">How to judge a repository quickly</h3>
+                            <p class="card-desc">Use the project criteria before you commit your time. The goal is to understand value, maintenance signal, and onboarding quality early.</p>
+                            <a href="#projects-submit" class="card-link">See the evaluation criteria</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="guides-reading-flow" class="doc-section">
+                    <h2 class="doc-subtitle">How to Read the Guides</h2>
+                    <p class="doc-text">LAOS guides are not meant to be read like one long manual from top to bottom. They are built as decision paths.</p>
+                    <p class="doc-text">Start with the question you are trying to answer: what to explore, which project to evaluate, or how to make your first useful contribution.</p>
+                    <ul class="doc-list">
+                        <li><strong>Choose one goal first:</strong> pick discovery, evaluation, or contribution before you start clicking. The shortest useful path is usually better than reading everything in order.</li>
+                        <li><strong>Use the sidebar as your route:</strong> stay inside one guide branch until you have enough context, then branch into Projects or Articles only when you need more depth.</li>
+                        <li><strong>Treat cards as entry points:</strong> cards in Getting Started are there to move you into the next useful section, not to summarize the whole platform.</li>
+                        <li><strong>Return after each deep dive:</strong> after reading a project or article, come back to the guide path and decide your next step instead of wandering aimlessly.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>If you are new to LAOS, start with Explore, check the project criteria, and return here before deciding where to contribute.</p>
+                    </div>
+                </div>
+
+                <div id="guides-levels" class="doc-section">
+                    <h2 class="doc-subtitle">Level Structure</h2>
+                    <ul class="doc-list">
+                        <li><strong>Beginner:</strong> fundamental concepts, terminology, and quick-start paths.</li>
+                        <li><strong>Intermediate:</strong> architectural tradeoffs, process design, and project patterns.</li>
+                        <li><strong>Advanced:</strong> maintainability, scale, and team knowledge transfer.</li>
+                    </ul>
+                </div>
+
+                <div id="guides-contributing" class="doc-section">
+                    <h2 class="doc-subtitle">How to Contribute</h2>
+                    <p class="doc-text">Right now contributions are content-first. The fastest useful improvements are usually clearer copy, better section flow, stronger guide paths, or more honest project framing.</p>
+                    <p class="doc-text">When you contribute, aim to reduce hesitation for the next visitor. If your change makes the next step clearer, it is valuable.</p>
+                    <ul class="doc-list">
+                        <li><strong>Start with a concrete gap:</strong> pick one weak area: unclear copy, missing context, a vague card, or a section that does not lead anywhere useful.</li>
+                        <li><strong>Edit the source content:</strong> structured page content still lives in <span class="inline-code">content/site-content.v1.json</span>, while longer guide bodies can now live in <span class="inline-code">content/guides/*.md</span>.</li>
+                        <li><strong>Test locally:</strong> run the local HTTP server, open the page, and check that the new copy reads naturally in both the card and the full section.</li>
+                        <li><strong>Open a focused PR:</strong> explain what problem you fixed, why the old version was weak, and what became clearer for the reader.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>Keep section metadata, navigation labels, and summary cards in JSON. Put substantial guide text in <span class="inline-code">content/guides/*.md</span>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="content-about" class="content-section" data-title="About" tabindex="-1" hidden>
+                <h1 class="doc-title">About</h1>
+                <p class="doc-subtitle">Why the platform exists</p>
+
+                <div id="about-what-is-laos" class="doc-section">
+                    <h2 class="doc-subtitle">What Is LAOS?</h2>
+                    <p class="doc-text">LikeAnOpenSource (LAOS) is a platform focused on explaining the ideas, design choices, and ecosystem patterns behind open source software.</p>
+                    <p class="doc-text">It is not only a list of repositories. It is meant to connect projects with technical context, guide paths, and editorial storytelling.</p>
+                </div>
+
+                <div id="about-philosophy" class="doc-section">
+                    <h2 class="doc-subtitle">Our Philosophy</h2>
+                    <ul class="doc-list">
+                        <li><strong>Think like open source:</strong> build knowledge in a modular, reusable, and transparent way.</li>
+                        <li><strong>Single source of truth:</strong> UI content should come from repository records, not manual page edits.</li>
+                        <li><strong>Sustainable publishing:</strong> adding content should be cheap, and validation should be visible.</li>
+                    </ul>
+                </div>
+
+                <div id="about-quality" class="doc-section">
+                    <h2 class="doc-subtitle">Editorial Standards</h2>
+                    <p class="doc-text">The manifest contract should make it easy to validate missing fields, broken links, and invalid category references before they reach the site.</p>
+
+                    <div class="callout warning">
+                        <p>The next strong step is to add GitHub Actions checks for schema validation and content integrity.</p>
+                    </div>
+                </div>
+
+                <div id="about-contact" class="doc-section">
+                    <h2 class="doc-subtitle">Repository</h2>
+                    <div class="card-grid">
+                        <article class="card">
+                            <span class="card-tag">GitHub</span>
+                            <h3 class="card-title">Main repository</h3>
+                            <p class="card-desc">The source repository that will eventually provide the content and structure for the site.</p>
+                            <a href="https://github.com/Krypera/LikeAnOpenSource" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="content-config.js" defer></script>
+    <script src="content-service.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

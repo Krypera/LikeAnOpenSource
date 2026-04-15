@@ -1,0 +1,21 @@
+{
+    "collection": "projects",
+    "records": [
+        {
+            "id": "documentation-platforms",
+            "path": "content/projects/documentation-platforms.json"
+        },
+        {
+            "id": "modern-frontend-toolchains",
+            "path": "content/projects/modern-frontend-toolchains.json"
+        },
+        {
+            "id": "quality-and-testing-stacks",
+            "path": "content/projects/quality-and-testing-stacks.json"
+        },
+        {
+            "id": "terminal-first-workflows",
+            "path": "content/projects/terminal-first-workflows.json"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "collection": "articles",
+    "records": [
+        {
+            "id": "step-by-step-teaching-content",
+            "path": "content/articles/step-by-step-teaching-content.json"
+        },
+        {
+            "id": "real-world-breakdowns",
+            "path": "content/articles/real-world-breakdowns.json"
+        },
+        {
+            "id": "deep-dives-into-system-choices",
+            "path": "content/articles/deep-dives-into-system-choices.json"
+        },
+        {
+            "id": "writing-from-inside-the-workflow",
+            "path": "content/articles/writing-from-inside-the-workflow.json"
+        }
+    ]
+}

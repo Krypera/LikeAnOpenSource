@@ -1,0 +1,586 @@
+{
+    "meta": {
+        "version": 1,
+        "generatedAt": "2026-04-15",
+        "repository": {
+            "owner": "Krypera",
+            "name": "LikeAnOpenSource",
+            "branch": "main"
+        }
+    },
+    "site": {
+        "name": "LikeAnOpenSource",
+        "repositoryUrl": "https://github.com/Krypera/LikeAnOpenSource"
+    },
+    "sections": {
+        "home": {
+            "title": "Home",
+            "subtitle": "Welcome to LikeAnOpenSource",
+            "intro": [
+                "LikeAnOpenSource is a discovery and learning platform for people who want to explore open source with more clarity, more context, and better entry points.",
+                "Instead of dropping visitors into endless repository lists, the platform is designed to connect projects, articles, and guides into paths that actually help people move forward."
+            ],
+            "callout": {
+                "tone": "default",
+                "text": "Start with Explore for curated entry points, then move into Projects, Articles, and Guides depending on how deep you want to go."
+            },
+            "groups": [
+                {
+                    "id": "home-overview",
+                    "title": "Platform Overview",
+                    "intro": [
+                        "The experience is shaped around discovery, deep context, and practical next steps."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Explore",
+                                    "title": "Curated entry points",
+                                    "description": "Find strong starting points for open-source ecosystems, documentation stacks, developer tooling, and contributor-friendly communities.",
+                                    "href": "#content-explore",
+                                    "linkLabel": "Go to Explore",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Projects",
+                                    "title": "Project collections with context",
+                                    "description": "Browse repositories by category, maturity, onboarding quality, and the kind of learning value they offer.",
+                                    "href": "#content-projects",
+                                    "linkLabel": "Browse Projects",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Guides",
+                                    "title": "Step-by-step paths",
+                                    "description": "Follow guided routes built for first-time learners, active builders, and future contributors.",
+                                    "href": "#content-guides",
+                                    "linkLabel": "Open Guides",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Articles",
+                                    "title": "Deep technical context",
+                                    "description": "Read long-form breakdowns that explain why projects matter, which tradeoffs they carry, and how teams actually use them.",
+                                    "href": "#content-articles",
+                                    "linkLabel": "Browse Articles",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "home-paths",
+                    "title": "Content Paths",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "For newcomers",
+                                    "text": "Begin with Guides to build a mental model, then use Explore to find ecosystems and projects worth your time."
+                                },
+                                {
+                                    "label": "For active builders",
+                                    "text": "Jump into Projects and Articles when you want to compare tools, evaluate architecture, or sharpen your workflow."
+                                },
+                                {
+                                    "label": "For contributors",
+                                    "text": "Use the repository to suggest additions, improve content quality, and help shape better open-source onboarding."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "home-principles",
+                    "title": "Core Principles",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Clarity matters more than hype. Every page should help visitors understand what something is, why it matters, and where to go next.",
+                                "Good curation is more useful than volume. The goal is not to list everything, but to surface the most teachable, trustworthy, and well-explained things first."
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "The strongest open-source platforms do not just publish information. They reduce hesitation and make the next step feel obvious."
+                        }
+                    ]
+                }
+            ]
+        },
+        "explore": {
+            "title": "Explore",
+            "subtitle": "How discovery is being shaped in LAOS",
+            "intro": [
+                "Explore is where LAOS will eventually surface curated projects, ecosystems, and deep-dive writing.",
+                "Until the repository contains enough real records, this section should explain the discovery lens honestly instead of pretending there is already a populated feed."
+            ],
+            "groups": [
+                {
+                    "id": "explore-focus",
+                    "title": "What Explore Surfaces",
+                    "intro": [
+                        "These are the four discovery lanes the platform is intentionally building first."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Projects",
+                                    "title": "Repositories with clear onboarding",
+                                    "description": "Projects earn space here when setup, documentation, and contribution flow are understandable to someone new.",
+                                    "href": "#projects-overview",
+                                    "linkLabel": "Open project criteria",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Ecosystems",
+                                    "title": "Stacks worth studying together",
+                                    "description": "Explore should connect tools that make more sense as a system, such as docs platforms, frontend workflows, and developer tooling.",
+                                    "href": "#projects-categories",
+                                    "linkLabel": "See the category logic",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Articles",
+                                    "title": "Deep dives with a point of view",
+                                    "description": "Long-form writing here should explain tradeoffs, maintenance reality, and why a choice matters, not just list features.",
+                                    "href": "#articles-overview",
+                                    "linkLabel": "See the article direction",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Guides",
+                                    "title": "Contribution paths that lower hesitation",
+                                    "description": "Guides should turn curiosity into motion by showing where to start, what to improve, and how to contribute without guesswork.",
+                                    "href": "#guides-getting-started",
+                                    "linkLabel": "Open Getting Started",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "explore-criteria",
+                    "title": "What Earns A Feature",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Clear onboarding",
+                                    "text": "A visitor should understand what the project is, how to start, and how much effort it asks from them."
+                                },
+                                {
+                                    "label": "Visible maintenance",
+                                    "text": "There should be some sign of active stewardship, usable issue hygiene, or healthy release practices."
+                                },
+                                {
+                                    "label": "Learning signal",
+                                    "text": "The project, article, or guide should teach something transferable instead of only promoting itself."
+                                },
+                                {
+                                    "label": "Honest tradeoffs",
+                                    "text": "If something is powerful but difficult, expensive, or niche, Explore should say so clearly."
+                                },
+                                {
+                                    "label": "Contribution friendliness",
+                                    "text": "The best candidates make it easier for a newcomer to understand where help is needed."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "Explore should never simulate momentum. If something is featured, the team should be able to explain exactly why it deserves attention."
+                        }
+                    ]
+                },
+                {
+                    "id": "explore-current-focus",
+                    "title": "Current Focus",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Right now the content work is focused on three foundations: honest repository evaluation, stronger getting-started guides, and long-form writing that connects tools to real workflows.",
+                                "As real project records and articles land in the repository, Explore can stop describing the lens and start surfacing those records directly."
+                            ]
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Documentation systems",
+                                    "text": "We are prioritizing tools and patterns that solve navigation, search, structure, and authoring well."
+                                },
+                                {
+                                    "label": "Contributor-friendly repositories",
+                                    "text": "We want to spotlight projects that make their contribution process visible and realistic for first-time contributors."
+                                },
+                                {
+                                    "label": "Workflow writing",
+                                    "text": "The article layer is being shaped around real tradeoffs, maintenance lessons, and system-level thinking."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "This area should stay focused on real project signals, clear selection criteria, and content that can stand behind its claims."
+                        }
+                    ]
+                }
+            ]
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "Browse repositories with real context",
+            "intro": [
+                "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone."
+            ],
+            "groups": [
+                {
+                    "id": "projects-overview",
+                    "title": "Catalog Flow",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "This section should explain why a repository matters, who it is for, and how much complexity or maintenance load comes with adopting it."
+                            ]
+                        },
+                        {
+                            "type": "record-feed",
+                            "sourcePath": "content/projects/index.json",
+                            "records": [
+                                "documentation-platforms",
+                                "modern-frontend-toolchains",
+                                "quality-and-testing-stacks",
+                                "terminal-first-workflows"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-categories",
+                    "title": "Category Logic",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Web and Frontend",
+                                    "text": "Design systems, UI libraries, and framework-oriented repositories."
+                                },
+                                {
+                                    "label": "Documentation and Knowledge",
+                                    "text": "Docs platforms, content tooling, search systems, and writing infrastructure."
+                                },
+                                {
+                                    "label": "CLI and Terminal",
+                                    "text": "Tools that improve the command-line developer experience."
+                                },
+                                {
+                                    "label": "Devtools",
+                                    "text": "Build, lint, test, and observability tooling."
+                                },
+                                {
+                                    "label": "Automation",
+                                    "text": "Release helpers, workflow runners, generators, and repo maintenance utilities."
+                                },
+                                {
+                                    "label": "Community-first Repositories",
+                                    "text": "Projects that stand out because of contribution quality, documentation clarity, or maintainer friendliness."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-submit",
+                    "title": "What We Look For",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "A strong project entry should help people decide whether something is worth learning from, contributing to, or adopting.",
+                                "That means going beyond the repository name and showing why a project stands out in practice."
+                            ]
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Why it matters",
+                                    "text": "Explain the problem the project solves and who benefits from it."
+                                },
+                                {
+                                    "label": "Maintenance signal",
+                                    "text": "Show whether the project has signs of active stewardship, healthy releases, and usable issue triage."
+                                },
+                                {
+                                    "label": "Learning value",
+                                    "text": "Clarify whether the repository is interesting because of architecture, community process, or contributor experience."
+                                },
+                                {
+                                    "label": "Entry difficulty",
+                                    "text": "Set expectations for setup complexity, docs quality, and how quickly a newcomer can become productive."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "The best project catalogs do not just rank repositories. They reduce uncertainty and help people choose with confidence."
+                        }
+                    ]
+                }
+            ]
+        },
+        "articles": {
+            "title": "Articles",
+            "subtitle": "Long-form writing with technical depth",
+            "intro": [
+                "Articles are where the platform slows down and gives ideas enough room to breathe."
+            ],
+            "groups": [
+                {
+                    "id": "articles-overview",
+                    "title": "Publishing Flow",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The article library should do more than explain how a tool works. It should surface tradeoffs, team impact, and the reasoning behind technical choices.",
+                                "Strong editorial content helps people understand not only which project is interesting, but also which one fits their workflow, team, or stage of learning."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-formats",
+                    "title": "Content Formats",
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "sourcePath": "content/articles/index.json",
+                            "records": [
+                                "step-by-step-teaching-content",
+                                "real-world-breakdowns",
+                                "deep-dives-into-system-choices",
+                                "writing-from-inside-the-workflow"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-editorial",
+                    "title": "Editorial Standards",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Title discipline",
+                                    "text": "Every article should make its topic, scope, and intended reader clear from the first glance."
+                                },
+                                {
+                                    "label": "Context first",
+                                    "text": "Good writing explains not only what to do, but also why a choice matters and what it may cost."
+                                },
+                                {
+                                    "label": "Cross-section visibility",
+                                    "text": "Strong pieces should be easy to surface again inside Explore, Projects, or guide recommendations."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "guides": {
+            "title": "Guides",
+            "subtitle": "Learning paths for real progress",
+            "intro": [
+                "Guides should help people move from passive reading to confident action."
+            ],
+            "groups": [
+                {
+                    "id": "guides-getting-started",
+                    "title": "Getting Started",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Start",
+                                    "title": "How to read the guides",
+                                    "description": "Use the guide layer as a decision path. Start from your goal, stay inside one route, and branch into Projects or Articles only when you need depth.",
+                                    "href": "#guides-reading-flow",
+                                    "linkLabel": "Read the guide flow",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Contribute",
+                                    "title": "How to contribute",
+                                    "description": "Contribute where the reading experience feels weak: unclear copy, missing context, thin guide paths, or content that sounds more polished than it really is.",
+                                    "href": "#guides-contributing",
+                                    "linkLabel": "Open the contribution guide",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Evaluate",
+                                    "title": "How to judge a repository quickly",
+                                    "description": "Use the project criteria before you commit your time. The goal is to understand value, maintenance signal, and onboarding quality early.",
+                                    "href": "#projects-submit",
+                                    "linkLabel": "See the evaluation criteria",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-reading-flow",
+                    "title": "How to Read the Guides",
+                    "blocks": [
+                        {
+                            "type": "markdown",
+                            "path": "content/guides/how-to-read-the-guides.md",
+                            "skipTitle": true
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-levels",
+                    "title": "Level Structure",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Beginner",
+                                    "text": "Fundamental concepts, terminology, and quick-start paths."
+                                },
+                                {
+                                    "label": "Intermediate",
+                                    "text": "Architectural tradeoffs, process design, and project patterns."
+                                },
+                                {
+                                    "label": "Advanced",
+                                    "text": "Maintainability, scale, and team knowledge transfer."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-contributing",
+                    "title": "How to Contribute",
+                    "blocks": [
+                        {
+                            "type": "markdown",
+                            "path": "content/guides/how-to-contribute.md",
+                            "skipTitle": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "about": {
+            "title": "About",
+            "subtitle": "Why the platform exists",
+            "groups": [
+                {
+                    "id": "about-what-is-laos",
+                    "title": "What Is LAOS?",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "LikeAnOpenSource (LAOS) is a platform focused on explaining the ideas, design choices, and ecosystem patterns behind open source software.",
+                                "It is not only a list of repositories. It is meant to connect projects with technical context, guide paths, and editorial storytelling."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-philosophy",
+                    "title": "Our Philosophy",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Think like open source",
+                                    "text": "Build knowledge in a modular, reusable, and transparent way."
+                                },
+                                {
+                                    "label": "Curate with care",
+                                    "text": "A smaller, sharper set of recommendations is more valuable than an overwhelming wall of links."
+                                },
+                                {
+                                    "label": "Make contribution feel possible",
+                                    "text": "People should leave the platform feeling closer to their first meaningful contribution, not further from it."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-quality",
+                    "title": "Editorial Standards",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The platform should favor clear writing, visible reasoning, and recommendations that can be defended with real experience."
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "Quality here means trust. If something is featured, visitors should feel there is a good reason it earned that space."
+                        }
+                    ]
+                },
+                {
+                    "id": "about-contact",
+                    "title": "Repository",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "GitHub",
+                                    "title": "Main repository",
+                                    "description": "Follow the codebase, track how the platform evolves, and see where future content operations will live.",
+                                    "href": "https://github.com/Krypera/LikeAnOpenSource",
+                                    "linkLabel": "Open repository",
+                                    "external": true
+                                },
+                                {
+                                    "tag": "Roadmap",
+                                    "title": "What ships next",
+                                    "description": "The next phase is turning seeded local content into live repository-backed content so updates can flow from GitHub directly.",
+                                    "href": "#projects-submit",
+                                    "linkLabel": "See the content criteria",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

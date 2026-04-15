@@ -1,0 +1,9 @@
+{
+    "id": "modern-frontend-toolchains",
+    "tag": "Frontend",
+    "title": "Modern frontend toolchains",
+    "description": "Track ecosystems built around Vite, Astro, Next.js, and component-driven workflows that balance speed, structure, and long-term maintainability.",
+    "href": "#projects-categories",
+    "linkLabel": "See the category model",
+    "external": false
+}
