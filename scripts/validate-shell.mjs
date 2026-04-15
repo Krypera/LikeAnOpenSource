@@ -3,6 +3,8 @@ import path from "node:path";
 
 const rootDir = path.resolve(import.meta.dirname, "..");
 const errors = [];
+const siteOrigin = "https://likeanopensource.com";
+const siteRootUrl = `${siteOrigin}/`;
 
 const readFile = (relativePath) => {
     const absolutePath = path.join(rootDir, relativePath);
@@ -20,6 +22,7 @@ const ensure = (condition, message) => {
 const indexHtml = readFile("index.html");
 const manifestJson = JSON.parse(readFile("site.webmanifest"));
 const robotsTxt = readFile("robots.txt");
+const sitemapXml = readFile("sitemap.xml");
 
 const expectMetaTag = (pattern, message) => {
     ensure(pattern.test(indexHtml), `index.html: ${message}`);
@@ -42,12 +45,20 @@ expectMetaTag(
     'missing the Twitter summary card metadata.'
 );
 expectMetaTag(
+    new RegExp(`<meta\\s+property="og:url"\\s+content="${siteRootUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "i"),
+    `missing or invalid Open Graph URL for "${siteRootUrl}".`
+);
+expectMetaTag(
     /<link\s+rel="icon"\s+href="([^"]+)"/i,
     'missing the favicon link.'
 );
 expectMetaTag(
     /<link\s+rel="manifest"\s+href="([^"]+)"/i,
     'missing the web manifest link.'
+);
+expectMetaTag(
+    new RegExp(`<link\\s+rel="canonical"\\s+href="${siteRootUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`, "i"),
+    `missing or invalid canonical URL for "${siteRootUrl}".`
 );
 
 const faviconMatch = indexHtml.match(/<link\s+rel="icon"\s+href="([^"]+)"/i);
@@ -61,6 +72,30 @@ if (webManifestMatch) {
         fileExists(webManifestMatch[1]),
         `index.html: linked web manifest "${webManifestMatch[1]}" does not exist.`
     );
+}
+
+const structuredDataMatch = indexHtml.match(
+    /<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i
+);
+ensure(structuredDataMatch, "index.html: missing JSON-LD website metadata.");
+if (structuredDataMatch) {
+    try {
+        const structuredData = JSON.parse(structuredDataMatch[1].trim());
+        ensure(
+            structuredData?.["@type"] === "WebSite",
+            'index.html: JSON-LD must describe a "WebSite".'
+        );
+        ensure(
+            structuredData?.url === siteRootUrl,
+            `index.html: JSON-LD url must be "${siteRootUrl}".`
+        );
+        ensure(
+            typeof structuredData?.name === "string" && structuredData.name.trim(),
+            "index.html: JSON-LD name is required."
+        );
+    } catch (error) {
+        errors.push(`index.html: JSON-LD is invalid. ${error.message}`);
+    }
 }
 
 ensure(
@@ -78,6 +113,14 @@ ensure(
 ensure(
     typeof manifestJson.start_url === "string" && manifestJson.start_url.trim(),
     "site.webmanifest: start_url is required."
+);
+ensure(
+    manifestJson.id === "/",
+    'site.webmanifest: id should be "/".'
+);
+ensure(
+    manifestJson.scope === "/",
+    'site.webmanifest: scope should be "/".'
 );
 ensure(
     typeof manifestJson.display === "string" && manifestJson.display.trim(),
@@ -114,6 +157,19 @@ if (Array.isArray(manifestJson.icons)) {
 
 ensure(/User-agent:\s*\*/i.test(robotsTxt), 'robots.txt: missing "User-agent: *".');
 ensure(/Allow:\s*\//i.test(robotsTxt), 'robots.txt: missing "Allow: /".');
+ensure(
+    robotsTxt.includes(`Sitemap: ${siteOrigin}/sitemap.xml`),
+    `robots.txt: missing sitemap declaration for "${siteOrigin}/sitemap.xml".`
+);
+
+ensure(
+    sitemapXml.includes("<urlset"),
+    "sitemap.xml: missing urlset root element."
+);
+ensure(
+    sitemapXml.includes(`<loc>${siteRootUrl}</loc>`),
+    `sitemap.xml: missing root URL "${siteRootUrl}".`
+);
 
 if (errors.length) {
     console.error("Shell validation failed:\n");

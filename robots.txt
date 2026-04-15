@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-# Add the sitemap location after the production domain is finalized.
+Sitemap: https://likeanopensource.com/sitemap.xml

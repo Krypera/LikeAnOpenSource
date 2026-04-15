@@ -93,11 +93,10 @@ The prototype now includes a lightweight SEO baseline:
 - description, Open Graph, and Twitter summary metadata
 - favicon and web manifest
 - `robots.txt`
+- canonical URL, `og:url`, JSON-LD website metadata, and `sitemap.xml`
 
 Items intentionally left for the final domain:
 
-- canonical URL
-- sitemap with production URLs
 - share image URLs that need absolute hosting paths
 
 ## Content Model
