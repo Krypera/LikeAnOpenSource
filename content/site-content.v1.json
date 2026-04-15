@@ -243,29 +243,30 @@
         },
         "projects": {
             "title": "Projects",
-            "subtitle": "Browse repositories with real context",
+            "subtitle": "Real repositories with clear learning value",
             "intro": [
                 "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone."
             ],
             "groups": [
                 {
                     "id": "projects-overview",
-                    "title": "Catalog Flow",
+                    "title": "Selected Repositories",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "This section should explain why a repository matters, who it is for, and how much complexity or maintenance load comes with adopting it."
+                                "This opening set is intentionally small. Each repository earns its place by teaching something concrete about docs architecture, frontend tooling, code quality, or terminal-based workflow design.",
+                                "They are not here because they are simply well known. They are here because they give LAOS a strong starting point for explaining why certain repositories are worth studying."
                             ]
                         },
                         {
                             "type": "record-feed",
                             "sourcePath": "content/projects/index.json",
                             "records": [
-                                "documentation-platforms",
-                                "modern-frontend-toolchains",
-                                "quality-and-testing-stacks",
-                                "terminal-first-workflows"
+                                "facebook-docusaurus",
+                                "vitejs-vite",
+                                "biomejs-biome",
+                                "cli-cli"
                             ]
                         }
                     ]

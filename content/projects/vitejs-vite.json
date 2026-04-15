@@ -1,0 +1,9 @@
+{
+    "id": "vitejs-vite",
+    "tag": "Frontend Tooling",
+    "title": "Vite",
+    "description": "A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.",
+    "href": "https://github.com/vitejs/vite",
+    "linkLabel": "Open repository",
+    "external": true
+}

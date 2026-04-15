@@ -101,7 +101,7 @@
             <div class="sidebar-menu" id="menu-projects" data-menu="projects">
                 <h2 class="sidebar-title">Projects</h2>
                 <ul class="sidebar-list">
-                    <li><a href="#projects-overview">Catalog Flow</a></li>
+                    <li><a href="#projects-overview">Selected Repositories</a></li>
                     <li><a href="#projects-categories">Category Logic</a></li>
                     <li><a href="#projects-submit">What We Look For</a></li>
                 </ul>
@@ -272,25 +272,38 @@
 
             <section id="content-projects" class="content-section" data-title="Projects" tabindex="-1" hidden>
                 <h1 class="doc-title">Projects</h1>
-                <p class="doc-subtitle">A project catalog fed from GitHub</p>
-                <p class="doc-text">The Projects section is meant to become a categorized view of repository records, grouped by technology, maintenance expectations, and usage context.</p>
+                <p class="doc-subtitle">Real repositories with clear learning value</p>
+                <p class="doc-text">The Projects section should help people evaluate real repositories through onboarding quality, technical usefulness, and the kind of learning value each project offers.</p>
 
                 <div id="projects-overview" class="doc-section">
-                    <h2 class="doc-subtitle">Catalog Flow</h2>
-                    <p class="doc-text">This area is not only for listing popular repositories. It should explain why they matter, who they are for, and what kind of maintenance burden or learning curve they carry.</p>
+                    <h2 class="doc-subtitle">Selected Repositories</h2>
+                    <p class="doc-text">This opening set is intentionally small. Each repository earns its place by teaching something concrete about docs architecture, frontend tooling, code quality, or terminal-based workflow design.</p>
+                    <p class="doc-text">They are not here because they are simply well known. They are here because they give LAOS a strong starting point for explaining why certain repositories are worth studying.</p>
 
                     <div class="card-grid">
                         <article class="card">
-                            <span class="card-tag">Repository</span>
-                            <h3 class="card-title">Project records</h3>
-                            <p class="card-desc">Every project can live as its own metadata record inside the repository and then be connected through the main manifest.</p>
-                            <a href="https://github.com/Krypera/LikeAnOpenSource/tree/main/content/projects" target="_blank" rel="noopener noreferrer" class="card-link">Open the projects folder</a>
+                            <span class="card-tag">Docs Platform</span>
+                            <h3 class="card-title">Docusaurus</h3>
+                            <p class="card-desc">An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.</p>
+                            <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                         <article class="card">
-                            <span class="card-tag">UI</span>
-                            <h3 class="card-title">Category blocks</h3>
-                            <p class="card-desc">Web, CLI, devtools, and libraries can all be defined as content blocks instead of hard-coded sections.</p>
-                            <a href="#projects-categories" class="card-link">See the category model</a>
+                            <span class="card-tag">Frontend Tooling</span>
+                            <h3 class="card-title">Vite</h3>
+                            <p class="card-desc">A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.</p>
+                            <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Code Quality</span>
+                            <h3 class="card-title">Biome</h3>
+                            <p class="card-desc">A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.</p>
+                            <a href="https://github.com/biomejs/biome" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Terminal Workflow</span>
+                            <h3 class="card-title">GitHub CLI</h3>
+                            <p class="card-desc">GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.</p>
+                            <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                     </div>
                 </div>
@@ -299,17 +312,28 @@
                     <h2 class="doc-subtitle">Category Logic</h2>
                     <ul class="doc-list">
                         <li><strong>Web and Frontend:</strong> design systems, UI libraries, and framework-oriented repositories.</li>
+                        <li><strong>Documentation and Knowledge:</strong> docs platforms, content tooling, search systems, and writing infrastructure.</li>
                         <li><strong>CLI and Terminal:</strong> tools that improve the command-line developer experience.</li>
                         <li><strong>Devtools:</strong> build, lint, test, and observability tooling.</li>
+                        <li><strong>Automation:</strong> release helpers, workflow runners, generators, and repo maintenance utilities.</li>
+                        <li><strong>Community-first Repositories:</strong> projects that stand out because of contribution quality, documentation clarity, or maintainer friendliness.</li>
                     </ul>
                 </div>
 
                 <div id="projects-submit" class="doc-section">
                     <h2 class="doc-subtitle">What We Look For</h2>
-                    <p class="doc-text">Adding a project should mean adding a repository record and, if needed, supporting assets. The layout should not need manual expansion every time a new item appears.</p>
+                    <p class="doc-text">A strong project entry should help people decide whether something is worth learning from, contributing to, or adopting.</p>
+                    <p class="doc-text">That means going beyond the repository name and showing why a project stands out in practice.</p>
+
+                    <ul class="doc-list">
+                        <li><strong>Why it matters:</strong> explain the problem the project solves and who benefits from it.</li>
+                        <li><strong>Maintenance signal:</strong> show whether the project has signs of active stewardship, healthy releases, and usable issue triage.</li>
+                        <li><strong>Learning value:</strong> clarify whether the repository is interesting because of architecture, community process, or contributor experience.</li>
+                        <li><strong>Entry difficulty:</strong> set expectations for setup complexity, docs quality, and how quickly a newcomer can become productive.</li>
+                    </ul>
 
                     <div class="callout warning">
-                        <p>As this grows, CI validation should protect the site from broken manifest references or incomplete project records.</p>
+                        <p>The best project catalogs do not just rank repositories. They reduce uncertainty and help people choose with confidence.</p>
                     </div>
                 </div>
             </section>

@@ -1,9 +1,0 @@
-{
-    "id": "quality-and-testing-stacks",
-    "tag": "Devtools",
-    "title": "Quality and testing stacks",
-    "description": "A lane for linting, formatting, testing, and observability tools that help open-source repositories stay readable, stable, and contributor-friendly over time.",
-    "href": "#projects-categories",
-    "linkLabel": "Explore devtool criteria",
-    "external": false
-}

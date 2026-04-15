@@ -2,20 +2,20 @@
     "collection": "projects",
     "records": [
         {
-            "id": "documentation-platforms",
-            "path": "content/projects/documentation-platforms.json"
+            "id": "facebook-docusaurus",
+            "path": "content/projects/facebook-docusaurus.json"
         },
         {
-            "id": "modern-frontend-toolchains",
-            "path": "content/projects/modern-frontend-toolchains.json"
+            "id": "vitejs-vite",
+            "path": "content/projects/vitejs-vite.json"
         },
         {
-            "id": "quality-and-testing-stacks",
-            "path": "content/projects/quality-and-testing-stacks.json"
+            "id": "biomejs-biome",
+            "path": "content/projects/biomejs-biome.json"
         },
         {
-            "id": "terminal-first-workflows",
-            "path": "content/projects/terminal-first-workflows.json"
+            "id": "cli-cli",
+            "path": "content/projects/cli-cli.json"
         }
     ]
 }

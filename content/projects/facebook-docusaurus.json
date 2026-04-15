@@ -1,0 +1,9 @@
+{
+    "id": "facebook-docusaurus",
+    "tag": "Docs Platform",
+    "title": "Docusaurus",
+    "description": "An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.",
+    "href": "https://github.com/facebook/docusaurus",
+    "linkLabel": "Open repository",
+    "external": true
+}

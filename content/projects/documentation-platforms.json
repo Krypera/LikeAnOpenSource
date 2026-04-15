@@ -1,9 +1,0 @@
-{
-    "id": "documentation-platforms",
-    "tag": "Docs",
-    "title": "Documentation platforms",
-    "description": "Compare systems such as Docusaurus, Nextra, and MkDocs Material through information architecture, authoring flow, search behavior, and scaling tradeoffs.",
-    "href": "#articles-overview",
-    "linkLabel": "See the editorial view",
-    "external": false
-}
