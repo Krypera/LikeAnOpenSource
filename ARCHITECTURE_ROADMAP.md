@@ -133,6 +133,7 @@ Now partially underway:
 
 - fallback shell was reduced to an embedded-manifest app shell
 - baseline metadata, robots, and favicon support were added
+- validation now covers shell-level metadata, asset links, and embedded-manifest sync
 - domain-specific SEO items still wait for the final production URL
 
 ## Important Note

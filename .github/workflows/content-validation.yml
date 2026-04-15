@@ -1,4 +1,4 @@
-name: Content Validation
+name: Site Validation
 
 on:
   push:
@@ -6,20 +6,32 @@ on:
       - main
     paths:
       - "content/**"
+      - "assets/**"
+      - "robots.txt"
+      - "site.webmanifest"
+      - "index.html"
       - "content-service.js"
       - "script.js"
+      - "scripts/sync-embedded-manifest.mjs"
+      - "scripts/validate-shell.mjs"
       - "scripts/validate-content.mjs"
       - ".github/workflows/content-validation.yml"
   pull_request:
     paths:
       - "content/**"
+      - "assets/**"
+      - "robots.txt"
+      - "site.webmanifest"
+      - "index.html"
       - "content-service.js"
       - "script.js"
+      - "scripts/sync-embedded-manifest.mjs"
+      - "scripts/validate-shell.mjs"
       - "scripts/validate-content.mjs"
       - ".github/workflows/content-validation.yml"
 
 jobs:
-  validate-content:
+  validate-site:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,5 +43,18 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Check embedded manifest sync
+        run: |
+          node scripts/sync-embedded-manifest.mjs
+          git diff --exit-code -- index.html
+
       - name: Validate content contract
         run: node scripts/validate-content.mjs
+
+      - name: Validate shell and SEO baseline
+        run: node scripts/validate-shell.mjs
+
+      - name: Check browser scripts syntax
+        run: |
+          node --check content-service.js
+          node --check script.js

@@ -72,6 +72,7 @@ Check the content contract before publishing:
 ```powershell
 node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
+node scripts/validate-shell.mjs
 ```
 
 This validator checks:
@@ -83,6 +84,7 @@ This validator checks:
 - Markdown file existence
 - record-feed references
 - referenced record file integrity
+- shell-level metadata and asset references
 
 ## SEO Baseline
 

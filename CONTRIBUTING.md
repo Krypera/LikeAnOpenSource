@@ -98,6 +98,7 @@ Then validate content:
 ```powershell
 node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
+node scripts/validate-shell.mjs
 ```
 
 ## Pull request checklist
@@ -110,6 +111,7 @@ Before opening a PR, make sure:
 - Markdown paths exist and load
 - the embedded manifest was resynced after manifest changes
 - `node scripts/validate-content.mjs` passes
+- `node scripts/validate-shell.mjs` passes
 
 ## License note
 
