@@ -96,6 +96,7 @@ python -m http.server 4173
 Then validate content:
 
 ```powershell
+node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
 ```
 
@@ -107,6 +108,7 @@ Before opening a PR, make sure:
 - new anchors resolve correctly
 - new records are registered in the proper index file
 - Markdown paths exist and load
+- the embedded manifest was resynced after manifest changes
 - `node scripts/validate-content.mjs` passes
 
 ## License note

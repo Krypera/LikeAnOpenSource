@@ -253,6 +253,23 @@ window.LAOSContentService = (() => {
         };
     };
 
+    const readEmbeddedManifest = () => {
+        const embeddedNode = document.getElementById("embedded-manifest");
+        const rawValue = embeddedNode?.textContent?.trim();
+
+        if (!rawValue) {
+            return null;
+        }
+
+        try {
+            return normalizeManifest(JSON.parse(rawValue));
+        } catch (error) {
+            throw new Error(
+                `The embedded manifest is invalid.${error instanceof Error ? ` ${error.message}` : ""}`
+            );
+        }
+    };
+
     const readCache = () => {
         if (!config.cacheKey) {
             return null;
@@ -619,6 +636,29 @@ window.LAOSContentService = (() => {
             } catch (error) {
                 errors.push(error instanceof Error ? error.message : String(error));
             }
+        }
+
+        try {
+            const embeddedManifest = readEmbeddedManifest();
+            if (embeddedManifest) {
+                const hydrated = await hydrateManifest(embeddedManifest, "embedded");
+                writeCache(hydrated);
+                return {
+                    kind: "manifest",
+                    source: {
+                        id: "embedded",
+                        label: "Embedded manifest",
+                        url: ""
+                    },
+                    manifest: hydrated,
+                    state: "embedded",
+                    message:
+                        "Network content could not be loaded, so the embedded manifest bundled with the page was used.",
+                    warnings: errors
+                };
+            }
+        } catch (error) {
+            errors.push(error instanceof Error ? error.message : String(error));
         }
 
         const cached = readCache();

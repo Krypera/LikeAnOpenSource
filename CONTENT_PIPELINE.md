@@ -9,6 +9,7 @@ This project should no longer grow by duplicating hard-coded HTML blocks. The cu
 3. The manifest describes the screen using a `section -> group -> block` structure.
 4. The current prototype tries a local manifest first, then GitHub Raw, then browser cache, and finally an embedded fallback view.
 5. When the repository is ready, manifest validation should run in CI.
+6. The embedded manifest inside `index.html` should be regenerated from `content/site-content.v1.json` after content changes.
 
 Important context:
 
@@ -115,14 +116,21 @@ The frontend uses this order:
 
 1. `./content/site-content.v1.json`
 2. `https://raw.githubusercontent.com/Krypera/LikeAnOpenSource/main/content/site-content.v1.json`
-3. browser cache
-4. embedded fallback view
+3. embedded manifest bundled into `index.html`
+4. browser cache
+
+During development, refresh the embedded fallback payload with:
+
+```powershell
+node scripts/sync-embedded-manifest.mjs
+```
 
 That means:
 
 - a version hosted from the same repo can use a relative path
 - a separated presentation layer can still pull from GitHub Raw
-- network failures can reuse the last known content
+- the shell can still render the current repository content even when browser fetches fail
+- network failures can reuse the last known cached content
 - the prototype does not fully break if the manifest cannot be loaded
 
 ## Important Assumption

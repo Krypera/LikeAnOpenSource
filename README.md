@@ -70,12 +70,14 @@ http://127.0.0.1:4173/
 Check the content contract before publishing:
 
 ```powershell
+node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
 ```
 
 This validator checks:
 
 - manifest structure
+- embedded manifest sync inside `index.html`
 - required sections and group ids
 - internal anchor targets
 - Markdown file existence

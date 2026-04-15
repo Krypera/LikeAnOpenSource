@@ -192,6 +192,25 @@ const validateBlock = (block, sourceLabel) => {
 
 const manifest = readJson(manifestRelativePath);
 
+const readEmbeddedManifestFromIndex = () => {
+    const indexHtml = readFile("index.html");
+    const match = indexHtml.match(
+        /<!-- EMBEDDED_MANIFEST_START -->[\s\S]*?<script id="embedded-manifest" type="application\/json">([\s\S]*?)<\/script>[\s\S]*?<!-- EMBEDDED_MANIFEST_END -->/
+    );
+
+    if (!match) {
+        errors.push("index.html: embedded manifest block is missing.");
+        return null;
+    }
+
+    try {
+        return JSON.parse(match[1].trim());
+    } catch (error) {
+        errors.push(`index.html: embedded manifest JSON is invalid. ${error.message}`);
+        return null;
+    }
+};
+
 if (manifest && typeof manifest === "object") {
     ensure(manifest.sections && typeof manifest.sections === "object", "Manifest: sections object is required.");
 
@@ -229,6 +248,14 @@ if (manifest && typeof manifest === "object") {
             });
         });
     });
+
+    const embeddedManifest = readEmbeddedManifestFromIndex();
+    if (embeddedManifest) {
+        ensure(
+            JSON.stringify(embeddedManifest) === JSON.stringify(manifest),
+            'index.html: embedded manifest is out of sync with "content/site-content.v1.json". Run "node scripts/sync-embedded-manifest.mjs".'
+        );
+    }
 }
 
 if (errors.length) {

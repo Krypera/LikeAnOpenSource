@@ -41,7 +41,7 @@
                     <span class="sr-only">Search the documentation</span>
                     <input id="site-search" type="search" placeholder="Search the documentation..." autocomplete="off" aria-describedby="search-status">
                 </label>
-                <p class="search-status" id="search-status" role="status" aria-live="polite">Home section is displayed.</p>
+                <p class="search-status" id="search-status" role="status" aria-live="polite">Preparing content.</p>
             </div>
 
             <div class="user-area">
@@ -81,66 +81,21 @@
 
         <div id="sidebar-menus">
             <div class="sidebar-menu active" id="menu-home" data-menu="home">
-                <h2 class="sidebar-title">Home</h2>
+                <h2 class="sidebar-title">Loading</h2>
                 <ul class="sidebar-list">
-                    <li><a href="#home-overview">Platform Overview</a></li>
-                    <li><a href="#home-paths">Content Paths</a></li>
-                    <li><a href="#home-principles">Core Principles</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu" id="menu-explore" data-menu="explore">
-                <h2 class="sidebar-title">Explore</h2>
-                <ul class="sidebar-list">
-                    <li><a href="#explore-focus">What Explore Surfaces</a></li>
-                    <li><a href="#explore-criteria">What Earns A Feature</a></li>
-                    <li><a href="#explore-current-focus">Current Focus</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu" id="menu-projects" data-menu="projects">
-                <h2 class="sidebar-title">Projects</h2>
-                <ul class="sidebar-list">
-                    <li><a href="#projects-overview">Selected Repositories</a></li>
-                    <li><a href="#projects-reading-room">Repository Notes</a></li>
-                    <li><a href="#projects-categories">Category Logic</a></li>
-                    <li><a href="#projects-submit">What We Look For</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu" id="menu-articles" data-menu="articles">
-                <h2 class="sidebar-title">Articles</h2>
-                <ul class="sidebar-list">
-                    <li><a href="#articles-overview">Publishing Flow</a></li>
-                    <li><a href="#articles-formats">Article Catalog</a></li>
-                    <li><a href="#articles-reading-room">Reading Room</a></li>
-                    <li><a href="#articles-editorial">Editorial Standards</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu" id="menu-guides" data-menu="guides">
-                <h2 class="sidebar-title">Guides</h2>
-                <ul class="sidebar-list">
-                    <li><a href="#guides-getting-started">Getting Started</a></li>
-                    <li><a href="#guides-reading-flow">How to Read the Guides</a></li>
-                    <li><a href="#guides-levels">Level Structure</a></li>
-                    <li><a href="#guides-contributing">How to Contribute</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu" id="menu-about" data-menu="about">
-                <h2 class="sidebar-title">About</h2>
-                <ul class="sidebar-list">
-                    <li><a href="#about-what-is-laos">What Is LAOS?</a></li>
-                    <li><a href="#about-philosophy">Our Philosophy</a></li>
-                    <li><a href="#about-quality">Editorial Standards</a></li>
-                    <li><a href="#about-contact">Repository</a></li>
+                    <li><a href="#shell-loading">Preparing content</a></li>
                 </ul>
             </div>
         </div>
     </aside>
 
     <main id="main-content" class="main-content">
+        <noscript>
+            <div class="callout warning">
+                <p>JavaScript is required to render the latest content model for this prototype.</p>
+            </div>
+        </noscript>
+
         <div class="search-empty" id="search-empty" hidden>
             <p class="search-empty-title">No matching section was found for your search.</p>
             <p class="search-empty-text">Try a broader keyword or switch to another main section.</p>
@@ -150,693 +105,654 @@
 
         <div id="content-sections">
             <section id="content-home" class="content-section active" data-title="Home" tabindex="-1">
-                <h1 class="doc-title">Home</h1>
-                <p class="doc-subtitle">Welcome to LikeAnOpenSource</p>
-                <p class="doc-text">LikeAnOpenSource is a modern documentation and discovery platform designed to help people explore open source projects, learn developer tools, and discover the stories behind strong communities.</p>
-                <p class="doc-text">In the new architecture, this homepage no longer depends on hand-written HTML cards. It is designed to be fed by content that lives in the GitHub repository.</p>
+                <h1 class="doc-title">LikeAnOpenSource</h1>
+                <p class="doc-subtitle">Preparing the content model</p>
+                <p class="doc-text">The application shell is ready. Section content will be rendered from the repository manifest as soon as the data layer finishes loading.</p>
 
-                <div class="callout">
-                    <p>Once the manifest is loaded from the repository, Explore, Projects, Articles, and Guides can all be updated from a single source of truth.</p>
-                </div>
-
-                <div id="home-overview" class="doc-section">
-                    <h2 class="doc-subtitle">Platform Overview</h2>
-                    <p class="doc-text">The platform is shaped around three major flows: discovery, deep content, and contribution guides. That structure helps both newcomers and experienced builders move through the same system with different goals.</p>
-
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">Explore</span>
-                            <h3 class="card-title">Featured Content</h3>
-                            <p class="card-desc">Show the latest and most relevant content from a single manifest-driven flow.</p>
-                            <a href="#content-explore" class="card-link">Go to Explore</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Guides</span>
-                            <h3 class="card-title">Layered Learning</h3>
-                            <p class="card-desc">List guide tracks by level and purpose without editing the page layout every time.</p>
-                            <a href="#content-guides" class="card-link">Open Guides</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Articles</span>
-                            <h3 class="card-title">Deep Context</h3>
-                            <p class="card-desc">Publish technical writing and editorial context through the same content contract.</p>
-                            <a href="#content-articles" class="card-link">Browse Articles</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="home-paths" class="doc-section">
-                    <h2 class="doc-subtitle">Content Paths</h2>
-                    <ul class="doc-list">
-                        <li><strong>For newcomers:</strong> Start with Guides, then move into Explore and Projects once the basics are familiar.</li>
-                        <li><strong>For active builders:</strong> Use Projects and Articles to compare tools, patterns, and real-world tradeoffs.</li>
-                        <li><strong>For contributors:</strong> Update repository content files and register them through the manifest instead of editing the layout directly.</li>
-                    </ul>
-                </div>
-
-                <div id="home-principles" class="doc-section">
-                    <h2 class="doc-subtitle">Core Principles</h2>
-                    <p class="doc-text">This platform is built to make content structure visible. Each section should explain what it is for, how it is fed, and where it connects in the rest of the system.</p>
-                    <p class="doc-text">A manifest-driven setup means a new project, guide, or article can appear without hand-editing HTML blocks.</p>
-
-                    <div class="callout warning">
-                        <p>As content grows, the repository should stay the source of truth. The page should render content, not own it.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="content-explore" class="content-section" data-title="Explore" tabindex="-1" hidden>
-                <h1 class="doc-title">Explore</h1>
-                <p class="doc-subtitle">How discovery is being shaped in LAOS</p>
-                <p class="doc-text">Explore is where LAOS will eventually surface curated projects, ecosystems, and deep-dive writing.</p>
-                <p class="doc-text">Until the repository contains enough real records, this section should explain the discovery lens honestly instead of pretending there is already a populated feed.</p>
-
-                <div id="explore-focus" class="doc-section">
-                    <h2 class="doc-subtitle">What Explore Surfaces</h2>
-                    <p class="doc-text">These are the four discovery lanes the platform is intentionally building first.</p>
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">Projects</span>
-                            <h3 class="card-title">Repositories with clear onboarding</h3>
-                            <p class="card-desc">Projects earn space here when setup, documentation, and contribution flow are understandable to someone new.</p>
-                            <a href="#projects-overview" class="card-link">Open project criteria</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Ecosystems</span>
-                            <h3 class="card-title">Stacks worth studying together</h3>
-                            <p class="card-desc">Explore should connect tools that make more sense as a system, such as docs platforms, frontend workflows, and developer tooling.</p>
-                            <a href="#projects-categories" class="card-link">See the category logic</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Articles</span>
-                            <h3 class="card-title">Deep dives with a point of view</h3>
-                            <p class="card-desc">Long-form writing here should explain tradeoffs, maintenance reality, and why a choice matters, not just list features.</p>
-                            <a href="#articles-overview" class="card-link">See the article direction</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Guides</span>
-                            <h3 class="card-title">Contribution paths that lower hesitation</h3>
-                            <p class="card-desc">Guides should turn curiosity into motion by showing where to start, what to improve, and how to contribute without guesswork.</p>
-                            <a href="#guides-getting-started" class="card-link">Open Getting Started</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="explore-criteria" class="doc-section">
-                    <h2 class="doc-subtitle">What Earns A Feature</h2>
-                    <ul class="doc-list">
-                        <li><strong>Clear onboarding:</strong> a visitor should understand what the project is, how to start, and how much effort it asks from them.</li>
-                        <li><strong>Visible maintenance:</strong> there should be some sign of active stewardship, usable issue hygiene, or healthy release practices.</li>
-                        <li><strong>Learning signal:</strong> the project, article, or guide should teach something transferable instead of only promoting itself.</li>
-                        <li><strong>Honest tradeoffs:</strong> if something is powerful but difficult, expensive, or niche, Explore should say so clearly.</li>
-                        <li><strong>Contribution friendliness:</strong> the best candidates make it easier for a newcomer to understand where help is needed.</li>
-                    </ul>
-
+                <div id="shell-loading" class="doc-section">
+                    <h2 class="doc-subtitle">Loading State</h2>
+                    <p class="doc-text">The page first tries the local manifest, then GitHub Raw, then the embedded manifest bundled into this file, and finally browser cache.</p>
                     <div class="callout">
-                        <p>Explore should never simulate momentum. If something is featured, the team should be able to explain exactly why it deserves attention.</p>
-                    </div>
-                </div>
-
-                <div id="explore-current-focus" class="doc-section">
-                    <h2 class="doc-subtitle">Current Focus</h2>
-                    <p class="doc-text">Right now the content work is focused on three foundations: honest repository evaluation, stronger getting-started guides, and long-form writing that connects tools to real workflows.</p>
-                    <p class="doc-text">As real project records and articles land in the repository, Explore can stop describing the lens and start surfacing those records directly.</p>
-                    <ul class="doc-list">
-                        <li><strong>Documentation systems:</strong> we are prioritizing tools and patterns that solve navigation, search, structure, and authoring well.</li>
-                        <li><strong>Contributor-friendly repositories:</strong> we want to spotlight projects that make their contribution process visible and realistic for first-time contributors.</li>
-                        <li><strong>Workflow writing:</strong> the article layer is being shaped around real tradeoffs, maintenance lessons, and system-level thinking.</li>
-                    </ul>
-                    <div class="callout">
-                        <p>This area should stay focused on real project signals, clear selection criteria, and content that can stand behind its claims.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="content-projects" class="content-section" data-title="Projects" tabindex="-1" hidden>
-                <h1 class="doc-title">Projects</h1>
-                <p class="doc-subtitle">Real repositories with clear learning value</p>
-                <p class="doc-text">Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone.</p>
-                <p class="doc-text">The best project catalog does not stop at naming repositories. It explains why a repository is worth attention and what kind of team will actually benefit from it.</p>
-
-                <div id="projects-overview" class="doc-section">
-                    <h2 class="doc-subtitle">Selected Repositories</h2>
-                    <p class="doc-text">This opening set is intentionally small. Each repository earns its place by teaching something concrete about docs architecture, frontend tooling, code quality, or terminal-based workflow design.</p>
-                    <p class="doc-text">They are not here because they are simply well known. They are here because they give LAOS a strong starting point for explaining why certain repositories are worth studying.</p>
-
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">Docs Platform</span>
-                            <h3 class="card-title">Docusaurus</h3>
-                            <p class="card-desc">An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Repository:</span> facebook/docusaurus</li>
-                                <li><span class="card-meta-label">Best for:</span> Versioned docs and documentation portals</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Information architecture and docs maintainability</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Theme, plugin, and docs workflow customization</li>
-                            </ul>
-                            <a href="#record-facebook-docusaurus" class="card-link">Read evaluation</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Frontend Tooling</span>
-                            <h3 class="card-title">Vite</h3>
-                            <p class="card-desc">A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Repository:</span> vitejs/vite</li>
-                                <li><span class="card-meta-label">Best for:</span> Fast modern frontend app setup</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Feedback-loop speed and build-tool ergonomics</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Plugin-driven tooling and dev-server experience</li>
-                            </ul>
-                            <a href="#record-vitejs-vite" class="card-link">Read evaluation</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Code Quality</span>
-                            <h3 class="card-title">Biome</h3>
-                            <p class="card-desc">A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Repository:</span> biomejs/biome</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams simplifying lint and format workflows</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Tool consolidation and codebase consistency</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Everyday developer ergonomics and rule clarity</li>
-                            </ul>
-                            <a href="#record-biomejs-biome" class="card-link">Read evaluation</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Terminal Workflow</span>
-                            <h3 class="card-title">GitHub CLI</h3>
-                            <p class="card-desc">GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Repository:</span> cli/cli</li>
-                                <li><span class="card-meta-label">Best for:</span> Terminal-first GitHub issue and PR workflows</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Terminal productivity and repository operations</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Scriptable issue, PR, and release workflows</li>
-                            </ul>
-                            <a href="#record-cli-cli" class="card-link">Read evaluation</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="projects-reading-room" class="doc-section">
-                    <h2 class="doc-subtitle">Repository Notes</h2>
-                    <p class="doc-text">These notes are meant to do the part a project card cannot do on its own: explain what the repository teaches, where it fits, and which tradeoffs deserve attention.</p>
-                    <div class="record-stack">
-                        <article id="record-facebook-docusaurus" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Docs Platform</span>
-                                <h3 class="record-detail-title">Docusaurus</h3>
-                            </div>
-                            <p class="record-detail-summary">An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Repository:</span> facebook/docusaurus</li>
-                                <li><span class="card-meta-label">Best for:</span> Versioned docs and documentation portals</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Information architecture and docs maintainability</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Theme, plugin, and docs workflow customization</li>
-                            </ul>
-                            <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Docusaurus matters in LAOS because it teaches more than page generation. It teaches how documentation becomes a product surface with navigation, versioning, and editorial structure.</p>
-                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
-                                <p class="doc-text">This repository is useful when you want to study:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>versioned documentation as a first-class requirement</li>
-                                    <li>navigation patterns for large technical content sets</li>
-                                    <li>the relationship between docs structure and contributor clarity</li>
-                                </ul>
-                                <p class="doc-text">That makes it a strong reference for products that expect their knowledge base to grow over time.</p>
-                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
-                                <p class="doc-text">Docusaurus fits best when a team needs documentation to behave like a maintained system rather than a loose pile of pages.</p>
-                                <p class="doc-text">It is especially useful when content needs to survive multiple releases, product changes, or contributor waves without losing its shape.</p>
-                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
-                                <p class="doc-text">The strength of a mature docs platform is also its weight. Teams get structure, but they also inherit decisions about theme conventions, plugin behavior, and content organization.</p>
-                                <p class="doc-text">That is not a flaw. It simply means Docusaurus is most valuable when the team actually needs that level of documentation discipline.</p>
-                            </div>
-                        </article>
-                        <article id="record-vitejs-vite" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Frontend Tooling</span>
-                                <h3 class="record-detail-title">Vite</h3>
-                            </div>
-                            <p class="record-detail-summary">A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Repository:</span> vitejs/vite</li>
-                                <li><span class="card-meta-label">Best for:</span> Fast modern frontend app setup</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Feedback-loop speed and build-tool ergonomics</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Plugin-driven tooling and dev-server experience</li>
-                            </ul>
-                            <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Vite belongs in the first project set because it changed the baseline expectation for local frontend feedback. It is not only a tool choice. It is a workflow expectation.</p>
-                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
-                                <p class="doc-text">Vite is worth studying when you care about:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>fast startup and instant local feedback</li>
-                                    <li>tool design that stays close to everyday developer experience</li>
-                                    <li>plugin-based extensibility without drowning the default setup</li>
-                                </ul>
-                                <p class="doc-text">That combination makes it useful far beyond its marketing shorthand.</p>
-                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
-                                <p class="doc-text">It fits best for teams building modern frontend applications that want fast iteration without immediately committing to a heavy custom toolchain.</p>
-                                <p class="doc-text">It is also useful as a learning reference because it shows how performance and simplicity can shape adoption just as much as feature depth.</p>
-                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
-                                <p class="doc-text">Speed alone does not answer every architectural question. Teams still have to think about framework fit, deployment constraints, and how much build customization they really need.</p>
-                                <p class="doc-text">That is why LAOS treats Vite as a strong workflow reference, not as a universal answer.</p>
-                            </div>
-                        </article>
-                        <article id="record-biomejs-biome" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Code Quality</span>
-                                <h3 class="record-detail-title">Biome</h3>
-                            </div>
-                            <p class="record-detail-summary">A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Repository:</span> biomejs/biome</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams simplifying lint and format workflows</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Tool consolidation and codebase consistency</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Everyday developer ergonomics and rule clarity</li>
-                            </ul>
-                            <a href="https://github.com/biomejs/biome" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Biome earns space here because it represents a clear idea: many teams want fewer overlapping quality tools and a more coherent everyday code-health workflow.</p>
-                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
-                                <p class="doc-text">Biome is valuable when you want to look at:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>how tool consolidation affects developer experience</li>
-                                    <li>the cost of fragmented lint and format pipelines</li>
-                                    <li>the relationship between speed, consistency, and adoption</li>
-                                </ul>
-                                <p class="doc-text">It turns code quality into a usability question, not only a rules question.</p>
-                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
-                                <p class="doc-text">It fits best for teams that are tired of maintaining a long stack of small quality tools and want a clearer operating model for formatting and linting.</p>
-                                <p class="doc-text">That makes it especially relevant for organizations that care about standardization and lower day-to-day friction.</p>
-                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
-                                <p class="doc-text">An integrated toolchain simplifies a lot, but it also asks teams to align around a more opinionated path. That means adoption is not only technical; it is also procedural.</p>
-                                <p class="doc-text">The right evaluation question is not "is consolidation good?" but "does this consolidation help our team move with less friction than before?"</p>
-                            </div>
-                        </article>
-                        <article id="record-cli-cli" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Terminal Workflow</span>
-                                <h3 class="record-detail-title">GitHub CLI</h3>
-                            </div>
-                            <p class="record-detail-summary">GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Repository:</span> cli/cli</li>
-                                <li><span class="card-meta-label">Best for:</span> Terminal-first GitHub issue and PR workflows</li>
-                                <li><span class="card-meta-label">Evaluation lens:</span> Terminal productivity and repository operations</li>
-                                <li><span class="card-meta-label">Contribution angle:</span> Scriptable issue, PR, and release workflows</li>
-                            </ul>
-                            <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" class="card-link record-detail-link">Open repository</a>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">GitHub CLI belongs in this project set because it brings repository work closer to the place many developers already live: the terminal.</p>
-                                <h3 class="doc-subtitle markdown-heading">What it teaches well</h3>
-                                <p class="doc-text">This repository is useful when you want to study:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>terminal-first issue and pull request workflows</li>
-                                    <li>scripting-friendly repository operations</li>
-                                    <li>how tooling can reduce context switching across common GitHub tasks</li>
-                                </ul>
-                                <p class="doc-text">That makes it more than a convenience utility. It is a workflow design decision.</p>
-                                <h3 class="doc-subtitle markdown-heading">Where it fits best</h3>
-                                <p class="doc-text">It fits best for contributors and teams who spend meaningful time in shell-driven workflows and want repository actions to feel close to their development loop.</p>
-                                <p class="doc-text">That includes maintainers, reviewers, and contributors who prefer keyboard-heavy operating patterns.</p>
-                                <h3 class="doc-subtitle markdown-heading">The tradeoff to notice</h3>
-                                <p class="doc-text">Terminal-native workflows feel powerful for the people who already think that way, but they can feel distant to contributors who rely on graphical interfaces.</p>
-                                <p class="doc-text">So the right question is not only whether the tool is capable. It is whether the team wants its contribution flow to lean more heavily toward command-line habits.</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="projects-categories" class="doc-section">
-                    <h2 class="doc-subtitle">Category Logic</h2>
-                    <ul class="doc-list">
-                        <li><strong>Web and Frontend:</strong> design systems, UI libraries, and framework-oriented repositories.</li>
-                        <li><strong>Documentation and Knowledge:</strong> docs platforms, content tooling, search systems, and writing infrastructure.</li>
-                        <li><strong>CLI and Terminal:</strong> tools that improve the command-line developer experience.</li>
-                        <li><strong>Devtools:</strong> build, lint, test, and observability tooling.</li>
-                        <li><strong>Automation:</strong> release helpers, workflow runners, generators, and repo maintenance utilities.</li>
-                        <li><strong>Community-first Repositories:</strong> projects that stand out because of contribution quality, documentation clarity, or maintainer friendliness.</li>
-                    </ul>
-                </div>
-
-                <div id="projects-submit" class="doc-section">
-                    <h2 class="doc-subtitle">What We Look For</h2>
-                    <p class="doc-text">A strong project entry should help people decide whether something is worth learning from, contributing to, or adopting.</p>
-                    <p class="doc-text">That means going beyond the repository name and showing why a project stands out in practice.</p>
-
-                    <ul class="doc-list">
-                        <li><strong>Why it matters:</strong> explain the problem the project solves and who benefits from it.</li>
-                        <li><strong>Maintenance signal:</strong> show whether the project has signs of active stewardship, healthy releases, and usable issue triage.</li>
-                        <li><strong>Learning value:</strong> clarify whether the repository is interesting because of architecture, community process, or contributor experience.</li>
-                        <li><strong>Entry difficulty:</strong> set expectations for setup complexity, docs quality, and how quickly a newcomer can become productive.</li>
-                    </ul>
-
-                    <div class="callout warning">
-                        <p>The best project catalogs do not just rank repositories. They reduce uncertainty and help people choose with confidence.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="content-articles" class="content-section" data-title="Articles" tabindex="-1" hidden>
-                <h1 class="doc-title">Articles</h1>
-                <p class="doc-subtitle">Long-form writing with technical depth</p>
-                <p class="doc-text">Articles are where the platform slows down and gives ideas enough room to breathe.</p>
-                <p class="doc-text">The goal is not to publish generic explainers. It is to publish writing that helps people make better technical judgments with more context and less noise.</p>
-
-                <div id="articles-overview" class="doc-section">
-                    <h2 class="doc-subtitle">Publishing Flow</h2>
-                    <p class="doc-text">The article library should do more than explain how a tool works. It should also surface tradeoffs, team impact, and the reasoning behind technical choices.</p>
-                    <p class="doc-text">Strong editorial content helps people understand not only which project is interesting, but also which one fits their workflow, team, or stage of learning.</p>
-                </div>
-
-                <div id="articles-formats" class="doc-section">
-                    <h2 class="doc-subtitle">Article Catalog</h2>
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">Tutorial</span>
-                            <h3 class="card-title">How step-by-step content earns trust</h3>
-                            <p class="card-desc">Strong tutorial writing does more than move line by line. It explains why each step exists, where the reader might get lost, and what a good stopping point looks like.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Format:</span> Guided tutorial</li>
-                                <li><span class="card-meta-label">Best for:</span> Readers moving from curiosity into first implementation</li>
-                                <li><span class="card-meta-label">Core promise:</span> Turns setup and architecture into a sequence people can actually follow</li>
-                            </ul>
-                            <a href="#record-step-by-step-teaching-content" class="card-link">Read article</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Case Study</span>
-                            <h3 class="card-title">Why real-world breakdowns matter more than feature lists</h3>
-                            <p class="card-desc">A useful breakdown shows what a decision changed after rollout: what became easier, what became slower, and which tradeoffs were acceptable only in a specific context.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Format:</span> Case study</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams comparing tools under real delivery constraints</li>
-                                <li><span class="card-meta-label">Core promise:</span> Keeps evaluation grounded in maintenance, speed, and team cost</li>
-                            </ul>
-                            <a href="#record-real-world-breakdowns" class="card-link">Read article</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Architecture</span>
-                            <h3 class="card-title">How to write about system choices without pretending there is one right answer</h3>
-                            <p class="card-desc">Architecture writing should explain why a team picked a direction, what constraints shaped the decision, and which signals would justify changing course later.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Format:</span> Architecture essay</li>
-                                <li><span class="card-meta-label">Best for:</span> Readers trying to compare systems without flattening the tradeoffs</li>
-                                <li><span class="card-meta-label">Core promise:</span> Frames technical choices as context-sensitive decisions rather than verdicts</li>
-                            </ul>
-                            <a href="#record-deep-dives-into-system-choices" class="card-link">Read article</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Maintainer Notes</span>
-                            <h3 class="card-title">What workflow-native writing gives a technical product</h3>
-                            <p class="card-desc">The most useful operational writing comes from people close to the actual work. It captures friction, shortcuts, review habits, and the invisible rules new contributors usually miss.</p>
-                            <ul class="card-meta">
-                                <li><span class="card-meta-label">Format:</span> Maintainer notes</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams documenting contribution flow, release habits, and repository hygiene</li>
-                                <li><span class="card-meta-label">Core promise:</span> Turns tacit workflow knowledge into something a newcomer can learn from</li>
-                            </ul>
-                            <a href="#record-writing-from-inside-the-workflow" class="card-link">Read article</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="articles-reading-room" class="doc-section">
-                    <h2 class="doc-subtitle">Reading Room</h2>
-                    <p class="doc-text">These opening pieces define the kind of writing LAOS wants to publish first: practical, tradeoff-aware, and grounded in real team work.</p>
-                    <div class="record-stack">
-                        <article id="record-step-by-step-teaching-content" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Tutorial</span>
-                                <h3 class="record-detail-title">How step-by-step content earns trust</h3>
-                            </div>
-                            <p class="record-detail-summary">Strong tutorial writing does more than move line by line. It explains why each step exists, where the reader might get lost, and what a good stopping point looks like.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Format:</span> Guided tutorial</li>
-                                <li><span class="card-meta-label">Best for:</span> Readers moving from curiosity into first implementation</li>
-                                <li><span class="card-meta-label">Core promise:</span> Turns setup and architecture into a sequence people can actually follow</li>
-                            </ul>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Good technical teaching is not only about sequence. It is about pacing, confidence, and reducing the chance that a reader quietly falls behind without noticing.</p>
-                                <h3 class="doc-subtitle markdown-heading">Show the reader where they are</h3>
-                                <p class="doc-text">A strong tutorial keeps naming the current stage:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>what has been set up already</li>
-                                    <li>what is changing in this step</li>
-                                    <li>what the reader should understand before moving on</li>
-                                </ul>
-                                <p class="doc-text">That makes the experience feel guided instead of arbitrary.</p>
-                                <h3 class="doc-subtitle markdown-heading">Explain why the step exists</h3>
-                                <p class="doc-text">Readers lose trust when a guide says "now do this" over and over without explaining why the action matters.</p>
-                                <p class="doc-text">Each important step should answer one of these questions:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>What problem does this solve?</li>
-                                    <li>What would break without it?</li>
-                                    <li>Why is this the right place in the sequence?</li>
-                                </ul>
-                                <p class="doc-text">If the guide cannot answer those questions, it usually means the sequence needs work.</p>
-                                <h3 class="doc-subtitle markdown-heading">Give readers safe stopping points</h3>
-                                <p class="doc-text">Not every reader finishes a tutorial in one sitting. Good teaching content makes it possible to pause without losing the thread.</p>
-                                <p class="doc-text">That means calling out checkpoints, naming what is already complete, and making the next step obvious when the reader returns.</p>
-                                <h3 class="doc-subtitle markdown-heading">Do not confuse completeness with usefulness</h3>
-                                <p class="doc-text">The best step-by-step writing is rarely the longest. It is the writing that helps a reader finish one meaningful action with less hesitation than before.</p>
-                            </div>
-                        </article>
-                        <article id="record-real-world-breakdowns" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Case Study</span>
-                                <h3 class="record-detail-title">Why real-world breakdowns matter more than feature lists</h3>
-                            </div>
-                            <p class="record-detail-summary">A useful breakdown shows what a decision changed after rollout: what became easier, what became slower, and which tradeoffs were acceptable only in a specific context.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Format:</span> Case study</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams comparing tools under real delivery constraints</li>
-                                <li><span class="card-meta-label">Core promise:</span> Keeps evaluation grounded in maintenance, speed, and team cost</li>
-                            </ul>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Feature lists are easy to write and easy to skim, but they do not tell a team what life looks like after adoption.</p>
-                                <h3 class="doc-subtitle markdown-heading">The useful question is what changed</h3>
-                                <p class="doc-text">When a team adopts a tool or workflow, the real questions are practical:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>Did onboarding become easier or harder?</li>
-                                    <li>Did review quality improve?</li>
-                                    <li>Did the setup become more fragile?</li>
-                                    <li>Did the team move faster after the first week, or only on demo day?</li>
-                                </ul>
-                                <p class="doc-text">Those questions reveal whether a decision actually helped.</p>
-                                <h3 class="doc-subtitle markdown-heading">Context beats generic praise</h3>
-                                <p class="doc-text">A real breakdown should say who benefited and under which conditions.</p>
-                                <p class="doc-text">The same tool can feel elegant for a small team and heavy for a larger one. A workflow that saves time for experienced maintainers can still confuse a newcomer. Without that context, the writing sounds polished but not useful.</p>
-                                <h3 class="doc-subtitle markdown-heading">Write about maintenance, not only setup</h3>
-                                <p class="doc-text">Many tools look strong on installation day. The better article is the one that follows the decision into maintenance:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>release rhythm</li>
-                                    <li>issue handling</li>
-                                    <li>configuration drift</li>
-                                    <li>how often the team had to explain the same thing twice</li>
-                                </ul>
-                                <p class="doc-text">That is where long-term value becomes visible.</p>
-                                <h3 class="doc-subtitle markdown-heading">A good breakdown lowers decision risk</h3>
-                                <p class="doc-text">The point is not to crown a winner. It is to help the next team understand the likely cost, the likely benefit, and the tradeoffs they would be choosing into.</p>
-                            </div>
-                        </article>
-                        <article id="record-deep-dives-into-system-choices" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Architecture</span>
-                                <h3 class="record-detail-title">How to write about system choices without pretending there is one right answer</h3>
-                            </div>
-                            <p class="record-detail-summary">Architecture writing should explain why a team picked a direction, what constraints shaped the decision, and which signals would justify changing course later.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Format:</span> Architecture essay</li>
-                                <li><span class="card-meta-label">Best for:</span> Readers trying to compare systems without flattening the tradeoffs</li>
-                                <li><span class="card-meta-label">Core promise:</span> Frames technical choices as context-sensitive decisions rather than verdicts</li>
-                            </ul>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Architecture decisions usually make sense only inside a specific environment. Team size, delivery pressure, contributor skill, legacy code, and hosting constraints all shape what "good" looks like.</p>
-                                <h3 class="doc-subtitle markdown-heading">Start with the constraint, not the conclusion</h3>
-                                <p class="doc-text">If an article begins by announcing the winning stack, it skips the most important part of the story.</p>
-                                <p class="doc-text">Better system writing begins with the condition that forced the decision:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>a docs site needed versioning</li>
-                                    <li>a frontend workflow had become too slow</li>
-                                    <li>too many tools were competing for the same job</li>
-                                    <li>contributor onboarding was becoming expensive</li>
-                                </ul>
-                                <p class="doc-text">Once the pressure is clear, the choice becomes easier to evaluate.</p>
-                                <h3 class="doc-subtitle markdown-heading">Tradeoffs deserve equal space</h3>
-                                <p class="doc-text">A serious system article should make room for what the chosen path costs.</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>What becomes harder?</li>
-                                    <li>What becomes more rigid?</li>
-                                    <li>What kind of team benefits most?</li>
-                                    <li>Under what signal would the team reevaluate the choice?</li>
-                                </ul>
-                                <p class="doc-text">That turns the article into reasoning instead of advocacy.</p>
-                                <h3 class="doc-subtitle markdown-heading">Good comparison writing is honest about timing</h3>
-                                <p class="doc-text">Sometimes a system is right for the current stage and wrong for the next one. That is not a failure. It is normal product and team evolution.</p>
-                                <p class="doc-text">The best writing leaves room for that possibility and tells readers what to watch as their own context changes.</p>
-                            </div>
-                        </article>
-                        <article id="record-writing-from-inside-the-workflow" class="record-detail">
-                            <div class="record-detail-head">
-                                <span class="card-tag">Maintainer Notes</span>
-                                <h3 class="record-detail-title">What workflow-native writing gives a technical product</h3>
-                            </div>
-                            <p class="record-detail-summary">The most useful operational writing comes from people close to the actual work. It captures friction, shortcuts, review habits, and the invisible rules new contributors usually miss.</p>
-                            <ul class="card-meta record-detail-meta">
-                                <li><span class="card-meta-label">Format:</span> Maintainer notes</li>
-                                <li><span class="card-meta-label">Best for:</span> Teams documenting contribution flow, release habits, and repository hygiene</li>
-                                <li><span class="card-meta-label">Core promise:</span> Turns tacit workflow knowledge into something a newcomer can learn from</li>
-                            </ul>
-                            <div class="record-detail-body markdown-block">
-                                <p class="doc-text">Some of the most valuable documentation never starts as documentation. It begins as review notes, release checklists, onboarding answers, or the explanation a maintainer repeats every week.</p>
-                                <h3 class="doc-subtitle markdown-heading">The work already contains the writing</h3>
-                                <p class="doc-text">When a team pays attention, the workflow keeps exposing the places that need clearer language:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>repeated pull request comments</li>
-                                    <li>recurring setup mistakes</li>
-                                    <li>hidden release steps</li>
-                                    <li>assumptions new contributors do not know yet</li>
-                                </ul>
-                                <p class="doc-text">Those are not side notes. They are signals.</p>
-                                <h3 class="doc-subtitle markdown-heading">Writing close to the work keeps it honest</h3>
-                                <p class="doc-text">Workflow-native writing tends to be more useful because it comes from real friction. It describes the process people actually follow, not the idealized one they wish they followed.</p>
-                                <p class="doc-text">That difference matters. New contributors can feel when a guide was written from memory instead of current practice.</p>
-                                <h3 class="doc-subtitle markdown-heading">Maintainer notes create reusable knowledge</h3>
-                                <p class="doc-text">Once written down, small operational lessons can travel:</p>
-                                <ul class="doc-list markdown-list">
-                                    <li>from pull request review into a guide</li>
-                                    <li>from a release checklist into contributor docs</li>
-                                    <li>from internal team habits into public repository standards</li>
-                                </ul>
-                                <p class="doc-text">That is how a product becomes easier to join over time.</p>
-                                <h3 class="doc-subtitle markdown-heading">Good editorial systems should capture this material</h3>
-                                <p class="doc-text">If LAOS wants to help people contribute with less hesitation, it should keep making room for writing that comes from inside the workflow, not only polished summaries written after the fact.</p>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="articles-editorial" class="doc-section">
-                    <h2 class="doc-subtitle">Editorial Standards</h2>
-                    <ul class="doc-list">
-                        <li><strong>Title discipline:</strong> Every article should make its topic, scope, and intended reader clear from the first glance.</li>
-                        <li><strong>Context first:</strong> Good writing explains not only what to do, but also why a choice matters and what it may cost.</li>
-                        <li><strong>Cross-section visibility:</strong> Strong pieces should be easy to surface again inside Explore, Projects, or guide recommendations.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="content-guides" class="content-section" data-title="Guides" tabindex="-1" hidden>
-                <h1 class="doc-title">Guides</h1>
-                <p class="doc-subtitle">Learning paths for real progress</p>
-                <p class="doc-text">Guides should help people move from passive reading to confident action.</p>
-
-                <div id="guides-getting-started" class="doc-section">
-                    <h2 class="doc-subtitle">Getting Started</h2>
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">Start</span>
-                            <h3 class="card-title">How to read the guides</h3>
-                            <p class="card-desc">Use the guide layer as a decision path. Start from your goal, stay inside one route, and branch into Projects or Articles only when you need depth.</p>
-                            <a href="#guides-reading-flow" class="card-link">Read the guide flow</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Contribute</span>
-                            <h3 class="card-title">How to contribute</h3>
-                            <p class="card-desc">Contribute where the reading experience feels weak: unclear copy, missing context, thin guide paths, or content that sounds more polished than it really is.</p>
-                            <a href="#guides-contributing" class="card-link">Open the contribution guide</a>
-                        </article>
-                        <article class="card">
-                            <span class="card-tag">Evaluate</span>
-                            <h3 class="card-title">How to judge a repository quickly</h3>
-                            <p class="card-desc">Use the project criteria before you commit your time. The goal is to understand value, maintenance signal, and onboarding quality early.</p>
-                            <a href="#projects-submit" class="card-link">See the evaluation criteria</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div id="guides-reading-flow" class="doc-section">
-                    <h2 class="doc-subtitle">How to Read the Guides</h2>
-                    <p class="doc-text">LAOS guides are not meant to be read like one long manual from top to bottom. They are built as decision paths.</p>
-                    <p class="doc-text">Start with the question you are trying to answer: what to explore, which project to evaluate, or how to make your first useful contribution.</p>
-                    <ul class="doc-list">
-                        <li><strong>Choose one goal first:</strong> pick discovery, evaluation, or contribution before you start clicking. The shortest useful path is usually better than reading everything in order.</li>
-                        <li><strong>Use the sidebar as your route:</strong> stay inside one guide branch until you have enough context, then branch into Projects or Articles only when you need more depth.</li>
-                        <li><strong>Treat cards as entry points:</strong> cards in Getting Started are there to move you into the next useful section, not to summarize the whole platform.</li>
-                        <li><strong>Return after each deep dive:</strong> after reading a project or article, come back to the guide path and decide your next step instead of wandering aimlessly.</li>
-                    </ul>
-
-                    <div class="callout">
-                        <p>If you are new to LAOS, start with Explore, check the project criteria, and return here before deciding where to contribute.</p>
-                    </div>
-                </div>
-
-                <div id="guides-levels" class="doc-section">
-                    <h2 class="doc-subtitle">Level Structure</h2>
-                    <ul class="doc-list">
-                        <li><strong>Beginner:</strong> fundamental concepts, terminology, and quick-start paths.</li>
-                        <li><strong>Intermediate:</strong> architectural tradeoffs, process design, and project patterns.</li>
-                        <li><strong>Advanced:</strong> maintainability, scale, and team knowledge transfer.</li>
-                    </ul>
-                </div>
-
-                <div id="guides-contributing" class="doc-section">
-                    <h2 class="doc-subtitle">How to Contribute</h2>
-                    <p class="doc-text">Right now contributions are content-first. The fastest useful improvements are usually clearer copy, better section flow, stronger guide paths, or more honest project framing.</p>
-                    <p class="doc-text">When you contribute, aim to reduce hesitation for the next visitor. If your change makes the next step clearer, it is valuable.</p>
-                    <ul class="doc-list">
-                        <li><strong>Start with a concrete gap:</strong> pick one weak area: unclear copy, missing context, a vague card, or a section that does not lead anywhere useful.</li>
-                        <li><strong>Edit the source content:</strong> structured page content still lives in <span class="inline-code">content/site-content.v1.json</span>, while longer guide bodies can now live in <span class="inline-code">content/guides/*.md</span>.</li>
-                        <li><strong>Test locally:</strong> run the local HTTP server, open the page, and check that the new copy reads naturally in both the card and the full section.</li>
-                        <li><strong>Open a focused PR:</strong> explain what problem you fixed, why the old version was weak, and what became clearer for the reader.</li>
-                    </ul>
-
-                    <div class="callout">
-                        <p>Keep section metadata, navigation labels, and summary cards in JSON. Put substantial guide text in <span class="inline-code">content/guides/*.md</span>.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="content-about" class="content-section" data-title="About" tabindex="-1" hidden>
-                <h1 class="doc-title">About</h1>
-                <p class="doc-subtitle">Why the platform exists</p>
-
-                <div id="about-what-is-laos" class="doc-section">
-                    <h2 class="doc-subtitle">What Is LAOS?</h2>
-                    <p class="doc-text">LikeAnOpenSource (LAOS) is a platform focused on explaining the ideas, design choices, and ecosystem patterns behind open source software.</p>
-                    <p class="doc-text">It is not only a list of repositories. It is meant to connect projects with technical context, guide paths, and editorial storytelling.</p>
-                </div>
-
-                <div id="about-philosophy" class="doc-section">
-                    <h2 class="doc-subtitle">Our Philosophy</h2>
-                    <ul class="doc-list">
-                        <li><strong>Think like open source:</strong> build knowledge in a modular, reusable, and transparent way.</li>
-                        <li><strong>Single source of truth:</strong> UI content should come from repository records, not manual page edits.</li>
-                        <li><strong>Sustainable publishing:</strong> adding content should be cheap, and validation should be visible.</li>
-                    </ul>
-                </div>
-
-                <div id="about-quality" class="doc-section">
-                    <h2 class="doc-subtitle">Editorial Standards</h2>
-                    <p class="doc-text">The manifest contract should make it easy to validate missing fields, broken links, and invalid category references before they reach the site.</p>
-
-                    <div class="callout warning">
-                        <p>The next strong step is to add GitHub Actions checks for schema validation and content integrity.</p>
-                    </div>
-                </div>
-
-                <div id="about-contact" class="doc-section">
-                    <h2 class="doc-subtitle">Repository</h2>
-                    <div class="card-grid">
-                        <article class="card">
-                            <span class="card-tag">GitHub</span>
-                            <h3 class="card-title">Main repository</h3>
-                            <p class="card-desc">The source repository that will eventually provide the content and structure for the site.</p>
-                            <a href="https://github.com/Krypera/LikeAnOpenSource" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
-                        </article>
+                        <p>The large inline HTML fallback has been replaced with a smaller shell so the UI can stay closer to one content source.</p>
                     </div>
                 </div>
             </section>
         </div>
     </main>
+
+    <!-- EMBEDDED_MANIFEST_START -->
+<script id="embedded-manifest" type="application/json">
+{
+    "meta": {
+        "version": 1,
+        "generatedAt": "2026-04-15",
+        "repository": {
+            "owner": "Krypera",
+            "name": "LikeAnOpenSource",
+            "branch": "main"
+        }
+    },
+    "site": {
+        "name": "LikeAnOpenSource",
+        "repositoryUrl": "https://github.com/Krypera/LikeAnOpenSource"
+    },
+    "sections": {
+        "home": {
+            "title": "Home",
+            "subtitle": "Welcome to LikeAnOpenSource",
+            "intro": [
+                "LikeAnOpenSource is a discovery and learning platform for people who want to explore open source with more clarity, more context, and better entry points.",
+                "Instead of dropping visitors into endless repository lists, the platform is designed to connect projects, articles, and guides into paths that actually help people move forward."
+            ],
+            "callout": {
+                "tone": "default",
+                "text": "Start with Explore for curated entry points, then move into Projects, Articles, and Guides depending on how deep you want to go."
+            },
+            "groups": [
+                {
+                    "id": "home-overview",
+                    "title": "Platform Overview",
+                    "intro": [
+                        "The experience is shaped around discovery, deep context, and practical next steps."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Explore",
+                                    "title": "Curated entry points",
+                                    "description": "Find strong starting points for open-source ecosystems, documentation stacks, developer tooling, and contributor-friendly communities.",
+                                    "href": "#content-explore",
+                                    "linkLabel": "Go to Explore",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Projects",
+                                    "title": "Project collections with context",
+                                    "description": "Browse repositories by category, maturity, onboarding quality, and the kind of learning value they offer.",
+                                    "href": "#content-projects",
+                                    "linkLabel": "Browse Projects",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Guides",
+                                    "title": "Step-by-step paths",
+                                    "description": "Follow guided routes built for first-time learners, active builders, and future contributors.",
+                                    "href": "#content-guides",
+                                    "linkLabel": "Open Guides",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Articles",
+                                    "title": "Deep technical context",
+                                    "description": "Read long-form breakdowns that explain why projects matter, which tradeoffs they carry, and how teams actually use them.",
+                                    "href": "#content-articles",
+                                    "linkLabel": "Browse Articles",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "home-paths",
+                    "title": "Content Paths",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "For newcomers",
+                                    "text": "Begin with Guides to build a mental model, then use Explore to find ecosystems and projects worth your time."
+                                },
+                                {
+                                    "label": "For active builders",
+                                    "text": "Jump into Projects and Articles when you want to compare tools, evaluate architecture, or sharpen your workflow."
+                                },
+                                {
+                                    "label": "For contributors",
+                                    "text": "Use the repository to suggest additions, improve content quality, and help shape better open-source onboarding."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "home-principles",
+                    "title": "Core Principles",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Clarity matters more than hype. Every page should help visitors understand what something is, why it matters, and where to go next.",
+                                "Good curation is more useful than volume. The goal is not to list everything, but to surface the most teachable, trustworthy, and well-explained things first."
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "The strongest open-source platforms do not just publish information. They reduce hesitation and make the next step feel obvious."
+                        }
+                    ]
+                }
+            ]
+        },
+        "explore": {
+            "title": "Explore",
+            "subtitle": "How discovery is being shaped in LAOS",
+            "intro": [
+                "Explore is where LAOS will eventually surface curated projects, ecosystems, and deep-dive writing.",
+                "Until the repository contains enough real records, this section should explain the discovery lens honestly instead of pretending there is already a populated feed."
+            ],
+            "groups": [
+                {
+                    "id": "explore-focus",
+                    "title": "What Explore Surfaces",
+                    "intro": [
+                        "These are the four discovery lanes the platform is intentionally building first."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Projects",
+                                    "title": "Repositories with clear onboarding",
+                                    "description": "Projects earn space here when setup, documentation, and contribution flow are understandable to someone new.",
+                                    "href": "#projects-overview",
+                                    "linkLabel": "Open project criteria",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Ecosystems",
+                                    "title": "Stacks worth studying together",
+                                    "description": "Explore should connect tools that make more sense as a system, such as docs platforms, frontend workflows, and developer tooling.",
+                                    "href": "#projects-categories",
+                                    "linkLabel": "See the category logic",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Articles",
+                                    "title": "Deep dives with a point of view",
+                                    "description": "Long-form writing here should explain tradeoffs, maintenance reality, and why a choice matters, not just list features.",
+                                    "href": "#articles-overview",
+                                    "linkLabel": "See the article direction",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Guides",
+                                    "title": "Contribution paths that lower hesitation",
+                                    "description": "Guides should turn curiosity into motion by showing where to start, what to improve, and how to contribute without guesswork.",
+                                    "href": "#guides-getting-started",
+                                    "linkLabel": "Open Getting Started",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "explore-criteria",
+                    "title": "What Earns A Feature",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Clear onboarding",
+                                    "text": "A visitor should understand what the project is, how to start, and how much effort it asks from them."
+                                },
+                                {
+                                    "label": "Visible maintenance",
+                                    "text": "There should be some sign of active stewardship, usable issue hygiene, or healthy release practices."
+                                },
+                                {
+                                    "label": "Learning signal",
+                                    "text": "The project, article, or guide should teach something transferable instead of only promoting itself."
+                                },
+                                {
+                                    "label": "Honest tradeoffs",
+                                    "text": "If something is powerful but difficult, expensive, or niche, Explore should say so clearly."
+                                },
+                                {
+                                    "label": "Contribution friendliness",
+                                    "text": "The best candidates make it easier for a newcomer to understand where help is needed."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "Explore should never simulate momentum. If something is featured, the team should be able to explain exactly why it deserves attention."
+                        }
+                    ]
+                },
+                {
+                    "id": "explore-current-focus",
+                    "title": "Current Focus",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Right now the content work is focused on three foundations: honest repository evaluation, stronger getting-started guides, and long-form writing that connects tools to real workflows.",
+                                "As real project records and articles land in the repository, Explore can stop describing the lens and start surfacing those records directly."
+                            ]
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Documentation systems",
+                                    "text": "We are prioritizing tools and patterns that solve navigation, search, structure, and authoring well."
+                                },
+                                {
+                                    "label": "Contributor-friendly repositories",
+                                    "text": "We want to spotlight projects that make their contribution process visible and realistic for first-time contributors."
+                                },
+                                {
+                                    "label": "Workflow writing",
+                                    "text": "The article layer is being shaped around real tradeoffs, maintenance lessons, and system-level thinking."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "This area should stay focused on real project signals, clear selection criteria, and content that can stand behind its claims."
+                        }
+                    ]
+                }
+            ]
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "Real repositories with clear learning value",
+            "intro": [
+                "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone.",
+                "The best project catalog does not stop at naming repositories. It explains why a repository is worth attention and what kind of team will actually benefit from it."
+            ],
+            "groups": [
+                {
+                    "id": "projects-overview",
+                    "title": "Selected Repositories",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "This opening set is intentionally small. Each repository earns its place by teaching something concrete about docs architecture, frontend tooling, code quality, or terminal-based workflow design.",
+                                "They are not here because they are simply well known. They are here because they give LAOS a strong starting point for explaining why certain repositories are worth studying."
+                            ]
+                        },
+                        {
+                            "type": "record-feed",
+                            "sourcePath": "content/projects/index.json",
+                            "records": [
+                                "facebook-docusaurus",
+                                "vitejs-vite",
+                                "biomejs-biome",
+                                "cli-cli"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-reading-room",
+                    "title": "Repository Notes",
+                    "intro": [
+                        "These notes are meant to do the part a project card cannot do on its own: explain what the repository teaches, where it fits, and which tradeoffs deserve attention."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "layout": "details",
+                            "sourcePath": "content/projects/index.json",
+                            "records": [
+                                "facebook-docusaurus",
+                                "vitejs-vite",
+                                "biomejs-biome",
+                                "cli-cli"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-categories",
+                    "title": "Category Logic",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Web and Frontend",
+                                    "text": "Design systems, UI libraries, and framework-oriented repositories."
+                                },
+                                {
+                                    "label": "Documentation and Knowledge",
+                                    "text": "Docs platforms, content tooling, search systems, and writing infrastructure."
+                                },
+                                {
+                                    "label": "CLI and Terminal",
+                                    "text": "Tools that improve the command-line developer experience."
+                                },
+                                {
+                                    "label": "Devtools",
+                                    "text": "Build, lint, test, and observability tooling."
+                                },
+                                {
+                                    "label": "Automation",
+                                    "text": "Release helpers, workflow runners, generators, and repo maintenance utilities."
+                                },
+                                {
+                                    "label": "Community-first Repositories",
+                                    "text": "Projects that stand out because of contribution quality, documentation clarity, or maintainer friendliness."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-submit",
+                    "title": "What We Look For",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "A strong project entry should help people decide whether something is worth learning from, contributing to, or adopting.",
+                                "That means going beyond the repository name and showing why a project stands out in practice."
+                            ]
+                        },
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Why it matters",
+                                    "text": "Explain the problem the project solves and who benefits from it."
+                                },
+                                {
+                                    "label": "Maintenance signal",
+                                    "text": "Show whether the project has signs of active stewardship, healthy releases, and usable issue triage."
+                                },
+                                {
+                                    "label": "Learning value",
+                                    "text": "Clarify whether the repository is interesting because of architecture, community process, or contributor experience."
+                                },
+                                {
+                                    "label": "Entry difficulty",
+                                    "text": "Set expectations for setup complexity, docs quality, and how quickly a newcomer can become productive."
+                                }
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "The best project catalogs do not just rank repositories. They reduce uncertainty and help people choose with confidence."
+                        }
+                    ]
+                }
+            ]
+        },
+        "articles": {
+            "title": "Articles",
+            "subtitle": "Long-form writing with technical depth",
+            "intro": [
+                "Articles are where the platform slows down and gives ideas enough room to breathe.",
+                "The goal is not to publish generic explainers. It is to publish writing that helps people make better technical judgments with more context and less noise."
+            ],
+            "groups": [
+                {
+                    "id": "articles-overview",
+                    "title": "Publishing Flow",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The article library should do more than explain how a tool works. It should surface tradeoffs, team impact, and the reasoning behind technical choices.",
+                                "Strong editorial content helps people understand not only which project is interesting, but also which one fits their workflow, team, or stage of learning."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-formats",
+                    "title": "Article Catalog",
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "sourcePath": "content/articles/index.json",
+                            "records": [
+                                "step-by-step-teaching-content",
+                                "real-world-breakdowns",
+                                "deep-dives-into-system-choices",
+                                "writing-from-inside-the-workflow"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-reading-room",
+                    "title": "Reading Room",
+                    "intro": [
+                        "These opening pieces define the kind of writing LAOS wants to publish first: practical, tradeoff-aware, and grounded in real team work."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "layout": "details",
+                            "sourcePath": "content/articles/index.json",
+                            "records": [
+                                "step-by-step-teaching-content",
+                                "real-world-breakdowns",
+                                "deep-dives-into-system-choices",
+                                "writing-from-inside-the-workflow"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-editorial",
+                    "title": "Editorial Standards",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Title discipline",
+                                    "text": "Every article should make its topic, scope, and intended reader clear from the first glance."
+                                },
+                                {
+                                    "label": "Context first",
+                                    "text": "Good writing explains not only what to do, but also why a choice matters and what it may cost."
+                                },
+                                {
+                                    "label": "Cross-section visibility",
+                                    "text": "Strong pieces should be easy to surface again inside Explore, Projects, or guide recommendations."
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "guides": {
+            "title": "Guides",
+            "subtitle": "Learning paths for real progress",
+            "intro": [
+                "Guides should help people move from passive reading to confident action."
+            ],
+            "groups": [
+                {
+                    "id": "guides-getting-started",
+                    "title": "Getting Started",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Start",
+                                    "title": "How to read the guides",
+                                    "description": "Use the guide layer as a decision path. Start from your goal, stay inside one route, and branch into Projects or Articles only when you need depth.",
+                                    "href": "#guides-reading-flow",
+                                    "linkLabel": "Read the guide flow",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Contribute",
+                                    "title": "How to contribute",
+                                    "description": "Contribute where the reading experience feels weak: unclear copy, missing context, thin guide paths, or content that sounds more polished than it really is.",
+                                    "href": "#guides-contributing",
+                                    "linkLabel": "Open the contribution guide",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Evaluate",
+                                    "title": "How to judge a repository quickly",
+                                    "description": "Use the project criteria before you commit your time. The goal is to understand value, maintenance signal, and onboarding quality early.",
+                                    "href": "#projects-submit",
+                                    "linkLabel": "See the evaluation criteria",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-reading-flow",
+                    "title": "How to Read the Guides",
+                    "blocks": [
+                        {
+                            "type": "markdown",
+                            "path": "content/guides/how-to-read-the-guides.md",
+                            "skipTitle": true
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-levels",
+                    "title": "Level Structure",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Beginner",
+                                    "text": "Fundamental concepts, terminology, and quick-start paths."
+                                },
+                                {
+                                    "label": "Intermediate",
+                                    "text": "Architectural tradeoffs, process design, and project patterns."
+                                },
+                                {
+                                    "label": "Advanced",
+                                    "text": "Maintainability, scale, and team knowledge transfer."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-contributing",
+                    "title": "How to Contribute",
+                    "blocks": [
+                        {
+                            "type": "markdown",
+                            "path": "content/guides/how-to-contribute.md",
+                            "skipTitle": true
+                        }
+                    ]
+                }
+            ]
+        },
+        "about": {
+            "title": "About",
+            "subtitle": "Why the platform exists",
+            "groups": [
+                {
+                    "id": "about-what-is-laos",
+                    "title": "What Is LAOS?",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "LikeAnOpenSource (LAOS) is a platform focused on explaining the ideas, design choices, and ecosystem patterns behind open source software.",
+                                "It is not only a list of repositories. It is meant to connect projects with technical context, guide paths, and editorial storytelling."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-philosophy",
+                    "title": "Our Philosophy",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Think like open source",
+                                    "text": "Build knowledge in a modular, reusable, and transparent way."
+                                },
+                                {
+                                    "label": "Curate with care",
+                                    "text": "A smaller, sharper set of recommendations is more valuable than an overwhelming wall of links."
+                                },
+                                {
+                                    "label": "Make contribution feel possible",
+                                    "text": "People should leave the platform feeling closer to their first meaningful contribution, not further from it."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-quality",
+                    "title": "Editorial Standards",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The platform should favor clear writing, visible reasoning, and recommendations that can be defended with real experience."
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "Quality here means trust. If something is featured, visitors should feel there is a good reason it earned that space."
+                        }
+                    ]
+                },
+                {
+                    "id": "about-contact",
+                    "title": "Repository",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "GitHub",
+                                    "title": "Main repository",
+                                    "description": "Follow the codebase, track how the platform evolves, and see where future content operations will live.",
+                                    "href": "https://github.com/Krypera/LikeAnOpenSource",
+                                    "linkLabel": "Open repository",
+                                    "external": true
+                                },
+                                {
+                                    "tag": "Roadmap",
+                                    "title": "What ships next",
+                                    "description": "The next phase is turning seeded local content into live repository-backed content so updates can flow from GitHub directly.",
+                                    "href": "#projects-submit",
+                                    "linkLabel": "See the content criteria",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+</script>
+<!-- EMBEDDED_MANIFEST_END -->
 
     <script src="content-config.js" defer></script>
     <script src="content-service.js" defer></script>
