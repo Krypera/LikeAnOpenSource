@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const contentSourceBanner = document.getElementById("content-source-banner");
     const contentSectionsRoot = document.getElementById("content-sections");
     const repoLink = document.querySelector(".repo-link");
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+    const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+    const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]');
+    const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
     const desktopQuery = window.matchMedia("(min-width: 1024px)");
     const debugContentSource =
         new URLSearchParams(window.location.search).get("debugContentSource") === "1";
@@ -26,6 +31,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentMenu = "home";
     let searchMode = false;
     let lastFocusedElement = null;
+    let baseMetadata = {
+        siteName: "LikeAnOpenSource",
+        title: document.title,
+        description: descriptionMeta?.getAttribute("content") || ""
+    };
 
     const escapeHtml = (value = "") =>
         String(value).replace(/[&<>"']/g, (character) => {
@@ -187,6 +197,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getSectionByMenu = (menuId) =>
         document.getElementById(`content-${menuId}`);
+
+    const getUrlWithState = ({ hash = window.location.hash, query = null } = {}) => {
+        const url = new URL(window.location.href);
+        if (query === null) {
+            // Preserve current search params.
+        } else if (query.trim()) {
+            url.searchParams.set("q", query.trim());
+        } else {
+            url.searchParams.delete("q");
+        }
+
+        url.hash = hash || "";
+        return `${url.pathname}${url.search}${url.hash}`;
+    };
 
     const buildLinkAttributes = (card) => {
         if (!card.href) {
@@ -521,7 +545,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         if (manifest?.site?.name) {
-            document.title = `${manifest.site.name} - Documentation and Discovery Platform`;
+            baseMetadata = {
+                siteName: manifest.site.name,
+                title: `${manifest.site.name} - Documentation and Discovery Platform`,
+                description:
+                    descriptionMeta?.getAttribute("content") ||
+                    `${manifest.site.name} helps people explore open-source projects with clearer entry points, stronger technical context, and better contribution paths.`
+            };
+            document.title = baseMetadata.title;
         }
 
         if (manifest?.site?.repositoryUrl && repoLink) {
@@ -529,19 +560,57 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
+    const updatePageMetadata = ({
+        title = baseMetadata.title,
+        description = baseMetadata.description
+    } = {}) => {
+        document.title = title;
+        descriptionMeta?.setAttribute("content", description);
+        ogTitleMeta?.setAttribute("content", title.replace(/\s+-\s+Documentation and Discovery Platform$/, ""));
+        ogDescriptionMeta?.setAttribute("content", description);
+        twitterTitleMeta?.setAttribute("content", title.replace(/\s+-\s+Documentation and Discovery Platform$/, ""));
+        twitterDescriptionMeta?.setAttribute("content", description);
+    };
+
+    const getSectionDescription = (section) => {
+        const subtitle = getPlainText(section.querySelector(":scope > .doc-subtitle")?.textContent || "");
+        const introParagraph = getPlainText(section.querySelector(":scope > .doc-text")?.textContent || "");
+        return subtitle || introParagraph || baseMetadata.description;
+    };
+
     const setLocationHash = (hash, { replace = false } = {}) => {
-        if (!hash || window.location.hash === hash) {
+        const nextUrl = getUrlWithState({ hash, query: "" });
+        const currentUrl = getUrlWithState({ query: "" });
+        if (!hash || currentUrl === nextUrl) {
             return;
         }
 
         try {
             if (replace) {
-                window.history.replaceState(null, "", hash);
+                window.history.replaceState(null, "", nextUrl);
             } else {
-                window.history.pushState(null, "", hash);
+                window.history.pushState(null, "", nextUrl);
             }
         } catch {
             window.location.hash = hash;
+        }
+    };
+
+    const syncSearchQueryParam = (query = "", { clearHash = false } = {}) => {
+        const nextUrl = getUrlWithState({
+            hash: clearHash ? "" : window.location.hash,
+            query
+        });
+        const currentUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+        if (nextUrl === currentUrl) {
+            return;
+        }
+
+        try {
+            window.history.replaceState(null, "", nextUrl);
+        } catch {
+            // Ignore replaceState failures in restricted environments.
         }
     };
 
@@ -834,6 +903,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         setActiveSidebarMenus([menuId]);
         setActiveSidebarLink(menuId, targetId);
         updateStatus(`${section.dataset.title} section is currently displayed.`);
+        updatePageMetadata({
+            title: `${section.dataset.title} - ${baseMetadata.siteName}`,
+            description: getSectionDescription(section)
+        });
 
         if (updateLocation) {
             setLocationHash(targetId ? `#${targetId}` : `#${section.id}`);
@@ -902,6 +975,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const restoreCurrentSection = () => {
+        syncSearchQueryParam("", { clearHash: false });
         showSection(currentMenu, {
             updateLocation: false,
             smooth: false,
@@ -920,6 +994,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchMode = true;
         clearSidebarActiveLinks();
         setActiveNav("");
+        syncSearchQueryParam(query, { clearHash: true });
         const searchState = collectSearchMatches(query);
 
         getContentSections().forEach((section) => {
@@ -953,6 +1028,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         renderSearchResults(searchState.matches, query);
         searchEmpty.hidden = searchState.matches.length !== 0;
+        updatePageMetadata({
+            title: `Search - ${baseMetadata.siteName}`,
+            description: `Search results for "${query.trim()}" on ${baseMetadata.siteName}.`
+        });
         updateStatus(
             searchState.matches.length
                 ? `${searchState.matches.length} result(s) found for "${query.trim()}".`
@@ -1092,6 +1171,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             updateLocation: false,
             smooth: false
         });
+    } else if (new URLSearchParams(window.location.search).get("q")) {
+        const query = new URLSearchParams(window.location.search).get("q") || "";
+        searchInput.value = query;
+        applySearch(query);
     } else {
         showSection("home", {
             updateLocation: false,

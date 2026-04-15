@@ -93,6 +93,18 @@ if (structuredDataMatch) {
             typeof structuredData?.name === "string" && structuredData.name.trim(),
             "index.html: JSON-LD name is required."
         );
+        ensure(
+            structuredData?.potentialAction?.["@type"] === "SearchAction",
+            'index.html: JSON-LD must include a "SearchAction".'
+        );
+        ensure(
+            structuredData?.potentialAction?.target === `${siteRootUrl}?q={search_term_string}`,
+            `index.html: JSON-LD SearchAction target must be "${siteRootUrl}?q={search_term_string}".`
+        );
+        ensure(
+            structuredData?.potentialAction?.["query-input"] === "required name=search_term_string",
+            'index.html: JSON-LD SearchAction must declare "required name=search_term_string".'
+        );
     } catch (error) {
         errors.push(`index.html: JSON-LD is invalid. ${error.message}`);
     }

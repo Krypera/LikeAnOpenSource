@@ -135,6 +135,7 @@ Now partially underway:
 - baseline metadata, robots, and favicon support were added
 - validation now covers shell-level metadata, asset links, and embedded-manifest sync
 - the planned production domain is now wired into canonical, sitemap, and structured metadata
+- search can now be expressed through URL query state for more stable sharing and indexing behavior
 - social/share image URLs still wait for a final hosted asset
 
 ## Important Note

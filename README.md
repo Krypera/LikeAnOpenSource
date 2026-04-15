@@ -94,6 +94,7 @@ The prototype now includes a lightweight SEO baseline:
 - favicon and web manifest
 - `robots.txt`
 - canonical URL, `og:url`, JSON-LD website metadata, and `sitemap.xml`
+- shareable search URLs through `?q=...`
 
 Items intentionally left for the final domain:
 
