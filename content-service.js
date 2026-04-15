@@ -36,6 +36,21 @@ window.LAOSContentService = (() => {
         };
     };
 
+    const normalizeCardDetail = (item) => {
+        if (!item || typeof item !== "object") {
+            return null;
+        }
+
+        const label = typeof item.label === "string" ? item.label.trim() : "";
+        const text = typeof item.text === "string" ? item.text.trim() : "";
+
+        if (!label || !text) {
+            return null;
+        }
+
+        return { label, text };
+    };
+
     const normalizeCard = (item) => {
         if (!item || typeof item !== "object") {
             return null;
@@ -50,6 +65,9 @@ window.LAOSContentService = (() => {
             tag: typeof item.tag === "string" ? item.tag.trim() : "",
             title,
             description: typeof item.description === "string" ? item.description.trim() : "",
+            details: toArray(item.details)
+                .map(normalizeCardDetail)
+                .filter(Boolean),
             href: typeof item.href === "string" ? item.href.trim() : "",
             linkLabel: typeof item.linkLabel === "string" ? item.linkLabel.trim() : "",
             external: Boolean(item.external)
@@ -73,7 +91,8 @@ window.LAOSContentService = (() => {
         return {
             type: "record-feed",
             sourcePath,
-            records
+            records,
+            layout: block.layout === "details" ? "details" : "cards"
         };
     };
 
@@ -306,6 +325,7 @@ window.LAOSContentService = (() => {
             tag: item.tag,
             title: item.title,
             description: item.description,
+            details: item.details,
             href: item.href,
             linkLabel: item.linkLabel,
             external: item.external
@@ -319,7 +339,8 @@ window.LAOSContentService = (() => {
             id:
                 (typeof item.id === "string" && item.id.trim()) ||
                 fallbackId,
-            ...card
+            ...card,
+            bodyPath: typeof item.bodyPath === "string" ? item.bodyPath.trim() : ""
         };
     };
 
@@ -513,13 +534,21 @@ window.LAOSContentService = (() => {
         );
         const items = block.records
             .map((recordId) => recordMap.get(recordId))
-            .filter(Boolean)
-            .map(({ id, ...card }) => card);
+            .filter(Boolean);
+
+        if (block.layout === "details") {
+            return items.length
+                ? {
+                    type: "record-sections",
+                    items
+                }
+                : null;
+        }
 
         return items.length
             ? {
                 type: "cards",
-                items
+                items: items.map(({ id, bodyPath, ...card }) => card)
             }
             : null;
     };

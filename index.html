@@ -111,7 +111,8 @@
                 <h2 class="sidebar-title">Articles</h2>
                 <ul class="sidebar-list">
                     <li><a href="#articles-overview">Publishing Flow</a></li>
-                    <li><a href="#articles-formats">Content Formats</a></li>
+                    <li><a href="#articles-formats">Article Catalog</a></li>
+                    <li><a href="#articles-reading-room">Reading Room</a></li>
                     <li><a href="#articles-editorial">Editorial Standards</a></li>
                 </ul>
             </div>
@@ -285,24 +286,44 @@
                             <span class="card-tag">Docs Platform</span>
                             <h3 class="card-title">Docusaurus</h3>
                             <p class="card-desc">An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Repository:</span> facebook/docusaurus</li>
+                                <li><span class="card-meta-label">Best for:</span> Versioned docs and documentation portals</li>
+                                <li><span class="card-meta-label">Why it matters:</span> Strong information architecture and a mature docs workflow</li>
+                            </ul>
                             <a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Frontend Tooling</span>
                             <h3 class="card-title">Vite</h3>
                             <p class="card-desc">A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Repository:</span> vitejs/vite</li>
+                                <li><span class="card-meta-label">Best for:</span> Fast modern frontend app setup</li>
+                                <li><span class="card-meta-label">Why it matters:</span> Sets the pace for fast local feedback loops</li>
+                            </ul>
                             <a href="https://github.com/vitejs/vite" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Code Quality</span>
                             <h3 class="card-title">Biome</h3>
                             <p class="card-desc">A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Repository:</span> biomejs/biome</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams simplifying lint and format workflows</li>
+                                <li><span class="card-meta-label">Why it matters:</span> Reduces tool sprawl in everyday code quality work</li>
+                            </ul>
                             <a href="https://github.com/biomejs/biome" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Terminal Workflow</span>
                             <h3 class="card-title">GitHub CLI</h3>
                             <p class="card-desc">GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Repository:</span> cli/cli</li>
+                                <li><span class="card-meta-label">Best for:</span> Terminal-first GitHub issue and PR workflows</li>
+                                <li><span class="card-meta-label">Why it matters:</span> Pulls core repository operations closer to the command line</li>
+                            </ul>
                             <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" class="card-link">Open repository</a>
                         </article>
                     </div>
@@ -340,29 +361,218 @@
 
             <section id="content-articles" class="content-section" data-title="Articles" tabindex="-1" hidden>
                 <h1 class="doc-title">Articles</h1>
-                <p class="doc-subtitle">An editorial content flow</p>
-                <p class="doc-text">Articles should hold the deeper technical writing, decision-making context, and project narratives that sit next to the project catalog.</p>
+                <p class="doc-subtitle">Long-form writing with technical depth</p>
+                <p class="doc-text">Articles are where the platform slows down and gives ideas enough room to breathe.</p>
+                <p class="doc-text">The goal is not to publish generic explainers. It is to publish writing that helps people make better technical judgments with more context and less noise.</p>
 
                 <div id="articles-overview" class="doc-section">
                     <h2 class="doc-subtitle">Publishing Flow</h2>
                     <p class="doc-text">The article library should do more than explain how a tool works. It should also surface tradeoffs, team impact, and the reasoning behind technical choices.</p>
-                    <p class="doc-text">A shared content contract lets tutorials, case studies, and editorial notes reuse the same rendering system.</p>
+                    <p class="doc-text">Strong editorial content helps people understand not only which project is interesting, but also which one fits their workflow, team, or stage of learning.</p>
                 </div>
 
                 <div id="articles-formats" class="doc-section">
-                    <h2 class="doc-subtitle">Content Formats</h2>
+                    <h2 class="doc-subtitle">Article Catalog</h2>
                     <div class="card-grid">
                         <article class="card">
                             <span class="card-tag">Tutorial</span>
-                            <h3 class="card-title">Step-by-step teaching content</h3>
-                            <p class="card-desc">Explain setup, architecture, and implementation flows in a practical sequence.</p>
-                            <a href="https://github.com/Krypera/LikeAnOpenSource/tree/main/content/articles" target="_blank" rel="noopener noreferrer" class="card-link">Open the articles folder</a>
+                            <h3 class="card-title">How step-by-step content earns trust</h3>
+                            <p class="card-desc">Strong tutorial writing does more than move line by line. It explains why each step exists, where the reader might get lost, and what a good stopping point looks like.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Format:</span> Guided tutorial</li>
+                                <li><span class="card-meta-label">Best for:</span> Readers moving from curiosity into first implementation</li>
+                                <li><span class="card-meta-label">Core promise:</span> Turns setup and architecture into a sequence people can actually follow</li>
+                            </ul>
+                            <a href="#record-step-by-step-teaching-content" class="card-link">Read article</a>
                         </article>
                         <article class="card">
                             <span class="card-tag">Case Study</span>
-                            <h3 class="card-title">Real-world breakdowns</h3>
-                            <p class="card-desc">Show how a decision affects the team, the product, and long-term maintainability.</p>
-                            <a href="#articles-editorial" class="card-link">Read editorial notes</a>
+                            <h3 class="card-title">Why real-world breakdowns matter more than feature lists</h3>
+                            <p class="card-desc">A useful breakdown shows what a decision changed after rollout: what became easier, what became slower, and which tradeoffs were acceptable only in a specific context.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Format:</span> Case study</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams comparing tools under real delivery constraints</li>
+                                <li><span class="card-meta-label">Core promise:</span> Keeps evaluation grounded in maintenance, speed, and team cost</li>
+                            </ul>
+                            <a href="#record-real-world-breakdowns" class="card-link">Read article</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Architecture</span>
+                            <h3 class="card-title">How to write about system choices without pretending there is one right answer</h3>
+                            <p class="card-desc">Architecture writing should explain why a team picked a direction, what constraints shaped the decision, and which signals would justify changing course later.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Format:</span> Architecture essay</li>
+                                <li><span class="card-meta-label">Best for:</span> Readers trying to compare systems without flattening the tradeoffs</li>
+                                <li><span class="card-meta-label">Core promise:</span> Frames technical choices as context-sensitive decisions rather than verdicts</li>
+                            </ul>
+                            <a href="#record-deep-dives-into-system-choices" class="card-link">Read article</a>
+                        </article>
+                        <article class="card">
+                            <span class="card-tag">Maintainer Notes</span>
+                            <h3 class="card-title">What workflow-native writing gives a technical product</h3>
+                            <p class="card-desc">The most useful operational writing comes from people close to the actual work. It captures friction, shortcuts, review habits, and the invisible rules new contributors usually miss.</p>
+                            <ul class="card-meta">
+                                <li><span class="card-meta-label">Format:</span> Maintainer notes</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams documenting contribution flow, release habits, and repository hygiene</li>
+                                <li><span class="card-meta-label">Core promise:</span> Turns tacit workflow knowledge into something a newcomer can learn from</li>
+                            </ul>
+                            <a href="#record-writing-from-inside-the-workflow" class="card-link">Read article</a>
+                        </article>
+                    </div>
+                </div>
+
+                <div id="articles-reading-room" class="doc-section">
+                    <h2 class="doc-subtitle">Reading Room</h2>
+                    <p class="doc-text">These opening pieces define the kind of writing LAOS wants to publish first: practical, tradeoff-aware, and grounded in real team work.</p>
+                    <div class="record-stack">
+                        <article id="record-step-by-step-teaching-content" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Tutorial</span>
+                                <h3 class="record-detail-title">How step-by-step content earns trust</h3>
+                            </div>
+                            <p class="record-detail-summary">Strong tutorial writing does more than move line by line. It explains why each step exists, where the reader might get lost, and what a good stopping point looks like.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Format:</span> Guided tutorial</li>
+                                <li><span class="card-meta-label">Best for:</span> Readers moving from curiosity into first implementation</li>
+                                <li><span class="card-meta-label">Core promise:</span> Turns setup and architecture into a sequence people can actually follow</li>
+                            </ul>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Good technical teaching is not only about sequence. It is about pacing, confidence, and reducing the chance that a reader quietly falls behind without noticing.</p>
+                                <h3 class="doc-subtitle markdown-heading">Show the reader where they are</h3>
+                                <p class="doc-text">A strong tutorial keeps naming the current stage:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>what has been set up already</li>
+                                    <li>what is changing in this step</li>
+                                    <li>what the reader should understand before moving on</li>
+                                </ul>
+                                <p class="doc-text">That makes the experience feel guided instead of arbitrary.</p>
+                                <h3 class="doc-subtitle markdown-heading">Explain why the step exists</h3>
+                                <p class="doc-text">Readers lose trust when a guide says "now do this" over and over without explaining why the action matters.</p>
+                                <p class="doc-text">Each important step should answer one of these questions:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>What problem does this solve?</li>
+                                    <li>What would break without it?</li>
+                                    <li>Why is this the right place in the sequence?</li>
+                                </ul>
+                                <p class="doc-text">If the guide cannot answer those questions, it usually means the sequence needs work.</p>
+                                <h3 class="doc-subtitle markdown-heading">Give readers safe stopping points</h3>
+                                <p class="doc-text">Not every reader finishes a tutorial in one sitting. Good teaching content makes it possible to pause without losing the thread.</p>
+                                <p class="doc-text">That means calling out checkpoints, naming what is already complete, and making the next step obvious when the reader returns.</p>
+                                <h3 class="doc-subtitle markdown-heading">Do not confuse completeness with usefulness</h3>
+                                <p class="doc-text">The best step-by-step writing is rarely the longest. It is the writing that helps a reader finish one meaningful action with less hesitation than before.</p>
+                            </div>
+                        </article>
+                        <article id="record-real-world-breakdowns" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Case Study</span>
+                                <h3 class="record-detail-title">Why real-world breakdowns matter more than feature lists</h3>
+                            </div>
+                            <p class="record-detail-summary">A useful breakdown shows what a decision changed after rollout: what became easier, what became slower, and which tradeoffs were acceptable only in a specific context.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Format:</span> Case study</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams comparing tools under real delivery constraints</li>
+                                <li><span class="card-meta-label">Core promise:</span> Keeps evaluation grounded in maintenance, speed, and team cost</li>
+                            </ul>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Feature lists are easy to write and easy to skim, but they do not tell a team what life looks like after adoption.</p>
+                                <h3 class="doc-subtitle markdown-heading">The useful question is what changed</h3>
+                                <p class="doc-text">When a team adopts a tool or workflow, the real questions are practical:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>Did onboarding become easier or harder?</li>
+                                    <li>Did review quality improve?</li>
+                                    <li>Did the setup become more fragile?</li>
+                                    <li>Did the team move faster after the first week, or only on demo day?</li>
+                                </ul>
+                                <p class="doc-text">Those questions reveal whether a decision actually helped.</p>
+                                <h3 class="doc-subtitle markdown-heading">Context beats generic praise</h3>
+                                <p class="doc-text">A real breakdown should say who benefited and under which conditions.</p>
+                                <p class="doc-text">The same tool can feel elegant for a small team and heavy for a larger one. A workflow that saves time for experienced maintainers can still confuse a newcomer. Without that context, the writing sounds polished but not useful.</p>
+                                <h3 class="doc-subtitle markdown-heading">Write about maintenance, not only setup</h3>
+                                <p class="doc-text">Many tools look strong on installation day. The better article is the one that follows the decision into maintenance:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>release rhythm</li>
+                                    <li>issue handling</li>
+                                    <li>configuration drift</li>
+                                    <li>how often the team had to explain the same thing twice</li>
+                                </ul>
+                                <p class="doc-text">That is where long-term value becomes visible.</p>
+                                <h3 class="doc-subtitle markdown-heading">A good breakdown lowers decision risk</h3>
+                                <p class="doc-text">The point is not to crown a winner. It is to help the next team understand the likely cost, the likely benefit, and the tradeoffs they would be choosing into.</p>
+                            </div>
+                        </article>
+                        <article id="record-deep-dives-into-system-choices" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Architecture</span>
+                                <h3 class="record-detail-title">How to write about system choices without pretending there is one right answer</h3>
+                            </div>
+                            <p class="record-detail-summary">Architecture writing should explain why a team picked a direction, what constraints shaped the decision, and which signals would justify changing course later.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Format:</span> Architecture essay</li>
+                                <li><span class="card-meta-label">Best for:</span> Readers trying to compare systems without flattening the tradeoffs</li>
+                                <li><span class="card-meta-label">Core promise:</span> Frames technical choices as context-sensitive decisions rather than verdicts</li>
+                            </ul>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Architecture decisions usually make sense only inside a specific environment. Team size, delivery pressure, contributor skill, legacy code, and hosting constraints all shape what "good" looks like.</p>
+                                <h3 class="doc-subtitle markdown-heading">Start with the constraint, not the conclusion</h3>
+                                <p class="doc-text">If an article begins by announcing the winning stack, it skips the most important part of the story.</p>
+                                <p class="doc-text">Better system writing begins with the condition that forced the decision:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>a docs site needed versioning</li>
+                                    <li>a frontend workflow had become too slow</li>
+                                    <li>too many tools were competing for the same job</li>
+                                    <li>contributor onboarding was becoming expensive</li>
+                                </ul>
+                                <p class="doc-text">Once the pressure is clear, the choice becomes easier to evaluate.</p>
+                                <h3 class="doc-subtitle markdown-heading">Tradeoffs deserve equal space</h3>
+                                <p class="doc-text">A serious system article should make room for what the chosen path costs.</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>What becomes harder?</li>
+                                    <li>What becomes more rigid?</li>
+                                    <li>What kind of team benefits most?</li>
+                                    <li>Under what signal would the team reevaluate the choice?</li>
+                                </ul>
+                                <p class="doc-text">That turns the article into reasoning instead of advocacy.</p>
+                                <h3 class="doc-subtitle markdown-heading">Good comparison writing is honest about timing</h3>
+                                <p class="doc-text">Sometimes a system is right for the current stage and wrong for the next one. That is not a failure. It is normal product and team evolution.</p>
+                                <p class="doc-text">The best writing leaves room for that possibility and tells readers what to watch as their own context changes.</p>
+                            </div>
+                        </article>
+                        <article id="record-writing-from-inside-the-workflow" class="record-detail">
+                            <div class="record-detail-head">
+                                <span class="card-tag">Maintainer Notes</span>
+                                <h3 class="record-detail-title">What workflow-native writing gives a technical product</h3>
+                            </div>
+                            <p class="record-detail-summary">The most useful operational writing comes from people close to the actual work. It captures friction, shortcuts, review habits, and the invisible rules new contributors usually miss.</p>
+                            <ul class="card-meta record-detail-meta">
+                                <li><span class="card-meta-label">Format:</span> Maintainer notes</li>
+                                <li><span class="card-meta-label">Best for:</span> Teams documenting contribution flow, release habits, and repository hygiene</li>
+                                <li><span class="card-meta-label">Core promise:</span> Turns tacit workflow knowledge into something a newcomer can learn from</li>
+                            </ul>
+                            <div class="record-detail-body markdown-block">
+                                <p class="doc-text">Some of the most valuable documentation never starts as documentation. It begins as review notes, release checklists, onboarding answers, or the explanation a maintainer repeats every week.</p>
+                                <h3 class="doc-subtitle markdown-heading">The work already contains the writing</h3>
+                                <p class="doc-text">When a team pays attention, the workflow keeps exposing the places that need clearer language:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>repeated pull request comments</li>
+                                    <li>recurring setup mistakes</li>
+                                    <li>hidden release steps</li>
+                                    <li>assumptions new contributors do not know yet</li>
+                                </ul>
+                                <p class="doc-text">Those are not side notes. They are signals.</p>
+                                <h3 class="doc-subtitle markdown-heading">Writing close to the work keeps it honest</h3>
+                                <p class="doc-text">Workflow-native writing tends to be more useful because it comes from real friction. It describes the process people actually follow, not the idealized one they wish they followed.</p>
+                                <p class="doc-text">That difference matters. New contributors can feel when a guide was written from memory instead of current practice.</p>
+                                <h3 class="doc-subtitle markdown-heading">Maintainer notes create reusable knowledge</h3>
+                                <p class="doc-text">Once written down, small operational lessons can travel:</p>
+                                <ul class="doc-list markdown-list">
+                                    <li>from pull request review into a guide</li>
+                                    <li>from a release checklist into contributor docs</li>
+                                    <li>from internal team habits into public repository standards</li>
+                                </ul>
+                                <p class="doc-text">That is how a product becomes easier to join over time.</p>
+                                <h3 class="doc-subtitle markdown-heading">Good editorial systems should capture this material</h3>
+                                <p class="doc-text">If LAOS wants to help people contribute with less hesitation, it should keep making room for writing that comes from inside the workflow, not only polished summaries written after the fact.</p>
+                            </div>
                         </article>
                     </div>
                 </div>
@@ -370,9 +580,9 @@
                 <div id="articles-editorial" class="doc-section">
                     <h2 class="doc-subtitle">Editorial Standards</h2>
                     <ul class="doc-list">
-                        <li><strong>Title discipline:</strong> every item should carry topic, category, and difficulty information.</li>
-                        <li><strong>Context first:</strong> articles should explain not only what to do, but also why a choice matters.</li>
-                        <li><strong>Cross-section visibility:</strong> highlighted writing can be reused in Explore.</li>
+                        <li><strong>Title discipline:</strong> Every article should make its topic, scope, and intended reader clear from the first glance.</li>
+                        <li><strong>Context first:</strong> Good writing explains not only what to do, but also why a choice matters and what it may cost.</li>
+                        <li><strong>Cross-section visibility:</strong> Strong pieces should be easy to surface again inside Explore, Projects, or guide recommendations.</li>
                     </ul>
                 </div>
             </section>

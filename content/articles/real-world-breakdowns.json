@@ -1,9 +1,24 @@
 {
     "id": "real-world-breakdowns",
     "tag": "Case Study",
-    "title": "Real-world breakdowns",
-    "description": "Show how a technical decision affects the team, the product, delivery speed, and long-term maintainability after the first excitement is gone.",
-    "href": "#articles-editorial",
-    "linkLabel": "Read editorial notes",
+    "title": "Why real-world breakdowns matter more than feature lists",
+    "description": "A useful breakdown shows what a decision changed after rollout: what became easier, what became slower, and which tradeoffs were acceptable only in a specific context.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Case study"
+        },
+        {
+            "label": "Best for",
+            "text": "Teams comparing tools under real delivery constraints"
+        },
+        {
+            "label": "Core promise",
+            "text": "Keeps evaluation grounded in maintenance, speed, and team cost"
+        }
+    ],
+    "bodyPath": "content/articles/real-world-breakdowns.md",
+    "href": "#record-real-world-breakdowns",
+    "linkLabel": "Read article",
     "external": false
 }

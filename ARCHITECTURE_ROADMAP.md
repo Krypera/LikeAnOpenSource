@@ -89,7 +89,7 @@ Completed:
 
 Correct the repo framing so it matches the real product goal.
 
-Now in progress:
+Completed:
 
 - remove static-site deployment assumptions
 - document the dynamic application target
@@ -99,7 +99,7 @@ Now in progress:
 
 Deepen repository records.
 
-Planned:
+Now in progress:
 
 - richer project metadata
 - clearer repository evaluation fields
@@ -109,11 +109,12 @@ Planned:
 
 Move articles toward real detail content.
 
-Planned:
+Now in progress:
 
 - article metadata records
 - Markdown article bodies
 - article detail rendering
+- reuse the same record contract when backend delivery replaces browser fetches
 
 ### Phase 5
 

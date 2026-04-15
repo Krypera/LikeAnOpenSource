@@ -42,6 +42,7 @@ Recommended split:
 
 - keep section order, labels, cards, and lightweight summaries in JSON
 - store long-form guide and article bodies in Markdown
+- let record files point to optional `bodyPath` values when a card also owns a long-form body
 
 ## Manifest Contract
 
@@ -94,6 +95,11 @@ Supported `block.type` values:
 - `callout`
 - `markdown`
 - `record-feed`
+
+`record-feed` supports two layouts:
+
+- default card hydration for reusable catalog grids
+- `layout: "details"` when records should render as long-form sections with optional Markdown bodies
 
 This gives us two major benefits:
 

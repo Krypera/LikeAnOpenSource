@@ -3,6 +3,20 @@
     "tag": "Frontend Tooling",
     "title": "Vite",
     "description": "A fast frontend build tool and dev server that reshaped expectations around instant feedback, simple setup, and lean modern web workflows.",
+    "details": [
+        {
+            "label": "Repository",
+            "text": "vitejs/vite"
+        },
+        {
+            "label": "Best for",
+            "text": "Fast modern frontend app setup"
+        },
+        {
+            "label": "Why it matters",
+            "text": "Sets the pace for fast local feedback loops"
+        }
+    ],
     "href": "https://github.com/vitejs/vite",
     "linkLabel": "Open repository",
     "external": true

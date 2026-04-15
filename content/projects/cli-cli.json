@@ -3,6 +3,20 @@
     "tag": "Terminal Workflow",
     "title": "GitHub CLI",
     "description": "GitHub's official command-line tool for issues, pull requests, releases, and repository work that fits teams who spend serious time in the terminal.",
+    "details": [
+        {
+            "label": "Repository",
+            "text": "cli/cli"
+        },
+        {
+            "label": "Best for",
+            "text": "Terminal-first GitHub issue and PR workflows"
+        },
+        {
+            "label": "Why it matters",
+            "text": "Pulls core repository operations closer to the command line"
+        }
+    ],
     "href": "https://github.com/cli/cli",
     "linkLabel": "Open repository",
     "external": true

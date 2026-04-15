@@ -3,6 +3,20 @@
     "tag": "Code Quality",
     "title": "Biome",
     "description": "A web tooling project that combines formatting and linting in one fast toolchain for teams that want fewer moving parts and clearer everyday code health.",
+    "details": [
+        {
+            "label": "Repository",
+            "text": "biomejs/biome"
+        },
+        {
+            "label": "Best for",
+            "text": "Teams simplifying lint and format workflows"
+        },
+        {
+            "label": "Why it matters",
+            "text": "Reduces tool sprawl in everyday code quality work"
+        }
+    ],
     "href": "https://github.com/biomejs/biome",
     "linkLabel": "Open repository",
     "external": true

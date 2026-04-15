@@ -351,7 +351,8 @@
             "title": "Articles",
             "subtitle": "Long-form writing with technical depth",
             "intro": [
-                "Articles are where the platform slows down and gives ideas enough room to breathe."
+                "Articles are where the platform slows down and gives ideas enough room to breathe.",
+                "The goal is not to publish generic explainers. It is to publish writing that helps people make better technical judgments with more context and less noise."
             ],
             "groups": [
                 {
@@ -369,10 +370,30 @@
                 },
                 {
                     "id": "articles-formats",
-                    "title": "Content Formats",
+                    "title": "Article Catalog",
                     "blocks": [
                         {
                             "type": "record-feed",
+                            "sourcePath": "content/articles/index.json",
+                            "records": [
+                                "step-by-step-teaching-content",
+                                "real-world-breakdowns",
+                                "deep-dives-into-system-choices",
+                                "writing-from-inside-the-workflow"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-reading-room",
+                    "title": "Reading Room",
+                    "intro": [
+                        "These opening pieces define the kind of writing LAOS wants to publish first: practical, tradeoff-aware, and grounded in real team work."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "record-feed",
+                            "layout": "details",
                             "sourcePath": "content/articles/index.json",
                             "records": [
                                 "step-by-step-teaching-content",

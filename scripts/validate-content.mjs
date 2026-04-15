@@ -44,11 +44,35 @@ const validateHref = (href, sourceLabel) => {
     ensure(validHashTargets.has(targetId), `${sourceLabel}: missing internal target "${href}".`);
 };
 
-const validateCard = (card, sourceLabel) => {
+const validateCard = (card, sourceLabel, { generatedTargets = [] } = {}) => {
     ensure(card && typeof card === "object", `${sourceLabel}: card must be an object.`);
     ensure(typeof card?.title === "string" && card.title.trim(), `${sourceLabel}: card title is required.`);
+    if (Array.isArray(card?.details)) {
+        card.details.forEach((detail, index) => {
+            ensure(detail && typeof detail === "object", `${sourceLabel} detail[${index}]: detail must be an object.`);
+            ensure(
+                typeof detail?.label === "string" && detail.label.trim(),
+                `${sourceLabel} detail[${index}]: label is required.`
+            );
+            ensure(
+                typeof detail?.text === "string" && detail.text.trim(),
+                `${sourceLabel} detail[${index}]: text is required.`
+            );
+        });
+    }
     if (typeof card?.href === "string") {
-        validateHref(card.href, sourceLabel);
+        const targetId = card.href.trim().startsWith("#") ? card.href.trim().slice(1) : "";
+        if (!targetId || !generatedTargets.includes(targetId)) {
+            validateHref(card.href, sourceLabel);
+        }
+    }
+    if (typeof card?.bodyPath === "string" && card.bodyPath.trim()) {
+        const bodyPath = card.bodyPath.trim();
+        ensure(fileExists(bodyPath), `${sourceLabel}: body file "${bodyPath}" does not exist.`);
+        if (fileExists(bodyPath)) {
+            const body = readFile(bodyPath).trim();
+            ensure(body.length > 0, `${sourceLabel}: body file "${bodyPath}" is empty.`);
+        }
     }
 };
 
@@ -89,7 +113,11 @@ const loadRecordCollection = (relativePath) => {
 
         const recordId = typeof record.id === "string" ? record.id.trim() : "";
         ensure(recordId === id, `${recordPath}: id must match index id "${id}".`);
-        validateCard(record, recordPath);
+        const generatedTargets =
+            recordId && typeof record.bodyPath === "string" && record.bodyPath.trim()
+                ? [`record-${recordId}`]
+                : [];
+        validateCard(record, recordPath, { generatedTargets });
         recordMap.set(id, record);
     });
 
@@ -130,8 +158,13 @@ const validateBlock = (block, sourceLabel) => {
         case "record-feed": {
             const sourcePath = typeof block.sourcePath === "string" ? block.sourcePath.trim() : "";
             const records = Array.isArray(block.records) ? block.records : [];
+            const layout = typeof block.layout === "string" ? block.layout.trim() : "cards";
             ensure(sourcePath, `${sourceLabel}: record-feed sourcePath is required.`);
             ensure(records.length > 0, `${sourceLabel}: record-feed records are required.`);
+            ensure(
+                layout === "cards" || layout === "details",
+                `${sourceLabel}: record-feed layout must be "cards" or "details".`
+            );
             ensure(fileExists(sourcePath), `${sourceLabel}: record-feed source "${sourcePath}" does not exist.`);
 
             if (sourcePath && fileExists(sourcePath)) {

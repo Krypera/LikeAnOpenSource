@@ -195,6 +195,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         const descriptionMarkup = card.description
             ? `<p class="card-desc">${escapeHtml(card.description)}</p>`
             : "";
+        const detailsMarkup = Array.isArray(card.details) && card.details.length
+            ? `
+                <ul class="card-meta">
+                    ${card.details
+                        .map(
+                            (item) =>
+                                `<li><span class="card-meta-label">${escapeHtml(item.label)}:</span> ${escapeHtml(item.text)}</li>`
+                        )
+                        .join("")}
+                </ul>
+            `
+            : "";
         const linkMarkup =
             card.href && card.linkLabel
                 ? `<a class="card-link"${buildLinkAttributes(card)}>${escapeHtml(card.linkLabel)}</a>`
@@ -205,7 +217,69 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ${tagMarkup}
                 <h3 class="card-title">${escapeHtml(card.title)}</h3>
                 ${descriptionMarkup}
+                ${detailsMarkup}
                 ${linkMarkup}
+            </article>
+        `;
+    };
+
+    const renderRecordSection = async (record, { contentSourceId = "local" } = {}) => {
+        const tagMarkup = record.tag
+            ? `<span class="card-tag">${escapeHtml(record.tag)}</span>`
+            : "";
+        const descriptionMarkup = record.description
+            ? `<p class="record-detail-summary">${escapeHtml(record.description)}</p>`
+            : "";
+        const detailsMarkup = Array.isArray(record.details) && record.details.length
+            ? `
+                <ul class="card-meta record-detail-meta">
+                    ${record.details
+                        .map(
+                            (item) =>
+                                `<li><span class="card-meta-label">${escapeHtml(item.label)}:</span> ${escapeHtml(item.text)}</li>`
+                        )
+                        .join("")}
+                </ul>
+            `
+            : "";
+
+        let markdownMarkup = "";
+        if (record.bodyPath && window.LAOSContentService?.loadTextContent) {
+            try {
+                const markdown = await window.LAOSContentService.loadTextContent(
+                    record.bodyPath,
+                    contentSourceId
+                );
+                markdownMarkup = `
+                    <div class="record-detail-body markdown-block">
+                        ${renderMarkdownBody(markdown, { skipTitle: true })}
+                    </div>
+                `;
+            } catch (error) {
+                console.warn("[LAOS record markdown]", error);
+                markdownMarkup = `
+                    <div class="callout warning">
+                        <p>The article body could not be loaded right now.</p>
+                    </div>
+                `;
+            }
+        }
+
+        const linkMarkup =
+            record.external && record.href && record.linkLabel
+                ? `<a class="card-link record-detail-link"${buildLinkAttributes(record)}>${escapeHtml(record.linkLabel)}</a>`
+                : "";
+
+        return `
+            <article id="record-${escapeHtml(record.id)}" class="record-detail">
+                <div class="record-detail-head">
+                    ${tagMarkup}
+                    <h3 class="record-detail-title">${escapeHtml(record.title)}</h3>
+                </div>
+                ${descriptionMarkup}
+                ${detailsMarkup}
+                ${linkMarkup}
+                ${markdownMarkup}
             </article>
         `;
     };
@@ -233,6 +307,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return `
                     <div class="card-grid">
                         ${block.items.map(renderCard).join("")}
+                    </div>
+                `;
+            case "record-sections":
+                return `
+                    <div class="record-stack">
+                        ${(
+                            await Promise.all(
+                                block.items.map((item) =>
+                                    renderRecordSection(item, { contentSourceId })
+                                )
+                            )
+                        ).join("")}
                     </div>
                 `;
             case "tags":

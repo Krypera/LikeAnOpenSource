@@ -8,7 +8,8 @@ The content layer is intentionally structured:
 
 - layout and navigation come from a manifest
 - long-form guide bodies can live in Markdown
-- project and article cards can come from record files
+- project cards can come from record files
+- article cards and article bodies can come from record files plus Markdown
 - content validation runs before deployment
 
 ## Current Product Direction
@@ -21,7 +22,7 @@ The project is moving in these phases:
 4. Article metadata plus Markdown bodies
 5. Production polish and delivery readiness
 
-The repository currently covers phase 1 and the beginning of phase 2.
+The repository currently covers phases 1 and 2, a meaningful pass on phase 3, and the first working slice of phase 4.
 
 ## Repository Structure
 
@@ -98,7 +99,7 @@ Keep these in JSON:
 Keep substantial guide or article bodies in Markdown:
 
 - `content/guides/*.md`
-- future `content/articles/*.md`
+- `content/articles/*.md`
 
 ### Record collections
 

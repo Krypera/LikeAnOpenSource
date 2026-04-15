@@ -598,6 +598,22 @@ input:focus-visible {
     font-size: 0.95rem;
 }
 
+.card-meta {
+    margin: 0 0 1rem;
+    padding-left: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.card-meta li + li {
+    margin-top: 0.45rem;
+}
+
+.card-meta-label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
 .card-link {
     display: inline-flex;
     align-items: center;
@@ -609,6 +625,55 @@ input:focus-visible {
 
 .card-link:hover {
     color: #e9d5ff;
+}
+
+.record-stack {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.record-detail {
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 1rem;
+    background:
+        linear-gradient(180deg, rgba(35, 39, 58, 0.95), rgba(22, 25, 36, 0.94));
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.16);
+}
+
+.record-detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.record-detail-title {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    font-weight: 650;
+    color: var(--text-primary);
+}
+
+.record-detail-summary {
+    margin-top: 0.85rem;
+    margin-bottom: 1rem;
+    max-width: 72ch;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.record-detail-meta {
+    margin-bottom: 1.1rem;
+}
+
+.record-detail-link {
+    margin-bottom: 0.4rem;
+}
+
+.record-detail-body {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .tag-list {

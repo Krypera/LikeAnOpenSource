@@ -3,6 +3,20 @@
     "tag": "Docs Platform",
     "title": "Docusaurus",
     "description": "An open-source documentation platform with versioned docs, strong navigation patterns, and a mature structure for teams publishing long-lived technical content.",
+    "details": [
+        {
+            "label": "Repository",
+            "text": "facebook/docusaurus"
+        },
+        {
+            "label": "Best for",
+            "text": "Versioned docs and documentation portals"
+        },
+        {
+            "label": "Why it matters",
+            "text": "Strong information architecture and a mature docs workflow"
+        }
+    ],
     "href": "https://github.com/facebook/docusaurus",
     "linkLabel": "Open repository",
     "external": true
