@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         new URLSearchParams(window.location.search).get("debugContentSource") === "1";
 
     let currentMenu = "home";
+    let currentPrimaryMenu = "home";
+    let currentPrimaryTargetId = null;
     let searchMode = false;
     let lastFocusedElement = null;
     let lastAppliedLocationKey = "";
@@ -1079,6 +1081,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         searchStatus.textContent = message;
     };
 
+    const clearHydrationState = () => {
+        window.__laosHydrationComplete = true;
+        sidebarMenusRoot?.style.removeProperty("display");
+        sidebarFooterRoot?.style.removeProperty("display");
+        contentSectionsRoot?.style.removeProperty("display");
+        root.classList.remove("app-hydrating");
+    };
+
     const clearSidebarActiveLinks = () => {
         getSidebarLinks().forEach((link) => {
             link.classList.remove("active");
@@ -1463,6 +1473,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         currentMenu = menuId;
+        if (menuId !== supportMenuId) {
+            currentPrimaryMenu = menuId;
+            currentPrimaryTargetId = targetId;
+        }
+
+        const contextMenuId = menuId === supportMenuId ? currentPrimaryMenu : menuId;
+        const contextTargetId = menuId === supportMenuId ? currentPrimaryTargetId : targetId;
         clearSearchState();
 
         getContentSections().forEach((item) => {
@@ -1471,9 +1488,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             item.classList.toggle("active", isActive);
         });
 
-        setActiveNav(menuId);
-        setActiveSidebarMenus(menuId === supportMenuId ? [] : [menuId]);
-        setActiveSidebarLink(menuId, targetId);
+        setActiveNav(contextMenuId);
+        setActiveSidebarMenus([contextMenuId]);
+        setActiveSidebarLink(contextMenuId, contextTargetId);
         setActiveSidebarFundingCard(menuId === supportMenuId);
         updateStatus(`${section.dataset.title} section is currently displayed.`);
         updatePageMetadata({
@@ -1625,7 +1642,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const handleHashLinkClick = (event) => {
         const link = event.target.closest('a[href^="#"]');
-        if (!link || link.classList.contains("skip-link") || link.closest(".header-nav")) {
+        if (!link || link.closest(".header-nav")) {
             return;
         }
 
@@ -1813,4 +1830,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         focus: false,
         force: true
     });
+    clearHydrationState();
 });

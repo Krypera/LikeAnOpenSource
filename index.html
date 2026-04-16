@@ -46,11 +46,42 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script>
+        (() => {
+            const root = document.documentElement;
+            root.classList.add("app-hydrating");
+            window.__laosHydrationComplete = false;
+
+            window.setTimeout(() => {
+                if (!window.__laosHydrationComplete) {
+                    root.classList.remove("app-hydrating");
+                }
+            }, 4000);
+        })();
+    </script>
+    <style>
+        html.app-hydrating #sidebar-menus,
+        html.app-hydrating #sidebar-footer,
+        html.app-hydrating #content-sections {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <noscript>
+        <style>
+            #sidebar-menus,
+            #sidebar-footer,
+            #content-sections {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
 
     <header class="site-header">
         <div class="header-content">
@@ -120,7 +151,7 @@
             </button>
         </div>
 
-        <div id="sidebar-menus">
+        <div id="sidebar-menus" style="display: none;">
             <div class="sidebar-menu active" id="menu-home" data-menu="home">
                 <h2 class="sidebar-title">Loading</h2>
                 <ul class="sidebar-list">
@@ -128,7 +159,7 @@
                 </ul>
             </div>
         </div>
-        <div id="sidebar-footer"></div>
+        <div id="sidebar-footer" style="display: none;"></div>
     </aside>
 
     <main id="main-content" class="main-content">
@@ -153,7 +184,7 @@
 
         <div class="data-source-banner" id="content-source-banner" hidden></div>
 
-        <div id="content-sections">
+        <div id="content-sections" style="display: none;">
             <section id="content-home" class="content-section active" data-title="Home" tabindex="-1">
                 <h1 class="doc-title">LikeAnOpenSource</h1>
                 <p class="doc-subtitle">Loading the current content model</p>
@@ -1175,58 +1206,59 @@
         },
         "about": {
             "title": "About",
-            "subtitle": "Why the platform exists",
+            "subtitle": "What this platform is and why it works this way",
             "groups": [
                 {
                     "id": "about-what-is-laos",
-                    "title": "What Is LAOS?",
+                    "title": "What LikeAnOpenSource Is",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "LikeAnOpenSource (LAOS) is a platform for turning open-source curiosity into grounded understanding and useful contribution paths.",
-                                "Instead of pretending a large catalog already exists, the platform is being built in public with a GitHub-backed backlog and a community-written publishing model."
+                                "LikeAnOpenSource is a documentation and discovery platform for open-source projects, built in public from the beginning.",
+                                "The most honest version of the platform right now is its backlog: a visible, repository-backed list of what should be written next and where contributors can help."
                             ]
                         }
                     ]
                 },
                 {
-                    "id": "about-philosophy",
-                    "title": "Our Philosophy",
+                    "id": "about-why-it-exists",
+                    "title": "Why It Exists",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Open-source projects are often readable once you are inside them. Getting inside is the harder part.",
+                                "Contribution paths are unclear. Project complexity is hard to compare. First steps are buried. This platform exists to make those entry points visible, not by pretending a polished catalog already exists, but by building one honestly in the open."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-how-it-stays-honest",
+                    "title": "How It Stays Honest",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Build in public",
-                                    "text": "Let the repository show what the platform still needs, not only what it has already finished."
+                                    "label": "The backlog is the product",
+                                    "text": "Right now the most useful thing the site can do is show what needs to be written. The open topic list is not a placeholder. It is the current artifact."
                                 },
                                 {
-                                    "label": "Prefer honest empty states",
-                                    "text": "A clear backlog is more trustworthy than a fake catalog."
+                                    "label": "Content lives in the repository",
+                                    "text": "Everything on the site can be traced back to real files in the repository, where it can be reviewed, improved, and discussed in the open."
                                 },
                                 {
-                                    "label": "Make contribution feel possible",
-                                    "text": "People should leave the site feeling closer to a useful contribution, not further from it."
+                                    "label": "Nothing is faked forward",
+                                    "text": "Sections that do not have real content yet say so directly, instead of hiding behind empty placeholders or premature polish."
                                 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "about-quality",
-                    "title": "Editorial Standard",
-                    "blocks": [
-                        {
-                            "type": "paragraphs",
-                            "items": [
-                                "Every visible topic or published piece should earn its place by solving a real editorial gap and helping the next reader make a better decision."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "warning",
-                            "text": "Trust is the product. If the site claims something exists, visitors should be able to see the real repository-backed source behind it."
+                            "text": "If something appears on the site, you should be able to trace it back to real work in the repository."
                         }
                     ]
                 },
@@ -1240,7 +1272,7 @@
                                 {
                                     "tag": "GitHub",
                                     "title": "Main repository",
-                                    "description": "Track the codebase, the backlog, and the content model that powers the site.",
+                                    "description": "See the code, the open topics, and the content that shapes the site.",
                                     "href": "https://github.com/Krypera/LikeAnOpenSource",
                                     "linkLabel": "Open repository",
                                     "external": true
@@ -1248,7 +1280,7 @@
                                 {
                                     "tag": "Backlog",
                                     "title": "Open contribution topics",
-                                    "description": "Browse the live topic backlog that the site reads directly from the repository.",
+                                    "description": "Browse the current writing backlog and see what still needs contributors.",
                                     "href": "#content-contribute",
                                     "linkLabel": "Open Contribute",
                                     "external": false

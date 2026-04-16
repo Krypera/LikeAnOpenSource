@@ -146,6 +146,10 @@
                     !/Preparing content/i.test(searchStatusText),
                     "Runner: shell loading copy should be replaced after hydration."
                 );
+                assert(
+                    !frameDocument.documentElement.classList.contains("app-hydrating"),
+                    "Runner: hydration guard class should be cleared once the app finishes rendering."
+                );
 
                 return { frameWindow, frameDocument };
             };
@@ -197,6 +201,21 @@
                     );
                 }, "Desktop: browser back did not restore the hashless home state.");
 
+                const aboutNav = frameDocument.querySelector('.header-nav a[data-menu="about"]');
+                clickElement(aboutNav, frameWindow);
+                await waitFor(() => {
+                    const section = frameDocument.getElementById("content-about");
+                    return section && !section.hidden && section.classList.contains("active");
+                }, 'Desktop: "About" section did not activate.');
+
+                const aboutSidebarMenu = frameDocument.getElementById("menu-about");
+                assert(
+                    Boolean(aboutSidebarMenu) &&
+                        !aboutSidebarMenu.hidden &&
+                        aboutSidebarMenu.classList.contains("active"),
+                    'Desktop: "About" sidebar menu should be active before opening support.'
+                );
+
                 const supportCard = frameDocument.querySelector("#sidebar-footer .sidebar-funding-card");
                 assert(Boolean(supportCard), "Desktop: sidebar should render the support funding card.");
 
@@ -215,6 +234,16 @@
                         frameDocument.getElementById("support-wallets")?.textContent || ""
                     ),
                     'Desktop: support wallets should show the "Coming soon" placeholder text.'
+                );
+                assert(
+                    Boolean(aboutSidebarMenu) &&
+                        !aboutSidebarMenu.hidden &&
+                        aboutSidebarMenu.classList.contains("active"),
+                    'Desktop: opening support should preserve the previously active sidebar menu.'
+                );
+                assert(
+                    aboutNav.getAttribute("aria-current") === "page",
+                    'Desktop: opening support should preserve the previously active primary nav context.'
                 );
 
                 const articlesNav = frameDocument.querySelector('.header-nav a[data-menu="articles"]');
@@ -372,6 +401,13 @@
                     "Mobile: backdrop click did not close the sidebar."
                 );
 
+                const aboutNav = frameDocument.querySelector('.header-nav a[data-menu="about"]');
+                clickElement(aboutNav, frameWindow);
+                await waitFor(() => {
+                    const section = frameDocument.getElementById("content-about");
+                    return section && !section.hidden && section.classList.contains("active");
+                }, 'Mobile: "About" section did not activate.');
+
                 clickElement(menuToggle, frameWindow);
                 await waitFor(
                     () => frameDocument.body.classList.contains("sidebar-open"),
@@ -380,6 +416,10 @@
 
                 const supportCard = frameDocument.querySelector("#sidebar-footer .sidebar-funding-card");
                 assert(Boolean(supportCard), "Mobile: sidebar should render the support funding card.");
+                assert(
+                    frameDocument.getElementById("menu-about")?.classList.contains("active"),
+                    'Mobile: "About" sidebar menu should stay active before opening support.'
+                );
 
                 clickElement(supportCard, frameWindow);
                 await waitFor(
@@ -395,6 +435,14 @@
                         );
                     },
                     "Mobile: tapping the support funding card should open the support section and close the sidebar."
+                );
+
+                clickElement(menuToggle, frameWindow);
+                await waitFor(
+                    () =>
+                        frameDocument.body.classList.contains("sidebar-open") &&
+                        frameDocument.getElementById("menu-about")?.classList.contains("active"),
+                    "Mobile: reopening the sidebar from support should preserve the prior menu context."
                 );
             };
 
