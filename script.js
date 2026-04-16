@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const menuToggle = document.getElementById("menu-toggle");
     const sidebar = document.getElementById("sidebar");
     const sidebarMenusRoot = document.getElementById("sidebar-menus");
+    const sidebarFooterRoot = document.getElementById("sidebar-footer");
     const sidebarBackdrop = document.getElementById("sidebar-backdrop");
     const sidebarClose = document.getElementById("sidebar-close");
     const logoLink = document.getElementById("logo-link");
@@ -37,6 +38,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         title: document.title,
         description: descriptionMeta?.getAttribute("content") || ""
     };
+    const primaryMenuOrder = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
+    const supportMenuId = "support";
+    const walletPlaceholderText = "Coming soon";
+    const walletCopyResetTimers = new WeakMap();
 
     const escapeHtml = (value = "") =>
         String(value).replace(/[&<>"']/g, (character) => {
@@ -60,6 +65,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getPlainText = (value = "") =>
         String(value).replace(/\s+/g, " ").trim();
+
+    const formatUsd = (value = 0) => {
+        const safeValue = Number.isFinite(Number(value)) ? Number(value) : 0;
+        const maximumFractionDigits = Number.isInteger(safeValue) ? 0 : 2;
+        return new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits
+        }).format(safeValue);
+    };
+
+    const isWalletPlaceholder = (address = "") =>
+        normalizeText(address) === normalizeText(walletPlaceholderText);
+
+    const getFundingMetrics = (funding) => {
+        const expenses = Array.isArray(funding?.expenses) ? funding.expenses : [];
+        const goal = expenses.reduce((total, item) => total + (Number(item?.monthlyUsd) || 0), 0);
+        const raised = Math.max(0, Number(funding?.monthlyRaisedUsd) || 0);
+        const remaining = Math.max(goal - raised, 0);
+        const progressPercent = goal > 0 ? Math.min(100, (raised / goal) * 100) : 0;
+
+        return {
+            goal,
+            raised,
+            remaining,
+            progressPercent
+        };
+    };
 
     const hasUriScheme = (value = "") =>
         /^[a-z][a-z\d+\-.]*:/i.test(value);
@@ -416,7 +449,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         Array.from(sidebarMenusRoot.querySelectorAll(".sidebar-menu"));
 
     const getSidebarLinks = () =>
-        Array.from(sidebarMenusRoot.querySelectorAll(".sidebar-list a"));
+        Array.from(sidebar.querySelectorAll(".sidebar-list a, .sidebar-funding-card"));
+
+    const getSidebarFundingCard = () =>
+        sidebarFooterRoot?.querySelector(".sidebar-funding-card");
 
     const getContentSections = () =>
         Array.from(contentSectionsRoot.querySelectorAll(".content-section"));
@@ -744,20 +780,182 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
     `;
 
-    const renderManifest = async (manifest, options = {}) => {
-        const menuOrder = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
+    const renderFundingSidebarCard = (funding, isActive) => {
+        if (!funding?.enabled) {
+            return "";
+        }
 
-        sidebarMenusRoot.innerHTML = menuOrder
+        const metrics = getFundingMetrics(funding);
+
+        return `
+            <div class="sidebar-footer-card">
+                <a
+                    href="#content-support"
+                    class="sidebar-funding-card${isActive ? " active" : ""}"
+                    data-menu="${supportMenuId}"
+                    aria-controls="content-support"
+                    ${isActive ? 'aria-current="page"' : ""}
+                >
+                    <span class="sidebar-funding-label">${escapeHtml(funding.sidebarLabel || "Support LAOS")}</span>
+                    <span class="sidebar-funding-caption">${escapeHtml(funding.sidebarCaption || "Help cover the monthly cost of running the project.")}</span>
+                    <span class="sidebar-funding-stats">
+                        <span>${escapeHtml(formatUsd(metrics.raised))} this month</span>
+                        <span>${escapeHtml(formatUsd(metrics.goal))} needed</span>
+                    </span>
+                    <span class="sidebar-funding-progress" aria-hidden="true">
+                        <span class="sidebar-funding-progress-bar" style="width: ${metrics.progressPercent.toFixed(2)}%;"></span>
+                    </span>
+                </a>
+            </div>
+        `;
+    };
+
+    const renderSupportWalletCard = (wallet) => {
+        const isPlaceholder = isWalletPlaceholder(wallet.address);
+        const symbolMarkup = wallet.symbol
+            ? `<span class="support-wallet-symbol">${escapeHtml(wallet.symbol)}</span>`
+            : "";
+        const copyButtonMarkup = isPlaceholder
+            ? ""
+            : `
+                <button
+                    type="button"
+                    class="wallet-copy-button"
+                    data-label="Copy"
+                    data-wallet-address="${escapeHtml(wallet.address)}"
+                >
+                    Copy
+                </button>
+            `;
+
+        return `
+            <article class="support-wallet-card">
+                <div class="support-wallet-head">
+                    <div class="support-wallet-meta">
+                        <p class="support-wallet-network">${escapeHtml(wallet.network)}</p>
+                        ${symbolMarkup}
+                    </div>
+                    ${copyButtonMarkup}
+                </div>
+                <p class="support-wallet-address${isPlaceholder ? " support-wallet-placeholder" : ""}">${escapeHtml(wallet.address)}</p>
+            </article>
+        `;
+    };
+
+    const renderSupportSection = (funding, isActive) => {
+        if (!funding?.enabled) {
+            return "";
+        }
+
+        const metrics = getFundingMetrics(funding);
+        const whyMarkup = funding.why
+            .map((item) => `<li>${escapeHtml(item)}</li>`)
+            .join("");
+        const expensesMarkup = funding.expenses
+            .map((expense) => {
+                const noteMarkup = expense.note
+                    ? `<p class="support-expense-note">${escapeHtml(expense.note)}</p>`
+                    : "";
+                return `
+                    <li class="support-expense-item">
+                        <div class="support-expense-copy">
+                            <p class="support-expense-label">${escapeHtml(expense.label)}</p>
+                            ${noteMarkup}
+                        </div>
+                        <p class="support-expense-amount">${escapeHtml(formatUsd(expense.monthlyUsd))}</p>
+                    </li>
+                `;
+            })
+            .join("");
+        const walletsMarkup = funding.wallets.map(renderSupportWalletCard).join("");
+
+        return `
+            <section
+                id="content-support"
+                class="content-section${isActive ? " active" : ""}"
+                data-title="${escapeHtml(funding.sidebarLabel || "Support LAOS")}"
+                tabindex="-1"
+                ${isActive ? "" : "hidden"}
+            >
+                <h1 class="doc-title">${escapeHtml(funding.sidebarLabel || "Support LAOS")}</h1>
+                <p class="doc-subtitle">Why we are collecting donations and what they help cover</p>
+                <p class="doc-text">${escapeHtml(funding.sidebarCaption || "Help cover the monthly cost of running the project.")}</p>
+
+                <div id="support-why" class="doc-section">
+                    <h2 class="doc-subtitle">Why Support Helps</h2>
+                    <ul class="doc-list">
+                        ${whyMarkup}
+                    </ul>
+                </div>
+
+                <div id="support-this-month" class="doc-section">
+                    <h2 class="doc-subtitle">This Month</h2>
+                    <p class="doc-text">For ${escapeHtml(funding.reportingMonth)}, we are tracking donations against the recurring monthly cost of keeping LAOS online.</p>
+                    <div class="support-stat-grid">
+                        <article class="support-stat-card">
+                            <p class="support-stat-label">Raised</p>
+                            <p class="support-stat-value">${escapeHtml(formatUsd(metrics.raised))}</p>
+                            <p class="support-stat-note">${escapeHtml(funding.reportingMonth)}</p>
+                        </article>
+                        <article class="support-stat-card">
+                            <p class="support-stat-label">Monthly need</p>
+                            <p class="support-stat-value">${escapeHtml(formatUsd(metrics.goal))}</p>
+                            <p class="support-stat-note">Derived from current recurring expenses.</p>
+                        </article>
+                        <article class="support-stat-card">
+                            <p class="support-stat-label">Remaining</p>
+                            <p class="support-stat-value">${escapeHtml(formatUsd(metrics.remaining))}</p>
+                            <p class="support-stat-note">The amount still needed this month.</p>
+                        </article>
+                    </div>
+                    <div class="support-progress" role="img" aria-label="${escapeHtml(`${Math.round(metrics.progressPercent)} percent of the monthly goal is covered`)}">
+                        <span class="support-progress-bar" style="width: ${metrics.progressPercent.toFixed(2)}%;"></span>
+                    </div>
+                </div>
+
+                <div id="support-expenses" class="doc-section">
+                    <h2 class="doc-subtitle">Monthly Expenses</h2>
+                    <p class="doc-text">This is the current working breakdown of the recurring costs we are trying to cover.</p>
+                    <ul class="support-expense-list">
+                        ${expensesMarkup}
+                    </ul>
+                </div>
+
+                <div id="support-wallets" class="doc-section">
+                    <h2 class="doc-subtitle">Crypto Wallets</h2>
+                    <p class="doc-text">Wallet details are managed manually in the repository. Until each address is published, the card will show a placeholder.</p>
+                    <div class="support-wallet-grid">
+                        ${walletsMarkup}
+                    </div>
+                </div>
+
+                <div id="support-disclaimer" class="doc-section">
+                    <h2 class="doc-subtitle">Disclaimer</h2>
+                    <p class="doc-text">${escapeHtml(funding.disclaimer)}</p>
+                </div>
+            </section>
+        `;
+    };
+
+    const renderManifest = async (manifest, options = {}) => {
+        sidebarMenusRoot.innerHTML = primaryMenuOrder
             .map((menuId) => renderSidebarMenu(menuId, manifest.sections[menuId], menuId === "home"))
             .join("");
+        if (sidebarFooterRoot) {
+            sidebarFooterRoot.innerHTML = renderFundingSidebarCard(manifest.funding, false);
+        }
 
-        contentSectionsRoot.innerHTML = (
-            await Promise.all(
-                menuOrder.map((menuId) =>
+        const sectionMarkup = await Promise.all(
+            primaryMenuOrder.map((menuId) =>
                     renderSection(menuId, manifest.sections[menuId], menuId === "home", options)
                 )
-            )
-        ).join("");
+        );
+
+        if (manifest.funding?.enabled) {
+            sectionMarkup.push(renderSupportSection(manifest.funding, false));
+        }
+
+        contentSectionsRoot.innerHTML = sectionMarkup.join("");
     };
 
     const setContentSourceBanner = (loadResult) => {
@@ -882,7 +1080,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const clearSidebarActiveLinks = () => {
-        getSidebarLinks().forEach((link) => link.classList.remove("active"));
+        getSidebarLinks().forEach((link) => {
+            link.classList.remove("active");
+            link.removeAttribute("aria-current");
+        });
     };
 
     const getSidebarFocusableElements = () =>
@@ -927,6 +1128,67 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (targetLink) {
             targetLink.classList.add("active");
+        }
+    };
+
+    const setActiveSidebarFundingCard = (isActive) => {
+        const fundingCard = getSidebarFundingCard();
+        if (!fundingCard) {
+            return;
+        }
+
+        fundingCard.classList.toggle("active", isActive);
+        if (isActive) {
+            fundingCard.setAttribute("aria-current", "page");
+        } else {
+            fundingCard.removeAttribute("aria-current");
+        }
+    };
+
+    const fallbackCopyText = (value) => {
+        const textArea = document.createElement("textarea");
+        textArea.value = value;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        textArea.style.pointerEvents = "none";
+        document.body.append(textArea);
+        textArea.select();
+        textArea.setSelectionRange(0, textArea.value.length);
+        const copied = document.execCommand("copy");
+        textArea.remove();
+
+        if (!copied) {
+            throw new Error("Fallback copy failed.");
+        }
+    };
+
+    const copyText = async (value) => {
+        if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(value);
+            return;
+        }
+
+        fallbackCopyText(value);
+    };
+
+    const setWalletCopyLabel = (button, label, state) => {
+        const resetLabel = button.dataset.label || "Copy";
+        button.textContent = label;
+        button.dataset.state = state;
+
+        const existingTimer = walletCopyResetTimers.get(button);
+        if (existingTimer) {
+            window.clearTimeout(existingTimer);
+        }
+
+        if (label !== resetLabel) {
+            const timerId = window.setTimeout(() => {
+                button.textContent = resetLabel;
+                button.dataset.state = "default";
+                walletCopyResetTimers.delete(button);
+            }, 1800);
+            walletCopyResetTimers.set(button, timerId);
         }
     };
 
@@ -1210,8 +1472,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         setActiveNav(menuId);
-        setActiveSidebarMenus([menuId]);
+        setActiveSidebarMenus(menuId === supportMenuId ? [] : [menuId]);
         setActiveSidebarLink(menuId, targetId);
+        setActiveSidebarFundingCard(menuId === supportMenuId);
         updateStatus(`${section.dataset.title} section is currently displayed.`);
         updatePageMetadata({
             title: `${section.dataset.title} - ${baseMetadata.siteName}`,
@@ -1446,8 +1709,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     sidebarMenusRoot.addEventListener("click", handleHashLinkClick);
+    sidebarFooterRoot?.addEventListener("click", handleHashLinkClick);
     contentSectionsRoot.addEventListener("click", handleHashLinkClick);
     searchResults.addEventListener("click", handleHashLinkClick);
+    contentSectionsRoot.addEventListener("click", async (event) => {
+        const copyButton = event.target.closest(".wallet-copy-button");
+        if (!copyButton) {
+            return;
+        }
+
+        const walletAddress = copyButton.dataset.walletAddress || "";
+        if (!walletAddress || isWalletPlaceholder(walletAddress)) {
+            return;
+        }
+
+        event.preventDefault();
+        copyButton.disabled = true;
+
+        try {
+            await copyText(walletAddress);
+            setWalletCopyLabel(copyButton, "Copied", "success");
+        } catch (error) {
+            console.warn("[LAOS wallet copy]", error);
+            setWalletCopyLabel(copyButton, "Copy failed", "error");
+        } finally {
+            copyButton.disabled = false;
+        }
+    });
 
     menuToggle.addEventListener("click", () => {
         if (body.classList.contains("sidebar-open")) {

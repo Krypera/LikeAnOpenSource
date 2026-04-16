@@ -266,6 +266,75 @@ window.LAOSContentService = (() => {
         };
     };
 
+    const normalizeFundingExpense = (item) => {
+        if (!item || typeof item !== "object") {
+            return null;
+        }
+
+        const label = typeof item.label === "string" ? item.label.trim() : "";
+        const monthlyUsd = Number(item.monthlyUsd);
+        if (!label || !Number.isFinite(monthlyUsd)) {
+            return null;
+        }
+
+        return {
+            label,
+            monthlyUsd: Math.max(0, monthlyUsd),
+            note: typeof item.note === "string" ? item.note.trim() : ""
+        };
+    };
+
+    const normalizeFundingWallet = (item) => {
+        if (!item || typeof item !== "object") {
+            return null;
+        }
+
+        const network = typeof item.network === "string" ? item.network.trim() : "";
+        const address = typeof item.address === "string" ? item.address.trim() : "";
+        if (!network || !address) {
+            return null;
+        }
+
+        return {
+            network,
+            symbol: typeof item.symbol === "string" ? item.symbol.trim() : "",
+            address
+        };
+    };
+
+    const normalizeFunding = (value) => {
+        const safeValue = value && typeof value === "object" ? value : {};
+        const monthlyRaisedUsd = Number(safeValue.monthlyRaisedUsd);
+
+        return {
+            enabled: safeValue.enabled === true,
+            sidebarLabel:
+                typeof safeValue.sidebarLabel === "string"
+                    ? safeValue.sidebarLabel.trim()
+                    : "Support LAOS",
+            sidebarCaption:
+                typeof safeValue.sidebarCaption === "string"
+                    ? safeValue.sidebarCaption.trim()
+                    : "",
+            reportingMonth:
+                typeof safeValue.reportingMonth === "string"
+                    ? safeValue.reportingMonth.trim()
+                    : "",
+            monthlyRaisedUsd: Number.isFinite(monthlyRaisedUsd) ? Math.max(0, monthlyRaisedUsd) : 0,
+            why: toArray(safeValue.why),
+            expenses: toArray(safeValue.expenses)
+                .map(normalizeFundingExpense)
+                .filter(Boolean),
+            wallets: toArray(safeValue.wallets)
+                .map(normalizeFundingWallet)
+                .filter(Boolean),
+            disclaimer:
+                typeof safeValue.disclaimer === "string"
+                    ? safeValue.disclaimer.trim()
+                    : ""
+        };
+    };
+
     const normalizeSection = (menuId, section) => {
         const safeSection = section && typeof section === "object" ? section : {};
         return {
@@ -324,6 +393,7 @@ window.LAOSContentService = (() => {
                         ? manifest.site.repositoryUrl.trim()
                         : ""
             },
+            funding: normalizeFunding(manifest.funding),
             sections
         };
     };

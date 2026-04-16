@@ -130,6 +130,15 @@ const localResult = await localService.loadSiteContent();
 
 ensure(localResult.kind === "manifest", "Runtime validation: expected a manifest result.");
 ensure(localResult.source?.id === "local", "Runtime validation: local source should win in HTTP mode.");
+ensure(
+    localResult.manifest?.funding?.enabled === true,
+    "Runtime validation: local manifest should expose enabled funding data."
+);
+ensure(
+    Array.isArray(localResult.manifest?.funding?.wallets) &&
+        localResult.manifest.funding.wallets.some((wallet) => wallet.address === "Coming soon"),
+    'Runtime validation: funding wallets should preserve the "Coming soon" placeholder text.'
+);
 
 const contributeSection = getSection(localResult.manifest, "contribute");
 const openTopicsGroup = getGroup(contributeSection, "contribute-open-topics");
@@ -187,6 +196,10 @@ ensure(
     "Runtime validation: embedded manifest did not restore the expected section content."
 );
 ensure(
+    embeddedResult.manifest?.funding?.enabled === true,
+    "Runtime validation: embedded fallback did not preserve funding data."
+);
+ensure(
     Array.isArray(
         getBlock(
             getGroup(getSection(embeddedResult.manifest, "contribute"), "contribute-open-topics"),
@@ -217,6 +230,15 @@ const cacheResult = await cacheOnlyService.loadSiteContent();
 ensure(
     cacheResult.kind === "manifest" && cacheResult.source?.id === "cache",
     "Runtime validation: cache fallback did not activate when embedded content was unavailable."
+);
+ensure(
+    cacheResult.manifest?.funding?.enabled === true,
+    "Runtime validation: cache fallback did not preserve funding data."
+);
+ensure(
+    Array.isArray(cacheResult.manifest?.funding?.wallets) &&
+        cacheResult.manifest.funding.wallets.some((wallet) => wallet.address === "Coming soon"),
+    'Runtime validation: cache fallback did not preserve the "Coming soon" wallet placeholder.'
 );
 
 const cachedGuideBlock = getBlock(

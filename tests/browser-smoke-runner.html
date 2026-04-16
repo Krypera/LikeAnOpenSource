@@ -197,6 +197,26 @@
                     );
                 }, "Desktop: browser back did not restore the hashless home state.");
 
+                const supportCard = frameDocument.querySelector("#sidebar-footer .sidebar-funding-card");
+                assert(Boolean(supportCard), "Desktop: sidebar should render the support funding card.");
+
+                clickElement(supportCard, frameWindow);
+                await waitFor(() => {
+                    const supportSection = frameDocument.getElementById("content-support");
+                    return (
+                        frameWindow.location.hash === "#content-support" &&
+                        supportSection &&
+                        !supportSection.hidden &&
+                        supportSection.classList.contains("active")
+                    );
+                }, 'Desktop: clicking the support footer card did not open the "Support LAOS" section.');
+                assert(
+                    /coming soon/i.test(
+                        frameDocument.getElementById("support-wallets")?.textContent || ""
+                    ),
+                    'Desktop: support wallets should show the "Coming soon" placeholder text.'
+                );
+
                 const articlesNav = frameDocument.querySelector('.header-nav a[data-menu="articles"]');
                 clickElement(articlesNav, frameWindow);
                 await waitFor(() => {
@@ -290,6 +310,20 @@
                         initialQueryInput.value === "documentation platforms"
                     );
                 }, "Desktop: an initial q parameter should restore the search view on load.");
+
+                const directSupportContext = await loadApp(
+                    `/?debugContentSource=1&smokeScenario=desktop&t=${Date.now()}#content-support`
+                );
+                await waitFor(() => {
+                    const directSupportSection =
+                        directSupportContext.frameDocument.getElementById("content-support");
+                    return (
+                        directSupportContext.frameWindow.location.hash === "#content-support" &&
+                        directSupportSection &&
+                        !directSupportSection.hidden &&
+                        directSupportSection.classList.contains("active")
+                    );
+                }, 'Desktop: direct navigation to "#content-support" should restore the support section.');
             };
 
             const runMobileScenario = async (frameWindow, frameDocument) => {
@@ -336,6 +370,31 @@
                 await waitFor(
                     () => !frameDocument.body.classList.contains("sidebar-open"),
                     "Mobile: backdrop click did not close the sidebar."
+                );
+
+                clickElement(menuToggle, frameWindow);
+                await waitFor(
+                    () => frameDocument.body.classList.contains("sidebar-open"),
+                    "Mobile: sidebar did not reopen for the support card check."
+                );
+
+                const supportCard = frameDocument.querySelector("#sidebar-footer .sidebar-funding-card");
+                assert(Boolean(supportCard), "Mobile: sidebar should render the support funding card.");
+
+                clickElement(supportCard, frameWindow);
+                await waitFor(
+                    () => {
+                        const supportSection = frameDocument.getElementById("content-support");
+                        return (
+                            frameWindow.location.hash === "#content-support" &&
+                            supportSection &&
+                            !supportSection.hidden &&
+                            supportSection.classList.contains("active") &&
+                            !frameDocument.body.classList.contains("sidebar-open") &&
+                            sidebar.getAttribute("aria-hidden") === "true"
+                        );
+                    },
+                    "Mobile: tapping the support funding card should open the support section and close the sidebar."
                 );
             };
 

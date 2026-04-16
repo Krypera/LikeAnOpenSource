@@ -298,6 +298,8 @@ input:focus-visible {
 
 .sidebar {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     top: 0;
     left: 0;
     z-index: 100;
@@ -310,6 +312,15 @@ input:focus-visible {
     box-shadow: var(--shadow-lg);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
+}
+
+#sidebar-menus {
+    flex: 1 1 auto;
+}
+
+#sidebar-footer {
+    margin-top: auto;
+    padding-top: 1rem;
 }
 
 .sidebar.open {
@@ -368,6 +379,72 @@ input:focus-visible {
     background-color: rgba(192, 132, 252, 0.14);
     color: var(--text-primary);
     transform: translateX(4px);
+}
+
+.sidebar-footer-card {
+    padding-top: 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-funding-card {
+    display: block;
+    padding: 0.9rem 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    background: linear-gradient(180deg, rgba(18, 25, 38, 0.92), rgba(11, 16, 26, 0.96));
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-funding-card:hover,
+.sidebar-funding-card:focus-visible,
+.sidebar-funding-card.active {
+    transform: translateY(-1px);
+    border-color: rgba(52, 211, 153, 0.34);
+    background: linear-gradient(180deg, rgba(19, 30, 43, 0.96), rgba(12, 18, 29, 0.98));
+}
+
+.sidebar-funding-label {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.sidebar-funding-caption {
+    display: block;
+    margin-top: 0.45rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.sidebar-funding-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.8rem;
+    color: rgba(232, 240, 255, 0.78);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.sidebar-funding-progress,
+.support-progress {
+    display: block;
+    width: 100%;
+    height: 0.4rem;
+    margin-top: 0.8rem;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-funding-progress-bar,
+.support-progress-bar {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #34d399, #60a5fa);
 }
 
 .main-content {
@@ -762,6 +839,161 @@ input:focus-visible {
     font-weight: 600;
 }
 
+.support-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.support-stat-card,
+.support-wallet-card {
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    background: rgba(8, 12, 24, 0.72);
+}
+
+.support-stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.support-stat-value {
+    margin-top: 0.55rem;
+    color: var(--text-primary);
+    font-size: clamp(1.45rem, 2vw, 1.9rem);
+    font-weight: 700;
+}
+
+.support-stat-note {
+    margin-top: 0.45rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.support-expense-list {
+    display: grid;
+    gap: 0.9rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.support-expense-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    background: rgba(11, 16, 27, 0.72);
+}
+
+.support-expense-label {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.support-expense-note {
+    margin-top: 0.35rem;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.support-expense-amount {
+    color: var(--accent-green);
+    font-size: 1.05rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.support-wallet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.support-wallet-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.support-wallet-network {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.support-wallet-symbol {
+    display: inline-flex;
+    margin-top: 0.45rem;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(96, 165, 250, 0.14);
+    color: #bfdbfe;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.support-wallet-address {
+    margin-top: 1rem;
+    color: #d6e3ff;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    word-break: break-word;
+}
+
+.support-wallet-placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.wallet-copy-button {
+    flex-shrink: 0;
+    min-width: 5.5rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(96, 165, 250, 0.24);
+    border-radius: 0.8rem;
+    background: rgba(96, 165, 250, 0.12);
+    color: #dbeafe;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.wallet-copy-button:hover,
+.wallet-copy-button:focus-visible {
+    border-color: rgba(96, 165, 250, 0.4);
+    background: rgba(96, 165, 250, 0.2);
+}
+
+.wallet-copy-button[data-state="success"] {
+    border-color: rgba(52, 211, 153, 0.38);
+    background: rgba(52, 211, 153, 0.14);
+    color: #d1fae5;
+}
+
+.wallet-copy-button[data-state="error"] {
+    border-color: rgba(245, 158, 11, 0.4);
+    background: rgba(245, 158, 11, 0.14);
+    color: #fde68a;
+}
+
 .card-link:hover {
     color: #e9d5ff;
 }
@@ -985,6 +1217,14 @@ input:focus-visible {
 
     .user-area {
         margin-left: auto;
+    }
+
+    .support-expense-item {
+        flex-direction: column;
+    }
+
+    .support-expense-amount {
+        white-space: normal;
     }
 }
 

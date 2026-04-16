@@ -263,6 +263,90 @@ const getRecordFeedBySource = (group, sourcePath) =>
         )
         : null;
 
+const validateFunding = (funding) => {
+    ensure(funding && typeof funding === "object", "Manifest: funding object is required.");
+    if (!funding || typeof funding !== "object") {
+        return;
+    }
+
+    ensure(typeof funding.enabled === "boolean", "Manifest: funding.enabled must be a boolean.");
+    if (funding.enabled !== true) {
+        return;
+    }
+
+    validHashTargets.add("content-support");
+
+    ensure(
+        typeof funding.sidebarLabel === "string" && funding.sidebarLabel.trim(),
+        "Manifest funding: sidebarLabel is required when funding is enabled."
+    );
+    ensure(
+        typeof funding.sidebarCaption === "string" && funding.sidebarCaption.trim(),
+        "Manifest funding: sidebarCaption is required when funding is enabled."
+    );
+    ensure(
+        typeof funding.reportingMonth === "string" && funding.reportingMonth.trim(),
+        "Manifest funding: reportingMonth is required when funding is enabled."
+    );
+    ensure(
+        Number.isFinite(funding.monthlyRaisedUsd) && funding.monthlyRaisedUsd >= 0,
+        "Manifest funding: monthlyRaisedUsd must be a non-negative number."
+    );
+    ensure(
+        typeof funding.disclaimer === "string" && funding.disclaimer.trim(),
+        "Manifest funding: disclaimer is required when funding is enabled."
+    );
+
+    const whyItems = Array.isArray(funding.why) ? funding.why : [];
+    ensure(whyItems.length > 0, "Manifest funding: at least one why item is required.");
+    whyItems.forEach((item, index) => {
+        ensure(
+            typeof item === "string" && item.trim(),
+            `Manifest funding: why[${index}] must be a non-empty string.`
+        );
+    });
+
+    const expenses = Array.isArray(funding.expenses) ? funding.expenses : [];
+    ensure(expenses.length > 0, "Manifest funding: at least one expense is required.");
+    expenses.forEach((expense, index) => {
+        ensure(expense && typeof expense === "object", `Manifest funding: expenses[${index}] must be an object.`);
+        ensure(
+            typeof expense?.label === "string" && expense.label.trim(),
+            `Manifest funding: expenses[${index}].label is required.`
+        );
+        ensure(
+            Number.isFinite(expense?.monthlyUsd) && expense.monthlyUsd >= 0,
+            `Manifest funding: expenses[${index}].monthlyUsd must be a non-negative number.`
+        );
+        if (typeof expense?.note !== "undefined") {
+            ensure(
+                typeof expense.note === "string" && expense.note.trim(),
+                `Manifest funding: expenses[${index}].note must be a non-empty string when provided.`
+            );
+        }
+    });
+
+    const wallets = Array.isArray(funding.wallets) ? funding.wallets : [];
+    ensure(wallets.length > 0, "Manifest funding: at least one wallet is required.");
+    wallets.forEach((wallet, index) => {
+        ensure(wallet && typeof wallet === "object", `Manifest funding: wallets[${index}] must be an object.`);
+        ensure(
+            typeof wallet?.network === "string" && wallet.network.trim(),
+            `Manifest funding: wallets[${index}].network is required.`
+        );
+        ensure(
+            typeof wallet?.address === "string" && wallet.address.trim(),
+            `Manifest funding: wallets[${index}].address is required.`
+        );
+        if (typeof wallet?.symbol !== "undefined") {
+            ensure(
+                typeof wallet.symbol === "string" && wallet.symbol.trim(),
+                `Manifest funding: wallets[${index}].symbol must be a non-empty string when provided.`
+            );
+        }
+    });
+};
+
 const manifest = readJson(manifestRelativePath);
 
 const readEmbeddedManifestFromIndex = () => {
@@ -286,6 +370,7 @@ const readEmbeddedManifestFromIndex = () => {
 
 if (manifest && typeof manifest === "object") {
     ensure(manifest.sections && typeof manifest.sections === "object", "Manifest: sections object is required.");
+    validateFunding(manifest.funding);
 
     requiredMenus.forEach((menuId) => {
         const section = manifest.sections?.[menuId];
