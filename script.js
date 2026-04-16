@@ -61,8 +61,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const getPlainText = (value = "") =>
         String(value).replace(/\s+/g, " ").trim();
 
+    const hasUriScheme = (value = "") =>
+        /^[a-z][a-z\d+\-.]*:/i.test(value);
+
     const isExternalAssetUrl = (value = "") =>
         /^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(value) || /^data:/i.test(value);
+
+    const isExternalLinkUrl = (value = "") =>
+        /^(?:https?:)?\/\//i.test(value);
 
     const resolveContentAssetPath = (assetPath = "", basePath = "") => {
         const trimmedAssetPath = String(assetPath || "").trim();
@@ -88,6 +94,24 @@ document.addEventListener("DOMContentLoaded", async () => {
             : "";
         const resolvedPath = new URL(trimmedAssetPath, `https://laos.local/${baseDirectory}`).pathname;
         return resolvedPath.replace(/^\/+/, "");
+    };
+
+    const resolveContentHref = (href = "", basePath = "") => {
+        const trimmedHref = String(href || "").trim();
+        if (!trimmedHref) {
+            return "";
+        }
+
+        if (
+            hasUriScheme(trimmedHref) ||
+            trimmedHref.startsWith("//") ||
+            trimmedHref.startsWith("/") ||
+            trimmedHref.startsWith("#")
+        ) {
+            return trimmedHref;
+        }
+
+        return resolveContentAssetPath(trimmedHref, basePath);
     };
 
     const parseStandaloneMarkdownImage = (value = "") => {
@@ -165,7 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return getPlainText(clone.textContent);
     };
 
-    const renderInlineMarkdown = (value = "") => {
+    const renderInlineMarkdown = (value = "", { basePath = "" } = {}) => {
         const placeholders = [];
         const protect = (markup) => {
             const token = `__LAOS_TOKEN_${placeholders.length}__`;
@@ -176,6 +200,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         let rendered = escapeHtml(value);
         rendered = rendered.replace(/`([^`]+)`/g, (_match, code) =>
             protect(`<code class="inline-code">${code}</code>`)
+        );
+        rendered = rendered.replace(
+            /\[([^\]]+)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)/g,
+            (_match, label, href, title) => {
+                const resolvedHref = resolveContentHref(href, basePath);
+                const titleAttribute =
+                    typeof title === "string" && title.trim()
+                        ? ` title="${escapeHtml(title.trim())}"`
+                        : "";
+                const externalAttributes = isExternalLinkUrl(resolvedHref)
+                    ? ' target="_blank" rel="noopener noreferrer"'
+                    : "";
+                return protect(
+                    `<a class="markdown-link" href="${escapeHtml(resolvedHref)}"${titleAttribute}${externalAttributes}>${label}</a>`
+                );
+            }
         );
         rendered = rendered.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
         rendered = rendered.replace(/\*([^*]+)\*/g, "<em>$1</em>");
@@ -191,7 +231,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const lines = String(markdown || "").replace(/\r\n?/g, "\n").split("\n");
         const markup = [];
         const paragraphBuffer = [];
+        const blockquoteBuffer = [];
         let listBuffer = null;
+        let codeFence = null;
         let skippedFirstTitle = false;
 
         const flushParagraph = () => {
@@ -200,9 +242,30 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             markup.push(
-                `<p class="doc-text">${renderInlineMarkdown(paragraphBuffer.join(" "))}</p>`
+                `<p class="doc-text">${renderInlineMarkdown(paragraphBuffer.join(" "), { basePath })}</p>`
             );
             paragraphBuffer.length = 0;
+        };
+
+        const flushBlockquote = () => {
+            if (!blockquoteBuffer.length) {
+                return;
+            }
+
+            const blockquoteText = blockquoteBuffer
+                .map((line) => line.trim())
+                .filter(Boolean)
+                .join(" ");
+
+            if (blockquoteText) {
+                markup.push(`
+                    <blockquote class="markdown-blockquote">
+                        <p class="doc-text">${renderInlineMarkdown(blockquoteText, { basePath })}</p>
+                    </blockquote>
+                `);
+            }
+
+            blockquoteBuffer.length = 0;
         };
 
         const flushList = () => {
@@ -219,12 +282,50 @@ document.addEventListener("DOMContentLoaded", async () => {
             listBuffer = null;
         };
 
+        const flushCodeFence = () => {
+            if (!codeFence) {
+                return;
+            }
+
+            const languageAttribute = codeFence.language
+                ? ` data-language="${escapeHtml(codeFence.language)}"`
+                : "";
+            markup.push(
+                `<pre class="markdown-code-block"><code class="markdown-code"${languageAttribute}>${escapeHtml(
+                    codeFence.lines.join("\n")
+                )}</code></pre>`
+            );
+            codeFence = null;
+        };
+
         lines.forEach((rawLine) => {
+            const codeFenceMatch = rawLine.match(/^\s*```([\w-]+)?\s*$/);
+            if (codeFence) {
+                if (codeFenceMatch) {
+                    flushCodeFence();
+                } else {
+                    codeFence.lines.push(rawLine);
+                }
+                return;
+            }
+
+            if (codeFenceMatch) {
+                flushParagraph();
+                flushList();
+                flushBlockquote();
+                codeFence = {
+                    language: (codeFenceMatch[1] || "").trim(),
+                    lines: []
+                };
+                return;
+            }
+
             const line = rawLine.trim();
 
             if (!line) {
                 flushParagraph();
                 flushList();
+                flushBlockquote();
                 return;
             }
 
@@ -232,8 +333,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (imageMatch) {
                 flushParagraph();
                 flushList();
+                flushBlockquote();
                 markup.push(renderMarkdownImageFigure(imageMatch, { basePath }));
                 return;
+            }
+
+            const blockquoteMatch = rawLine.match(/^\s*>\s?(.*)$/);
+            if (blockquoteMatch) {
+                flushParagraph();
+                flushList();
+                blockquoteBuffer.push(blockquoteMatch[1]);
+                return;
+            }
+
+            if (blockquoteBuffer.length) {
+                flushBlockquote();
             }
 
             const headingMatch = line.match(/^(#{1,6})\s+(.*)$/);
@@ -253,7 +367,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const headingClass = level <= 2 ? "doc-subtitle markdown-heading" : "markdown-subheading";
                 const tagName = level <= 2 ? "h3" : "h4";
                 markup.push(
-                    `<${tagName} class="${headingClass}">${renderInlineMarkdown(headingText)}</${tagName}>`
+                    `<${tagName} class="${headingClass}">${renderInlineMarkdown(headingText, { basePath })}</${tagName}>`
                 );
                 return;
             }
@@ -265,7 +379,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     flushList();
                     listBuffer = { type: "ul", items: [] };
                 }
-                listBuffer.items.push(renderInlineMarkdown(unorderedMatch[1]));
+                listBuffer.items.push(renderInlineMarkdown(unorderedMatch[1], { basePath }));
                 return;
             }
 
@@ -276,7 +390,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     flushList();
                     listBuffer = { type: "ol", items: [] };
                 }
-                listBuffer.items.push(renderInlineMarkdown(orderedMatch[1]));
+                listBuffer.items.push(renderInlineMarkdown(orderedMatch[1], { basePath }));
                 return;
             }
 
@@ -289,6 +403,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         flushParagraph();
         flushList();
+        flushBlockquote();
+        flushCodeFence();
 
         return markup.join("");
     };
@@ -1074,6 +1190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         {
             targetId = null,
             updateLocation = true,
+            replaceLocation = false,
             smooth = true,
             focus = true
         } = {}
@@ -1102,7 +1219,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         if (updateLocation) {
-            setLocationHash(targetId ? `#${targetId}` : `#${section.id}`);
+            setLocationHash(targetId ? `#${targetId}` : `#${section.id}`, {
+                replace: replaceLocation
+            });
         }
 
         if (focus) {
@@ -1142,7 +1261,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const target = resolveHashTarget(hash);
         if (!target) {
             showSection("home", {
-                updateLocation: false,
+                updateLocation: true,
+                replaceLocation: true,
                 smooth: false,
                 focus: false
             });

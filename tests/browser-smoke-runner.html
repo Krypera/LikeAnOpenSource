@@ -114,6 +114,42 @@
                 );
             };
 
+            const loadApp = async (url) => {
+                const expectedUrl = new URL(url, window.location.href);
+                const expectedToken = expectedUrl.searchParams.get("t") || "";
+                frame.src = url;
+
+                await waitFor(
+                    () =>
+                        frame.contentWindow &&
+                        frame.contentDocument &&
+                        frame.contentWindow.location.pathname === "/" &&
+                        new URLSearchParams(frame.contentWindow.location.search).get("t") ===
+                            expectedToken &&
+                        frame.contentDocument.readyState === "complete",
+                    "Runner: app frame did not finish navigating to the app document."
+                );
+
+                const frameWindow = frame.contentWindow;
+                const frameDocument = frame.contentDocument;
+
+                await waitFor(
+                    () =>
+                        frameDocument.querySelector("#content-contribute") &&
+                        frameDocument.querySelector('.header-nav a[data-menu="contribute"]') &&
+                        frameDocument.querySelector("#menu-home .sidebar-title")?.textContent !== "Loading",
+                    "Runner: manifest content did not finish rendering."
+                );
+
+                const searchStatusText = frameDocument.getElementById("search-status")?.textContent || "";
+                assert(
+                    !/Preparing content/i.test(searchStatusText),
+                    "Runner: shell loading copy should be replaced after hydration."
+                );
+
+                return { frameWindow, frameDocument };
+            };
+
             const runDesktopScenario = async (frameWindow, frameDocument) => {
                 const contributeNav = frameDocument.querySelector('.header-nav a[data-menu="contribute"]');
                 assert(Boolean(contributeNav), 'Desktop: primary navigation should include "Contribute".');
@@ -213,13 +249,47 @@
                     const searchInputAfterBack = frameDocument.getElementById("site-search");
                     return (
                         frameWindow.location.hash === "" &&
-                        frameWindow.location.search.includes("q=documentation+platforms") &&
+                        new frameWindow.URLSearchParams(frameWindow.location.search).get("q") ===
+                            "documentation platforms" &&
                         searchResults &&
                         !searchResults.hidden &&
                         searchInputAfterBack &&
                         searchInputAfterBack.value === "documentation platforms"
                     );
                 }, "Desktop: browser back did not restore the URL-driven search state.");
+
+                const invalidHashContext = await loadApp(
+                    `/?debugContentSource=1&smokeScenario=desktop&t=${Date.now()}#not-a-real-target`
+                );
+                await waitFor(() => {
+                    const invalidHashHomeSection =
+                        invalidHashContext.frameDocument.getElementById("content-home");
+                    return (
+                        invalidHashContext.frameWindow.location.hash === "#content-home" &&
+                        invalidHashHomeSection &&
+                        !invalidHashHomeSection.hidden &&
+                        invalidHashHomeSection.classList.contains("active")
+                    );
+                }, "Desktop: an invalid initial hash should normalize to the home section.");
+
+                const initialQueryContext = await loadApp(
+                    `/?debugContentSource=1&smokeScenario=desktop&q=documentation%20platforms&t=${Date.now()}`
+                );
+                await waitFor(() => {
+                    const initialQueryResults =
+                        initialQueryContext.frameDocument.getElementById("search-results");
+                    const initialQueryInput =
+                        initialQueryContext.frameDocument.getElementById("site-search");
+                    return (
+                        new initialQueryContext.frameWindow.URLSearchParams(
+                            initialQueryContext.frameWindow.location.search
+                        ).get("q") === "documentation platforms" &&
+                        initialQueryResults &&
+                        !initialQueryResults.hidden &&
+                        initialQueryInput &&
+                        initialQueryInput.value === "documentation platforms"
+                    );
+                }, "Desktop: an initial q parameter should restore the search view on load.");
             };
 
             const runMobileScenario = async (frameWindow, frameDocument) => {
@@ -272,32 +342,8 @@
             const run = async () => {
                 frame.style.width = scenario === "mobile" ? "390px" : "1366px";
                 frame.style.height = scenario === "mobile" ? "900px" : "1200px";
-                frame.src = `/?debugContentSource=1&smokeScenario=${encodeURIComponent(scenario)}&t=${Date.now()}`;
-
-                await waitFor(
-                    () =>
-                        frame.contentWindow &&
-                        frame.contentDocument &&
-                        frame.contentWindow.location.pathname === "/" &&
-                        frame.contentDocument.readyState === "complete",
-                    "Runner: app frame did not finish navigating to the app document."
-                );
-
-                const frameWindow = frame.contentWindow;
-                const frameDocument = frame.contentDocument;
-
-                await waitFor(
-                    () =>
-                        frameDocument.querySelector("#content-contribute") &&
-                        frameDocument.querySelector('.header-nav a[data-menu="contribute"]') &&
-                        frameDocument.querySelector("#menu-home .sidebar-title")?.textContent !== "Loading",
-                    "Runner: manifest content did not finish rendering."
-                );
-
-                const searchStatusText = frameDocument.getElementById("search-status")?.textContent || "";
-                assert(
-                    !/Preparing content/i.test(searchStatusText),
-                    "Runner: shell loading copy should be replaced after hydration."
+                const { frameWindow, frameDocument } = await loadApp(
+                    `/?debugContentSource=1&smokeScenario=${encodeURIComponent(scenario)}&t=${Date.now()}`
                 );
 
                 if (scenario === "mobile") {
