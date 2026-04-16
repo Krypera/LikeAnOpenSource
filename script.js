@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentMenu = "home";
     let searchMode = false;
     let lastFocusedElement = null;
+    let lastAppliedLocationKey = "";
     let baseMetadata = {
         siteName: "LikeAnOpenSource",
         title: document.title,
@@ -59,6 +60,75 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getPlainText = (value = "") =>
         String(value).replace(/\s+/g, " ").trim();
+
+    const isExternalAssetUrl = (value = "") =>
+        /^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(value) || /^data:/i.test(value);
+
+    const resolveContentAssetPath = (assetPath = "", basePath = "") => {
+        const trimmedAssetPath = String(assetPath || "").trim();
+        if (!trimmedAssetPath) {
+            return "";
+        }
+
+        if (
+            isExternalAssetUrl(trimmedAssetPath) ||
+            trimmedAssetPath.startsWith("/") ||
+            trimmedAssetPath.startsWith("#")
+        ) {
+            return trimmedAssetPath;
+        }
+
+        const normalizedBasePath = String(basePath || "").trim().replace(/^\/+/, "");
+        if (!normalizedBasePath) {
+            return trimmedAssetPath;
+        }
+
+        const baseDirectory = normalizedBasePath.includes("/")
+            ? normalizedBasePath.slice(0, normalizedBasePath.lastIndexOf("/") + 1)
+            : "";
+        const resolvedPath = new URL(trimmedAssetPath, `https://laos.local/${baseDirectory}`).pathname;
+        return resolvedPath.replace(/^\/+/, "");
+    };
+
+    const parseStandaloneMarkdownImage = (value = "") => {
+        const match = String(value || "").trim().match(
+            /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/
+        );
+
+        if (!match) {
+            return null;
+        }
+
+        return {
+            alt: match[1].trim(),
+            src: match[2].trim(),
+            caption: typeof match[3] === "string" ? match[3].trim() : ""
+        };
+    };
+
+    const renderMarkdownImageFigure = (image, { basePath = "" } = {}) => {
+        if (!image?.src) {
+            return "";
+        }
+
+        const resolvedSrc = resolveContentAssetPath(image.src, basePath);
+        const captionMarkup = image.caption
+            ? `<figcaption>${escapeHtml(image.caption)}</figcaption>`
+            : "";
+
+        return `
+            <figure class="markdown-media">
+                <img
+                    class="markdown-media-image"
+                    src="${escapeHtml(resolvedSrc)}"
+                    alt="${escapeHtml(image.alt || "")}"
+                    loading="lazy"
+                    decoding="async"
+                >
+                ${captionMarkup}
+            </figure>
+        `;
+    };
 
     const getSearchScore = ({
         query = "",
@@ -117,7 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return rendered;
     };
 
-    const renderMarkdownBody = (markdown, { skipTitle = false } = {}) => {
+    const renderMarkdownBody = (markdown, { skipTitle = false, basePath = "" } = {}) => {
         const lines = String(markdown || "").replace(/\r\n?/g, "\n").split("\n");
         const markup = [];
         const paragraphBuffer = [];
@@ -155,6 +225,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!line) {
                 flushParagraph();
                 flushList();
+                return;
+            }
+
+            const imageMatch = parseStandaloneMarkdownImage(line);
+            if (imageMatch) {
+                flushParagraph();
+                flushList();
+                markup.push(renderMarkdownImageFigure(imageMatch, { basePath }));
                 return;
             }
 
@@ -232,6 +310,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const getSectionByMenu = (menuId) =>
         document.getElementById(`content-${menuId}`);
+
+    const getLocationStateKey = () =>
+        `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    const markLocationStateApplied = () => {
+        lastAppliedLocationKey = getLocationStateKey();
+    };
 
     const getUrlWithState = ({ hash = window.location.hash, query = null } = {}) => {
         const url = new URL(window.location.href);
@@ -315,7 +400,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (record.bodyMarkdown) {
             markdownMarkup = `
                 <div class="record-detail-body markdown-block">
-                    ${renderMarkdownBody(record.bodyMarkdown, { skipTitle: true })}
+                    ${renderMarkdownBody(record.bodyMarkdown, {
+                        skipTitle: true,
+                        basePath: record.bodyPath
+                    })}
                 </div>
             `;
         } else if (record.bodyPath && window.LAOSContentService?.loadTextContent) {
@@ -326,7 +414,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 );
                 markdownMarkup = `
                     <div class="record-detail-body markdown-block">
-                        ${renderMarkdownBody(markdown, { skipTitle: true })}
+                        ${renderMarkdownBody(markdown, {
+                            skipTitle: true,
+                            basePath: record.bodyPath
+                        })}
                     </div>
                 `;
             } catch (error) {
@@ -440,7 +531,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     return `
                         <div class="markdown-block">
                             ${renderMarkdownBody(markdown, {
-                                skipTitle: block.skipTitle !== false
+                                skipTitle: block.skipTitle !== false,
+                                basePath: block.sourcePath || block.path || ""
                             })}
                         </div>
                     `;
@@ -457,7 +549,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return `
                     <div class="markdown-block">
                         ${renderMarkdownBody(block.content, {
-                            skipTitle: block.skipTitle !== false
+                            skipTitle: block.skipTitle !== false,
+                            basePath: block.sourcePath || ""
                         })}
                     </div>
                 `;
@@ -1035,6 +1128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         closeSidebar();
+        markLocationStateApplied();
     };
 
     const resolveHashTarget = (hash) => {
@@ -1143,6 +1237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         window.scrollTo({ top: 0, behavior: "smooth" });
+        markLocationStateApplied();
     };
 
     const handleHashLinkClick = (event) => {
@@ -1158,6 +1253,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         event.preventDefault();
         openFromHash(href, { updateLocation: true, smooth: true });
+    };
+
+    const applyLocationState = ({
+        smooth = false,
+        focus = false,
+        force = false
+    } = {}) => {
+        const locationKey = getLocationStateKey();
+        if (!force && locationKey === lastAppliedLocationKey) {
+            return;
+        }
+
+        const query = new URLSearchParams(window.location.search).get("q") || "";
+
+        if (window.location.hash) {
+            openFromHash(window.location.hash, {
+                updateLocation: false,
+                smooth
+            });
+            return;
+        }
+
+        if (query.trim()) {
+            searchInput.value = query;
+            applySearch(query);
+            return;
+        }
+
+        showSection("home", {
+            updateLocation: false,
+            smooth,
+            focus
+        });
     };
 
     const loadResult = window.LAOSContentService?.loadSiteContent
@@ -1257,33 +1385,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     window.addEventListener("resize", updateHeaderOffset);
+    window.addEventListener("popstate", () => {
+        applyLocationState({
+            smooth: false,
+            focus: false
+        });
+    });
     window.addEventListener("hashchange", () => {
-        if (!window.location.hash) {
-            return;
-        }
-        openFromHash(window.location.hash, {
-            updateLocation: false,
-            smooth: false
+        applyLocationState({
+            smooth: false,
+            focus: false
         });
     });
 
     updateHeaderOffset();
     syncSidebar();
-
-    if (window.location.hash) {
-        openFromHash(window.location.hash, {
-            updateLocation: false,
-            smooth: false
-        });
-    } else if (new URLSearchParams(window.location.search).get("q")) {
-        const query = new URLSearchParams(window.location.search).get("q") || "";
-        searchInput.value = query;
-        applySearch(query);
-    } else {
-        showSection("home", {
-            updateLocation: false,
-            smooth: false,
-            focus: false
-        });
-    }
+    applyLocationState({
+        smooth: false,
+        focus: false,
+        force: true
+    });
 });

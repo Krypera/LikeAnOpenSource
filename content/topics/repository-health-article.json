@@ -1,6 +1,7 @@
 {
     "id": "repository-health-article",
     "tag": "Article Topic",
+    "type": "Research",
     "title": "Explain how teams judge repository health",
     "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
     "details": [

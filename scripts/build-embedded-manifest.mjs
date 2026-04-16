@@ -57,6 +57,7 @@ const inlineBlock = (rootDir, block) => {
                     typeof block.path === "string" && block.path.trim()
                         ? readFile(rootDir, block.path.trim())
                         : "",
+                sourcePath: typeof block.path === "string" ? block.path.trim() : "",
                 skipTitle: block.skipTitle !== false
             };
         case "record-feed": {

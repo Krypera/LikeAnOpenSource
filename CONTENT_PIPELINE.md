@@ -43,6 +43,8 @@ Recommended split:
 - keep section order, labels, cards, and lightweight summaries in JSON
 - store long-form topic, guide, article, and project bodies in Markdown
 - let record files point to optional `bodyPath` values when a card also owns a long-form body
+- let article topic records define a top-level `type` so the publishing model can distinguish explainers, research pieces, statistics writing, editorials, and other article kinds
+- allow Markdown bodies to embed images with standard `![alt](path "caption")` syntax
 
 ## Manifest Contract
 

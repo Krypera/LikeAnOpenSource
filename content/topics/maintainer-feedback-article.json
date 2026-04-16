@@ -1,6 +1,7 @@
 {
     "id": "maintainer-feedback-article",
     "tag": "Article Topic",
+    "type": "Explainer",
     "title": "Write about what makes maintainer feedback useful",
     "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
     "details": [

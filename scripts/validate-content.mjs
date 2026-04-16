@@ -30,6 +30,51 @@ const ensure = (condition, message) => {
     }
 };
 
+const isExternalAssetRef = (value = "") =>
+    /^(?:[a-z][a-z\d+\-.]*:)?\/\//i.test(value) || /^data:/i.test(value);
+
+const resolveMarkdownAssetPath = (assetPath, markdownPath = "") => {
+    const trimmedAssetPath = typeof assetPath === "string" ? assetPath.trim() : "";
+    if (!trimmedAssetPath) {
+        return "";
+    }
+
+    if (
+        isExternalAssetRef(trimmedAssetPath) ||
+        trimmedAssetPath.startsWith("#")
+    ) {
+        return "";
+    }
+
+    if (trimmedAssetPath.startsWith("/")) {
+        return trimmedAssetPath.replace(/^\/+/, "");
+    }
+
+    const normalizedMarkdownPath = typeof markdownPath === "string" ? markdownPath.trim() : "";
+    const markdownDirectory = normalizedMarkdownPath.includes("/")
+        ? normalizedMarkdownPath.slice(0, normalizedMarkdownPath.lastIndexOf("/") + 1)
+        : "";
+    const resolvedPath = new URL(trimmedAssetPath, `https://laos.local/${markdownDirectory}`).pathname;
+    return resolvedPath.replace(/^\/+/, "");
+};
+
+const validateMarkdownAssetRefs = (markdown, markdownPath, sourceLabel) => {
+    const imagePattern = /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
+    let match;
+
+    while ((match = imagePattern.exec(markdown)) !== null) {
+        const assetPath = resolveMarkdownAssetPath(match[2], markdownPath);
+        if (!assetPath) {
+            continue;
+        }
+
+        ensure(
+            fileExists(assetPath),
+            `${sourceLabel}: image asset "${match[2]}" could not be resolved from "${markdownPath}".`
+        );
+    }
+};
+
 const validHashTargets = new Set(requiredMenus.map((menuId) => `content-${menuId}`));
 
 const validateHref = (href, sourceLabel) => {
@@ -48,6 +93,14 @@ const validateHref = (href, sourceLabel) => {
 const validateCard = (card, sourceLabel, { generatedTargets = [] } = {}) => {
     ensure(card && typeof card === "object", `${sourceLabel}: card must be an object.`);
     ensure(typeof card?.title === "string" && card.title.trim(), `${sourceLabel}: card title is required.`);
+    const cardTag = typeof card?.tag === "string" ? card.tag.trim() : "";
+    const cardType = typeof card?.type === "string" ? card.type.trim() : "";
+    if (cardTag === "Article Topic") {
+        ensure(cardType, `${sourceLabel}: article topics must define a top-level type.`);
+    }
+    if (typeof card?.type !== "undefined") {
+        ensure(cardType, `${sourceLabel}: type must be a non-empty string when provided.`);
+    }
     if (Array.isArray(card?.details)) {
         card.details.forEach((detail, index) => {
             ensure(detail && typeof detail === "object", `${sourceLabel} detail[${index}]: detail must be an object.`);
@@ -73,6 +126,7 @@ const validateCard = (card, sourceLabel, { generatedTargets = [] } = {}) => {
         if (fileExists(bodyPath)) {
             const body = readFile(bodyPath).trim();
             ensure(body.length > 0, `${sourceLabel}: body file "${bodyPath}" is empty.`);
+            validateMarkdownAssetRefs(body, bodyPath, sourceLabel);
         }
     }
     if (typeof card?.resourceHref === "string" && card.resourceHref.trim()) {
@@ -161,6 +215,7 @@ const validateBlock = (block, sourceLabel) => {
             if (markdownPath && fileExists(markdownPath)) {
                 const markdown = readFile(markdownPath).trim();
                 ensure(markdown.length > 0, `${sourceLabel}: markdown file "${markdownPath}" is empty.`);
+                validateMarkdownAssetRefs(markdown, markdownPath, sourceLabel);
             }
             break;
         }

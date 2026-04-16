@@ -54,7 +54,7 @@
                                 {
                                     "tag": "Articles",
                                     "title": "Long-form writing will be community-written",
-                                    "description": "Articles now describes the writing standard and points readers to open article topics rather than seeded essays.",
+                                    "description": "Articles now makes room for explainers, research pieces, statistics roundups, editorials, and other long-form writing that real contributors want to publish.",
                                     "href": "#content-articles",
                                     "linkLabel": "Open Articles",
                                     "external": false
@@ -197,7 +197,7 @@
                                 {
                                     "tag": "Articles",
                                     "title": "Article topics waiting for real writers",
-                                    "description": "Articles defines the editorial bar and points to the article briefs that still need to be written.",
+                                    "description": "Articles now covers explainers, research pieces, statistics writing, and opinionated long-form work that still needs real contributors.",
                                     "href": "#articles-open-call",
                                     "linkLabel": "See article needs",
                                     "external": false
@@ -327,10 +327,11 @@
         },
         "articles": {
             "title": "Articles",
-            "subtitle": "Long-form articles will appear here after contributors publish real writing",
+            "subtitle": "Explainers, research pieces, statistics writing, and other long-form articles will appear here after contributors publish real work",
             "intro": [
                 "There are no published community-written articles yet.",
-                "Instead of showing seeded essays, this section now defines the editorial standard and points contributors toward the open article backlog."
+                "This section is meant to hold a broad range of long-form writing: explainers, research pieces, statistics roundups, ecosystem notes, and essays with a clear point of view.",
+                "Instead of showing seeded essays, it now defines the editorial range and points contributors toward the open article backlog."
             ],
             "groups": [
                 {
@@ -340,14 +341,14 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and defensible reasoning.",
+                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and useful context, evidence, or perspective.",
                                 "Once a reviewed article record is merged into the repository, it can appear here automatically without hand-authoring new HTML."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "default",
-                            "text": "Articles should publish judgment, not filler. If a piece cannot help a reader make a better technical decision, it does not belong here yet."
+                            "text": "Articles should publish useful context, not filler. A good piece can explain a concept, surface research or statistics, document an ecosystem, or argue for a point of view, but it should always leave the reader with something more usable than they had before."
                         }
                     ]
                 },
@@ -368,26 +369,34 @@
                 },
                 {
                     "id": "articles-editorial-bar",
-                    "title": "What A Good Article Must Do",
+                    "title": "What A Good Article Can Be",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
+                                    "label": "Explain a concept clearly",
+                                    "text": "Some articles should help a reader understand a subject, system, tool, or idea without flattening the important details."
+                                },
+                                {
+                                    "label": "Surface research or statistics",
+                                    "text": "Some articles should gather evidence, numbers, or patterns and explain why they matter."
+                                },
+                                {
+                                    "label": "Document an ecosystem or workflow",
+                                    "text": "A strong article can map how a space works, where the friction lives, and what a newcomer should notice first."
+                                },
+                                {
+                                    "label": "Take a defensible position",
+                                    "text": "Opinionated writing is welcome when the reasoning is visible and the claims are grounded."
+                                },
+                                {
                                     "label": "Name the reader",
                                     "text": "Every article should make its intended audience obvious from the start."
                                 },
                                 {
-                                    "label": "Explain the tradeoff",
-                                    "text": "The writing should show what a decision buys, what it costs, and when it stops being the right choice."
-                                },
-                                {
-                                    "label": "Ground the argument",
-                                    "text": "Use practical workflow evidence, repository signals, or real team consequences instead of vague praise."
-                                },
-                                {
-                                    "label": "Stay reusable",
-                                    "text": "A strong article teaches an evaluation lens that a reader can use again elsewhere."
+                                    "label": "Leave the reader with something usable",
+                                    "text": "Whether the piece is an explainer, research note, statistics article, or editorial, it should give the reader a clearer mental model or next step."
                                 }
                             ]
                         }
@@ -403,7 +412,7 @@
                                 {
                                     "tag": "Backlog",
                                     "title": "Browse open article topics",
-                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write the first long-form LAOS pieces.",
+                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write explainers, research pieces, statistics writing, or other long-form LAOS articles.",
                                     "href": "#contribute-open-topics",
                                     "linkLabel": "Open article backlog",
                                     "external": false

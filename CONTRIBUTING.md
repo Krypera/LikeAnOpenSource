@@ -33,14 +33,16 @@ Use Markdown for:
 - guide briefs and guide documentation
 - published project notes
 - published article bodies
+- inline post images using standard Markdown image syntax
 
 ## Add a topic brief
 
 1. Create a new file in `content/topics/` with a stable `id`.
 2. Add `tag`, `title`, `description`, optional `details`, and a `bodyPath`.
-3. Add the long-form brief in `content/topics/*.md`.
-4. Register the topic in `content/topics/index.json`.
-5. Run the validation checks and confirm the topic appears in `Contribute`.
+3. If the topic is an article brief, add a top-level `type` such as the article's actual publishing form.
+4. Add the long-form brief in `content/topics/*.md`.
+5. Register the topic in `content/topics/index.json`.
+6. Run the validation checks and confirm the topic appears in `Contribute`.
 
 Removing a topic works the same way in reverse:
 

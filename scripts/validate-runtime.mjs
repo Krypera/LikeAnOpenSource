@@ -63,11 +63,15 @@ const createStorage = () => {
     };
 };
 
-const createContext = ({ allowLocal = true } = {}) => {
+const createContext = ({
+    allowLocal = true,
+    storage = createStorage(),
+    embeddedManifest = embeddedManifestText
+} = {}) => {
     const document = {
         getElementById(id) {
             if (id === "embedded-manifest") {
-                return { textContent: embeddedManifestText };
+                return embeddedManifest === null ? null : { textContent: embeddedManifest };
             }
 
             return null;
@@ -75,7 +79,7 @@ const createContext = ({ allowLocal = true } = {}) => {
     };
 
     const window = {
-        localStorage: createStorage(),
+        localStorage: storage,
         location: {
             protocol: allowLocal ? "http:" : "https:"
         },
@@ -194,6 +198,47 @@ ensure(
             "cards"
         ).items.length > 0,
     "Runtime validation: embedded fallback did not preserve the topic backlog."
+);
+
+const sharedStorage = createStorage();
+const seededCacheService = createContext({
+    allowLocal: true,
+    storage: sharedStorage
+});
+await seededCacheService.loadSiteContent();
+
+const cacheOnlyService = createContext({
+    allowLocal: false,
+    storage: sharedStorage,
+    embeddedManifest: null
+});
+const cacheResult = await cacheOnlyService.loadSiteContent();
+
+ensure(
+    cacheResult.kind === "manifest" && cacheResult.source?.id === "cache",
+    "Runtime validation: cache fallback did not activate when embedded content was unavailable."
+);
+
+const cachedGuideBlock = getBlock(
+    getGroup(getSection(cacheResult.manifest, "guides"), "guides-writing-model"),
+    "markdown-inline"
+);
+ensure(
+    typeof cachedGuideBlock?.content === "string" &&
+        cachedGuideBlock.content.toLowerCase().includes("# guide contribution model"),
+    "Runtime validation: cache fallback did not inline guide markdown content."
+);
+
+const cachedTopicRecord = getBlock(
+    getGroup(getSection(cacheResult.manifest, "contribute"), "contribute-topic-briefs"),
+    "record-sections"
+)?.items?.find((item) => item.id === "docs-platform-comparison-guide");
+ensure(
+    typeof cachedTopicRecord?.bodyMarkdown === "string" &&
+        cachedTopicRecord.bodyMarkdown
+            .toLowerCase()
+            .includes("# compare documentation platforms for small teams"),
+    "Runtime validation: cache fallback did not preserve topic body markdown."
 );
 
 console.log("Runtime validation passed.");

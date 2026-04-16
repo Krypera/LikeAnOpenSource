@@ -52,6 +52,27 @@ window.LAOSContentService = (() => {
         return { label, text };
     };
 
+    const normalizeCardDetails = (details, type = "") => {
+        const normalizedDetails = toArray(details)
+            .map(normalizeCardDetail)
+            .filter(Boolean);
+        const normalizedType = typeof type === "string" ? type.trim() : "";
+
+        if (
+            normalizedType &&
+            !normalizedDetails.some(
+                (item) => item.label.toLocaleLowerCase("en") === "type"
+            )
+        ) {
+            normalizedDetails.unshift({
+                label: "Type",
+                text: normalizedType
+            });
+        }
+
+        return normalizedDetails;
+    };
+
     const normalizeCard = (item) => {
         if (!item || typeof item !== "object") {
             return null;
@@ -66,9 +87,8 @@ window.LAOSContentService = (() => {
             tag: typeof item.tag === "string" ? item.tag.trim() : "",
             title,
             description: typeof item.description === "string" ? item.description.trim() : "",
-            details: toArray(item.details)
-                .map(normalizeCardDetail)
-                .filter(Boolean),
+            type: typeof item.type === "string" ? item.type.trim() : "",
+            details: normalizeCardDetails(item.details, item.type),
             href: typeof item.href === "string" ? item.href.trim() : "",
             linkLabel: typeof item.linkLabel === "string" ? item.linkLabel.trim() : "",
             external: Boolean(item.external),
@@ -88,6 +108,7 @@ window.LAOSContentService = (() => {
             tag: item.tag,
             title: item.title,
             description: item.description,
+            type: item.type,
             details: item.details,
             href: item.href,
             linkLabel: item.linkLabel,
@@ -193,6 +214,8 @@ window.LAOSContentService = (() => {
                 return {
                     type: "markdown-inline",
                     content,
+                    sourcePath:
+                        typeof block.sourcePath === "string" ? block.sourcePath.trim() : "",
                     skipTitle: block.skipTitle !== false
                 };
             }
@@ -641,6 +664,95 @@ window.LAOSContentService = (() => {
         };
     };
 
+    const inlineRecordBody = async (record, preferredSourceId = "local") => {
+        if (
+            !record ||
+            typeof record !== "object" ||
+            record.bodyMarkdown ||
+            typeof record.bodyPath !== "string" ||
+            !record.bodyPath.trim()
+        ) {
+            return record;
+        }
+
+        try {
+            return {
+                ...record,
+                bodyMarkdown: await loadTextContent(record.bodyPath.trim(), preferredSourceId)
+            };
+        } catch {
+            return record;
+        }
+    };
+
+    const inlineBlockContent = async (block, preferredSourceId = "local") => {
+        if (!block || typeof block !== "object") {
+            return block;
+        }
+
+        switch (block.type) {
+            case "markdown": {
+                const path = typeof block.path === "string" ? block.path.trim() : "";
+                if (!path) {
+                    return block;
+                }
+
+                try {
+                    return {
+                        type: "markdown-inline",
+                        content: await loadTextContent(path, preferredSourceId),
+                        sourcePath: path,
+                        skipTitle: block.skipTitle !== false
+                    };
+                } catch {
+                    return block;
+                }
+            }
+            case "record-sections":
+                return {
+                    ...block,
+                    items: await Promise.all(
+                        toArray(block.items).map((item) => inlineRecordBody(item, preferredSourceId))
+                    )
+                };
+            default:
+                return block;
+        }
+    };
+
+    const inlineManifestContent = async (manifest, preferredSourceId = "local") => {
+        const sections = {};
+
+        for (const menuId of requiredMenus) {
+            const section = manifest.sections?.[menuId];
+            if (!section) {
+                continue;
+            }
+
+            const groups = [];
+            for (const group of section.groups || []) {
+                groups.push({
+                    ...group,
+                    blocks: await Promise.all(
+                        (group.blocks || []).map((block) =>
+                            inlineBlockContent(block, preferredSourceId)
+                        )
+                    )
+                });
+            }
+
+            sections[menuId] = {
+                ...section,
+                groups
+            };
+        }
+
+        return {
+            ...manifest,
+            sections
+        };
+    };
+
     const loadSiteContent = async () => {
         const sources = buildManifestSources();
         const errors = [];
@@ -650,12 +762,13 @@ window.LAOSContentService = (() => {
                 const manifest = await fetchManifest(source);
                 const normalized = normalizeManifest(manifest);
                 const hydrated = await hydrateManifest(normalized, source.id);
-                writeCache(hydrated);
+                const cachedManifest = await inlineManifestContent(hydrated, source.id);
+                writeCache(cachedManifest);
 
                 return {
                     kind: "manifest",
                     source,
-                    manifest: hydrated,
+                    manifest: cachedManifest,
                     state: source.id,
                     message:
                         source.id === "local"
@@ -671,7 +784,8 @@ window.LAOSContentService = (() => {
             const embeddedManifest = readEmbeddedManifest();
             if (embeddedManifest) {
                 const hydrated = await hydrateManifest(embeddedManifest, "embedded");
-                writeCache(hydrated);
+                const cachedManifest = await inlineManifestContent(hydrated, "embedded");
+                writeCache(cachedManifest);
                 return {
                     kind: "manifest",
                     source: {
@@ -679,7 +793,7 @@ window.LAOSContentService = (() => {
                         label: "Embedded manifest",
                         url: ""
                     },
-                    manifest: hydrated,
+                    manifest: cachedManifest,
                     state: "embedded",
                     message:
                         "Network content could not be loaded, so the embedded manifest bundled with the page was used.",

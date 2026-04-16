@@ -227,7 +227,7 @@
                                 {
                                     "tag": "Articles",
                                     "title": "Long-form writing will be community-written",
-                                    "description": "Articles now describes the writing standard and points readers to open article topics rather than seeded essays.",
+                                    "description": "Articles now makes room for explainers, research pieces, statistics roundups, editorials, and other long-form writing that real contributors want to publish.",
                                     "href": "#content-articles",
                                     "linkLabel": "Open Articles",
                                     "external": false
@@ -370,7 +370,7 @@
                                 {
                                     "tag": "Articles",
                                     "title": "Article topics waiting for real writers",
-                                    "description": "Articles defines the editorial bar and points to the article briefs that still need to be written.",
+                                    "description": "Articles now covers explainers, research pieces, statistics writing, and opinionated long-form work that still needs real contributors.",
                                     "href": "#articles-open-call",
                                     "linkLabel": "See article needs",
                                     "external": false
@@ -499,10 +499,11 @@
         },
         "articles": {
             "title": "Articles",
-            "subtitle": "Long-form articles will appear here after contributors publish real writing",
+            "subtitle": "Explainers, research pieces, statistics writing, and other long-form articles will appear here after contributors publish real work",
             "intro": [
                 "There are no published community-written articles yet.",
-                "Instead of showing seeded essays, this section now defines the editorial standard and points contributors toward the open article backlog."
+                "This section is meant to hold a broad range of long-form writing: explainers, research pieces, statistics roundups, ecosystem notes, and essays with a clear point of view.",
+                "Instead of showing seeded essays, it now defines the editorial range and points contributors toward the open article backlog."
             ],
             "groups": [
                 {
@@ -512,14 +513,14 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and defensible reasoning.",
+                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and useful context, evidence, or perspective.",
                                 "Once a reviewed article record is merged into the repository, it can appear here automatically without hand-authoring new HTML."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "default",
-                            "text": "Articles should publish judgment, not filler. If a piece cannot help a reader make a better technical decision, it does not belong here yet."
+                            "text": "Articles should publish useful context, not filler. A good piece can explain a concept, surface research or statistics, document an ecosystem, or argue for a point of view, but it should always leave the reader with something more usable than they had before."
                         }
                     ]
                 },
@@ -539,26 +540,34 @@
                 },
                 {
                     "id": "articles-editorial-bar",
-                    "title": "What A Good Article Must Do",
+                    "title": "What A Good Article Can Be",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
+                                    "label": "Explain a concept clearly",
+                                    "text": "Some articles should help a reader understand a subject, system, tool, or idea without flattening the important details."
+                                },
+                                {
+                                    "label": "Surface research or statistics",
+                                    "text": "Some articles should gather evidence, numbers, or patterns and explain why they matter."
+                                },
+                                {
+                                    "label": "Document an ecosystem or workflow",
+                                    "text": "A strong article can map how a space works, where the friction lives, and what a newcomer should notice first."
+                                },
+                                {
+                                    "label": "Take a defensible position",
+                                    "text": "Opinionated writing is welcome when the reasoning is visible and the claims are grounded."
+                                },
+                                {
                                     "label": "Name the reader",
                                     "text": "Every article should make its intended audience obvious from the start."
                                 },
                                 {
-                                    "label": "Explain the tradeoff",
-                                    "text": "The writing should show what a decision buys, what it costs, and when it stops being the right choice."
-                                },
-                                {
-                                    "label": "Ground the argument",
-                                    "text": "Use practical workflow evidence, repository signals, or real team consequences instead of vague praise."
-                                },
-                                {
-                                    "label": "Stay reusable",
-                                    "text": "A strong article teaches an evaluation lens that a reader can use again elsewhere."
+                                    "label": "Leave the reader with something usable",
+                                    "text": "Whether the piece is an explainer, research note, statistics article, or editorial, it should give the reader a clearer mental model or next step."
                                 }
                             ]
                         }
@@ -574,7 +583,7 @@
                                 {
                                     "tag": "Backlog",
                                     "title": "Browse open article topics",
-                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write the first long-form LAOS pieces.",
+                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write explainers, research pieces, statistics writing, or other long-form LAOS articles.",
                                     "href": "#contribute-open-topics",
                                     "linkLabel": "Open article backlog",
                                     "external": false
@@ -621,6 +630,7 @@
                         {
                             "type": "markdown-inline",
                             "content": "# Guide contribution model\n\nLAOS does not want guides that read like disconnected documentation fragments. A guide should act like a path: it should help a reader decide where to begin, what to compare, and when they are ready to move forward.\n\n## Start from a real decision\n\nA good guide begins with a real question, such as:\n\n- Which documentation platform fits a small team?\n- How should I judge whether a repository is worth contributing to?\n- What should I check before opening my first pull request?\n\nIf the guide cannot name the decision it is helping with, it is probably too broad.\n\n## Move the reader forward in stages\n\nGood LAOS guides should usually move through three stages:\n\n1. Clarify the situation the reader is in.\n2. Explain the criteria they should use to judge options.\n3. Give them a concrete next action.\n\nThat structure keeps the guide useful even when the ecosystem around it changes.\n\n## Connect to the rest of the site\n\nGuides should not try to contain everything. They should hand off clearly to:\n\n- `Projects` when the reader needs a repository note\n- `Articles` when the reader needs deeper tradeoff analysis\n- `Contribute` when the reader wants to help fill a gap in the library\n\nThe handoff matters as much as the explanation.\n",
+                            "sourcePath": "content/guides/guide-contribution-model.md",
                             "skipTitle": true
                         }
                     ]
@@ -632,6 +642,7 @@
                         {
                             "type": "markdown-inline",
                             "content": "# Guide writing rules\n\nLAOS guides should make the next step feel possible, not just informative.\n\n## Write for motion, not for display\n\nThe reader should finish a guide knowing what to do next. That means:\n\n- define the reader clearly\n- keep the scope narrow\n- explain why each step exists\n- show where a reader can stop and still leave with value\n\n## Prefer criteria over slogans\n\nA guide should teach how to judge something, not just what to like. Use criteria such as:\n\n- onboarding clarity\n- maintenance signal\n- cost of adoption\n- contribution difficulty\n\nThose make the guide reusable beyond a single example.\n\n## Avoid these failure modes\n\n- broad introductions that never narrow into a decision\n- fake certainty about tools or workflows\n- copying product language from repository marketing\n- listing steps without explaining what success looks like\n\nIf the writing sounds polished but does not reduce hesitation, it still needs work.\n",
+                            "sourcePath": "content/guides/guide-writing-rules.md",
                             "skipTitle": true
                         }
                     ]
@@ -803,6 +814,7 @@
                                 },
                                 {
                                     "tag": "Article Topic",
+                                    "type": "Research",
                                     "title": "Explain how teams judge repository health",
                                     "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
                                     "details": [
@@ -829,6 +841,7 @@
                                 },
                                 {
                                     "tag": "Article Topic",
+                                    "type": "Explainer",
                                     "title": "Write about what makes maintainer feedback useful",
                                     "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
                                     "details": [
@@ -986,6 +999,7 @@
                                 {
                                     "id": "repository-health-article",
                                     "tag": "Article Topic",
+                                    "type": "Research",
                                     "title": "Explain how teams judge repository health",
                                     "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
                                     "details": [
@@ -1015,6 +1029,7 @@
                                 {
                                     "id": "maintainer-feedback-article",
                                     "tag": "Article Topic",
+                                    "type": "Explainer",
                                     "title": "Write about what makes maintainer feedback useful",
                                     "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
                                     "details": [

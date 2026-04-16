@@ -139,6 +139,28 @@
                     'Desktop: "Projects" should expose the published-notes group.'
                 );
 
+                frameWindow.history.back();
+                await waitFor(() => {
+                    const contributeSection = frameDocument.getElementById("content-contribute");
+                    return (
+                        frameWindow.location.hash === "#content-contribute" &&
+                        contributeSection &&
+                        !contributeSection.hidden &&
+                        contributeSection.classList.contains("active")
+                    );
+                }, 'Desktop: browser back did not restore the prior "Contribute" state.');
+
+                frameWindow.history.back();
+                await waitFor(() => {
+                    const homeSection = frameDocument.getElementById("content-home");
+                    return (
+                        frameWindow.location.hash === "" &&
+                        homeSection &&
+                        !homeSection.hidden &&
+                        homeSection.classList.contains("active")
+                    );
+                }, "Desktop: browser back did not restore the hashless home state.");
+
                 const articlesNav = frameDocument.querySelector('.header-nav a[data-menu="articles"]');
                 clickElement(articlesNav, frameWindow);
                 await waitFor(() => {
@@ -184,6 +206,20 @@
                         !record.hidden
                     );
                 }, "Desktop: clicking a search result did not open the matching topic brief.");
+
+                frameWindow.history.back();
+                await waitFor(() => {
+                    const searchResults = frameDocument.getElementById("search-results");
+                    const searchInputAfterBack = frameDocument.getElementById("site-search");
+                    return (
+                        frameWindow.location.hash === "" &&
+                        frameWindow.location.search.includes("q=documentation+platforms") &&
+                        searchResults &&
+                        !searchResults.hidden &&
+                        searchInputAfterBack &&
+                        searchInputAfterBack.value === "documentation platforms"
+                    );
+                }, "Desktop: browser back did not restore the URL-driven search state.");
             };
 
             const runMobileScenario = async (frameWindow, frameDocument) => {
