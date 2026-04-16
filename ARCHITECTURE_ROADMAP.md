@@ -1,18 +1,17 @@
 # Architecture Roadmap
 
-LikeAnOpenSource is currently being explored as a local frontend prototype, but the product direction is a dynamic application rather than a permanently static website.
+LikeAnOpenSource is being built as a dynamic application with a repository-backed publishing model.
 
-## Why the current prototype is simple
+## Why the current delivery layer is simple
 
-Right now the repository uses plain HTML, CSS, and JavaScript so we can move quickly on:
+Right now the repository uses plain HTML, CSS, and JavaScript so the team can move quickly on:
 
 - information architecture
 - content modeling
-- guide structure
-- repository curation rules
+- contribution backlog design
 - interaction design
 
-That makes local iteration faster while the real application boundaries are still being defined.
+That keeps iteration fast while the long-term application boundaries are still being defined.
 
 ## Target Direction
 
@@ -41,12 +40,12 @@ The frontend can evolve into a framework-based application that supports:
 The backend should become the source that:
 
 - reads from GitHub or editorial sources
-- normalizes repository and article records
+- normalizes topic, project, article, and guide records
 - validates contracts
 - caches responses
 - serves a stable API to the frontend
 
-That removes browser-only fetch complexity and makes private-source support possible later.
+That removes direct browser fetch complexity and makes private-source support possible later.
 
 ### Content ingestion
 
@@ -62,27 +61,17 @@ Recommended direction:
 - Markdown for long-form bodies
 - backend normalization into a delivery-friendly API shape
 
-### Storage
-
-A persistent store or cache layer should eventually hold:
-
-- normalized records
-- search indexes
-- cached GitHub content
-- editorial metadata
-- future user-facing signals such as popularity or freshness
-
 ## Phase View
 
 ### Phase 1
 
-Local prototype and content model.
+Foundation and content model.
 
 Completed:
 
 - manifest-driven sections
-- Markdown-backed guide bodies
-- record-feed model for projects and articles
+- Markdown-backed guide and topic bodies
+- record-feed model for collection-driven content
 - content validation
 
 ### Phase 2
@@ -93,29 +82,28 @@ Completed:
 
 - remove static-site deployment assumptions
 - document the dynamic application target
-- keep local preview as a development-only mode
+- keep the web delivery model aligned with the long-term application direction
 
 ### Phase 3
 
-Deepen repository records.
+Build a public contribution backlog.
 
 Now in progress:
 
-- richer project metadata
-- clearer repository evaluation fields
-- more realistic curation surface
-- deeper project notes using the same record-plus-Markdown contract
+- top-level contribution backlog
+- GitHub-backed topic briefs
+- honest empty states for unpublished sections
+- repository-managed visibility for open writing topics
 
 ### Phase 4
 
-Move articles toward real detail content.
+Publish the first real community-written content.
 
 Now in progress:
 
-- article metadata records
-- Markdown article bodies
-- article detail rendering
-- reuse the same record contract when backend delivery replaces browser fetches
+- project, article, and guide collections stay empty until real submissions are merged
+- published content can reuse the same record-plus-Markdown contract as the backlog
+- section rendering is already ready for the first accepted community content
 
 ### Phase 5
 
@@ -133,11 +121,10 @@ Now partially underway:
 
 - fallback shell was reduced to an embedded-manifest app shell
 - baseline metadata, robots, and favicon support were added
-- validation now covers shell-level metadata, asset links, and embedded-manifest sync
-- the planned production domain is now wired into canonical, sitemap, and structured metadata
-- search can now be expressed through URL query state for more stable sharing and indexing behavior
-- social/share image URLs still wait for a final hosted asset
+- validation covers shell metadata, embedded-manifest sync, and browser-side runtime contracts
+- the planned production domain is wired into canonical, sitemap, and structured metadata
+- search state can be expressed through URL query parameters
 
 ## Important Note
 
-Serving the current repo locally over HTTP is only a development convenience. It should not be mistaken for the final delivery architecture.
+The current repository already expresses the intended product shape, but the long-term delivery model should still move behind a backend or server layer that owns ingestion, moderation, caching, and API delivery.

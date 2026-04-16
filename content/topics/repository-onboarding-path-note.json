@@ -1,0 +1,28 @@
+{
+    "id": "repository-onboarding-path-note",
+    "tag": "Project Topic",
+    "title": "Map a repository onboarding path",
+    "description": "Write a repository note that documents the first thirty minutes inside a project: orientation, setup, contribution docs, and likely next step.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Project note"
+        },
+        {
+            "label": "Audience",
+            "text": "First-time contributors"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Beginner to intermediate"
+        },
+        {
+            "label": "Outcome",
+            "text": "A practical onboarding map, not a repository summary"
+        }
+    ],
+    "bodyPath": "content/topics/repository-onboarding-path-note.md",
+    "href": "#record-repository-onboarding-path-note",
+    "linkLabel": "Open brief",
+    "external": false
+}

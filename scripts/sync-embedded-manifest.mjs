@@ -1,11 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import { buildEmbeddedManifest } from "./build-embedded-manifest.mjs";
 
 const rootDir = path.resolve(import.meta.dirname, "..");
-const manifestPath = path.join(rootDir, "content", "site-content.v1.json");
 const indexPath = path.join(rootDir, "index.html");
 
-const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+const manifest = buildEmbeddedManifest(rootDir);
 const manifestMarkup = JSON.stringify(manifest, null, 4).replace(/<\/script/gi, "<\\/script");
 
 const indexHtml = fs.readFileSync(indexPath, "utf8");

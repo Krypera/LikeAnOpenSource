@@ -1,0 +1,28 @@
+{
+    "id": "first-contribution-guide-for-newcomers",
+    "tag": "Guide Topic",
+    "title": "Create a first contribution guide for newcomers",
+    "description": "Write a guide that helps a newcomer move from curiosity to a first useful pull request without relying on vague encouragement.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Guide"
+        },
+        {
+            "label": "Audience",
+            "text": "People making a first open-source contribution"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Beginner"
+        },
+        {
+            "label": "Outcome",
+            "text": "A concrete path from interest to first merged change"
+        }
+    ],
+    "bodyPath": "content/topics/first-contribution-guide-for-newcomers.md",
+    "href": "#record-first-contribution-guide-for-newcomers",
+    "linkLabel": "Open brief",
+    "external": false
+}

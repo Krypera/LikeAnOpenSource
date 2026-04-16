@@ -1,29 +1,35 @@
 # LikeAnOpenSource
 
-LikeAnOpenSource is a documentation and discovery product for people who want to explore open-source projects with clearer entry points, better technical context, and more useful contribution paths.
+LikeAnOpenSource is a community-written documentation and discovery product for people who want clearer entry points into open source and a visible backlog of what should be written next.
 
-The current repository is a local frontend prototype plus a content model. It is being run over HTTP for development and product exploration while the broader application architecture is still taking shape.
+This repository contains the application shell, the repository-backed content model, and the validation tooling that govern how the platform publishes backlog topics and future community-written content.
 
 The content layer is intentionally structured:
 
 - layout and navigation come from a manifest
-- long-form guide bodies can live in Markdown
-- long-form project notes can also live in Markdown-backed records
-- project cards can come from record files
-- article cards and article bodies can come from record files plus Markdown
+- open contribution topics come from GitHub-backed record files
+- long-form topic and guide briefs can live in Markdown
+- published project notes, articles, and guides can later reuse the same record model
 - content validation runs before deployment
 
 ## Current Product Direction
 
 The project is moving in these phases:
 
-1. Local prototype foundation and content model
-2. Dynamic product architecture alignment
-3. Real repository records in `Projects`
-4. Article metadata plus Markdown bodies
+1. Foundation and content model
+2. Application architecture alignment
+3. GitHub-backed contribution backlog
+4. First published community content
 5. Production polish and delivery readiness
 
-The repository currently covers phases 1 and 2, a meaningful pass on phase 3, and the first working slice of phase 4.
+The repository currently covers phases 1 and 2, the core implementation of phase 3, and the groundwork for phases 4 and 5.
+
+Current emphasis:
+
+- phases 1 and 2 are complete
+- phase 3 is close to complete
+- phase 4 is actively working, not just planned
+- phase 5 already includes validation, SEO baseline work, and fallback hardening
 
 ## Repository Structure
 
@@ -31,6 +37,7 @@ The repository currently covers phases 1 and 2, a meaningful pass on phase 3, an
 .
 |-- content/
 |   |-- site-content.v1.json
+|   |-- topics/
 |   |-- projects/
 |   |-- articles/
 |   `-- guides/
@@ -43,9 +50,9 @@ The repository currently covers phases 1 and 2, a meaningful pass on phase 3, an
 `-- index.html
 ```
 
-## Local Development
+## Running The Site
 
-This prototype should be served over HTTP instead of opening `index.html` directly.
+Open the application through an HTTP origin instead of opening `index.html` directly.
 
 Recommended options:
 
@@ -59,11 +66,7 @@ or
 npx serve . -l 4173
 ```
 
-Then open:
-
-```text
-http://127.0.0.1:4173/
-```
+Then open the served address in your browser.
 
 ## Validation
 
@@ -73,6 +76,8 @@ Check the content contract before publishing:
 node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
 node scripts/validate-shell.mjs
+node scripts/validate-runtime.mjs
+node scripts/browser-smoke.mjs
 ```
 
 This validator checks:
@@ -85,10 +90,12 @@ This validator checks:
 - record-feed references
 - referenced record file integrity
 - shell-level metadata and asset references
+- browser-side content-service runtime contracts
+- real browser interaction smoke coverage for navigation, search, and mobile sidebar behavior
 
 ## SEO Baseline
 
-The prototype now includes a lightweight SEO baseline:
+The application already includes a lightweight SEO baseline:
 
 - description, Open Graph, and Twitter summary metadata
 - favicon and web manifest
@@ -115,32 +122,33 @@ Keep these in JSON:
 
 ### Long-form content
 
-Keep substantial guide or article bodies in Markdown:
+Keep substantial topic and guide bodies in Markdown:
 
 - `content/guides/*.md`
-- `content/articles/*.md`
+- `content/topics/*.md`
 
 ### Record collections
 
 Use collection indexes for reusable cards:
 
+- `content/topics/index.json`
 - `content/projects/index.json`
 - `content/articles/index.json`
 
-Each index points to dedicated record files so new entries can be added without rewriting large UI blocks. Records can also own Markdown bodies when a catalog item needs a deeper explanation.
+`content/topics/index.json` is the live backlog. Published `projects` and `articles` collections can stay empty until real community-written content is merged.
 
-## Target Application Direction
+## Application Direction
 
-This project is not intended to stay a browser-only prototype.
+The current delivery layer uses HTML, CSS, and JavaScript while the broader application architecture continues to evolve. That keeps the published information architecture, repository-backed backlog, and validation flow easy to reason about while the backend shape is still being defined.
 
-The current HTML, CSS, and JavaScript setup is a fast local prototype so we can:
+The application direction continues to focus on:
 
 - shape the product structure
 - prove the content model
 - test GitHub-fed content experiments
 - refine information architecture before locking in the full app stack
 
-The target direction is a dynamic application with a real backend or server layer that can own content ingestion, normalization, caching, and delivery more cleanly than a browser-only prototype.
+The next architectural step is a dynamic application with a real backend or server layer that can own content ingestion, normalization, caching, and delivery more cleanly than a browser-fetched repository flow.
 
 See [ARCHITECTURE_ROADMAP.md](./ARCHITECTURE_ROADMAP.md) for the dynamic product direction.
 

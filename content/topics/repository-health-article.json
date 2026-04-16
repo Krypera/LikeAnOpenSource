@@ -1,0 +1,28 @@
+{
+    "id": "repository-health-article",
+    "tag": "Article Topic",
+    "title": "Explain how teams judge repository health",
+    "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Article"
+        },
+        {
+            "label": "Audience",
+            "text": "Engineers evaluating repositories"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Intermediate"
+        },
+        {
+            "label": "Outcome",
+            "text": "A reusable evaluation lens for repository trust"
+        }
+    ],
+    "bodyPath": "content/topics/repository-health-article.md",
+    "href": "#record-repository-health-article",
+    "linkLabel": "Open brief",
+    "external": false
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAOS Browser Smoke Runner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 24px;
+            font: 14px/1.5 Inter, Arial, sans-serif;
+            background: #10131d;
+            color: #f3f5ff;
+        }
+
+        h1,
+        p {
+            margin: 0 0 12px;
+        }
+
+        .runner-frame {
+            display: block;
+            border: 1px solid #2f3550;
+            background: #0b0f19;
+            margin: 20px 0;
+        }
+
+        .runner-report {
+            white-space: pre-wrap;
+            background: #151b29;
+            border: 1px solid #2f3550;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body data-status="running">
+    <h1>Browser Smoke Runner</h1>
+    <p id="runner-status">Running browser checks...</p>
+    <iframe id="app-frame" class="runner-frame" title="LikeAnOpenSource smoke scenario"></iframe>
+    <pre id="runner-report" class="runner-report"></pre>
+    <script id="smoke-result" type="application/json">{}</script>
+    <script>
+        (() => {
+            const params = new URLSearchParams(window.location.search);
+            const scenario = params.get("scenario") || "desktop";
+            const frame = document.getElementById("app-frame");
+            const statusNode = document.getElementById("runner-status");
+            const reportNode = document.getElementById("runner-report");
+            const resultNode = document.getElementById("smoke-result");
+            const results = [];
+
+            const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
+
+            const setResult = (status, error = null) => {
+                const payload = {
+                    status,
+                    scenario,
+                    results,
+                    error: error ? String(error.message || error) : null
+                };
+
+                document.body.dataset.status = status;
+                statusNode.textContent =
+                    status === "pass"
+                        ? `PASS: ${scenario} smoke checks completed.`
+                        : `FAIL: ${scenario} smoke checks failed.`;
+                reportNode.textContent = JSON.stringify(payload, null, 2);
+                resultNode.textContent = JSON.stringify(payload, null, 2).replace(/<\/script/gi, "<\\/script");
+            };
+
+            const assert = (condition, message) => {
+                results.push({
+                    status: condition ? "pass" : "fail",
+                    message
+                });
+
+                if (!condition) {
+                    throw new Error(message);
+                }
+            };
+
+            const waitFor = async (predicate, failureMessage, timeoutMs = 10000) => {
+                const startedAt = Date.now();
+
+                while (Date.now() - startedAt < timeoutMs) {
+                    try {
+                        const value = predicate();
+                        if (value) {
+                            return value;
+                        }
+                    } catch {
+                        // Ignore transient DOM errors while the app is still hydrating.
+                    }
+
+                    await wait(50);
+                }
+
+                throw new Error(failureMessage);
+            };
+
+            const clickElement = (target, view) => {
+                if (!target) {
+                    throw new Error("Attempted to click a missing element.");
+                }
+
+                target.dispatchEvent(
+                    new view.MouseEvent("click", {
+                        bubbles: true,
+                        cancelable: true,
+                        view
+                    })
+                );
+            };
+
+            const runDesktopScenario = async (frameWindow, frameDocument) => {
+                const contributeNav = frameDocument.querySelector('.header-nav a[data-menu="contribute"]');
+                assert(Boolean(contributeNav), 'Desktop: primary navigation should include "Contribute".');
+
+                clickElement(contributeNav, frameWindow);
+                await waitFor(() => {
+                    const section = frameDocument.getElementById("content-contribute");
+                    return section && !section.hidden && section.classList.contains("active");
+                }, 'Desktop: "Contribute" section did not activate.');
+                assert(
+                    contributeNav.getAttribute("aria-current") === "page",
+                    'Desktop: "Contribute" nav item should become current.'
+                );
+
+                const projectsNav = frameDocument.querySelector('.header-nav a[data-menu="projects"]');
+                clickElement(projectsNav, frameWindow);
+                await waitFor(() => {
+                    const section = frameDocument.getElementById("content-projects");
+                    return section && !section.hidden && section.classList.contains("active");
+                }, 'Desktop: "Projects" section did not activate.');
+                assert(
+                    Boolean(frameDocument.getElementById("projects-published-notes")),
+                    'Desktop: "Projects" should expose the published-notes group.'
+                );
+
+                const articlesNav = frameDocument.querySelector('.header-nav a[data-menu="articles"]');
+                clickElement(articlesNav, frameWindow);
+                await waitFor(() => {
+                    const section = frameDocument.getElementById("content-articles");
+                    return section && !section.hidden && section.classList.contains("active");
+                }, 'Desktop: "Articles" section did not activate.');
+                assert(
+                    Boolean(frameDocument.getElementById("articles-published-library")),
+                    'Desktop: "Articles" should expose the published-library group.'
+                );
+
+                const searchInput = frameDocument.getElementById("site-search");
+                searchInput.value = "documentation platforms";
+                searchInput.dispatchEvent(
+                    new frameWindow.Event("input", {
+                        bubbles: true
+                    })
+                );
+
+                await waitFor(() => {
+                    const searchResults = frameDocument.getElementById("search-results");
+                    return searchResults && !searchResults.hidden;
+                }, "Desktop: search results did not appear.");
+
+                const resultLink = await waitFor(
+                    () =>
+                        Array.from(frameDocument.querySelectorAll("#search-results-list a")).find(
+                            (link) =>
+                                link.getAttribute("href") === "#record-docs-platform-comparison-guide"
+                        ),
+                    "Desktop: record-level search did not surface the documentation-platforms brief."
+                );
+
+                clickElement(resultLink, frameWindow);
+                await waitFor(() => {
+                    const contributeSection = frameDocument.getElementById("content-contribute");
+                    const record = frameDocument.getElementById("record-docs-platform-comparison-guide");
+                    return (
+                        frameWindow.location.hash === "#record-docs-platform-comparison-guide" &&
+                        contributeSection &&
+                        contributeSection.classList.contains("active") &&
+                        record &&
+                        !record.hidden
+                    );
+                }, "Desktop: clicking a search result did not open the matching topic brief.");
+            };
+
+            const runMobileScenario = async (frameWindow, frameDocument) => {
+                await waitFor(
+                    () => frameWindow.innerWidth < 1024,
+                    "Mobile: iframe width did not enter the mobile breakpoint."
+                );
+
+                const menuToggle = frameDocument.getElementById("menu-toggle");
+                const sidebar = frameDocument.getElementById("sidebar");
+                const backdrop = frameDocument.getElementById("sidebar-backdrop");
+                const closeButton = frameDocument.getElementById("sidebar-close");
+                assert(Boolean(menuToggle), "Mobile: menu toggle should exist.");
+
+                clickElement(menuToggle, frameWindow);
+                await waitFor(
+                    () =>
+                        frameDocument.body.classList.contains("sidebar-open") &&
+                        sidebar.classList.contains("open") &&
+                        sidebar.getAttribute("aria-hidden") === "false" &&
+                        !backdrop.hidden,
+                    "Mobile: sidebar did not open."
+                );
+
+                clickElement(closeButton, frameWindow);
+                await waitFor(
+                    () =>
+                        !frameDocument.body.classList.contains("sidebar-open") &&
+                        sidebar.getAttribute("aria-hidden") === "true",
+                    "Mobile: sidebar did not close from the close button."
+                );
+                await waitFor(
+                    () => frameDocument.activeElement === menuToggle,
+                    "Mobile: focus did not return to the menu toggle."
+                );
+
+                clickElement(menuToggle, frameWindow);
+                await waitFor(
+                    () => frameDocument.body.classList.contains("sidebar-open"),
+                    "Mobile: sidebar did not reopen."
+                );
+
+                clickElement(backdrop, frameWindow);
+                await waitFor(
+                    () => !frameDocument.body.classList.contains("sidebar-open"),
+                    "Mobile: backdrop click did not close the sidebar."
+                );
+            };
+
+            const run = async () => {
+                frame.style.width = scenario === "mobile" ? "390px" : "1366px";
+                frame.style.height = scenario === "mobile" ? "900px" : "1200px";
+                frame.src = `/?debugContentSource=1&smokeScenario=${encodeURIComponent(scenario)}&t=${Date.now()}`;
+
+                await waitFor(
+                    () =>
+                        frame.contentWindow &&
+                        frame.contentDocument &&
+                        frame.contentWindow.location.pathname === "/" &&
+                        frame.contentDocument.readyState === "complete",
+                    "Runner: app frame did not finish navigating to the app document."
+                );
+
+                const frameWindow = frame.contentWindow;
+                const frameDocument = frame.contentDocument;
+
+                await waitFor(
+                    () =>
+                        frameDocument.querySelector("#content-contribute") &&
+                        frameDocument.querySelector('.header-nav a[data-menu="contribute"]') &&
+                        frameDocument.querySelector("#menu-home .sidebar-title")?.textContent !== "Loading",
+                    "Runner: manifest content did not finish rendering."
+                );
+
+                const searchStatusText = frameDocument.getElementById("search-status")?.textContent || "";
+                assert(
+                    !/Preparing content/i.test(searchStatusText),
+                    "Runner: shell loading copy should be replaced after hydration."
+                );
+
+                if (scenario === "mobile") {
+                    await runMobileScenario(frameWindow, frameDocument);
+                } else {
+                    await runDesktopScenario(frameWindow, frameDocument);
+                }
+
+                setResult("pass");
+            };
+
+            run().catch((error) => {
+                setResult("fail", error);
+            });
+        })();
+    </script>
+</body>
+</html>

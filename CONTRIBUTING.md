@@ -2,13 +2,11 @@
 
 Thanks for helping improve LikeAnOpenSource.
 
-The project is content-first right now. The most useful contributions are usually the ones that make the next visitor feel less lost, less hesitant, and more able to act.
-
-This repository is currently a local prototype. Running it over HTTP during development does not mean the final product will stay browser-only.
+The site is intentionally honest right now: there is a live topic backlog, but there is not yet a large published content library. The most useful contributions are the ones that either improve that backlog or turn one backlog brief into real published content.
 
 ## What to edit where
 
-### Edit JSON when you are changing structure
+### Edit JSON when you are changing structure or records
 
 Use JSON for:
 
@@ -18,56 +16,46 @@ Use JSON for:
 - summaries
 - callouts
 - internal link targets
+- topic records and published content records
 
 Main files:
 
 - `content/site-content.v1.json`
+- `content/topics/index.json`
 - `content/projects/index.json`
 - `content/articles/index.json`
 
-### Edit Markdown when you are changing long-form writing
+### Edit Markdown when you are changing long-form copy
 
 Use Markdown for:
 
-- guide bodies
-- project notes
-- long-form article bodies
+- topic briefs
+- guide briefs and guide documentation
+- published project notes
+- published article bodies
 
-Current guide files:
+## Add a topic brief
 
-- `content/guides/how-to-read-the-guides.md`
-- `content/guides/how-to-contribute.md`
+1. Create a new file in `content/topics/` with a stable `id`.
+2. Add `tag`, `title`, `description`, optional `details`, and a `bodyPath`.
+3. Add the long-form brief in `content/topics/*.md`.
+4. Register the topic in `content/topics/index.json`.
+5. Run the validation checks and confirm the topic appears in `Contribute`.
 
-Current article files:
+Removing a topic works the same way in reverse:
 
-- `content/articles/step-by-step-teaching-content.md`
-- `content/articles/real-world-breakdowns.md`
-- `content/articles/deep-dives-into-system-choices.md`
-- `content/articles/writing-from-inside-the-workflow.md`
+1. Remove it from `content/topics/index.json`.
+2. Delete the JSON and Markdown files if they are no longer needed.
 
-Current project note files:
+## Publish real content
 
-- `content/projects/facebook-docusaurus.md`
-- `content/projects/vitejs-vite.md`
-- `content/projects/biomejs-biome.md`
-- `content/projects/cli-cli.md`
+When a topic becomes real public content, use the matching collection:
 
-## Adding a new project record
+- `content/projects/` for repository notes
+- `content/articles/` for long-form articles
+- `content/guides/` for guide bodies and guide support content
 
-1. Create a new file in `content/projects/`.
-2. Give it a stable `id`.
-3. Add `tag`, `title`, `description`, optional `details`, and a `bodyPath` if the project needs a deeper note.
-4. Use `href` and `linkLabel` for the in-app jump target, then `resourceHref`, `resourceLinkLabel`, and `resourceExternal` for the real repository link when needed.
-5. Register the record in `content/projects/index.json`.
-6. Reference that record from the relevant `record-feed` block when needed.
-
-## Adding a new article record
-
-1. Create a new file in `content/articles/`.
-2. Give it a stable `id`.
-3. Add card metadata that says something concrete, plus optional `details` and a `bodyPath` when the article has a Markdown body.
-4. Register the record in `content/articles/index.json`.
-5. Connect it to the correct `record-feed` in the manifest.
+Published content should only be added when it is real, reviewable work. Do not add placeholder or seed records just to make a section look populated.
 
 ## Writing standards
 
@@ -83,11 +71,11 @@ Avoid:
 - vague praise
 - filler phrases
 - unexplained hype
-- cards that sound polished but say very little
+- cards or records that imply content exists when it does not
 
-## Local checks
+## Validation Checks
 
-Serve the site locally:
+Open the site through an HTTP origin:
 
 ```powershell
 python -m http.server 4173
@@ -99,19 +87,27 @@ Then validate content:
 node scripts/sync-embedded-manifest.mjs
 node scripts/validate-content.mjs
 node scripts/validate-shell.mjs
+node scripts/validate-runtime.mjs
+node scripts/browser-smoke.mjs
 ```
 
-## Pull request checklist
+## Pull Request Checklist
 
 Before opening a PR, make sure:
 
 - the changed page reads naturally in context
 - new anchors resolve correctly
-- new records are registered in the proper index file
+- new topic or content records are registered in the proper index file
 - Markdown paths exist and load
 - the embedded manifest was resynced after manifest changes
 - `node scripts/validate-content.mjs` passes
 - `node scripts/validate-shell.mjs` passes
+- `node scripts/validate-runtime.mjs` passes
+- `node scripts/browser-smoke.mjs` passes
+
+## Moderation note
+
+There is no site-side submission flow yet. The GitHub pull request process is the moderation layer for both backlog visibility and published content.
 
 ## License note
 

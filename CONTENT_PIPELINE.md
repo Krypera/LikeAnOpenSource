@@ -1,21 +1,21 @@
 # Content Pipeline
 
-This project should no longer grow by duplicating hard-coded HTML blocks. The current prototype uses a manifest-driven frontend so `Projects`, `Articles`, `Guides`, and discovery surfaces can be fed from repository content while the broader application is still being shaped.
+This project should no longer grow by duplicating hard-coded HTML blocks. The current delivery layer uses a manifest-driven frontend so `Contribute`, `Projects`, `Articles`, `Guides`, and discovery surfaces can be fed from repository content while the broader application continues to mature.
 
 ## Target Architecture
 
 1. The content source lives inside the repository.
 2. The UI does not hand-author every card. It reads a manifest.
 3. The manifest describes the screen using a `section -> group -> block` structure.
-4. The current prototype tries a local manifest first, then GitHub Raw, then browser cache, and finally an embedded fallback view.
-5. When the repository is ready, manifest validation should run in CI.
-6. The embedded manifest inside `index.html` should be regenerated from `content/site-content.v1.json` after content changes.
+4. The frontend tries a same-origin manifest first, then GitHub Raw, then an embedded fallback payload, and finally browser cache.
+5. The topic backlog is repository-backed and should be controllable from `content/topics/index.json`.
+6. The embedded manifest inside `index.html` should be regenerated from repository content after content changes.
 
 Important context:
 
-- this repository is currently a local frontend prototype
+- this repository already acts as the source of truth for visible backlog topics
 - the target product is expected to evolve into a dynamic application
-- the browser-only content flow here is a temporary development model, not a final architecture promise
+- the current browser-delivered content flow is a transitional implementation, not the final architecture promise
 
 ## Repository Layout
 
@@ -24,6 +24,10 @@ Recommended minimum structure:
 ```text
 content/
   site-content.v1.json
+  topics/
+    index.json
+    *.json
+    *.md
   projects/
     index.json
     *.json
@@ -31,63 +35,18 @@ content/
     index.json
     *.json
   guides/
-    *.json
     *.md
-  assets/
-    covers/
 ```
-
-The `content/site-content.v1.json` file added in this project is the current main manifest. Later, it can become a smaller index file that references `projects/*.json`, `articles/*.json`, and `guides/*.json` records instead of holding all display content directly.
 
 Recommended split:
 
 - keep section order, labels, cards, and lightweight summaries in JSON
-- store long-form guide, article, and project bodies in Markdown
+- store long-form topic, guide, article, and project bodies in Markdown
 - let record files point to optional `bodyPath` values when a card also owns a long-form body
 
 ## Manifest Contract
 
-The main contract follows this shape:
-
-```json
-{
-  "meta": {
-    "version": 1,
-    "generatedAt": "2026-04-15"
-  },
-  "sections": {
-    "projects": {
-      "title": "Projects",
-      "subtitle": "A project catalog fed from GitHub",
-      "intro": ["..."],
-      "groups": [
-        {
-          "id": "projects-overview",
-          "title": "Catalog Flow",
-          "intro": ["..."],
-          "blocks": [
-            {
-              "type": "cards",
-              "items": [
-                {
-                  "tag": "Repository",
-                  "title": "Project records",
-                  "description": "...",
-                  "href": "https://github.com/...",
-                  "linkLabel": "Open folder",
-                  "external": true
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-Supported `block.type` values:
+Supported source-manifest `block.type` values:
 
 - `paragraphs`
 - `list`
@@ -97,18 +56,17 @@ Supported `block.type` values:
 - `markdown`
 - `record-feed`
 
+The generated embedded payload can also contain render-ready block types:
+
+- `markdown-inline`
+- `record-sections`
+
 `record-feed` supports two layouts:
 
 - default card hydration for reusable catalog grids
 - `layout: "details"` when records should render as long-form sections with optional Markdown bodies
 
-This gives us two major benefits:
-
-- presentation components stay separate from content
-- new records can appear without editing HTML
-- long-form guide bodies can live in Markdown while cards and navigation stay structured
-- project and article cards can be sourced from dedicated record files instead of a single large manifest
-- repositories can open into richer inline notes without needing a separate page model first
+If `records` is omitted, the frontend renders the full collection in the order defined by the index file. This is the preferred mode for the live topic backlog because visibility should be controlled only from `content/topics/index.json`.
 
 ## Fetch Strategy
 
@@ -129,9 +87,10 @@ That means:
 
 - a version hosted from the same repo can use a relative path
 - a separated presentation layer can still pull from GitHub Raw
-- the shell can still render the current repository content even when browser fetches fail
+- the shell can still render the current repository content even when manifest fetches fail
+- the embedded payload is hydrated ahead of time so record feeds do not need a second round-trip during fallback
 - network failures can reuse the last known cached content
-- the prototype does not fully break if the manifest cannot be loaded
+- the application shell does not fully break if the manifest cannot be loaded
 
 ## Important Assumption
 
@@ -141,18 +100,17 @@ If the site fetches content entirely from the browser, the repository or at leas
 
 Recommended order:
 
-1. Define separate formats for `content/projects/*.json`, `content/articles/*.json`, and `content/guides/*.json`.
-2. Reduce `site-content.v1.json` into a smaller index that references those records.
-3. Add frontmatter or metadata references for Markdown-backed guide and article bodies.
-4. Add JSON schema validation for the manifest and record files.
-5. Run schema checks and broken-link validation in GitHub Actions.
+1. Keep the topic backlog repository-backed and easy to moderate through PR review.
+2. Publish the first real community-written `projects`, `articles`, and `guides` records without reintroducing seed content.
+3. Add schema validation for record files if the collection count starts growing quickly.
+4. Move the fetch/normalize layer behind a backend or API once the product needs stronger moderation and delivery control.
 
 ## Dynamic Product Note
 
-This content pipeline is useful for local prototyping, but it should not be treated as the final runtime model for the product.
+This content pipeline should not be treated as the final runtime model for the product.
 
-As the project moves beyond prototype mode, a backend or server layer should take over content ingestion, normalization, caching, and API delivery.
+As the product matures, a backend or server layer should take over content ingestion, normalization, caching, and API delivery.
 
-## Local Development Note
+## HTTP Delivery Note
 
-When the page is opened through `file://`, `fetch()` behavior can be restricted depending on the browser. To test the manifest layer properly, serve the project through a small HTTP server instead of opening the HTML file directly.
+When the page is opened through `file://`, `fetch()` behavior can be restricted depending on the browser. Open the application through an HTTP origin instead of opening the HTML file directly.

@@ -1,0 +1,29 @@
+{
+    "collection": "topics",
+    "records": [
+        {
+            "id": "docs-platform-comparison-guide",
+            "path": "content/topics/docs-platform-comparison-guide.json"
+        },
+        {
+            "id": "first-contribution-guide-for-newcomers",
+            "path": "content/topics/first-contribution-guide-for-newcomers.json"
+        },
+        {
+            "id": "contributor-friendly-repository-note",
+            "path": "content/topics/contributor-friendly-repository-note.json"
+        },
+        {
+            "id": "repository-onboarding-path-note",
+            "path": "content/topics/repository-onboarding-path-note.json"
+        },
+        {
+            "id": "repository-health-article",
+            "path": "content/topics/repository-health-article.json"
+        },
+        {
+            "id": "maintainer-feedback-article",
+            "path": "content/topics/maintainer-feedback-article.json"
+        }
+    ]
+}

@@ -1,12 +1,13 @@
 window.LAOSContentService = (() => {
     const config = window.LAOS_CONTENT_CONFIG || {};
-    const requiredMenus = ["home", "explore", "projects", "articles", "guides", "about"];
+    const requiredMenus = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
     const defaultTitles = {
         home: "Home",
         explore: "Explore",
         projects: "Projects",
         articles: "Articles",
         guides: "Guides",
+        contribute: "Contribute",
         about: "About"
     };
 
@@ -78,6 +79,39 @@ window.LAOSContentService = (() => {
         };
     };
 
+    const normalizeRecordSectionItem = (item, fallbackId = "") => {
+        if (!item || typeof item !== "object") {
+            return null;
+        }
+
+        const card = normalizeCard({
+            tag: item.tag,
+            title: item.title,
+            description: item.description,
+            details: item.details,
+            href: item.href,
+            linkLabel: item.linkLabel,
+            external: item.external,
+            resourceHref: item.resourceHref,
+            resourceLinkLabel: item.resourceLinkLabel,
+            resourceExternal: item.resourceExternal
+        });
+
+        if (!card) {
+            return null;
+        }
+
+        return {
+            id:
+                (typeof item.id === "string" && item.id.trim()) ||
+                fallbackId,
+            ...card,
+            bodyPath: typeof item.bodyPath === "string" ? item.bodyPath.trim() : "",
+            bodyMarkdown:
+                typeof item.bodyMarkdown === "string" ? item.bodyMarkdown : ""
+        };
+    };
+
     const normalizeRecordFeed = (block) => {
         if (!block || typeof block !== "object") {
             return null;
@@ -88,7 +122,7 @@ window.LAOSContentService = (() => {
             .map((item) => (typeof item === "string" ? item.trim() : ""))
             .filter(Boolean);
 
-        if (!sourcePath || !records.length) {
+        if (!sourcePath) {
             return null;
         }
 
@@ -150,6 +184,18 @@ window.LAOSContentService = (() => {
                 const callout = normalizeCallout(block);
                 return callout ? { type: "callout", ...callout } : null;
             }
+            case "markdown-inline": {
+                const content = typeof block.content === "string" ? block.content : "";
+                if (!content.trim()) {
+                    return null;
+                }
+
+                return {
+                    type: "markdown-inline",
+                    content,
+                    skipTitle: block.skipTitle !== false
+                };
+            }
             case "markdown": {
                 const path = typeof block.path === "string" ? block.path.trim() : "";
                 if (!path) {
@@ -161,6 +207,12 @@ window.LAOSContentService = (() => {
                     path,
                     skipTitle: block.skipTitle !== false
                 };
+            }
+            case "record-sections": {
+                const items = toArray(block.items)
+                    .map((item) => normalizeRecordSectionItem(item))
+                    .filter(Boolean);
+                return items.length ? { type: "record-sections", items } : null;
             }
             case "record-feed":
                 return normalizeRecordFeed(block);
@@ -337,33 +389,8 @@ window.LAOSContentService = (() => {
         return { id, path };
     };
 
-    const normalizeRecordEntry = (item, fallbackId = "") => {
-        if (!item || typeof item !== "object") {
-            return null;
-        }
-
-        const card = normalizeCard({
-            tag: item.tag,
-            title: item.title,
-            description: item.description,
-            details: item.details,
-            href: item.href,
-            linkLabel: item.linkLabel,
-            external: item.external
-        });
-
-        if (!card) {
-            return null;
-        }
-
-        return {
-            id:
-                (typeof item.id === "string" && item.id.trim()) ||
-                fallbackId,
-            ...card,
-            bodyPath: typeof item.bodyPath === "string" ? item.bodyPath.trim() : ""
-        };
-    };
+    const normalizeRecordEntry = (item, fallbackId = "") =>
+        normalizeRecordSectionItem(item, fallbackId);
 
     const buildManifestSources = () => {
         const repository = config.repository || {};
@@ -553,9 +580,11 @@ window.LAOSContentService = (() => {
             preferredSourceId,
             collectionCache
         );
-        const items = block.records
-            .map((recordId) => recordMap.get(recordId))
-            .filter(Boolean);
+        const items = block.records.length
+            ? block.records
+                .map((recordId) => recordMap.get(recordId))
+                .filter(Boolean)
+            : Array.from(recordMap.values());
 
         if (block.layout === "details") {
             return items.length
@@ -569,7 +598,7 @@ window.LAOSContentService = (() => {
         return items.length
             ? {
                 type: "cards",
-                items: items.map(({ id, bodyPath, ...card }) => card)
+                items: items.map(({ id, bodyPath, bodyMarkdown, ...card }) => card)
             }
             : null;
     };

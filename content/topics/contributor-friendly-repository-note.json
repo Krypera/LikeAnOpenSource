@@ -1,0 +1,28 @@
+{
+    "id": "contributor-friendly-repository-note",
+    "tag": "Project Topic",
+    "title": "Write a repository note for a contributor-friendly project",
+    "description": "Evaluate one real public repository and explain whether it genuinely lowers hesitation for a first-time contributor.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Project note"
+        },
+        {
+            "label": "Audience",
+            "text": "New contributors and repository evaluators"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Intermediate"
+        },
+        {
+            "label": "Outcome",
+            "text": "A grounded repository note with evidence, not praise"
+        }
+    ],
+    "bodyPath": "content/topics/contributor-friendly-repository-note.md",
+    "href": "#record-contributor-friendly-repository-note",
+    "linkLabel": "Open brief",
+    "external": false
+}

@@ -10,11 +10,16 @@ on:
       - "robots.txt"
       - "site.webmanifest"
       - "index.html"
+      - "content-config.js"
       - "content-service.js"
       - "script.js"
+      - "scripts/build-embedded-manifest.mjs"
+      - "scripts/browser-smoke.mjs"
       - "scripts/sync-embedded-manifest.mjs"
       - "scripts/validate-shell.mjs"
       - "scripts/validate-content.mjs"
+      - "scripts/validate-runtime.mjs"
+      - "tests/browser-smoke-runner.html"
       - ".github/workflows/content-validation.yml"
   pull_request:
     paths:
@@ -23,11 +28,16 @@ on:
       - "robots.txt"
       - "site.webmanifest"
       - "index.html"
+      - "content-config.js"
       - "content-service.js"
       - "script.js"
+      - "scripts/build-embedded-manifest.mjs"
+      - "scripts/browser-smoke.mjs"
       - "scripts/sync-embedded-manifest.mjs"
       - "scripts/validate-shell.mjs"
       - "scripts/validate-content.mjs"
+      - "scripts/validate-runtime.mjs"
+      - "tests/browser-smoke-runner.html"
       - ".github/workflows/content-validation.yml"
 
 jobs:
@@ -53,6 +63,12 @@ jobs:
 
       - name: Validate shell and SEO baseline
         run: node scripts/validate-shell.mjs
+
+      - name: Validate browser-side runtime contracts
+        run: node scripts/validate-runtime.mjs
+
+      - name: Run browser interaction smoke test
+        run: node scripts/browser-smoke.mjs
 
       - name: Check browser scripts syntax
         run: |

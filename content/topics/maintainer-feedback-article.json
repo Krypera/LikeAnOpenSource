@@ -1,0 +1,28 @@
+{
+    "id": "maintainer-feedback-article",
+    "tag": "Article Topic",
+    "title": "Write about what makes maintainer feedback useful",
+    "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Article"
+        },
+        {
+            "label": "Audience",
+            "text": "Maintainers and repeat contributors"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Intermediate"
+        },
+        {
+            "label": "Outcome",
+            "text": "A practical article about feedback that lowers contributor hesitation"
+        }
+    ],
+    "bodyPath": "content/topics/maintainer-feedback-article.md",
+    "href": "#record-maintainer-feedback-article",
+    "linkLabel": "Open brief",
+    "external": false
+}

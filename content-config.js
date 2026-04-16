@@ -5,6 +5,6 @@ window.LAOS_CONTENT_CONFIG = Object.freeze({
         branch: "main"
     },
     manifestPath: "content/site-content.v1.json",
-    cacheKey: "laos-site-content-v1",
+    cacheKey: "laos-site-content-v2",
     cacheTtlMs: 1000 * 60 * 10
 });

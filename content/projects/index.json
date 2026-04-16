@@ -1,21 +1,4 @@
 {
     "collection": "projects",
-    "records": [
-        {
-            "id": "facebook-docusaurus",
-            "path": "content/projects/facebook-docusaurus.json"
-        },
-        {
-            "id": "vitejs-vite",
-            "path": "content/projects/vitejs-vite.json"
-        },
-        {
-            "id": "biomejs-biome",
-            "path": "content/projects/biomejs-biome.json"
-        },
-        {
-            "id": "cli-cli",
-            "path": "content/projects/cli-cli.json"
-        }
-    ]
+    "records": []
 }

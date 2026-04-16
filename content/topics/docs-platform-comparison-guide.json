@@ -1,0 +1,28 @@
+{
+    "id": "docs-platform-comparison-guide",
+    "tag": "Guide Topic",
+    "title": "Compare documentation platforms for small teams",
+    "description": "Write a decision-oriented guide that helps a small team compare documentation platforms through real tradeoffs, authoring needs, and maintenance cost.",
+    "details": [
+        {
+            "label": "Format",
+            "text": "Guide"
+        },
+        {
+            "label": "Audience",
+            "text": "Small engineering teams"
+        },
+        {
+            "label": "Difficulty",
+            "text": "Intermediate"
+        },
+        {
+            "label": "Outcome",
+            "text": "A guide that helps a team choose, not just browse"
+        }
+    ],
+    "bodyPath": "content/topics/docs-platform-comparison-guide.md",
+    "href": "#record-docs-platform-comparison-guide",
+    "linkLabel": "Open brief",
+    "external": false
+}

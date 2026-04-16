@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { buildEmbeddedManifest } from "./build-embedded-manifest.mjs";
 
 const rootDir = path.resolve(import.meta.dirname, "..");
 const manifestRelativePath = "content/site-content.v1.json";
-const requiredMenus = ["home", "explore", "projects", "articles", "guides", "about"];
+const requiredMenus = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
 const errors = [];
 const recordCache = new Map();
 
@@ -124,6 +125,7 @@ const loadRecordCollection = (relativePath) => {
             recordId && typeof record.bodyPath === "string" && record.bodyPath.trim()
                 ? [`record-${recordId}`]
                 : [];
+        generatedTargets.forEach((targetId) => validHashTargets.add(targetId));
         validateCard(record, recordPath, { generatedTargets });
         recordMap.set(id, record);
     });
@@ -167,7 +169,6 @@ const validateBlock = (block, sourceLabel) => {
             const records = Array.isArray(block.records) ? block.records : [];
             const layout = typeof block.layout === "string" ? block.layout.trim() : "cards";
             ensure(sourcePath, `${sourceLabel}: record-feed sourcePath is required.`);
-            ensure(records.length > 0, `${sourceLabel}: record-feed records are required.`);
             ensure(
                 layout === "cards" || layout === "details",
                 `${sourceLabel}: record-feed layout must be "cards" or "details".`
@@ -176,12 +177,14 @@ const validateBlock = (block, sourceLabel) => {
 
             if (sourcePath && fileExists(sourcePath)) {
                 const recordMap = loadRecordCollection(sourcePath);
-                records.forEach((recordId) => {
-                    ensure(
-                        recordMap.has(recordId),
-                        `${sourceLabel}: record "${recordId}" is missing from "${sourcePath}".`
-                    );
-                });
+                if (records.length) {
+                    records.forEach((recordId) => {
+                        ensure(
+                            recordMap.has(recordId),
+                            `${sourceLabel}: record "${recordId}" is missing from "${sourcePath}".`
+                        );
+                    });
+                }
             }
             break;
         }
@@ -189,6 +192,21 @@ const validateBlock = (block, sourceLabel) => {
             errors.push(`${sourceLabel}: unsupported block type "${block?.type}".`);
     }
 };
+
+const getGroupById = (section, groupId) =>
+    Array.isArray(section?.groups)
+        ? section.groups.find((group) => group?.id === groupId)
+        : null;
+
+const getRecordFeedBySource = (group, sourcePath) =>
+    Array.isArray(group?.blocks)
+        ? group.blocks.find(
+            (block) =>
+                block?.type === "record-feed" &&
+                typeof block.sourcePath === "string" &&
+                block.sourcePath.trim() === sourcePath
+        )
+        : null;
 
 const manifest = readJson(manifestRelativePath);
 
@@ -238,6 +256,25 @@ if (manifest && typeof manifest === "object") {
         const section = manifest.sections?.[menuId];
         const groups = Array.isArray(section?.groups) ? section.groups : [];
 
+        groups.forEach((group) => {
+            const blocks = Array.isArray(group?.blocks) ? group.blocks : [];
+            blocks.forEach((block) => {
+                if (block?.type !== "record-feed") {
+                    return;
+                }
+
+                const sourcePath = typeof block.sourcePath === "string" ? block.sourcePath.trim() : "";
+                if (sourcePath && fileExists(sourcePath)) {
+                    loadRecordCollection(sourcePath);
+                }
+            });
+        });
+    });
+
+    requiredMenus.forEach((menuId) => {
+        const section = manifest.sections?.[menuId];
+        const groups = Array.isArray(section?.groups) ? section.groups : [];
+
         groups.forEach((group, groupIndex) => {
             const blocks = Array.isArray(group?.blocks) ? group.blocks : [];
             blocks.forEach((block, blockIndex) => {
@@ -249,11 +286,34 @@ if (manifest && typeof manifest === "object") {
         });
     });
 
+    const projectsSection = manifest.sections?.projects;
+    const publishedProjectGroup = getGroupById(projectsSection, "projects-published-notes");
+    ensure(
+        publishedProjectGroup,
+        'Manifest: section "projects" must define a "projects-published-notes" group.'
+    );
+    ensure(
+        getRecordFeedBySource(publishedProjectGroup, "content/projects/index.json"),
+        'Manifest: "projects-published-notes" must include a record-feed for "content/projects/index.json".'
+    );
+
+    const articlesSection = manifest.sections?.articles;
+    const publishedArticleGroup = getGroupById(articlesSection, "articles-published-library");
+    ensure(
+        publishedArticleGroup,
+        'Manifest: section "articles" must define an "articles-published-library" group.'
+    );
+    ensure(
+        getRecordFeedBySource(publishedArticleGroup, "content/articles/index.json"),
+        'Manifest: "articles-published-library" must include a record-feed for "content/articles/index.json".'
+    );
+
     const embeddedManifest = readEmbeddedManifestFromIndex();
     if (embeddedManifest) {
+        const expectedEmbeddedManifest = buildEmbeddedManifest(rootDir);
         ensure(
-            JSON.stringify(embeddedManifest) === JSON.stringify(manifest),
-            'index.html: embedded manifest is out of sync with "content/site-content.v1.json". Run "node scripts/sync-embedded-manifest.mjs".'
+            JSON.stringify(embeddedManifest) === JSON.stringify(expectedEmbeddedManifest),
+            'index.html: embedded manifest is out of sync with the generated embedded payload. Run "node scripts/sync-embedded-manifest.mjs".'
         );
     }
 }

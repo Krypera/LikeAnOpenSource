@@ -102,6 +102,7 @@
             <a href="#content-projects" data-menu="projects" aria-controls="content-projects">Projects</a>
             <a href="#content-articles" data-menu="articles" aria-controls="content-articles">Articles</a>
             <a href="#content-guides" data-menu="guides" aria-controls="content-guides">Guides</a>
+            <a href="#content-contribute" data-menu="contribute" aria-controls="content-contribute">Contribute</a>
             <a href="#content-about" data-menu="about" aria-controls="content-about">About</a>
         </nav>
     </header>
@@ -132,7 +133,7 @@
     <main id="main-content" class="main-content">
         <noscript>
             <div class="callout warning">
-                <p>JavaScript is required to render the latest content model for this prototype.</p>
+                <p>JavaScript is required to render the latest repository-backed content model.</p>
             </div>
         </noscript>
 
@@ -154,12 +155,12 @@
         <div id="content-sections">
             <section id="content-home" class="content-section active" data-title="Home" tabindex="-1">
                 <h1 class="doc-title">LikeAnOpenSource</h1>
-                <p class="doc-subtitle">Preparing the content model</p>
+                <p class="doc-subtitle">Loading the current content model</p>
                 <p class="doc-text">The application shell is ready. Section content will be rendered from the repository manifest as soon as the data layer finishes loading.</p>
 
                 <div id="shell-loading" class="doc-section">
                     <h2 class="doc-subtitle">Loading State</h2>
-                    <p class="doc-text">The page first tries the local manifest, then GitHub Raw, then the embedded manifest bundled into this file, and finally browser cache.</p>
+                    <p class="doc-text">The page first tries the same-origin manifest, then GitHub Raw, then the embedded manifest bundled into this file, and finally browser cache.</p>
                     <div class="callout">
                         <p>The large inline HTML fallback has been replaced with a smaller shell so the UI can stay closer to one content source.</p>
                     </div>
@@ -172,8 +173,8 @@
 <script id="embedded-manifest" type="application/json">
 {
     "meta": {
-        "version": 1,
-        "generatedAt": "2026-04-15",
+        "version": 2,
+        "generatedAt": "2026-04-16",
         "repository": {
             "owner": "Krypera",
             "name": "LikeAnOpenSource",
@@ -187,21 +188,21 @@
     "sections": {
         "home": {
             "title": "Home",
-            "subtitle": "Welcome to LikeAnOpenSource",
+            "subtitle": "A community-written backlog for open-source learning",
             "intro": [
-                "LikeAnOpenSource is a discovery and learning platform for people who want to explore open source with more clarity, more context, and better entry points.",
-                "Instead of dropping visitors into endless repository lists, the platform is designed to connect projects, articles, and guides into paths that actually help people move forward."
+                "LikeAnOpenSource is being built as a community-written library of project notes, articles, and guides.",
+                "Right now the most honest thing the site can do is show what should be written next and make that backlog easy to contribute to through GitHub."
             ],
             "callout": {
                 "tone": "default",
-                "text": "Start with Explore for curated entry points, then move into Projects, Articles, and Guides depending on how deep you want to go."
+                "text": "If you want to help shape the catalog, start in Contribute. If you want to understand the editorial direction first, start with Explore."
             },
             "groups": [
                 {
                     "id": "home-overview",
-                    "title": "Platform Overview",
+                    "title": "How the Platform Works",
                     "intro": [
-                        "The experience is shaped around discovery, deep context, and practical next steps."
+                        "The current version is intentionally honest about what exists and what is still waiting for real contributors."
                     ],
                     "blocks": [
                         {
@@ -209,34 +210,42 @@
                             "items": [
                                 {
                                     "tag": "Explore",
-                                    "title": "Curated entry points",
-                                    "description": "Find strong starting points for open-source ecosystems, documentation stacks, developer tooling, and contributor-friendly communities.",
+                                    "title": "Editorial direction first",
+                                    "description": "Explore explains what the platform wants to surface once real community content starts landing.",
                                     "href": "#content-explore",
-                                    "linkLabel": "Go to Explore",
+                                    "linkLabel": "Open Explore",
                                     "external": false
                                 },
                                 {
                                     "tag": "Projects",
-                                    "title": "Project collections with context",
-                                    "description": "Browse repositories by category, maturity, onboarding quality, and the kind of learning value they offer.",
+                                    "title": "Repository notes are still open work",
+                                    "description": "Projects now defines what a good repository note should cover instead of pretending a finished catalog already exists.",
                                     "href": "#content-projects",
-                                    "linkLabel": "Browse Projects",
+                                    "linkLabel": "Open Projects",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Articles",
+                                    "title": "Long-form writing will be community-written",
+                                    "description": "Articles now describes the writing standard and points readers to open article topics rather than seeded essays.",
+                                    "href": "#content-articles",
+                                    "linkLabel": "Open Articles",
                                     "external": false
                                 },
                                 {
                                     "tag": "Guides",
-                                    "title": "Step-by-step paths",
-                                    "description": "Follow guided routes built for first-time learners, active builders, and future contributors.",
+                                    "title": "Guide quality before guide volume",
+                                    "description": "Guides explains what future step-by-step paths should do before the first guide library is published.",
                                     "href": "#content-guides",
                                     "linkLabel": "Open Guides",
                                     "external": false
                                 },
                                 {
-                                    "tag": "Articles",
-                                    "title": "Deep technical context",
-                                    "description": "Read long-form breakdowns that explain why projects matter, which tradeoffs they carry, and how teams actually use them.",
-                                    "href": "#content-articles",
-                                    "linkLabel": "Browse Articles",
+                                    "tag": "Contribute",
+                                    "title": "The backlog lives in GitHub",
+                                    "description": "Open topics are repository-backed briefs. When a topic is added or removed in GitHub, the site reflects that change automatically.",
+                                    "href": "#content-contribute",
+                                    "linkLabel": "Open Contribute",
                                     "external": false
                                 }
                             ]
@@ -244,23 +253,23 @@
                     ]
                 },
                 {
-                    "id": "home-paths",
-                    "title": "Content Paths",
+                    "id": "home-starting-points",
+                    "title": "Three Good Starting Points",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "For newcomers",
-                                    "text": "Begin with Guides to build a mental model, then use Explore to find ecosystems and projects worth your time."
-                                },
-                                {
-                                    "label": "For active builders",
-                                    "text": "Jump into Projects and Articles when you want to compare tools, evaluate architecture, or sharpen your workflow."
-                                },
-                                {
                                     "label": "For contributors",
-                                    "text": "Use the repository to suggest additions, improve content quality, and help shape better open-source onboarding."
+                                    "text": "Open Contribute and choose a topic brief that matches the format you want to write."
+                                },
+                                {
+                                    "label": "For editors",
+                                    "text": "Use Explore, Projects, Articles, and Guides to check whether the backlog and empty states still describe the product honestly."
+                                },
+                                {
+                                    "label": "For curious readers",
+                                    "text": "Read Explore first, then jump into the section whose future content you care most about."
                                 }
                             ]
                         }
@@ -273,14 +282,14 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "Clarity matters more than hype. Every page should help visitors understand what something is, why it matters, and where to go next.",
-                                "Good curation is more useful than volume. The goal is not to list everything, but to surface the most teachable, trustworthy, and well-explained things first."
+                                "Clarity matters more than polish. A page should tell visitors what is real today and what still depends on future contributors.",
+                                "A smaller, honest backlog is more useful than a larger fake catalog. The site should never imply that community-written content already exists when it does not."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "warning",
-                            "text": "The strongest open-source platforms do not just publish information. They reduce hesitation and make the next step feel obvious."
+                            "text": "No section should simulate momentum. Content earns visibility only after a real contributor writes it and a real reviewer accepts it."
                         }
                     ]
                 }
@@ -288,126 +297,101 @@
         },
         "explore": {
             "title": "Explore",
-            "subtitle": "How discovery is being shaped in LAOS",
+            "subtitle": "What LAOS wants to surface once the community library starts growing",
             "intro": [
-                "Explore is where LAOS will eventually surface curated projects, ecosystems, and deep-dive writing.",
-                "Until the repository contains enough real records, this section should explain the discovery lens honestly instead of pretending there is already a populated feed."
+                "Explore is not a featured feed yet. It is a public statement about the kind of material this platform wants to earn over time.",
+                "For now it explains what deserves space on the site and sends contributors toward the backlog that can make that future real."
             ],
             "groups": [
                 {
-                    "id": "explore-focus",
-                    "title": "What Explore Surfaces",
-                    "intro": [
-                        "These are the four discovery lanes the platform is intentionally building first."
-                    ],
+                    "id": "explore-purpose",
+                    "title": "Why Explore Exists",
                     "blocks": [
                         {
-                            "type": "cards",
+                            "type": "paragraphs",
                             "items": [
-                                {
-                                    "tag": "Projects",
-                                    "title": "Repositories with clear onboarding",
-                                    "description": "Projects earn space here when setup, documentation, and contribution flow are understandable to someone new.",
-                                    "href": "#projects-overview",
-                                    "linkLabel": "Open project criteria",
-                                    "external": false
-                                },
-                                {
-                                    "tag": "Ecosystems",
-                                    "title": "Stacks worth studying together",
-                                    "description": "Explore should connect tools that make more sense as a system, such as docs platforms, frontend workflows, and developer tooling.",
-                                    "href": "#projects-categories",
-                                    "linkLabel": "See the category logic",
-                                    "external": false
-                                },
-                                {
-                                    "tag": "Articles",
-                                    "title": "Deep dives with a point of view",
-                                    "description": "Long-form writing here should explain tradeoffs, maintenance reality, and why a choice matters, not just list features.",
-                                    "href": "#articles-overview",
-                                    "linkLabel": "See the article direction",
-                                    "external": false
-                                },
-                                {
-                                    "tag": "Guides",
-                                    "title": "Contribution paths that lower hesitation",
-                                    "description": "Guides should turn curiosity into motion by showing where to start, what to improve, and how to contribute without guesswork.",
-                                    "href": "#guides-getting-started",
-                                    "linkLabel": "Open Getting Started",
-                                    "external": false
-                                }
+                                "A useful discovery layer does more than list popular repositories. It helps someone understand why a thing matters, how difficult it is to adopt, and where to go next.",
+                                "Until LAOS has real community-written notes and articles, Explore should describe that editorial intent clearly instead of pretending the feed is already full."
                             ]
                         }
                     ]
                 },
                 {
-                    "id": "explore-criteria",
-                    "title": "What Earns A Feature",
+                    "id": "explore-selection-criteria",
+                    "title": "What Deserves To Be Surfaced",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
                                     "label": "Clear onboarding",
-                                    "text": "A visitor should understand what the project is, how to start, and how much effort it asks from them."
+                                    "text": "A reader should understand what the project or topic is, how to start, and what effort it asks from them."
                                 },
                                 {
                                     "label": "Visible maintenance",
-                                    "text": "There should be some sign of active stewardship, usable issue hygiene, or healthy release practices."
+                                    "text": "A useful piece should talk about stewardship, issue hygiene, release rhythm, or other signals of repository health."
                                 },
                                 {
-                                    "label": "Learning signal",
-                                    "text": "The project, article, or guide should teach something transferable instead of only promoting itself."
+                                    "label": "Transferable learning",
+                                    "text": "The content should teach something reusable instead of just praising a tool."
                                 },
                                 {
                                     "label": "Honest tradeoffs",
-                                    "text": "If something is powerful but difficult, expensive, or niche, Explore should say so clearly."
+                                    "text": "If something is powerful but costly, niche, or difficult, the writing should say so directly."
                                 },
                                 {
-                                    "label": "Contribution friendliness",
-                                    "text": "The best candidates make it easier for a newcomer to understand where help is needed."
+                                    "label": "Actionable next step",
+                                    "text": "Good discovery content reduces hesitation by making the next click or next contribution obvious."
                                 }
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "default",
-                            "text": "Explore should never simulate momentum. If something is featured, the team should be able to explain exactly why it deserves attention."
+                            "text": "Nothing is featured here until a real contributor has written it and a real reviewer has accepted it."
                         }
                     ]
                 },
                 {
-                    "id": "explore-current-focus",
-                    "title": "Current Focus",
+                    "id": "explore-what-needs-writing",
+                    "title": "What Needs To Be Written Next",
                     "blocks": [
                         {
-                            "type": "paragraphs",
-                            "items": [
-                                "Right now the content work is focused on three foundations: honest repository evaluation, stronger getting-started guides, and long-form writing that connects tools to real workflows.",
-                                "As real project records and articles land in the repository, Explore can stop describing the lens and start surfacing those records directly."
-                            ]
-                        },
-                        {
-                            "type": "list",
+                            "type": "cards",
                             "items": [
                                 {
-                                    "label": "Documentation systems",
-                                    "text": "We are prioritizing tools and patterns that solve navigation, search, structure, and authoring well."
+                                    "tag": "Projects",
+                                    "title": "Repository notes we still need",
+                                    "description": "Projects explains what a repository note must cover and sends contributors to the open backlog.",
+                                    "href": "#projects-open-call",
+                                    "linkLabel": "See project note needs",
+                                    "external": false
                                 },
                                 {
-                                    "label": "Contributor-friendly repositories",
-                                    "text": "We want to spotlight projects that make their contribution process visible and realistic for first-time contributors."
+                                    "tag": "Articles",
+                                    "title": "Article topics waiting for real writers",
+                                    "description": "Articles defines the editorial bar and points to the article briefs that still need to be written.",
+                                    "href": "#articles-open-call",
+                                    "linkLabel": "See article needs",
+                                    "external": false
                                 },
                                 {
-                                    "label": "Workflow writing",
-                                    "text": "The article layer is being shaped around real tradeoffs, maintenance lessons, and system-level thinking."
+                                    "tag": "Guides",
+                                    "title": "Guide briefs waiting for contributors",
+                                    "description": "Guides explains the future guide model and links into the open guide backlog.",
+                                    "href": "#guides-open-call",
+                                    "linkLabel": "See guide needs",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Contribute",
+                                    "title": "Browse the full backlog",
+                                    "description": "Contribute is the single source of truth for open topic briefs that can be added or removed through GitHub.",
+                                    "href": "#content-contribute",
+                                    "linkLabel": "Open the backlog",
+                                    "external": false
                                 }
                             ]
-                        },
-                        {
-                            "type": "callout",
-                            "tone": "default",
-                            "text": "This area should stay focused on real project signals, clear selection criteria, and content that can stand behind its claims."
                         }
                     ]
                 }
@@ -415,126 +399,99 @@
         },
         "projects": {
             "title": "Projects",
-            "subtitle": "Real repositories with clear learning value",
+            "subtitle": "Repository notes will appear here once contributors publish real evaluations",
             "intro": [
-                "Projects should help visitors discover repositories through usability, purpose, and learning value instead of popularity alone.",
-                "The best project catalog does not stop at naming repositories. It explains why a repository is worth attention and what kind of team will actually benefit from it."
+                "There are no published community-written project notes yet.",
+                "This section now defines what a strong repository note should do and sends contributors toward the backlog instead of pretending the catalog already exists."
             ],
             "groups": [
                 {
-                    "id": "projects-overview",
-                    "title": "Selected Repositories",
+                    "id": "projects-status",
+                    "title": "Current Status",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "This opening set is intentionally small. Each repository earns its place by teaching something concrete about docs architecture, frontend tooling, code quality, or terminal-based workflow design.",
-                                "They are not here because they are simply well known. They are here because they give LAOS a strong starting point for explaining why certain repositories are worth studying."
-                            ]
-                        },
-                        {
-                            "type": "record-feed",
-                            "sourcePath": "content/projects/index.json",
-                            "records": [
-                                "facebook-docusaurus",
-                                "vitejs-vite",
-                                "biomejs-biome",
-                                "cli-cli"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "projects-reading-room",
-                    "title": "Repository Notes",
-                    "intro": [
-                        "These notes are meant to do the part a project card cannot do on its own: explain what the repository teaches, where it fits, and which tradeoffs deserve attention."
-                    ],
-                    "blocks": [
-                        {
-                            "type": "record-feed",
-                            "layout": "details",
-                            "sourcePath": "content/projects/index.json",
-                            "records": [
-                                "facebook-docusaurus",
-                                "vitejs-vite",
-                                "biomejs-biome",
-                                "cli-cli"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "projects-categories",
-                    "title": "Category Logic",
-                    "blocks": [
-                        {
-                            "type": "list",
-                            "items": [
-                                {
-                                    "label": "Web and Frontend",
-                                    "text": "Design systems, UI libraries, and framework-oriented repositories."
-                                },
-                                {
-                                    "label": "Documentation and Knowledge",
-                                    "text": "Docs platforms, content tooling, search systems, and writing infrastructure."
-                                },
-                                {
-                                    "label": "CLI and Terminal",
-                                    "text": "Tools that improve the command-line developer experience."
-                                },
-                                {
-                                    "label": "Devtools",
-                                    "text": "Build, lint, test, and observability tooling."
-                                },
-                                {
-                                    "label": "Automation",
-                                    "text": "Release helpers, workflow runners, generators, and repo maintenance utilities."
-                                },
-                                {
-                                    "label": "Community-first Repositories",
-                                    "text": "Projects that stand out because of contribution quality, documentation clarity, or maintainer friendliness."
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "id": "projects-submit",
-                    "title": "What We Look For",
-                    "blocks": [
-                        {
-                            "type": "paragraphs",
-                            "items": [
-                                "A strong project entry should help people decide whether something is worth learning from, contributing to, or adopting.",
-                                "That means going beyond the repository name and showing why a project stands out in practice."
-                            ]
-                        },
-                        {
-                            "type": "list",
-                            "items": [
-                                {
-                                    "label": "Why it matters",
-                                    "text": "Explain the problem the project solves and who benefits from it."
-                                },
-                                {
-                                    "label": "Maintenance signal",
-                                    "text": "Show whether the project has signs of active stewardship, healthy releases, and usable issue triage."
-                                },
-                                {
-                                    "label": "Learning value",
-                                    "text": "Clarify whether the repository is interesting because of architecture, community process, or contributor experience."
-                                },
-                                {
-                                    "label": "Entry difficulty",
-                                    "text": "Set expectations for setup complexity, docs quality, and how quickly a newcomer can become productive."
-                                }
+                                "The public project catalog is intentionally empty until someone writes a repository note grounded in a real project, real evidence, and real editorial review.",
+                                "When the first accepted project note is added to the repository, it can appear here automatically through the same GitHub-backed content model."
                             ]
                         },
                         {
                             "type": "callout",
-                            "tone": "warning",
-                            "text": "The best project catalogs do not just rank repositories. They reduce uncertainty and help people choose with confidence."
+                            "tone": "default",
+                            "text": "No repository note is published until it has been written by a contributor and merged through GitHub review."
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-published-notes",
+                    "title": "Published Repository Notes",
+                    "intro": [
+                        "Accepted repository notes will appear in this section automatically once real records are merged into `content/projects/index.json`.",
+                        "Until then, this heading stays visible as an honest placeholder for the first published notes instead of a fake catalog."
+                    ],
+                    "blocks": [
+                        {
+                            "type": "record-sections",
+                            "items": []
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-what-good-looks-like",
+                    "title": "What A Project Note Must Cover",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Why the repository matters",
+                                    "text": "Explain the problem the repository solves and who it helps."
+                                },
+                                {
+                                    "label": "Onboarding path",
+                                    "text": "Show what a newcomer sees in the README, setup flow, contribution docs, and first useful issue path."
+                                },
+                                {
+                                    "label": "Maintenance signal",
+                                    "text": "Describe release rhythm, issue hygiene, documentation quality, or other visible trust signals."
+                                },
+                                {
+                                    "label": "Learning value",
+                                    "text": "Clarify what a reader can learn from this repository beyond a simple feature list."
+                                },
+                                {
+                                    "label": "Contribution reality",
+                                    "text": "Be honest about how easy or difficult it is for someone to contribute usefully."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-open-call",
+                    "title": "Where To Start",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Backlog",
+                                    "title": "Browse open project topics",
+                                    "description": "Open the backlog and look for briefs tagged `Project Topic` if you want to write the first repository notes for LAOS.",
+                                    "href": "#contribute-open-topics",
+                                    "linkLabel": "Open project backlog",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Workflow",
+                                    "title": "See how topics become published notes",
+                                    "description": "The Contribute section explains how a topic moves from backlog brief to accepted public content through GitHub review.",
+                                    "href": "#contribute-how-it-works",
+                                    "linkLabel": "Open the workflow",
+                                    "external": false
+                                }
+                            ]
                         }
                     ]
                 }
@@ -542,79 +499,93 @@
         },
         "articles": {
             "title": "Articles",
-            "subtitle": "Long-form writing with technical depth",
+            "subtitle": "Long-form articles will appear here after contributors publish real writing",
             "intro": [
-                "Articles are where the platform slows down and gives ideas enough room to breathe.",
-                "The goal is not to publish generic explainers. It is to publish writing that helps people make better technical judgments with more context and less noise."
+                "There are no published community-written articles yet.",
+                "Instead of showing seeded essays, this section now defines the editorial standard and points contributors toward the open article backlog."
             ],
             "groups": [
                 {
-                    "id": "articles-overview",
-                    "title": "Publishing Flow",
+                    "id": "articles-status",
+                    "title": "Current Status",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The article library should do more than explain how a tool works. It should surface tradeoffs, team impact, and the reasoning behind technical choices.",
-                                "Strong editorial content helps people understand not only which project is interesting, but also which one fits their workflow, team, or stage of learning."
+                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and defensible reasoning.",
+                                "Once a reviewed article record is merged into the repository, it can appear here automatically without hand-authoring new HTML."
                             ]
-                        }
-                    ]
-                },
-                {
-                    "id": "articles-formats",
-                    "title": "Article Catalog",
-                    "blocks": [
+                        },
                         {
-                            "type": "record-feed",
-                            "sourcePath": "content/articles/index.json",
-                            "records": [
-                                "step-by-step-teaching-content",
-                                "real-world-breakdowns",
-                                "deep-dives-into-system-choices",
-                                "writing-from-inside-the-workflow"
-                            ]
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "Articles should publish judgment, not filler. If a piece cannot help a reader make a better technical decision, it does not belong here yet."
                         }
                     ]
                 },
                 {
-                    "id": "articles-reading-room",
-                    "title": "Reading Room",
+                    "id": "articles-published-library",
+                    "title": "Published Articles",
                     "intro": [
-                        "These opening pieces define the kind of writing LAOS wants to publish first: practical, tradeoff-aware, and grounded in real team work."
+                        "Reviewed long-form writing will appear here automatically once accepted article records are added to `content/articles/index.json`.",
+                        "For now this remains a truthful empty library rather than a seeded reading room."
                     ],
                     "blocks": [
                         {
-                            "type": "record-feed",
-                            "layout": "details",
-                            "sourcePath": "content/articles/index.json",
-                            "records": [
-                                "step-by-step-teaching-content",
-                                "real-world-breakdowns",
-                                "deep-dives-into-system-choices",
-                                "writing-from-inside-the-workflow"
-                            ]
+                            "type": "record-sections",
+                            "items": []
                         }
                     ]
                 },
                 {
-                    "id": "articles-editorial",
-                    "title": "Editorial Standards",
+                    "id": "articles-editorial-bar",
+                    "title": "What A Good Article Must Do",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Title discipline",
-                                    "text": "Every article should make its topic, scope, and intended reader clear from the first glance."
+                                    "label": "Name the reader",
+                                    "text": "Every article should make its intended audience obvious from the start."
                                 },
                                 {
-                                    "label": "Context first",
-                                    "text": "Good writing explains not only what to do, but also why a choice matters and what it may cost."
+                                    "label": "Explain the tradeoff",
+                                    "text": "The writing should show what a decision buys, what it costs, and when it stops being the right choice."
                                 },
                                 {
-                                    "label": "Cross-section visibility",
-                                    "text": "Strong pieces should be easy to surface again inside Explore, Projects, or guide recommendations."
+                                    "label": "Ground the argument",
+                                    "text": "Use practical workflow evidence, repository signals, or real team consequences instead of vague praise."
+                                },
+                                {
+                                    "label": "Stay reusable",
+                                    "text": "A strong article teaches an evaluation lens that a reader can use again elsewhere."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-open-call",
+                    "title": "Where To Start",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Backlog",
+                                    "title": "Browse open article topics",
+                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write the first long-form LAOS pieces.",
+                                    "href": "#contribute-open-topics",
+                                    "linkLabel": "Open article backlog",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Workflow",
+                                    "title": "Understand the publish path",
+                                    "description": "The Contribute workflow explains how an article brief becomes a reviewed public article through GitHub.",
+                                    "href": "#contribute-how-it-works",
+                                    "linkLabel": "Open the workflow",
+                                    "external": false
                                 }
                             ]
                         }
@@ -624,40 +595,262 @@
         },
         "guides": {
             "title": "Guides",
-            "subtitle": "Learning paths for real progress",
+            "subtitle": "Guide contribution model and writing rules",
             "intro": [
-                "Guides should help people move from passive reading to confident action."
+                "No full guide library is published yet.",
+                "Until that exists, this section explains the kind of guide paths LAOS wants and what contributors should optimize for when writing them."
             ],
             "groups": [
                 {
-                    "id": "guides-getting-started",
-                    "title": "Getting Started",
+                    "id": "guides-purpose",
+                    "title": "What Guides Should Eventually Do",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "A useful guide should move someone from uncertainty to action. It should tell them where to begin, what to compare, and how to decide that they are ready for the next step.",
+                                "That means the future guide library should be built around decision paths, not around generic topic dumping or overly polished summaries."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-writing-model",
+                    "title": "Guide Contribution Model",
+                    "blocks": [
+                        {
+                            "type": "markdown-inline",
+                            "content": "# Guide contribution model\n\nLAOS does not want guides that read like disconnected documentation fragments. A guide should act like a path: it should help a reader decide where to begin, what to compare, and when they are ready to move forward.\n\n## Start from a real decision\n\nA good guide begins with a real question, such as:\n\n- Which documentation platform fits a small team?\n- How should I judge whether a repository is worth contributing to?\n- What should I check before opening my first pull request?\n\nIf the guide cannot name the decision it is helping with, it is probably too broad.\n\n## Move the reader forward in stages\n\nGood LAOS guides should usually move through three stages:\n\n1. Clarify the situation the reader is in.\n2. Explain the criteria they should use to judge options.\n3. Give them a concrete next action.\n\nThat structure keeps the guide useful even when the ecosystem around it changes.\n\n## Connect to the rest of the site\n\nGuides should not try to contain everything. They should hand off clearly to:\n\n- `Projects` when the reader needs a repository note\n- `Articles` when the reader needs deeper tradeoff analysis\n- `Contribute` when the reader wants to help fill a gap in the library\n\nThe handoff matters as much as the explanation.\n",
+                            "skipTitle": true
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-writing-rules",
+                    "title": "Guide Writing Rules",
+                    "blocks": [
+                        {
+                            "type": "markdown-inline",
+                            "content": "# Guide writing rules\n\nLAOS guides should make the next step feel possible, not just informative.\n\n## Write for motion, not for display\n\nThe reader should finish a guide knowing what to do next. That means:\n\n- define the reader clearly\n- keep the scope narrow\n- explain why each step exists\n- show where a reader can stop and still leave with value\n\n## Prefer criteria over slogans\n\nA guide should teach how to judge something, not just what to like. Use criteria such as:\n\n- onboarding clarity\n- maintenance signal\n- cost of adoption\n- contribution difficulty\n\nThose make the guide reusable beyond a single example.\n\n## Avoid these failure modes\n\n- broad introductions that never narrow into a decision\n- fake certainty about tools or workflows\n- copying product language from repository marketing\n- listing steps without explaining what success looks like\n\nIf the writing sounds polished but does not reduce hesitation, it still needs work.\n",
+                            "skipTitle": true
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-open-call",
+                    "title": "Where To Start",
                     "blocks": [
                         {
                             "type": "cards",
                             "items": [
                                 {
-                                    "tag": "Start",
-                                    "title": "How to read the guides",
-                                    "description": "Use the guide layer as a decision path. Start from your goal, stay inside one route, and branch into Projects or Articles only when you need depth.",
-                                    "href": "#guides-reading-flow",
-                                    "linkLabel": "Read the guide flow",
+                                    "tag": "Backlog",
+                                    "title": "Browse open guide topics",
+                                    "description": "Open the backlog and look for briefs tagged `Guide Topic` if you want to write the first guide paths for LAOS.",
+                                    "href": "#contribute-open-topics",
+                                    "linkLabel": "Open guide backlog",
                                     "external": false
                                 },
                                 {
-                                    "tag": "Contribute",
-                                    "title": "How to contribute",
-                                    "description": "Contribute where the reading experience feels weak: unclear copy, missing context, thin guide paths, or content that sounds more polished than it really is.",
-                                    "href": "#guides-contributing",
-                                    "linkLabel": "Open the contribution guide",
+                                    "tag": "Workflow",
+                                    "title": "See how guide briefs move forward",
+                                    "description": "The Contribute workflow explains how a guide brief becomes real published guide content through GitHub review.",
+                                    "href": "#contribute-how-it-works",
+                                    "linkLabel": "Open the workflow",
+                                    "external": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "contribute": {
+            "title": "Contribute",
+            "subtitle": "GitHub-backed topic backlog for future community-written content",
+            "intro": [
+                "Every topic in this section is a real request for future content.",
+                "If a topic disappears from the repository, it disappears from the site. If a new topic is merged, it shows up here automatically."
+            ],
+            "callout": {
+                "tone": "default",
+                "text": "There is no submission form yet. GitHub pull requests are the only source of truth for topic visibility and published content."
+            },
+            "groups": [
+                {
+                    "id": "contribute-overview",
+                    "title": "What This Backlog Is",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The backlog is the place where LAOS makes its editorial needs visible. It tells contributors what kind of project notes, articles, and guides the platform still needs next.",
+                                "This backlog is intentionally repository-backed. That keeps visibility simple: the site shows only what the repository currently asks for."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "contribute-open-topics",
+                    "title": "Open Topics",
+                    "blocks": [
+                        {
+                            "type": "cards",
+                            "items": [
+                                {
+                                    "tag": "Guide Topic",
+                                    "title": "Compare documentation platforms for small teams",
+                                    "description": "Write a decision-oriented guide that helps a small team compare documentation platforms through real tradeoffs, authoring needs, and maintenance cost.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Guide"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Small engineering teams"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A guide that helps a team choose, not just browse"
+                                        }
+                                    ],
+                                    "href": "#record-docs-platform-comparison-guide",
+                                    "linkLabel": "Open brief",
                                     "external": false
                                 },
                                 {
-                                    "tag": "Evaluate",
-                                    "title": "How to judge a repository quickly",
-                                    "description": "Use the project criteria before you commit your time. The goal is to understand value, maintenance signal, and onboarding quality early.",
-                                    "href": "#projects-submit",
-                                    "linkLabel": "See the evaluation criteria",
+                                    "tag": "Guide Topic",
+                                    "title": "Create a first contribution guide for newcomers",
+                                    "description": "Write a guide that helps a newcomer move from curiosity to a first useful pull request without relying on vague encouragement.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Guide"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "People making a first open-source contribution"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Beginner"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A concrete path from interest to first merged change"
+                                        }
+                                    ],
+                                    "href": "#record-first-contribution-guide-for-newcomers",
+                                    "linkLabel": "Open brief",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Project Topic",
+                                    "title": "Write a repository note for a contributor-friendly project",
+                                    "description": "Evaluate one real public repository and explain whether it genuinely lowers hesitation for a first-time contributor.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Project note"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "New contributors and repository evaluators"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A grounded repository note with evidence, not praise"
+                                        }
+                                    ],
+                                    "href": "#record-contributor-friendly-repository-note",
+                                    "linkLabel": "Open brief",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Project Topic",
+                                    "title": "Map a repository onboarding path",
+                                    "description": "Write a repository note that documents the first thirty minutes inside a project: orientation, setup, contribution docs, and likely next step.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Project note"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "First-time contributors"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Beginner to intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A practical onboarding map, not a repository summary"
+                                        }
+                                    ],
+                                    "href": "#record-repository-onboarding-path-note",
+                                    "linkLabel": "Open brief",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Article Topic",
+                                    "title": "Explain how teams judge repository health",
+                                    "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Article"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Engineers evaluating repositories"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A reusable evaluation lens for repository trust"
+                                        }
+                                    ],
+                                    "href": "#record-repository-health-article",
+                                    "linkLabel": "Open brief",
+                                    "external": false
+                                },
+                                {
+                                    "tag": "Article Topic",
+                                    "title": "Write about what makes maintainer feedback useful",
+                                    "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Article"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Maintainers and repeat contributors"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A practical article about feedback that lowers contributor hesitation"
+                                        }
+                                    ],
+                                    "href": "#record-maintainer-feedback-article",
+                                    "linkLabel": "Open brief",
                                     "external": false
                                 }
                             ]
@@ -665,47 +858,253 @@
                     ]
                 },
                 {
-                    "id": "guides-reading-flow",
-                    "title": "How to Read the Guides",
+                    "id": "contribute-topic-briefs",
+                    "title": "Topic Briefs",
+                    "intro": [
+                        "Open a brief before you start writing. Each brief explains the intended reader, the expected shape, and the kinds of evidence the final piece should include."
+                    ],
                     "blocks": [
                         {
-                            "type": "markdown",
-                            "path": "content/guides/how-to-read-the-guides.md",
-                            "skipTitle": true
+                            "type": "record-sections",
+                            "items": [
+                                {
+                                    "id": "docs-platform-comparison-guide",
+                                    "tag": "Guide Topic",
+                                    "title": "Compare documentation platforms for small teams",
+                                    "description": "Write a decision-oriented guide that helps a small team compare documentation platforms through real tradeoffs, authoring needs, and maintenance cost.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Guide"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Small engineering teams"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A guide that helps a team choose, not just browse"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/docs-platform-comparison-guide.md",
+                                    "href": "#record-docs-platform-comparison-guide",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Compare documentation platforms for small teams\n\nThis topic asks for a guide, not a roundup.\n\n## What the final piece should help a reader decide\n\nThe guide should help a small team answer questions like:\n\n- Do we need versioned docs?\n- How much theming or custom code can we realistically maintain?\n- Is Markdown-only authoring enough for us?\n- Which navigation and search needs matter most for our size?\n\n## What the guide should include\n\n- a clear team profile at the top\n- the criteria used to compare options\n- concrete tradeoffs instead of marketing phrases\n- a recommendation pattern such as \"choose this kind of platform if...\"\n\n## What to avoid\n\n- feature matrices without explanation\n- pretending there is one universal winner\n- praising tools without saying what they cost to maintain\n"
+                                },
+                                {
+                                    "id": "first-contribution-guide-for-newcomers",
+                                    "tag": "Guide Topic",
+                                    "title": "Create a first contribution guide for newcomers",
+                                    "description": "Write a guide that helps a newcomer move from curiosity to a first useful pull request without relying on vague encouragement.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Guide"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "People making a first open-source contribution"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Beginner"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A concrete path from interest to first merged change"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/first-contribution-guide-for-newcomers.md",
+                                    "href": "#record-first-contribution-guide-for-newcomers",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Create a first contribution guide for newcomers\n\nThis topic should become a step-by-step guide for people who want to contribute to open source but do not yet know how to begin.\n\n## What the guide should cover\n\n- how to choose a realistic first repository\n- what to look for in contribution docs and issue labels\n- how to decide whether a task is still active\n- how to ask for context without wasting a maintainer's time\n- what a \"small but useful\" first change looks like\n\n## What the reader should leave with\n\nBy the end, the reader should know:\n\n- how to choose where to start\n- how to reduce the risk of picking the wrong first task\n- what to do before they open a pull request\n\n## What to avoid\n\n- broad motivation without process\n- implying that every repository is welcoming\n- advice that assumes the reader already knows contributor norms\n"
+                                },
+                                {
+                                    "id": "contributor-friendly-repository-note",
+                                    "tag": "Project Topic",
+                                    "title": "Write a repository note for a contributor-friendly project",
+                                    "description": "Evaluate one real public repository and explain whether it genuinely lowers hesitation for a first-time contributor.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Project note"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "New contributors and repository evaluators"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A grounded repository note with evidence, not praise"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/contributor-friendly-repository-note.md",
+                                    "href": "#record-contributor-friendly-repository-note",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Write a repository note for a contributor-friendly project\n\nThis brief asks for one repository note about a real public project.\n\n## What the final note should answer\n\n- Does the README make the purpose of the project clear?\n- Is setup realistic for a newcomer?\n- Are contribution docs visible and usable?\n- Is there evidence of issue hygiene or maintainer follow-through?\n- What would a first useful contribution probably look like?\n\n## Required evidence\n\nThe note should be grounded in things a reader can actually inspect:\n\n- repository docs\n- issue labels\n- contribution guides\n- release habits\n- signs of maintainer feedback\n\n## What to avoid\n\n- generic praise like \"great community\"\n- claiming something is beginner-friendly without showing why\n- drifting into a feature review that ignores contribution reality\n"
+                                },
+                                {
+                                    "id": "repository-onboarding-path-note",
+                                    "tag": "Project Topic",
+                                    "title": "Map a repository onboarding path",
+                                    "description": "Write a repository note that documents the first thirty minutes inside a project: orientation, setup, contribution docs, and likely next step.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Project note"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "First-time contributors"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Beginner to intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A practical onboarding map, not a repository summary"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/repository-onboarding-path-note.md",
+                                    "href": "#record-repository-onboarding-path-note",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Map a repository onboarding path\n\nThis topic asks for a repository note focused on the reader's first thirty minutes.\n\n## What the note should walk through\n\n- where a newcomer learns what the project does\n- what happens when they try to install or run it\n- where contribution instructions appear\n- whether first-issue paths are visible\n- what still feels ambiguous after the first pass\n\n## Why this topic matters\n\nMany repositories look welcoming in theory but become confusing during the first real attempt to contribute. This note should make that early experience legible.\n\n## What to avoid\n\n- describing the repository without following the onboarding path\n- using maintainer claims as proof without checking the repo\n- hiding friction just because the project is respected\n"
+                                },
+                                {
+                                    "id": "repository-health-article",
+                                    "tag": "Article Topic",
+                                    "title": "Explain how teams judge repository health",
+                                    "description": "Write an article about the signals teams actually use to decide whether a repository is trustworthy enough to study, adopt, or contribute to.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Article"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Engineers evaluating repositories"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A reusable evaluation lens for repository trust"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/repository-health-article.md",
+                                    "href": "#record-repository-health-article",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Explain how teams judge repository health\n\nThis topic should become an article about practical trust signals, not abstract best practices.\n\n## Core question\n\nHow does a team decide whether a repository is alive, maintainable, and worth their time?\n\n## The article should discuss signals such as\n\n- release rhythm\n- issue response patterns\n- documentation quality\n- contribution clarity\n- how often the same confusion seems to repeat\n\n## The article should help the reader do something\n\nA good version of this piece gives the reader a checklist or evaluation frame they can reuse on their own.\n\n## What to avoid\n\n- treating stars or popularity as enough evidence\n- writing a generic OSS best-practices article\n- talking about health without connecting it to real adoption risk\n"
+                                },
+                                {
+                                    "id": "maintainer-feedback-article",
+                                    "tag": "Article Topic",
+                                    "title": "Write about what makes maintainer feedback useful",
+                                    "description": "Explain how maintainer replies, review style, and issue follow-up change whether contributors stay engaged or leave early.",
+                                    "details": [
+                                        {
+                                            "label": "Format",
+                                            "text": "Article"
+                                        },
+                                        {
+                                            "label": "Audience",
+                                            "text": "Maintainers and repeat contributors"
+                                        },
+                                        {
+                                            "label": "Difficulty",
+                                            "text": "Intermediate"
+                                        },
+                                        {
+                                            "label": "Outcome",
+                                            "text": "A practical article about feedback that lowers contributor hesitation"
+                                        }
+                                    ],
+                                    "bodyPath": "content/topics/maintainer-feedback-article.md",
+                                    "href": "#record-maintainer-feedback-article",
+                                    "linkLabel": "Open brief",
+                                    "external": false,
+                                    "bodyMarkdown": "# Write about what makes maintainer feedback useful\n\nThis topic should become an article about contribution retention, not just communication etiquette.\n\n## Questions the article should answer\n\n- What kinds of maintainer replies reduce hesitation?\n- What makes review feedback feel actionable instead of dismissive?\n- How does response speed matter compared with response quality?\n- Why do some contributors disappear after the first interaction?\n\n## What the article should connect\n\nThe final piece should connect feedback style to practical outcomes:\n\n- contributor confidence\n- repeat participation\n- clarity of next steps\n- whether a repository feels worth returning to\n\n## What to avoid\n\n- generic advice like \"be nice\"\n- treating feedback as a tone issue only\n- ignoring the connection between review quality and contributor retention\n"
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    "id": "guides-levels",
-                    "title": "Level Structure",
+                    "id": "contribute-how-it-works",
+                    "title": "How It Works",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Beginner",
-                                    "text": "Fundamental concepts, terminology, and quick-start paths."
+                                    "label": "1. Choose a brief",
+                                    "text": "Pick a topic from the backlog that matches the format you want to write."
                                 },
                                 {
-                                    "label": "Intermediate",
-                                    "text": "Architectural tradeoffs, process design, and project patterns."
+                                    "label": "2. Work in the repository",
+                                    "text": "Create or update the relevant JSON and Markdown files inside the repo. The site itself does not author content."
                                 },
                                 {
-                                    "label": "Advanced",
-                                    "text": "Maintainability, scale, and team knowledge transfer."
+                                    "label": "3. Open a focused pull request",
+                                    "text": "Explain what topic you addressed, what content you added, and why it meets the brief."
+                                },
+                                {
+                                    "label": "4. Pass review",
+                                    "text": "Moderation happens through GitHub review. A topic becomes public content only after a reviewer accepts the work."
+                                },
+                                {
+                                    "label": "5. Let the site update",
+                                    "text": "Once merged, the new topic or published content shows up automatically through the repo-backed fetch flow."
                                 }
                             ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "warning",
+                            "text": "Backlog visibility and published content both follow the same rule: if it is not in the repository, it is not on the site."
                         }
                     ]
                 },
                 {
-                    "id": "guides-contributing",
-                    "title": "How to Contribute",
+                    "id": "contribute-quality-bar",
+                    "title": "What A Good Contribution Must Do",
                     "blocks": [
                         {
-                            "type": "markdown",
-                            "path": "content/guides/how-to-contribute.md",
-                            "skipTitle": true
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "Be specific",
+                                    "text": "Name the reader, the problem, and the real decision the content is trying to improve."
+                                },
+                                {
+                                    "label": "Stay honest",
+                                    "text": "Do not imply firsthand knowledge, contributor friendliness, or maintenance quality without showing why."
+                                },
+                                {
+                                    "label": "Reduce hesitation",
+                                    "text": "A strong piece should help the next person feel less lost and more ready to act."
+                                },
+                                {
+                                    "label": "Fit the format",
+                                    "text": "Project notes, articles, and guides serve different jobs. The final piece should match the brief it came from."
+                                }
+                            ]
                         }
                     ]
                 }
@@ -722,8 +1121,8 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "LikeAnOpenSource (LAOS) is a platform focused on explaining the ideas, design choices, and ecosystem patterns behind open source software.",
-                                "It is not only a list of repositories. It is meant to connect projects with technical context, guide paths, and editorial storytelling."
+                                "LikeAnOpenSource (LAOS) is a platform for turning open-source curiosity into grounded understanding and useful contribution paths.",
+                                "Instead of pretending a large catalog already exists, the platform is being built in public with a GitHub-backed backlog and a community-written publishing model."
                             ]
                         }
                     ]
@@ -736,16 +1135,16 @@
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Think like open source",
-                                    "text": "Build knowledge in a modular, reusable, and transparent way."
+                                    "label": "Build in public",
+                                    "text": "Let the repository show what the platform still needs, not only what it has already finished."
                                 },
                                 {
-                                    "label": "Curate with care",
-                                    "text": "A smaller, sharper set of recommendations is more valuable than an overwhelming wall of links."
+                                    "label": "Prefer honest empty states",
+                                    "text": "A clear backlog is more trustworthy than a fake catalog."
                                 },
                                 {
                                     "label": "Make contribution feel possible",
-                                    "text": "People should leave the platform feeling closer to their first meaningful contribution, not further from it."
+                                    "text": "People should leave the site feeling closer to a useful contribution, not further from it."
                                 }
                             ]
                         }
@@ -753,23 +1152,23 @@
                 },
                 {
                     "id": "about-quality",
-                    "title": "Editorial Standards",
+                    "title": "Editorial Standard",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The platform should favor clear writing, visible reasoning, and recommendations that can be defended with real experience."
+                                "Every visible topic or published piece should earn its place by solving a real editorial gap and helping the next reader make a better decision."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "warning",
-                            "text": "Quality here means trust. If something is featured, visitors should feel there is a good reason it earned that space."
+                            "text": "Trust is the product. If the site claims something exists, visitors should be able to see the real repository-backed source behind it."
                         }
                     ]
                 },
                 {
-                    "id": "about-contact",
+                    "id": "about-repository",
                     "title": "Repository",
                     "blocks": [
                         {
@@ -778,17 +1177,17 @@
                                 {
                                     "tag": "GitHub",
                                     "title": "Main repository",
-                                    "description": "Follow the codebase, track how the platform evolves, and see where future content operations will live.",
+                                    "description": "Track the codebase, the backlog, and the content model that powers the site.",
                                     "href": "https://github.com/Krypera/LikeAnOpenSource",
                                     "linkLabel": "Open repository",
                                     "external": true
                                 },
                                 {
-                                    "tag": "Roadmap",
-                                    "title": "What ships next",
-                                    "description": "The next phase is turning seeded local content into live repository-backed content so updates can flow from GitHub directly.",
-                                    "href": "#projects-submit",
-                                    "linkLabel": "See the content criteria",
+                                    "tag": "Backlog",
+                                    "title": "Open contribution topics",
+                                    "description": "Browse the live topic backlog that the site reads directly from the repository.",
+                                    "href": "#content-contribute",
+                                    "linkLabel": "Open Contribute",
                                     "external": false
                                 }
                             ]

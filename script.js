@@ -60,6 +60,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     const getPlainText = (value = "") =>
         String(value).replace(/\s+/g, " ").trim();
 
+    const getSearchScore = ({
+        query = "",
+        title = "",
+        sectionTitle = "",
+        groupTitle = "",
+        bodyText = ""
+    } = {}) => {
+        const normalizedQuery = normalizeText(query);
+        if (!normalizedQuery) {
+            return 0;
+        }
+
+        let score = 1;
+        if (normalizeText(title).includes(normalizedQuery)) {
+            score += 8;
+        }
+        if (normalizeText(groupTitle).includes(normalizedQuery)) {
+            score += 6;
+        }
+        if (normalizeText(sectionTitle).includes(normalizedQuery)) {
+            score += 3;
+        }
+        if (normalizeText(bodyText.slice(0, 220)).includes(normalizedQuery)) {
+            score += 2;
+        }
+
+        return score;
+    };
+
+    const getGroupSearchBody = (group) => {
+        const clone = group.cloneNode(true);
+        clone.querySelectorAll(".record-detail").forEach((item) => item.remove());
+        return getPlainText(clone.textContent);
+    };
+
     const renderInlineMarkdown = (value = "") => {
         const placeholders = [];
         const protect = (markup) => {
@@ -277,7 +312,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             : "";
 
         let markdownMarkup = "";
-        if (record.bodyPath && window.LAOSContentService?.loadTextContent) {
+        if (record.bodyMarkdown) {
+            markdownMarkup = `
+                <div class="record-detail-body markdown-block">
+                    ${renderMarkdownBody(record.bodyMarkdown, { skipTitle: true })}
+                </div>
+            `;
+        } else if (record.bodyPath && window.LAOSContentService?.loadTextContent) {
             try {
                 const markdown = await window.LAOSContentService.loadTextContent(
                     record.bodyPath,
@@ -412,6 +453,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                     `;
                 }
             }
+            case "markdown-inline":
+                return `
+                    <div class="markdown-block">
+                        ${renderMarkdownBody(block.content, {
+                            skipTitle: block.skipTitle !== false
+                        })}
+                    </div>
+                `;
             default:
                 return "";
         }
@@ -487,7 +536,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
 
     const renderManifest = async (manifest, options = {}) => {
-        const menuOrder = ["home", "explore", "projects", "articles", "guides", "about"];
+        const menuOrder = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
 
         sidebarMenusRoot.innerHTML = menuOrder
             .map((menuId) => renderSidebarMenu(menuId, manifest.sections[menuId], menuId === "home"))
@@ -752,6 +801,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         getDocumentGroups().forEach((group) => {
             group.hidden = false;
+            group.querySelectorAll(".record-detail").forEach((record) => {
+                record.hidden = false;
+            });
         });
 
         getSidebarMenus().forEach((menu) => {
@@ -789,6 +841,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const visibleGroups = new Set();
         const visibleMenus = new Set();
         const visibleSections = new Set();
+        const visibleRecords = new Set();
 
         getDocumentGroups().forEach((group) => {
             const section = group.closest(".content-section");
@@ -798,25 +851,65 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const sectionTitle = section.dataset.title || "";
             const groupTitle = group.querySelector(".doc-subtitle")?.textContent || "";
-            const bodyText = getPlainText(group.textContent);
+            const menuId = section.id.replace("content-", "");
+            const recordDetails = Array.from(group.querySelectorAll(".record-detail"));
+
+            recordDetails.forEach((record) => {
+                const recordTitle = getPlainText(
+                    record.querySelector(".record-detail-title")?.textContent || ""
+                );
+                const recordTag = getPlainText(
+                    record.querySelector(".card-tag")?.textContent || ""
+                );
+                const recordSummary = getPlainText(
+                    record.querySelector(".record-detail-summary")?.textContent || ""
+                );
+                const recordMeta = getPlainText(
+                    record.querySelector(".record-detail-meta")?.textContent || ""
+                );
+                const recordBody = getPlainText(
+                    record.querySelector(".record-detail-body")?.textContent || ""
+                );
+                const recordSearchBody = `${recordSummary} ${recordMeta} ${recordBody}`.trim();
+                const searchableText = normalizeText(
+                    `${sectionTitle} ${groupTitle} ${recordTag} ${recordTitle} ${recordSearchBody}`
+                );
+
+                if (!searchableText.includes(normalizedQuery)) {
+                    return;
+                }
+
+                visibleGroups.add(group.id);
+                visibleMenus.add(menuId);
+                visibleSections.add(section.id);
+                visibleRecords.add(record.id);
+
+                matches.push({
+                    id: record.id,
+                    menuId,
+                    sectionId: section.id,
+                    title: recordTitle || groupTitle,
+                    kicker: `${sectionTitle} / ${groupTitle}`,
+                    snippet: buildSearchSnippet(recordSearchBody || recordTitle, query),
+                    score: getSearchScore({
+                        query,
+                        title: recordTitle,
+                        sectionTitle,
+                        groupTitle,
+                        bodyText: recordSearchBody
+                    })
+                });
+            });
+
+            const bodyText = recordDetails.length
+                ? getGroupSearchBody(group)
+                : getPlainText(group.textContent);
             const searchableText = normalizeText(`${sectionTitle} ${groupTitle} ${bodyText}`);
 
             if (!searchableText.includes(normalizedQuery)) {
                 return;
             }
 
-            let score = 1;
-            if (normalizeText(groupTitle).includes(normalizedQuery)) {
-                score += 6;
-            }
-            if (normalizeText(sectionTitle).includes(normalizedQuery)) {
-                score += 3;
-            }
-            if (normalizeText(bodyText.slice(0, 220)).includes(normalizedQuery)) {
-                score += 2;
-            }
-
-            const menuId = section.id.replace("content-", "");
             visibleGroups.add(group.id);
             visibleMenus.add(menuId);
             visibleSections.add(section.id);
@@ -825,10 +918,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                 id: group.id,
                 menuId,
                 sectionId: section.id,
-                sectionTitle,
-                groupTitle,
+                title: groupTitle,
+                kicker: sectionTitle,
                 snippet: buildSearchSnippet(bodyText, query),
-                score
+                score: getSearchScore({
+                    query,
+                    title: groupTitle,
+                    sectionTitle,
+                    groupTitle,
+                    bodyText
+                })
             });
         });
 
@@ -837,18 +936,19 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return right.score - left.score;
             }
 
-            if (left.sectionTitle !== right.sectionTitle) {
-                return left.sectionTitle.localeCompare(right.sectionTitle);
+            if (left.kicker !== right.kicker) {
+                return left.kicker.localeCompare(right.kicker);
             }
 
-            return left.groupTitle.localeCompare(right.groupTitle);
+            return left.title.localeCompare(right.title);
         });
 
         return {
             matches,
             visibleGroups,
             visibleMenus,
-            visibleSections
+            visibleSections,
+            visibleRecords
         };
     };
 
@@ -867,8 +967,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             .map(
                 (match) => `
                     <a class="search-result-card" href="#${escapeHtml(match.id)}">
-                        <span class="search-result-kicker">${escapeHtml(match.sectionTitle)}</span>
-                        <h3 class="search-result-title">${escapeHtml(match.groupTitle)}</h3>
+                        <span class="search-result-kicker">${escapeHtml(match.kicker)}</span>
+                        <h3 class="search-result-title">${escapeHtml(match.title)}</h3>
                         <p class="search-result-text">${escapeHtml(match.snippet)}</p>
                     </a>
                 `
@@ -1005,6 +1105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         getDocumentGroups().forEach((group) => {
             group.hidden = !searchState.visibleGroups.has(group.id);
+            const records = Array.from(group.querySelectorAll(".record-detail"));
+            records.forEach((record) => {
+                record.hidden = !searchState.visibleRecords.has(record.id);
+            });
         });
 
         getSidebarMenus().forEach((menu) => {
