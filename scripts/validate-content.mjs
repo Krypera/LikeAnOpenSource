@@ -297,12 +297,30 @@ const validateFunding = (funding) => {
         "Manifest funding: disclaimer is required when funding is enabled."
     );
 
+    const noAdsItems = Array.isArray(funding.noAds) ? funding.noAds : [];
+    ensure(noAdsItems.length > 0, "Manifest funding: at least one noAds item is required.");
+    noAdsItems.forEach((item, index) => {
+        ensure(
+            typeof item === "string" && item.trim(),
+            `Manifest funding: noAds[${index}] must be a non-empty string.`
+        );
+    });
+
     const whyItems = Array.isArray(funding.why) ? funding.why : [];
     ensure(whyItems.length > 0, "Manifest funding: at least one why item is required.");
     whyItems.forEach((item, index) => {
         ensure(
             typeof item === "string" && item.trim(),
             `Manifest funding: why[${index}] must be a non-empty string.`
+        );
+    });
+
+    const walletHelpItems = Array.isArray(funding.walletHelp) ? funding.walletHelp : [];
+    ensure(walletHelpItems.length > 0, "Manifest funding: at least one walletHelp item is required.");
+    walletHelpItems.forEach((item, index) => {
+        ensure(
+            typeof item === "string" && item.trim(),
+            `Manifest funding: walletHelp[${index}] must be a non-empty string.`
         );
     });
 
@@ -327,7 +345,6 @@ const validateFunding = (funding) => {
     });
 
     const wallets = Array.isArray(funding.wallets) ? funding.wallets : [];
-    ensure(wallets.length > 0, "Manifest funding: at least one wallet is required.");
     wallets.forEach((wallet, index) => {
         ensure(wallet && typeof wallet === "object", `Manifest funding: wallets[${index}] must be an object.`);
         ensure(

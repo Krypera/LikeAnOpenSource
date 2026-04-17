@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
     const primaryMenuOrder = ["home", "explore", "projects", "articles", "guides", "contribute", "about"];
     const supportMenuId = "support";
-    const walletPlaceholderText = "Coming soon";
     const walletCopyResetTimers = new WeakMap();
 
     const escapeHtml = (value = "") =>
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const isWalletPlaceholder = (address = "") =>
-        normalizeText(address) === normalizeText(walletPlaceholderText);
+        normalizeText(address) === normalizeText("Coming soon");
 
     const getFundingMetrics = (funding) => {
         const expenses = Array.isArray(funding?.expenses) ? funding.expenses : [];
@@ -813,22 +812,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const renderSupportWalletCard = (wallet) => {
-        const isPlaceholder = isWalletPlaceholder(wallet.address);
         const symbolMarkup = wallet.symbol
             ? `<span class="support-wallet-symbol">${escapeHtml(wallet.symbol)}</span>`
             : "";
-        const copyButtonMarkup = isPlaceholder
-            ? ""
-            : `
-                <button
-                    type="button"
-                    class="wallet-copy-button"
-                    data-label="Copy"
-                    data-wallet-address="${escapeHtml(wallet.address)}"
-                >
-                    Copy
-                </button>
-            `;
+        const copyButtonMarkup = `
+            <button
+                type="button"
+                class="wallet-copy-button"
+                data-label="Copy"
+                data-wallet-address="${escapeHtml(wallet.address)}"
+            >
+                Copy
+            </button>
+        `;
 
         return `
             <article class="support-wallet-card">
@@ -839,7 +835,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     </div>
                     ${copyButtonMarkup}
                 </div>
-                <p class="support-wallet-address${isPlaceholder ? " support-wallet-placeholder" : ""}">${escapeHtml(wallet.address)}</p>
+                <p class="support-wallet-address">${escapeHtml(wallet.address)}</p>
             </article>
         `;
     };
@@ -850,10 +846,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const metrics = getFundingMetrics(funding);
-        const whyMarkup = funding.why
-            .map((item) => `<li>${escapeHtml(item)}</li>`)
+        const noAdsMarkup = (Array.isArray(funding.noAds) ? funding.noAds : [])
+            .map((item) => `<p class="doc-text">${escapeHtml(item)}</p>`)
             .join("");
-        const expensesMarkup = funding.expenses
+        const whyMarkup = (Array.isArray(funding.why) ? funding.why : [])
+            .map((item) => `<p class="doc-text">${escapeHtml(item)}</p>`)
+            .join("");
+        const expensesMarkup = (Array.isArray(funding.expenses) ? funding.expenses : [])
             .map((expense) => {
                 const noteMarkup = expense.note
                     ? `<p class="support-expense-note">${escapeHtml(expense.note)}</p>`
@@ -869,7 +868,24 @@ document.addEventListener("DOMContentLoaded", async () => {
                 `;
             })
             .join("");
-        const walletsMarkup = funding.wallets.map(renderSupportWalletCard).join("");
+        const walletIntroMarkup = (Array.isArray(funding.walletHelp) ? funding.walletHelp : [])
+            .map((item) => `<p class="doc-text">${escapeHtml(item)}</p>`)
+            .join("");
+        const readyWallets = (Array.isArray(funding.wallets) ? funding.wallets : []).filter(
+            (wallet) =>
+                wallet &&
+                typeof wallet.address === "string" &&
+                wallet.address.trim() &&
+                !isWalletPlaceholder(wallet.address)
+        );
+        const walletsMarkup = readyWallets.map(renderSupportWalletCard).join("");
+        const walletGridMarkup = readyWallets.length
+            ? `
+                    <div class="support-wallet-grid">
+                        ${walletsMarkup}
+                    </div>
+                `
+            : "";
 
         return `
             <section
@@ -880,14 +896,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ${isActive ? "" : "hidden"}
             >
                 <h1 class="doc-title">${escapeHtml(funding.sidebarLabel || "Support LAOS")}</h1>
-                <p class="doc-subtitle">Why we are collecting donations and what they help cover</p>
+                <p class="doc-subtitle">Independent support for an ad-free catalog</p>
                 <p class="doc-text">${escapeHtml(funding.sidebarCaption || "Help cover the monthly cost of running the project.")}</p>
+
+                <div id="support-no-ads" class="doc-section">
+                    <h2 class="doc-subtitle">Why We Don't Run Ads</h2>
+                    ${noAdsMarkup}
+                </div>
 
                 <div id="support-why" class="doc-section">
                     <h2 class="doc-subtitle">Why Support Helps</h2>
-                    <ul class="doc-list">
-                        ${whyMarkup}
-                    </ul>
+                    ${whyMarkup}
                 </div>
 
                 <div id="support-this-month" class="doc-section">
@@ -924,11 +943,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
 
                 <div id="support-wallets" class="doc-section">
-                    <h2 class="doc-subtitle">Crypto Wallets</h2>
-                    <p class="doc-text">Wallet details are managed manually in the repository. Until each address is published, the card will show a placeholder.</p>
-                    <div class="support-wallet-grid">
-                        ${walletsMarkup}
-                    </div>
+                    <h2 class="doc-subtitle">How to Contribute Financially</h2>
+                    ${walletIntroMarkup}
+                    ${walletGridMarkup}
                 </div>
 
                 <div id="support-disclaimer" class="doc-section">

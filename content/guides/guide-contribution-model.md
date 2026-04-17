@@ -1,33 +1,23 @@
 # Guide contribution model
 
-LAOS does not want guides that read like disconnected documentation fragments. A guide should act like a path: it should help a reader decide where to begin, what to compare, and when they are ready to move forward.
+Guides follow the same model as everything else on this site: GitHub is the source of truth.
 
-## Start from a real decision
+## How guide submissions work
 
-A good guide begins with a real question, such as:
+If you want to write a guide, open a pull request. No prior claim needed. No announcement required. Write it, submit it, let the community see it.
 
-- Which documentation platform fits a small team?
-- How should I judge whether a repository is worth contributing to?
-- What should I check before opening my first pull request?
+Every open guide topic has a brief. Read it before you start. The brief isn't a content template or a rigid checklist. It sets the frame: who the reader is, what they should be able to do after reading, and what the guide should avoid. It's there to make sure you're writing the right thing for the right person, not just filling a topic slot.
 
-If the guide cannot name the decision it is helping with, it is probably too broad.
+If your guide fits, it gets merged and published automatically. If it doesn't, the feedback is public and specific. You'll know exactly what to fix and why.
 
-## Move the reader forward in stages
+## When more than one draft exists
 
-Good LAOS guides should usually move through three stages:
+Two people can submit guides for the same topic. The better one moves forward, or both get reviewed and the community works it out.
 
-1. Clarify the situation the reader is in.
-2. Explain the criteria they should use to judge options.
-3. Give them a concrete next action.
+That's not a flaw in the system. That's the system working.
 
-That structure keeps the guide useful even when the ecosystem around it changes.
+## Proposing a new guide topic
 
-## Connect to the rest of the site
+If you want to propose a topic that doesn't exist in the backlog yet, the process is the same: open a pull request with a brief of your own.
 
-Guides should not try to contain everything. They should hand off clearly to:
-
-- `Projects` when the reader needs a repository note
-- `Articles` when the reader needs deeper tradeoff analysis
-- `Contribute` when the reader wants to help fill a gap in the library
-
-The handoff matters as much as the explanation.
+If the topic belongs here, it gets added and becomes available to any contributor.

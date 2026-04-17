@@ -15,13 +15,17 @@
     "funding": {
         "enabled": true,
         "sidebarLabel": "Support LAOS",
-        "sidebarCaption": "Help cover the monthly cost of running the project.",
+        "sidebarCaption": "Help keep the platform online and independent.",
         "reportingMonth": "April 2026",
         "monthlyRaisedUsd": 0,
+        "noAds": [
+            "LAOS doesn't run ads. It doesn't take sponsorships. It doesn't sell placement in the project catalog or the backlog.",
+            "That's a choice, not an oversight. A platform that evaluates open source projects honestly can't also accept money from the people whose projects it evaluates. The editorial independence is the product. Ads would compromise it.",
+            "The alternative is direct support from the people who find the platform useful. If LAOS helps you, you can help keep it running."
+        ],
         "why": [
-            "Keep LikeAnOpenSource online without ads or paywalls.",
-            "Cover the recurring cost of hosting, maintenance, and contributor-facing tooling.",
-            "Give the project room to publish better guides, reviews, and backlog updates over time."
+            "Every dollar raised goes toward the recurring cost of keeping the platform online and independent. No salaries, no growth spend, no infrastructure bloat. The expenses are listed below exactly as they are: hosting, domain, tooling. That's it.",
+            "Support also gives the project room to grow the backlog, improve contributor tooling, and publish better content over time without needing to answer to anyone but the community."
         ],
         "expenses": [
             {
@@ -40,32 +44,20 @@
                 "note": "Validation, testing, and editorial workflow tooling."
             }
         ],
-        "wallets": [
-            {
-                "network": "Ethereum",
-                "symbol": "ETH",
-                "address": "Coming soon"
-            },
-            {
-                "network": "Solana",
-                "symbol": "SOL",
-                "address": "Coming soon"
-            },
-            {
-                "network": "BNB Chain",
-                "symbol": "BNB",
-                "address": "Coming soon"
-            }
+        "walletHelp": [
+            "Crypto wallet addresses are managed directly in the repository and published here as they become available. Until an address is confirmed and live in the repo, it won't appear on this page. No placeholders, no coming soon cards, just the addresses that are actually ready to receive.",
+            "Addresses will appear here as soon as they are ready."
         ],
-        "disclaimer": "These figures are working monthly estimates and will be updated as the project cost changes."
+        "wallets": [],
+        "disclaimer": "These figures are working monthly estimates based on current recurring expenses. They will be updated in the repository as costs change. If the numbers here don't match what you'd expect, open an issue or a pull request."
     },
     "sections": {
         "home": {
             "title": "Home",
-            "subtitle": "A community-written backlog for open-source learning",
+            "subtitle": "A community-written library of project notes, articles, and guides built around open source",
             "intro": [
-                "LikeAnOpenSource is being built as a community-written library of project notes, articles, and guides.",
-                "Right now the most honest thing the site can do is show what should be written next and make that backlog easy to contribute to through GitHub."
+                "LikeAnOpenSource is a community-written library of project notes, articles, and guides built around open source. Nothing here is generated, scraped, or simulated. Every piece of content is written by a real contributor and accepted through GitHub review.",
+                "Right now the library is still being built. The most honest thing the site can do is show what should exist, make the backlog visible, and make it easy to contribute through GitHub."
             ],
             "callout": {
                 "tone": "default",
@@ -76,7 +68,10 @@
                     "id": "home-overview",
                     "title": "How the Platform Works",
                     "intro": [
-                        "The current version is intentionally honest about what exists and what is still waiting for real contributors."
+                        "The current version is intentionally honest about what exists and what is still waiting for real contributors.",
+                        "Explore defines what the platform wants to surface, the editorial standard that content will need to meet once contributors start writing. It's not a feed yet. It's a direction.",
+                        "Projects, Articles, and Guides each define what good content looks like in that category and point contributors toward the open briefs waiting to be written. None of them simulate a catalog that doesn't exist yet.",
+                        "Contribute is where the work actually starts. Open topics are backed by the GitHub repository. When a brief is added or removed, the site reflects it automatically. When a contribution is merged, it goes live the same way."
                     ],
                     "blocks": [
                         {
@@ -85,39 +80,39 @@
                                 {
                                     "tag": "Explore",
                                     "title": "Editorial direction first",
-                                    "description": "Explore explains what the platform wants to surface once real community content starts landing.",
+                                    "description": "Explore defines what deserves to be surfaced here and why. It is not a feed yet. It is the editorial direction the rest of the site is building toward.",
                                     "href": "#content-explore",
                                     "linkLabel": "Open Explore",
                                     "external": false
                                 },
                                 {
                                     "tag": "Projects",
-                                    "title": "Repository notes are still open work",
-                                    "description": "Projects now defines what a good repository note should cover instead of pretending a finished catalog already exists.",
+                                    "title": "Repository notes are open work",
+                                    "description": "Projects explains what a real repository note must cover and points contributors to the open briefs that still need to be written.",
                                     "href": "#content-projects",
                                     "linkLabel": "Open Projects",
                                     "external": false
                                 },
                                 {
                                     "tag": "Articles",
-                                    "title": "Long-form writing will be community-written",
-                                    "description": "Articles now makes room for explainers, research pieces, statistics roundups, editorials, and other long-form writing that real contributors want to publish.",
+                                    "title": "Articles define the standard",
+                                    "description": "Articles explains what belongs in long-form writing here, what questions it should answer, and how open article briefs move toward publication.",
                                     "href": "#content-articles",
                                     "linkLabel": "Open Articles",
                                     "external": false
                                 },
                                 {
                                     "tag": "Guides",
-                                    "title": "Guide quality before guide volume",
-                                    "description": "Guides explains what future step-by-step paths should do before the first guide library is published.",
+                                    "title": "Guides define useful paths",
+                                    "description": "Guides explains what a real guide should help a reader do, who it should be for, and which briefs are still waiting for contributors.",
                                     "href": "#content-guides",
                                     "linkLabel": "Open Guides",
                                     "external": false
                                 },
                                 {
                                     "tag": "Contribute",
-                                    "title": "The backlog lives in GitHub",
-                                    "description": "Open topics are repository-backed briefs. When a topic is added or removed in GitHub, the site reflects that change automatically.",
+                                    "title": "The work starts in GitHub",
+                                    "description": "Contribute is where open topics, briefs, and submissions actually live. When a brief changes or a contribution is merged, the site updates from the repository.",
                                     "href": "#content-contribute",
                                     "linkLabel": "Open Contribute",
                                     "external": false
@@ -134,16 +129,16 @@
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "For contributors",
-                                    "text": "Open Contribute and choose a topic brief that matches the format you want to write."
+                                    "label": "If you want to contribute",
+                                    "text": "Open Contribute and browse the topic briefs. Each brief tells you what to write, who it's for, and what it needs to do. Pick one that fits and open a pull request."
                                 },
                                 {
-                                    "label": "For editors",
-                                    "text": "Use Explore, Projects, Articles, and Guides to check whether the backlog and empty states still describe the product honestly."
+                                    "label": "If you want to understand the editorial direction",
+                                    "text": "Start with Explore. It explains what kind of content earns a place here and why. Then check Projects, Articles, and Guides to see where the gaps are."
                                 },
                                 {
-                                    "label": "For curious readers",
-                                    "text": "Read Explore first, then jump into the section whose future content you care most about."
+                                    "label": "If you're just curious",
+                                    "text": "Read Explore first to understand what this platform is trying to build. Then go wherever the content you care about most would eventually live."
                                 }
                             ]
                         }
@@ -156,14 +151,15 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "Clarity matters more than polish. A page should tell visitors what is real today and what still depends on future contributors.",
-                                "A smaller, honest backlog is more useful than a larger fake catalog. The site should never imply that community-written content already exists when it does not."
+                                "Clarity matters more than polish. Every page should tell visitors what is real today and what still depends on future contributors. No section should imply more than it can deliver.",
+                                "A smaller honest backlog is more useful than a larger fake catalog. The site will never suggest that community-written content already exists when it doesn't.",
+                                "Content earns visibility, it doesn't inherit it. Nothing appears in Projects, Articles, Guides, or Explore because it seems like it should be there. It appears because a real contributor wrote it and a real reviewer accepted it through GitHub."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "warning",
-                            "text": "No section should simulate momentum. Content earns visibility only after a real contributor writes it and a real reviewer accepts it."
+                            "text": "Empty states are honest states. No section should simulate momentum or suggest that a catalog exists before contributors actually build it."
                         }
                     ]
                 }
@@ -171,10 +167,10 @@
         },
         "explore": {
             "title": "Explore",
-            "subtitle": "What LAOS wants to surface once the community library starts growing",
+            "subtitle": "Why discovery matters here, what deserves to be surfaced, and what still needs to be written",
             "intro": [
-                "Explore is not a featured feed yet. It is a public statement about the kind of material this platform wants to earn over time.",
-                "For now it explains what deserves space on the site and sends contributors toward the backlog that can make that future real."
+                "Explore is not here to answer what is popular. It is here to answer what is actually worth your time.",
+                "Until the site has enough reviewed notes and articles to fill this space honestly, Explore explains what it is building toward and points contributors to the backlog that can make it real."
             ],
             "groups": [
                 {
@@ -184,8 +180,9 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "A useful discovery layer does more than list popular repositories. It helps someone understand why a thing matters, how difficult it is to adopt, and where to go next.",
-                                "Until LAOS has real community-written notes and articles, Explore should describe that editorial intent clearly instead of pretending the feed is already full."
+                                "Most discovery tools answer one question: what's popular? Explore exists to answer a different one: what's actually worth your time?",
+                                "A useful discovery layer does more than surface trending repositories. It helps someone understand why a project matters, how realistic it is to adopt, and what they'll walk away knowing. That kind of content has to be written. It can't be generated from star counts or download numbers.",
+                                "Until LAOS has enough community-written notes and articles to fill this space honestly, Explore describes what it's building toward and sends contributors to the backlog that can make it real."
                             ]
                         }
                     ]
@@ -198,24 +195,24 @@
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Clear onboarding",
-                                    "text": "A reader should understand what the project or topic is, how to start, and what effort it asks from them."
+                                    "label": "It makes onboarding legible",
+                                    "text": "A reader should understand what a project or topic is, how to start, and what it will actually ask of them before they commit to anything."
                                 },
                                 {
-                                    "label": "Visible maintenance",
-                                    "text": "A useful piece should talk about stewardship, issue hygiene, release rhythm, or other signals of repository health."
+                                    "label": "It shows maintenance signals",
+                                    "text": "A useful piece should address stewardship: issue hygiene, release rhythm, documentation upkeep, and maintainer responsiveness. These signals tell a reader whether the project is alive and worth investing in."
                                 },
                                 {
-                                    "label": "Transferable learning",
-                                    "text": "The content should teach something reusable instead of just praising a tool."
+                                    "label": "It teaches something transferable",
+                                    "text": "The goal is not to praise a tool. It's to leave the reader with something reusable: a pattern, a decision framework, or a way of evaluating similar things in the future."
                                 },
                                 {
-                                    "label": "Honest tradeoffs",
-                                    "text": "If something is powerful but costly, niche, or difficult, the writing should say so directly."
+                                    "label": "It states tradeoffs honestly",
+                                    "text": "If something is powerful but complex, niche but valuable, or promising but unmaintained, the writing should say so directly. Useful discovery reduces hesitation by naming friction clearly, not by hiding it."
                                 },
                                 {
-                                    "label": "Actionable next step",
-                                    "text": "Good discovery content reduces hesitation by making the next click or next contribution obvious."
+                                    "label": "It makes the next step obvious",
+                                    "text": "Good content ends with the reader knowing exactly what to do next, whether that's opening a repository, reading a related article, or deciding something isn't right for them."
                                 }
                             ]
                         },
@@ -227,16 +224,38 @@
                     ]
                 },
                 {
+                    "id": "explore-what-it-will-not-do",
+                    "title": "What Explore Will Not Do",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Explore will not rank projects by popularity. A repository with ten thousand stars is not automatically more useful than one with two hundred. What matters is whether someone took the time to evaluate it honestly.",
+                                "It will not surface content that hasn't been reviewed. There's no automated feed, no scraping, and no algorithm pulling in repositories because they're trending. Everything here goes through the same GitHub review process as everything else on the platform.",
+                                "It will not pretend the catalog is full when it isn't. If a category is empty, it says so. If a topic hasn't been covered yet, it points to the backlog instead of filling the space with placeholder content that helps no one."
+                            ]
+                        }
+                    ]
+                },
+                {
                     "id": "explore-what-needs-writing",
                     "title": "What Needs To Be Written Next",
                     "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "The backlog in Contribute is the single source of truth for open topics across Projects, Articles, and Guides.",
+                                "Browse the briefs, find something that fits, and open a pull request. Every piece of content that gets written and accepted will eventually find its place here.",
+                                "If you're not sure where to start, the Contribute section has the full workflow."
+                            ]
+                        },
                         {
                             "type": "cards",
                             "items": [
                                 {
                                     "tag": "Projects",
                                     "title": "Repository notes we still need",
-                                    "description": "Projects explains what a repository note must cover and sends contributors to the open backlog.",
+                                    "description": "Projects explains what a repository note must cover and points you to the briefs that can eventually fill Explore.",
                                     "href": "#projects-open-call",
                                     "linkLabel": "See project note needs",
                                     "external": false
@@ -244,7 +263,7 @@
                                 {
                                     "tag": "Articles",
                                     "title": "Article topics waiting for real writers",
-                                    "description": "Articles now covers explainers, research pieces, statistics writing, and opinionated long-form work that still needs real contributors.",
+                                    "description": "Articles covers explainers, research pieces, statistics writing, and opinionated long-form work that still needs real contributors.",
                                     "href": "#articles-open-call",
                                     "linkLabel": "See article needs",
                                     "external": false
@@ -252,7 +271,7 @@
                                 {
                                     "tag": "Guides",
                                     "title": "Guide briefs waiting for contributors",
-                                    "description": "Guides explains the future guide model and links into the open guide backlog.",
+                                    "description": "Guides explains the guide model and links into the open backlog for decision-oriented guide topics.",
                                     "href": "#guides-open-call",
                                     "linkLabel": "See guide needs",
                                     "external": false
@@ -260,7 +279,7 @@
                                 {
                                     "tag": "Contribute",
                                     "title": "Browse the full backlog",
-                                    "description": "Contribute is the single source of truth for open topic briefs that can be added or removed through GitHub.",
+                                    "description": "Contribute is the single source of truth for open topic briefs across the whole site.",
                                     "href": "#content-contribute",
                                     "linkLabel": "Open the backlog",
                                     "external": false
@@ -273,10 +292,10 @@
         },
         "projects": {
             "title": "Projects",
-            "subtitle": "Repository notes will appear here once contributors publish real evaluations",
+            "subtitle": "What repository notes should do and how they move from backlog to published evaluation",
             "intro": [
-                "There are no published community-written project notes yet.",
-                "This section now defines what a strong repository note should do and sends contributors toward the backlog instead of pretending the catalog already exists."
+                "Repository notes should help a reader decide whether a project is worth their time.",
+                "This section explains what belongs in the project catalog, what a strong repository note must do, and how contributors can add one through GitHub."
             ],
             "groups": [
                 {
@@ -286,14 +305,15 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The public project catalog is intentionally empty until someone writes a repository note grounded in a real project, real evidence, and real editorial review.",
-                                "When the first accepted project note is added to the repository, it can appear here automatically through the same GitHub-backed content model."
+                                "The project catalog is intentionally empty. Not because the platform isn't ready, but because nothing gets published here until someone writes a real repository note grounded in a real project, real evidence, and real editorial review.",
+                                "When the first note is written and merged through GitHub review, it will appear here automatically.",
+                                "Until then, this page does something more honest: it tells you what belongs here and how to put it there."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "default",
-                            "text": "No repository note is published until it has been written by a contributor and merged through GitHub review."
+                            "text": "Nothing is published in the project catalog until a contributor writes a real repository note and it passes GitHub review."
                         }
                     ]
                 },
@@ -321,23 +341,50 @@
                             "items": [
                                 {
                                     "label": "Why the repository matters",
-                                    "text": "Explain the problem the repository solves and who it helps."
+                                    "text": "Explain the problem it solves and who it actually helps. Not what the README claims, but what the project demonstrably does."
                                 },
                                 {
-                                    "label": "Onboarding path",
-                                    "text": "Show what a newcomer sees in the README, setup flow, contribution docs, and first useful issue path."
+                                    "label": "The onboarding path",
+                                    "text": "Walk through what a newcomer actually sees. Is the README clear? Is the setup realistic for someone who didn't write the code? Are contribution docs visible and usable? Follow it as if you're the first person arriving."
                                 },
                                 {
-                                    "label": "Maintenance signal",
-                                    "text": "Describe release rhythm, issue hygiene, documentation quality, or other visible trust signals."
+                                    "label": "The maintenance signal",
+                                    "text": "Look at release rhythm, issue hygiene, how maintainers respond to pull requests, and how documentation is kept up to date. These signals tell a reader whether the project is alive and whether their contribution would matter."
                                 },
                                 {
-                                    "label": "Learning value",
-                                    "text": "Clarify what a reader can learn from this repository beyond a simple feature list."
+                                    "label": "The learning value",
+                                    "text": "Show what a reader can take away from this repository beyond a feature list. Name the patterns, decisions, or approaches that make it worth studying."
                                 },
                                 {
-                                    "label": "Contribution reality",
-                                    "text": "Be honest about how easy or difficult it is for someone to contribute usefully."
+                                    "label": "The contribution reality",
+                                    "text": "Be honest about how hard it is to contribute usefully. A project that claims to be beginner-friendly should be evaluated on whether that claim actually holds up."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "projects-what-to-avoid",
+                    "title": "What A Project Note Must Not Do",
+                    "blocks": [
+                        {
+                            "type": "list",
+                            "items": [
+                                {
+                                    "label": "It must not repeat the README",
+                                    "text": "If the repository says it's \"blazing fast\" and \"easy to use,\" that's not information. That's marketing. A note that rephrases the project's own description adds nothing."
+                                },
+                                {
+                                    "label": "It must not make unsupported claims",
+                                    "text": "Every assessment needs to be traceable. If you say onboarding is smooth, show why. If you say maintenance is weak, point to something visible."
+                                },
+                                {
+                                    "label": "It must not avoid a verdict",
+                                    "text": "A note that describes everything but concludes nothing isn't useful. The reader should finish it knowing whether this project is worth their time and for whom."
+                                },
+                                {
+                                    "label": "It must not be a feature list",
+                                    "text": "Listing what a project does is not the same as evaluating it. Features are already on the project's own page."
                                 }
                             ]
                         }
@@ -348,12 +395,21 @@
                     "title": "Where To Start",
                     "blocks": [
                         {
+                            "type": "paragraphs",
+                            "items": [
+                                "Open the backlog and look for briefs tagged `Project Topic`.",
+                                "Each brief tells you which repository to evaluate, who the intended reader is, what the note needs to demonstrate, and what it should avoid. Read the brief before you start. It exists to keep the note focused.",
+                                "When your note is ready, open a pull request. The community reviews it, moderators decide, and if it's accepted it goes live automatically.",
+                                "If you want to understand how a topic moves from backlog to published note, the Contribute section has the full workflow."
+                            ]
+                        },
+                        {
                             "type": "cards",
                             "items": [
                                 {
                                     "tag": "Backlog",
                                     "title": "Browse open project topics",
-                                    "description": "Open the backlog and look for briefs tagged `Project Topic` if you want to write the first repository notes for LAOS.",
+                                    "description": "Open the backlog and look for briefs tagged `Project Topic` if you want to evaluate a repository through a real note instead of a surface-level summary.",
                                     "href": "#contribute-open-topics",
                                     "linkLabel": "Open project backlog",
                                     "external": false
@@ -361,7 +417,7 @@
                                 {
                                     "tag": "Workflow",
                                     "title": "See how topics become published notes",
-                                    "description": "The Contribute section explains how a topic moves from backlog brief to accepted public content through GitHub review.",
+                                    "description": "The Contribute section explains how a project topic moves from backlog brief to accepted public content through GitHub review.",
                                     "href": "#contribute-how-it-works",
                                     "linkLabel": "Open the workflow",
                                     "external": false
@@ -374,28 +430,41 @@
         },
         "articles": {
             "title": "Articles",
-            "subtitle": "Explainers, research pieces, statistics writing, and other long-form articles will appear here after contributors publish real work",
+            "subtitle": "What articles are for, what they can cover, and how they move through GitHub",
             "intro": [
-                "There are no published community-written articles yet.",
-                "This section is meant to hold a broad range of long-form writing: explainers, research pieces, statistics roundups, ecosystem notes, and essays with a clear point of view.",
-                "Instead of showing seeded essays, it now defines the editorial range and points contributors toward the open article backlog."
+                "An article should leave the reader with a clearer mental model, a sharper question, or a perspective they had not considered before.",
+                "This section explains what counts as an article on LAOS, what kinds of articles belong here, and how article submissions move from brief to published content."
             ],
             "groups": [
                 {
-                    "id": "articles-status",
-                    "title": "Current Status",
+                    "id": "articles-purpose",
+                    "title": "What an Article Is (and Isn't)",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The article library stays empty until someone writes a real piece with a clear reader, a real question, and useful context, evidence, or perspective.",
-                                "Once a reviewed article record is merged into the repository, it can appear here automatically without hand-authoring new HTML."
+                                "An article is not a guide. The difference matters.",
+                                "A guide moves a specific reader through a decision or a task. It has a starting point and an endpoint. The reader finishes it able to do something they couldn't do before.",
+                                "An article does something different. It explains, examines, or argues. It might surface research, document how an ecosystem works, or take a position on something worth debating. The reader finishes it with a clearer mental model, a sharper question, or a perspective they hadn't considered.",
+                                "Both formats have value. Neither replaces the other. If what you're writing ends with a recommendation for a specific reader in a specific situation, it might belong in Guides. If it ends with understanding, evidence, or a defensible point of view, it belongs here."
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-coverage",
+                    "title": "What an Article Can Cover",
+                    "blocks": [
                         {
-                            "type": "callout",
-                            "tone": "default",
-                            "text": "Articles should publish useful context, not filler. A good piece can explain a concept, surface research or statistics, document an ecosystem, or argue for a point of view, but it should always leave the reader with something more usable than they had before."
+                            "type": "paragraphs",
+                            "items": [
+                                "Articles on this site don't follow a single template. There are several kinds worth writing, and each one earns its place differently.",
+                                "Some articles explain a concept. They help a reader understand a subject, system, or idea without flattening the details that actually matter. A good explainer doesn't simplify for the sake of accessibility. It finds the level where the reader can think clearly about the topic.",
+                                "Some articles surface research or statistics. They gather evidence, numbers, or patterns from the field and explain why they matter in practice. The value isn't the data itself. It's the interpretation that helps a reader use it.",
+                                "Some articles document an ecosystem or workflow. They map how a space works, where the friction lives, and what a newcomer should notice first. These pieces are useful precisely because they're hard to find elsewhere.",
+                                "Some articles take a defensible position. Opinionated writing is welcome here when the reasoning is visible and the claims are grounded. An argument backed by evidence is more useful than a survey that won't commit to a conclusion.",
+                                "Every article, regardless of type, should make its intended audience obvious from the start and leave the reader with something more usable than they had before."
+                            ]
                         }
                     ]
                 },
@@ -404,7 +473,7 @@
                     "title": "Published Articles",
                     "intro": [
                         "Reviewed long-form writing will appear here automatically once accepted article records are added to `content/articles/index.json`.",
-                        "For now this remains a truthful empty library rather than a seeded reading room."
+                        "Until that happens, this stays an honest empty library instead of a seeded reading room."
                     ],
                     "blocks": [
                         {
@@ -415,36 +484,44 @@
                     ]
                 },
                 {
-                    "id": "articles-editorial-bar",
-                    "title": "What A Good Article Can Be",
+                    "id": "articles-writing-rules",
+                    "title": "Article Writing Rules",
                     "blocks": [
                         {
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Explain a concept clearly",
-                                    "text": "Some articles should help a reader understand a subject, system, tool, or idea without flattening the important details."
-                                },
-                                {
-                                    "label": "Surface research or statistics",
-                                    "text": "Some articles should gather evidence, numbers, or patterns and explain why they matter."
-                                },
-                                {
-                                    "label": "Document an ecosystem or workflow",
-                                    "text": "A strong article can map how a space works, where the friction lives, and what a newcomer should notice first."
-                                },
-                                {
-                                    "label": "Take a defensible position",
-                                    "text": "Opinionated writing is welcome when the reasoning is visible and the claims are grounded."
-                                },
-                                {
                                     "label": "Name the reader",
-                                    "text": "Every article should make its intended audience obvious from the start."
+                                    "text": "Before you write anything, you should be able to say exactly who this article is for and what they're trying to figure out. \"Developers\" is not a reader. A developer evaluating a repository before adopting it is."
                                 },
                                 {
-                                    "label": "Leave the reader with something usable",
-                                    "text": "Whether the piece is an explainer, research note, statistics article, or editorial, it should give the reader a clearer mental model or next step."
+                                    "label": "Earn your claims",
+                                    "text": "If you say something is common, show where. If you say something matters, explain why and for whom. Assertions without grounding don't belong here. Neither does confident-sounding language that doesn't actually say anything."
+                                },
+                                {
+                                    "label": "Respect the brief",
+                                    "text": "Every open article topic has a brief. It sets the frame: the question the article should answer, the evidence it should rely on, what it should avoid. You can bring your own voice and structure. The core purpose doesn't drift."
+                                },
+                                {
+                                    "label": "Stop when you're done",
+                                    "text": "A longer article is not a more serious one. If the reader has what they need, the article is finished. Padding, vague transitions, and summary conclusions that restate what was just said all work against the reader."
                                 }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "articles-contribution-model",
+                    "title": "Article Contribution Model",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Articles follow the same model as everything else on this site: GitHub is the source of truth.",
+                                "If you want to write an article, open a pull request. No prior claim needed. No announcement required. Write it, submit it, let the community see it.",
+                                "Every open article topic has a brief. Read it before you start. The brief tells you what question the article should answer, who it's written for, what kind of evidence or reasoning it should rely on, and what it should avoid. It's not a template. It's a frame.",
+                                "If your article fits, it gets merged and published automatically. If it doesn't, the feedback is public and specific. You'll know exactly what to fix and why.",
+                                "If you want to propose a topic that doesn't exist in the backlog yet, the process is the same: open a pull request with a brief of your own. If the topic belongs here, it gets added and becomes available to any contributor."
                             ]
                         }
                     ]
@@ -454,12 +531,21 @@
                     "title": "Where To Start",
                     "blocks": [
                         {
+                            "type": "paragraphs",
+                            "items": [
+                                "Start with the open topics in the Backlog.",
+                                "Each topic has a brief. Read it. If the topic fits your knowledge and the brief makes sense to you, write the article and open a pull request.",
+                                "If nothing in the backlog fits, propose a new topic. A pull request with a brief is enough. If it belongs here, it gets added.",
+                                "You don't need permission to start writing. You need a topic, a brief, and something honest to say."
+                            ]
+                        },
+                        {
                             "type": "cards",
                             "items": [
                                 {
                                     "tag": "Backlog",
                                     "title": "Browse open article topics",
-                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write explainers, research pieces, statistics writing, or other long-form LAOS articles.",
+                                    "description": "Open the backlog and look for briefs tagged `Article Topic` if you want to write an article with a real question, real evidence, or a defensible point of view.",
                                     "href": "#contribute-open-topics",
                                     "linkLabel": "Open article backlog",
                                     "external": false
@@ -467,7 +553,7 @@
                                 {
                                     "tag": "Workflow",
                                     "title": "Understand the publish path",
-                                    "description": "The Contribute workflow explains how an article brief becomes a reviewed public article through GitHub.",
+                                    "description": "The Contribute workflow explains how an article brief becomes published public writing through GitHub.",
                                     "href": "#contribute-how-it-works",
                                     "linkLabel": "Open the workflow",
                                     "external": false
@@ -480,21 +566,41 @@
         },
         "guides": {
             "title": "Guides",
-            "subtitle": "Guide contribution model and writing rules",
+            "subtitle": "What guides are for, who they are for, and how they move through GitHub",
             "intro": [
-                "No full guide library is published yet.",
-                "Until that exists, this section explains the kind of guide paths LAOS wants and what contributors should optimize for when writing them."
+                "A guide should help a specific reader reach a specific outcome.",
+                "This section explains what counts as a guide on LAOS, who it is for, and how guide submissions move from brief to published content."
             ],
             "groups": [
                 {
                     "id": "guides-purpose",
-                    "title": "What Guides Should Eventually Do",
+                    "title": "What a Guide Is (and Isn't)",
                     "blocks": [
                         {
                             "type": "paragraphs",
                             "items": [
-                                "A useful guide should move someone from uncertainty to action. It should tell them where to begin, what to compare, and how to decide that they are ready for the next step.",
-                                "That means the future guide library should be built around decision paths, not around generic topic dumping or overly polished summaries."
+                                "A guide is not an article. The difference matters.",
+                                "An article explains or analyzes. It might argue a point, describe a pattern, or examine a tradeoff. The reader leaves with better understanding.",
+                                "A guide moves someone through a process or a decision. It starts from a specific starting point and ends at a specific outcome. The reader leaves able to do something or decide something they couldn't before.",
+                                "If your draft explains how documentation platforms differ in general, it might be an article. If it tells a specific team which platform to choose given their size, their authoring habits, and their maintenance capacity, it's a guide.",
+                                "The distinction isn't about length or format. It's about what the reader can do when they close the tab.",
+                                "When in doubt, look at the brief. It says which one the topic needs."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "guides-audience",
+                    "title": "Who Guides Are Written For",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Every guide on this site is written for a specific reader, not for a general audience.",
+                                "\"Developers\" is not an audience. \"A developer making their first open-source contribution and not sure where to start\" is.",
+                                "This matters because vague audiences produce vague guides. When you don't know who you're writing for, you end up covering everything and helping no one. The guide becomes a survey of the topic instead of a path through it.",
+                                "Before you start writing, read the brief and find the person it describes. What do they already know? What are they trying to do? What would make this guide useful to them versus just interesting?",
+                                "Write for that person. Not for the broadest possible reader. Not for yourself. For the person who will open this guide with a real problem and need a real answer before they close the tab."
                             ]
                         }
                     ]
@@ -526,20 +632,29 @@
                     "title": "Where To Start",
                     "blocks": [
                         {
+                            "type": "paragraphs",
+                            "items": [
+                                "Start with the open topics in the Backlog.",
+                                "Each topic has a brief. Read it. If the topic fits your knowledge and the brief makes sense to you, write the guide and open a pull request.",
+                                "If nothing in the backlog fits, propose a new topic. A pull request with a brief is enough. If it belongs here, it gets added.",
+                                "You don't need permission to start writing. You need a topic, a brief, and something honest to say."
+                            ]
+                        },
+                        {
                             "type": "cards",
                             "items": [
                                 {
                                     "tag": "Backlog",
                                     "title": "Browse open guide topics",
-                                    "description": "Open the backlog and look for briefs tagged `Guide Topic` if you want to write the first guide paths for LAOS.",
+                                    "description": "Open the backlog and look for briefs tagged `Guide Topic` if you want to write a guide that solves a real reader problem.",
                                     "href": "#contribute-open-topics",
                                     "linkLabel": "Open guide backlog",
                                     "external": false
                                 },
                                 {
                                     "tag": "Workflow",
-                                    "title": "See how guide briefs move forward",
-                                    "description": "The Contribute workflow explains how a guide brief becomes real published guide content through GitHub review.",
+                                    "title": "See how guide submissions move",
+                                    "description": "The Contribute workflow explains how a guide brief becomes published guide content through GitHub review.",
                                     "href": "#contribute-how-it-works",
                                     "linkLabel": "Open the workflow",
                                     "external": false
@@ -552,14 +667,14 @@
         },
         "contribute": {
             "title": "Contribute",
-            "subtitle": "GitHub-backed topic backlog for future community-written content",
+            "subtitle": "Public backlog for content briefs and repository-based submissions",
             "intro": [
-                "Every topic in this section is a real request for future content.",
-                "If a topic disappears from the repository, it disappears from the site. If a new topic is merged, it shows up here automatically."
+                "This section shows what content still needs to be written and how contributions move through the repository.",
+                "If a topic or project change disappears from the repository, it disappears from the site. If a new one is merged, it shows up here automatically."
             ],
             "callout": {
                 "tone": "default",
-                "text": "There is no submission form yet. GitHub pull requests are the only source of truth for topic visibility and published content."
+                "text": "There is no submission form. GitHub pull requests are the only source of truth for topic visibility, project additions, and published content."
             },
             "groups": [
                 {
@@ -569,8 +684,9 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "The backlog is the place where LAOS makes its editorial needs visible. It tells contributors what kind of project notes, articles, and guides the platform still needs next.",
-                                "This backlog is intentionally repository-backed. That keeps visibility simple: the site shows only what the repository currently asks for."
+                                "This is the content backlog for LikeAnOpenSource. It's not a list of bugs or product tasks. Those live elsewhere.",
+                                "This backlog exists for one thing: tracking content that should exist but doesn't yet. Project notes that haven't been written. Articles that haven't been started. Guides that are still just an idea.",
+                                "If you're looking for something to contribute, this is where you start."
                             ]
                         }
                     ]
@@ -578,6 +694,11 @@
                 {
                     "id": "contribute-open-topics",
                     "title": "Open Topics",
+                    "intro": [
+                        "Open Topics are the content pieces currently waiting to be written.",
+                        "Each one represents a gap, something the community has decided is worth covering but hasn't covered yet. Browse the list, find something that fits your knowledge or interest, and check its brief before you start.",
+                        "Nothing here is assigned. Everything is available."
+                    ],
                     "blocks": [
                         {
                             "type": "record-feed",
@@ -589,9 +710,18 @@
                     "id": "contribute-topic-briefs",
                     "title": "Topic Briefs",
                     "intro": [
-                        "Open a brief before you start writing. Each brief explains the intended reader, the expected shape, and the kinds of evidence the final piece should include."
+                        "A Topic Brief is the working definition of a piece of content before it gets written. It's not a full outline and it's not a ticket.",
+                        "It lives in a Markdown file and answers the questions a writer actually needs before starting: What exactly should this content explain? Who is it for? What should the reader be able to do or decide after reading it? What evidence should it rely on? What should it avoid?"
                     ],
                     "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Every brief has two layers. The first is a short record: a card that shows the content type, target audience, difficulty level, expected outcome, and a link to the full brief. The second is the brief itself, which sets the frame without writing the content for you. It gives you direction without taking away your room to write.",
+                                "A brief might tell you to evaluate whether a repository is genuinely beginner-friendly. Not just whether it claims to be, but whether the README is clear, the setup is realistic, and the maintainer responses are visible. Another brief might ask you to compare documentation platforms for small teams, not by listing features, but by helping a specific kind of reader make a real decision.",
+                                "What a brief doesn't do: it doesn't write the article for you, it doesn't impose a paragraph structure, and it doesn't treat content work like a development task. It just makes sure you're writing the right thing, for the right person, at the right level of depth."
+                            ]
+                        },
                         {
                             "type": "record-feed",
                             "layout": "details",
@@ -601,37 +731,33 @@
                 },
                 {
                     "id": "contribute-how-it-works",
-                    "title": "How It Works",
+                    "title": "How to Contribute Content",
                     "blocks": [
                         {
-                            "type": "list",
+                            "type": "paragraphs",
                             "items": [
-                                {
-                                    "label": "1. Choose a brief",
-                                    "text": "Pick a topic from the backlog that matches the format you want to write."
-                                },
-                                {
-                                    "label": "2. Work in the repository",
-                                    "text": "Create or update the relevant JSON and Markdown files inside the repo. The site itself does not author content."
-                                },
-                                {
-                                    "label": "3. Open a focused pull request",
-                                    "text": "Explain what topic you addressed, what content you added, and why it meets the brief."
-                                },
-                                {
-                                    "label": "4. Pass review",
-                                    "text": "Moderation happens through GitHub review. A topic becomes public content only after a reviewer accepts the work."
-                                },
-                                {
-                                    "label": "5. Let the site update",
-                                    "text": "Once merged, the new topic or published content shows up automatically through the repo-backed fetch flow."
-                                }
+                                "Find an open topic that fits. Read its brief. Then open a pull request on the repository with your draft. Your contribution becomes visible immediately. The community can comment, suggest changes, or flag concerns. Moderators review and decide. If it fits, it gets merged and published automatically. If it doesn't, you'll know exactly why.",
+                                "You don't need to claim a topic in advance. You don't need to announce that you're working on something. Just write it and open the PR.",
+                                "If two people submit drafts for the same topic, the better one moves forward, or both get reviewed and the community figures it out from there."
                             ]
                         },
                         {
                             "type": "callout",
                             "tone": "warning",
-                            "text": "Backlog visibility and published content both follow the same rule: if it is not in the repository, it is not on the site."
+                            "text": "Backlog visibility and published content follow the same rule: if it is not in the repository, it is not on the site."
+                        }
+                    ]
+                },
+                {
+                    "id": "contribute-how-to-add-a-project",
+                    "title": "How to Add a Project",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "Project submissions follow the same process. No separate form, no external queue. Open a pull request on the repository with the project you want to add. It becomes visible in the repo, gets reviewed, and if it belongs here, it gets merged and appears on the site automatically.",
+                                "The same quality standards apply. A project being open source isn't enough on its own. It should be something the community would genuinely find useful, interesting, or worth knowing about."
+                            ]
                         }
                     ]
                 },
@@ -643,22 +769,27 @@
                             "type": "list",
                             "items": [
                                 {
-                                    "label": "Be specific",
-                                    "text": "Name the reader, the problem, and the real decision the content is trying to improve."
+                                    "label": "It must have a clear purpose",
+                                    "text": "Not just \"I wrote about this topic,\" but \"a specific reader will finish this and be able to do or decide something concrete.\""
                                 },
                                 {
-                                    "label": "Stay honest",
-                                    "text": "Do not imply firsthand knowledge, contributor friendliness, or maintenance quality without showing why."
+                                    "label": "It must be honest",
+                                    "text": "No unsupported claims. No marketing language dressed up as analysis. If you're comparing tools, the comparison has to actually help someone choose. If you're evaluating a project, the evaluation has to be real."
                                 },
                                 {
-                                    "label": "Reduce hesitation",
-                                    "text": "A strong piece should help the next person feel less lost and more ready to act."
+                                    "label": "It must respect the brief",
+                                    "text": "Open Topics exist for a reason. If you're writing from a brief, the brief sets the frame. You can bring your own voice and structure, but the core purpose shouldn't drift."
                                 },
                                 {
-                                    "label": "Fit the format",
-                                    "text": "Project notes, articles, and guides serve different jobs. The final piece should match the brief it came from."
+                                    "label": "It must be direct",
+                                    "text": "Long doesn't mean thorough. Say what needs to be said and stop. Padding, vague transitions, and filler conclusions all work against the reader."
                                 }
                             ]
+                        },
+                        {
+                            "type": "callout",
+                            "tone": "default",
+                            "text": "If your contribution does these four things, it belongs here."
                         }
                     ]
                 }
@@ -666,7 +797,7 @@
         },
         "about": {
             "title": "About",
-            "subtitle": "What this platform is and why it works this way",
+            "subtitle": "How the site works and why it is built this way",
             "groups": [
                 {
                     "id": "about-what-is-laos",
@@ -675,8 +806,9 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "LikeAnOpenSource is a documentation and discovery platform for open-source projects, built in public from the beginning.",
-                                "The most honest version of the platform right now is its backlog: a visible, repository-backed list of what should be written next and where contributors can help."
+                                "LikeAnOpenSource is a community-driven platform where open source projects get discovered, and where anyone can contribute to how it grows.",
+                                "There's no submission form. No approval queue hidden behind a dashboard. Every project, every article, every change goes through GitHub. You open a pull request, the community sees it, discusses it, and if it belongs here, it gets merged and goes live automatically.",
+                                "That's not just a workflow. That's a philosophy."
                             ]
                         }
                     ]
@@ -688,8 +820,9 @@
                         {
                             "type": "paragraphs",
                             "items": [
-                                "Open-source projects are often readable once you are inside them. Getting inside is the harder part.",
-                                "Contribution paths are unclear. Project complexity is hard to compare. First steps are buried. This platform exists to make those entry points visible, not by pretending a polished catalog already exists, but by building one honestly in the open."
+                                "Because open source deserves more than a GitHub star. Too many great projects sit undiscovered. Too many builders work in isolation.",
+                                "LikeAnOpenSource exists to close that gap, by making projects visible, by inviting real feedback, and by treating community contribution as a feature, not an afterthought.",
+                                "The personal articles exist for the same reason. Ideas also deserve to breathe in public."
                             ]
                         }
                     ]
@@ -699,26 +832,68 @@
                     "title": "How It Stays Honest",
                     "blocks": [
                         {
-                            "type": "list",
+                            "type": "paragraphs",
                             "items": [
-                                {
-                                    "label": "The backlog is the product",
-                                    "text": "Right now the most useful thing the site can do is show what needs to be written. The open topic list is not a placeholder. It is the current artifact."
-                                },
-                                {
-                                    "label": "Content lives in the repository",
-                                    "text": "Everything on the site can be traced back to real files in the repository, where it can be reviewed, improved, and discussed in the open."
-                                },
-                                {
-                                    "label": "Nothing is faked forward",
-                                    "text": "Sections that do not have real content yet say so directly, instead of hiding behind empty placeholders or premature polish."
-                                }
+                                "There's no algorithm here. No sponsored slots. No black-box moderation.",
+                                "Every submission is a pull request on a public repository. Anyone can see what's been proposed, what's been discussed, and what's been rejected and why. The conversation happens in the open, not behind closed doors.",
+                                "Moderators make the final call on what gets merged. That's intentional: quality matters, and someone has to be accountable for it. But the process that leads to that decision is visible to everyone. If you disagree with a decision, you can say so in the same place where the decision was made."
                             ]
-                        },
+                        }
+                    ]
+                },
+                {
+                    "id": "about-open-source-means",
+                    "title": "What \"Open Source\" Means to Us",
+                    "blocks": [
                         {
-                            "type": "callout",
-                            "tone": "warning",
-                            "text": "If something appears on the site, you should be able to trace it back to real work in the repository."
+                            "type": "paragraphs",
+                            "items": [
+                                "Open source is not just a license. It's a mindset.",
+                                "It means believing that the best ideas get better when more people can see them, question them, and improve them. It means trusting that transparency produces stronger software, and stronger communities, than secrecy ever could.",
+                                "At LikeAnOpenSource, we think of open as a posture toward the world. Share what you're building. Share what you're thinking. Let others in. That's the whole philosophy, really."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-who-can-contribute",
+                    "title": "Who Can Contribute",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "No form. No account wall. Just GitHub.",
+                                "If you want to add a project, write an article, or fix something that's broken, open a pull request. Your contribution becomes visible in the repository immediately. The community can comment, suggest changes, or show support. Moderators review and decide. If it fits, it gets merged. If it doesn't, you'll know exactly why.",
+                                "You don't need to be a senior developer. You don't need a big audience. You just need something worth sharing and the will to open that PR."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-what-were-not",
+                    "title": "What We're Not",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "We're not a marketplace. Nothing here is for sale. We're not a ranking system. There's no leaderboard, no algorithm deciding whose work matters more.",
+                                "We're not trying to be the biggest, the fastest, or the most funded. We're trying to be useful, to the people who build in the open and the people who want to find them.",
+                                "If that sounds small, good. Small and honest beats large and hollow every time."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "about-the-people-behind-it",
+                    "title": "The People Behind It",
+                    "blocks": [
+                        {
+                            "type": "paragraphs",
+                            "items": [
+                                "LikeAnOpenSource wasn't built by a team. It was built by people, readers who became writers, writers who became contributors, contributors who became the reason this place exists at all.",
+                                "There's no headquarters. No investor deck. No roadmap handed down from the top. Just people who believe that open source is worth taking seriously, and that a community built around that belief is worth maintaining.",
+                                "If you're reading this, you're probably one of them."
+                            ]
                         }
                     ]
                 },

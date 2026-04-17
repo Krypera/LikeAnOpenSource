@@ -1,32 +1,27 @@
 # Guide writing rules
 
-LAOS guides should make the next step feel possible, not just informative.
+Every guide on this site follows four rules. They apply to every submission without exception.
 
-## Write for motion, not for display
+## Have a real outcome
 
-The reader should finish a guide knowing what to do next. That means:
+Not "the reader will understand X." The reader will be able to do X, or choose between X and Y, under specific conditions.
 
-- define the reader clearly
-- keep the scope narrow
-- explain why each step exists
-- show where a reader can stop and still leave with value
+If you can't name the outcome in one sentence, the guide isn't ready to be written yet.
 
-## Prefer criteria over slogans
+## Earn your claims
 
-A guide should teach how to judge something, not just what to like. Use criteria such as:
+If you say a tool is easier to maintain, show why and for whom. If you say a process is faster, say under what conditions.
 
-- onboarding clarity
-- maintenance signal
-- cost of adoption
-- contribution difficulty
+Assertions without evidence don't belong here, and marketing language dressed up as analysis doesn't either.
 
-Those make the guide reusable beyond a single example.
+## Respect the brief
 
-## Avoid these failure modes
+Open topics exist for a reason. The brief tells you who the guide is for and what it needs to accomplish.
 
-- broad introductions that never narrow into a decision
-- fake certainty about tools or workflows
-- copying product language from repository marketing
-- listing steps without explaining what success looks like
+You can bring your own voice and your own structure. The core purpose doesn't drift.
 
-If the writing sounds polished but does not reduce hesitation, it still needs work.
+## Stop when you're done
+
+Long doesn't mean thorough. If the reader has what they need, the guide is finished.
+
+Padding, vague transitions, and motivational closings all work against the reader. Say what needs to be said and stop.

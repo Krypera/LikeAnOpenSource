@@ -305,6 +305,10 @@ window.LAOSContentService = (() => {
     const normalizeFunding = (value) => {
         const safeValue = value && typeof value === "object" ? value : {};
         const monthlyRaisedUsd = Number(safeValue.monthlyRaisedUsd);
+        const normalizeFundingTextList = (items) =>
+            toArray(items)
+                .map((item) => (typeof item === "string" ? item.trim() : ""))
+                .filter(Boolean);
 
         return {
             enabled: safeValue.enabled === true,
@@ -321,10 +325,12 @@ window.LAOSContentService = (() => {
                     ? safeValue.reportingMonth.trim()
                     : "",
             monthlyRaisedUsd: Number.isFinite(monthlyRaisedUsd) ? Math.max(0, monthlyRaisedUsd) : 0,
-            why: toArray(safeValue.why),
+            noAds: normalizeFundingTextList(safeValue.noAds),
+            why: normalizeFundingTextList(safeValue.why),
             expenses: toArray(safeValue.expenses)
                 .map(normalizeFundingExpense)
                 .filter(Boolean),
+            walletHelp: normalizeFundingTextList(safeValue.walletHelp),
             wallets: toArray(safeValue.wallets)
                 .map(normalizeFundingWallet)
                 .filter(Boolean),

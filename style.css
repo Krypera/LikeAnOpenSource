@@ -236,6 +236,12 @@ input:focus-visible {
     color: var(--accent-green);
 }
 
+.repo-icon-image {
+    display: block;
+    object-fit: contain;
+    border-radius: 999px;
+}
+
 .header-nav {
     display: flex;
     gap: 0.55rem;
@@ -295,6 +301,22 @@ input:focus-visible {
     box-shadow: var(--shadow-lg);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-button,
+.sidebar::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 #sidebar-menus {

@@ -230,10 +230,20 @@
                     );
                 }, 'Desktop: clicking the support footer card did not open the "Support LAOS" section.');
                 assert(
-                    /coming soon/i.test(
+                    /how to contribute financially/i.test(
                         frameDocument.getElementById("support-wallets")?.textContent || ""
                     ),
-                    'Desktop: support wallets should show the "Coming soon" placeholder text.'
+                    'Desktop: support wallets should render the financial contribution section copy.'
+                );
+                assert(
+                    frameDocument.querySelectorAll("#support-wallets .support-wallet-card").length === 0,
+                    "Desktop: support wallets should not render placeholder wallet cards before addresses are live."
+                );
+                assert(
+                    /no placeholders/i.test(
+                        frameDocument.getElementById("support-wallets")?.textContent || ""
+                    ),
+                    'Desktop: support wallets should explain that placeholder addresses are not shown.'
                 );
                 assert(
                     Boolean(aboutSidebarMenu) &&

@@ -135,9 +135,18 @@ ensure(
     "Runtime validation: local manifest should expose enabled funding data."
 );
 ensure(
-    Array.isArray(localResult.manifest?.funding?.wallets) &&
-        localResult.manifest.funding.wallets.some((wallet) => wallet.address === "Coming soon"),
-    'Runtime validation: funding wallets should preserve the "Coming soon" placeholder text.'
+    Array.isArray(localResult.manifest?.funding?.wallets),
+    "Runtime validation: local manifest should preserve the funding wallet list."
+);
+ensure(
+    Array.isArray(localResult.manifest?.funding?.noAds) &&
+        localResult.manifest.funding.noAds.length > 0,
+    'Runtime validation: funding data should preserve the "Why We Don\'t Run Ads" copy.'
+);
+ensure(
+    Array.isArray(localResult.manifest?.funding?.walletHelp) &&
+        localResult.manifest.funding.walletHelp.length > 0,
+    "Runtime validation: funding data should preserve the wallet publishing guidance."
 );
 
 const contributeSection = getSection(localResult.manifest, "contribute");
@@ -165,12 +174,32 @@ ensure(
     getGroup(projectSection, "projects-published-notes"),
     'Runtime validation: missing "projects-published-notes" group.'
 );
+ensure(
+    getGroup(projectSection, "projects-what-good-looks-like"),
+    'Runtime validation: missing "projects-what-good-looks-like" group.'
+);
+ensure(
+    getGroup(projectSection, "projects-what-to-avoid"),
+    'Runtime validation: missing "projects-what-to-avoid" group.'
+);
 ensure(getGroup(projectSection, "projects-open-call"), 'Runtime validation: missing "projects-open-call" group.');
 ensure(!getGroup(projectSection, "projects-reading-room"), 'Runtime validation: old project seed group still exists.');
-ensure(getGroup(articleSection, "articles-status"), 'Runtime validation: missing "articles-status" group.');
+ensure(getGroup(articleSection, "articles-purpose"), 'Runtime validation: missing "articles-purpose" group.');
+ensure(
+    getGroup(articleSection, "articles-coverage"),
+    'Runtime validation: missing "articles-coverage" group.'
+);
 ensure(
     getGroup(articleSection, "articles-published-library"),
     'Runtime validation: missing "articles-published-library" group.'
+);
+ensure(
+    getGroup(articleSection, "articles-writing-rules"),
+    'Runtime validation: missing "articles-writing-rules" group.'
+);
+ensure(
+    getGroup(articleSection, "articles-contribution-model"),
+    'Runtime validation: missing "articles-contribution-model" group.'
 );
 ensure(getGroup(articleSection, "articles-open-call"), 'Runtime validation: missing "articles-open-call" group.');
 ensure(!getGroup(articleSection, "articles-reading-room"), 'Runtime validation: old article seed group still exists.');
@@ -236,9 +265,18 @@ ensure(
     "Runtime validation: cache fallback did not preserve funding data."
 );
 ensure(
-    Array.isArray(cacheResult.manifest?.funding?.wallets) &&
-        cacheResult.manifest.funding.wallets.some((wallet) => wallet.address === "Coming soon"),
-    'Runtime validation: cache fallback did not preserve the "Coming soon" wallet placeholder.'
+    Array.isArray(cacheResult.manifest?.funding?.wallets),
+    "Runtime validation: cache fallback did not preserve the funding wallet list."
+);
+ensure(
+    Array.isArray(cacheResult.manifest?.funding?.noAds) &&
+        cacheResult.manifest.funding.noAds.length > 0,
+    'Runtime validation: cache fallback did not preserve the "Why We Don\'t Run Ads" copy.'
+);
+ensure(
+    Array.isArray(cacheResult.manifest?.funding?.walletHelp) &&
+        cacheResult.manifest.funding.walletHelp.length > 0,
+    "Runtime validation: cache fallback did not preserve the wallet publishing guidance."
 );
 
 const cachedGuideBlock = getBlock(
